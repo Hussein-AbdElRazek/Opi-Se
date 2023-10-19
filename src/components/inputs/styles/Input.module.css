@@ -1,0 +1,38 @@
+.input input {
+    height: 26.5px;
+    padding: 0;
+    color: var(--white);
+    background-color: var(--semi-dark-black);
+    border-radius: var(--border-radius-inputs);
+    padding: 4px 15px;
+    color: var(--input-text-color);
+    font-size: var(--font-size-small);
+}
+
+.input {
+    font-size: var(--font-size-small);
+    margin-top: 30px;
+    margin-bottom: var(--margin-bottom);
+}
+
+.input label {
+    color: var(--input-label-color)  ;
+    position: absolute;
+    transform: none;
+    font-size: var(--font-size-small);
+    top: -20px;
+}
+
+.labelEnglish {
+    left: 0;
+}
+
+.labelArabic {
+    right: 0;
+    text-align: right;
+}
+
+.errorBorder {
+    border: 1px solid var(--error);
+    border-radius: var(--border-radius-inputs);
+}

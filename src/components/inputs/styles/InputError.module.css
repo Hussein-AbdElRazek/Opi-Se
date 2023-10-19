@@ -1,0 +1,21 @@
+.errorText {
+    color: var(--error);
+    font-size: var(--font-size-small);
+    margin: 0;
+}
+
+.errorBorder {
+    border: 1px solid var(--error);
+    border-radius: var(--border-radius-inputs);
+}
+
+.errorContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.errorIcon {
+    margin-left: 2px;
+    margin-right: 2px;
+}
