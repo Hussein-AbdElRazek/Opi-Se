@@ -107,7 +107,7 @@ function Select(props)
                                             name={option.value}
                                             disabled={option.value === 'none'}
                                         >
-                                            {option.key}
+                                            {option.label}
                                         </MenuItem>
                                     );
                                 })}

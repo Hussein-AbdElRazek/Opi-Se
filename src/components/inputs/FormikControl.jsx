@@ -1,4 +1,5 @@
 import Input from "./Input";
+import InputArray from "./InputArray";
 import Password from "./Password";
 import Select from "./Select";
 function FormikControl(props)
@@ -12,7 +13,9 @@ function FormikControl(props)
             return <Password {...rest} />;
         case "select":
             return <Select {...rest} />;
-        
+        case "array":
+            return <InputArray {...rest} />;
+
         default:
             return null;
     }
