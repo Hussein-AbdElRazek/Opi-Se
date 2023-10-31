@@ -7,7 +7,7 @@ import { SnackbarProvider } from 'notistack';
 import './index.css';
 import App from './App';
 import store from './store';
-import GlobalCssPriority from './components/ui/GlobalCssPriority';
+import {GlobalCssPriority} from './components';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

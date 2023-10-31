@@ -2,12 +2,12 @@
     width: 100%;
     text-align: center;
     padding-bottom: var(--margin-bottom);
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-100);
     margin-bottom: calc(var(--margin-bottom));
 }
 
 .container a {
-    color: var(--blue);
+    color: var(--secondary);
     text-decoration: none;
     margin-left: 5px;
 }

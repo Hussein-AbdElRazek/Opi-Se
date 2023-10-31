@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, Divider } from '@mui/material'
 
 import FormikContainer from '../../../components/inputs/FormikContainer'
 import LoopOnInputs from '../../../components/inputs/LoopOnInputs'
@@ -7,6 +7,16 @@ import { loginValidationSchema } from './loginValidationSchema'
 import classes from './Login.module.css'
 import SignInUpQuestion from '../../../components/common/SignInUpQuestion'
 import Btn from '../../../components/inputs/Btn'
+import LoginWithSocial from '../../../components/loginWithSocial/LoginWithSocial'
+
+import
+{
+    Paragraph,
+    HeaderText,
+    Logo,
+    FormCard
+} from '../../../components';
+import { IllustrationSection } from '../../../components/ui/IllustrationSection'
 const LoginUi = (props) =>
 {
     const {
@@ -15,34 +25,50 @@ const LoginUi = (props) =>
         handleOpenForgetPassword,
     } = props;
     return (
-        <div>
-            <FormikContainer
-                initialValues={loginInitialValues}
-                validationSchema={loginValidationSchema}
-                onSubmit={handleLogin}
-            >
-                <LoopOnInputs inputs={loginInputs} />
-                <div
-                    className={classes.forgetPasswordContainer}
+        <div
+            className={classes.login}
+        >
+            <FormCard>
+                <Logo />
+                <HeaderText>
+                    Login
+                </HeaderText>
+                <Paragraph>
+                    Please, Enter your details
+                </Paragraph>
+                <FormikContainer
+                    initialValues={loginInitialValues}
+                    validationSchema={loginValidationSchema}
+                    onSubmit={handleLogin}
                 >
-                    <Button
-                        onClick={handleOpenForgetPassword}
-                        className={classes.forgetPasswordBtn}
-                        variant="text"
+                    <LoopOnInputs
+                        inputs={loginInputs}
+                        disabled={isLoadingLogin}
+                    />
+                    <div
+                        className={classes.forgetPasswordContainer}
                     >
-                        Forgot your password?
-                    </Button>
-                </div>
-                <Btn
-                    type="submit"
-                    isLoading={isLoadingLogin}
-                >
-                    Sign in
-                </Btn>
-                <SignInUpQuestion type="login" />
-            </FormikContainer>
-
-        </div>
+                        <Button
+                            onClick={handleOpenForgetPassword}
+                            className={classes.forgetPasswordBtn}
+                            variant="text"
+                        >
+                            Forgot password?
+                        </Button>
+                    </div>
+                    <Btn
+                        type="submit"
+                        isLoading={isLoadingLogin}
+                    >
+                        Login
+                    </Btn>
+                    <Divider className={classes.divider}>Or</Divider>
+                    <SignInUpQuestion type="login" />
+                    <LoginWithSocial />
+                </FormikContainer>
+            </FormCard>
+            <IllustrationSection type="login" />
+        </div >
     )
 }
 

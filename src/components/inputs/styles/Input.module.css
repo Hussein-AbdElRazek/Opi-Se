@@ -1,25 +1,33 @@
 .input input {
     height: 26.5px;
     padding: 0;
-    color: var(--white);
-    background-color: var(--semi-dark-black);
-    border-radius: var(--border-radius-inputs);
+    background-color: var(--primary);
     padding: 4px 15px;
-    color: var(--input-text-color);
     font-size: var(--font-size-small);
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius-inputs);
+}
+
+.password input {
+    padding-right: 50px !important;
+}
+
+.input input:focus {
+    border-color: var(--focus);
 }
 
 .input {
     font-size: var(--font-size-small);
     margin-top: 30px;
-    margin-bottom: var(--margin-bottom);
+    position: relative;
 }
 
 .input label {
-    color: var(--input-label-color)  ;
+    color: var(--label);
     position: absolute;
     transform: none;
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-200);
+    font-weight: 500;
     top: -20px;
 }
 
@@ -30,9 +38,4 @@
 .labelArabic {
     right: 0;
     text-align: right;
-}
-
-.errorBorder {
-    border: 1px solid var(--error);
-    border-radius: var(--border-radius-inputs);
 }

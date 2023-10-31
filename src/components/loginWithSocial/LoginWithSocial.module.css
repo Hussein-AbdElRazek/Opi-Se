@@ -1,0 +1,25 @@
+.container {
+    margin-top: 10px;
+}
+
+.container button {
+    margin-bottom: 10px;
+    border-radius: var(--border-radius-inputs);
+    background-color: var(--primary);
+    border-color: var(--border-social);
+    color: var(--text-header);
+    text-transform: none;
+}
+
+.container img {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width:900px) {
+    .container button {
+        font-size: 12px;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

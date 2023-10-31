@@ -1,12 +1,15 @@
 .errorText {
     color: var(--error);
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-100);
     margin: 0;
 }
 
-.errorBorder {
-    border: 1px solid var(--error);
-    border-radius: var(--border-radius-inputs);
+.formError input {
+    border-color: var(--error) !important;
+}
+
+.formError label {
+    color: var(--error) !important;
 }
 
 .errorContainer {

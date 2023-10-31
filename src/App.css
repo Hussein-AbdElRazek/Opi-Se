@@ -1,0 +1,41 @@
+:root {
+    /* Colors */
+    --primary: #ffffff;
+    --secondary: #036666;
+    --background: #EDEBDE;
+    --focus: #1976d2;
+    --error: #d3272a;
+    --input-border: rgba(0, 0, 0, 0.40);
+    --border-social: rgba(0, 0, 0, 0.20);
+    --label: rgba(0, 0, 0, 0.70);
+    --text-header: #000000;
+    --text-paragraph: rgba(0, 0, 0, 0.60);
+    --text-secondary: rgba(0, 0, 0, 0.50);
+    --divider: rgba(112, 104, 104, 0.70);
+    /* ------------------------------ */
+
+    /* Font Size */
+    --font-size-100: 13px;
+    --font-size-200: 14px;
+    --font-size-300: 15px;
+    /* ------------------------------ */
+
+    /*Border Radius*/
+    --border-radius-form: 30px;
+    --border-radius-inputs: 10px;
+    /* ------------------------------ */
+}
+
+.center-x {
+    display: flex;
+    justify-content: center;
+}
+
+.center-y {
+    display: flex;
+    align-items: center;
+}
+
+.center-text {
+    text-align: center;
+}

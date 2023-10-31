@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 
-import './styles/Btn.module.css'
+import classes from './styles/Btn.module.css'
 
 const Btn = (props) =>
 {
@@ -12,6 +12,7 @@ const Btn = (props) =>
             loading={isLoading}
             variant='contained'
             fullWidth
+            className={classes.btn}
         >
             {children}
         </LoadingButton>

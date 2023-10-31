@@ -8,7 +8,7 @@ const SignInUpQuestion = (props) =>
         <div className={classes.container}>
             {type === "login" ? (
                 <>
-                    <span>Don't have an account?</span>
+                    <span>Don't have an account yet?</span>
                     <Link to="/signup">Sign up</Link>
                 </>
 
