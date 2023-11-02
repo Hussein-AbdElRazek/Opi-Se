@@ -4,7 +4,7 @@ import Password from "./Password";
 import Select from "./Select";
 function FormikControl(props)
 {
-    const { control, ...rest } = props;
+    const { control, size, ...rest } = props;
     switch (control)
     {
         case "input":

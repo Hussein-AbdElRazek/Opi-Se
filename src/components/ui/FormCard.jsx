@@ -1,15 +1,22 @@
 import classes from './styles/FormCard.module.css'
 
-export const FormCard = ({ children }) =>
+export const FormCard = ({ children, size }) =>
 {
     return (
         <div
             className={`
                 ${classes.formCard} 
-                ${classes.small}
+                ${size === "big" ?
+                    classes.big :
+                    classes.small
+                }
             `}
         >
-            {children}
+            <div
+                className={classes.content}
+            >
+                {children}
+            </div>
         </div>
     )
 }

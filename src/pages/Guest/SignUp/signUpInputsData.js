@@ -4,22 +4,18 @@ const languagesInputs = [
         type: "text",
         name: "languageName",
         label: "Language Name",
+        size: 6
     },
     {
         control: "input",
         type: "number",
         name: "level",
         label: "Level",
+        size: 6
     },
 ]
 
 export const signUpInputs = [
-    {
-        control: "input",
-        type: "email",
-        name: "email",
-        label: "Email",
-    },
     {
         control: "input",
         type: "text",
@@ -28,9 +24,16 @@ export const signUpInputs = [
     },
     {
         control: "input",
+        type: "email",
+        name: "email",
+        label: "Email",
+    },
+    {
+        control: "input",
         type: "number",
         name: "age",
         label: "Age",
+        size:6
     },
     {
         control: "select",
@@ -39,7 +42,8 @@ export const signUpInputs = [
         options: [
             { value: "male", label: "Male" },
             { value: "female", label: "Female" },
-        ]
+        ],
+        size: 6
     },
     {
         control: "input",
@@ -54,15 +58,17 @@ export const signUpInputs = [
         label: "National Id",
     },
     {
-        control: "input",
+        control: "password",
         type: "password",
         name: "password",
         label: "Password",
+        size: 6
     },
     {
         control: "password",
         name: "confirmPassword",
         label: "Confirm Password",
+        size: 6
     },
     {
         control: "array",

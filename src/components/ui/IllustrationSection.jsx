@@ -1,23 +1,30 @@
-import loginBackground from '../../assets/images/loginBackground.png'
 import { HeaderText, Paragraph } from '../'
 import classes from './styles/IllustrationSection.module.css'
-
-export const IllustrationSection = ({ type }) =>
+import loginBackground from '../../assets/images/loginBackground.png'
+import signupBackground from '../../assets/images/signupBackground.png'
+export const IllustrationSection = ({ type, size }) =>
 {
     return (
         <div
             className={`
                 ${classes.default}
                 ${type !== "login" && classes.background}
+                ${size === "big" ? classes.big : classes.small}
             `}
+            style={{
+                backgroundImage:
+                    type === "signup" ?
+                        `url(${signupBackground})` :
+                        null
+            }}
         >
             {type === "login" && (
-                <>
+                <div>
                     <div
                         className={classes.text}
                     >
                         <HeaderText
-                        
+
                         >
                             Welcome Back To, LoGo
                         </HeaderText>
@@ -33,7 +40,7 @@ export const IllustrationSection = ({ type }) =>
                     >
                         <img src={loginBackground} alt='loginBackground' />
                     </div>
-                </>
+                </div>
             )}
         </div>
     )
