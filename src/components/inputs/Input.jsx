@@ -22,6 +22,7 @@ const Input = (props) =>
             {({ field, meta: { touched, error } }) =>
             {
                 const inputError = !!error && touched;
+                console.log("rest", rest)
                 return (
                     <FormControl
                         className={`
@@ -34,7 +35,6 @@ const Input = (props) =>
                         dir={dir}
                     >
                         <InputLabel
-                            className={dir === "rtl" ? classes.labelArabic : classes.labelEnglish}
                             shrink
                             htmlFor={name}
                         >
@@ -47,6 +47,7 @@ const Input = (props) =>
                             label={label}
                             {...field}
                             {...rest}
+                            inputProps={{ ...rest }}
                             variant="outlined"
                             className={!!children && classes.password}
                         />

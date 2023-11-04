@@ -11,7 +11,7 @@ const languagesInputs = [
         type: "number",
         name: "level",
         label: "Level",
-        size: 6
+        size: 3
     },
 ]
 
@@ -33,16 +33,12 @@ export const signUpInputs = [
         type: "number",
         name: "age",
         label: "Age",
-        size:6
+        min: 10,
+        max: 60,
+        size: 6
     },
     {
-        control: "select",
-        name: "gender",
-        label: "Gender",
-        options: [
-            { value: "male", label: "Male" },
-            { value: "female", label: "Female" },
-        ],
+        control: "gender",
         size: 6
     },
     {
@@ -59,7 +55,6 @@ export const signUpInputs = [
     },
     {
         control: "password",
-        type: "password",
         name: "password",
         label: "Password",
         size: 6

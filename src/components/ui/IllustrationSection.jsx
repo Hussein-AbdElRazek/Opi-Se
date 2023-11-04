@@ -2,6 +2,7 @@ import { HeaderText, Paragraph } from '../'
 import classes from './styles/IllustrationSection.module.css'
 import loginBackground from '../../assets/images/loginBackground.png'
 import signupBackground from '../../assets/images/signupBackground.png'
+import forgotPassword from '../../assets/images/forgotPasswordBackground.png'
 export const IllustrationSection = ({ type, size }) =>
 {
     return (
@@ -15,7 +16,9 @@ export const IllustrationSection = ({ type, size }) =>
                 backgroundImage:
                     type === "signup" ?
                         `url(${signupBackground})` :
-                        null
+                        type === "forgotPassword" ?
+                            `url(${forgotPassword})` :
+                            null
             }}
         >
             {type === "login" && (
@@ -42,6 +45,6 @@ export const IllustrationSection = ({ type, size }) =>
                     </div>
                 </div>
             )}
-        </div>
+        </div >
     )
 }

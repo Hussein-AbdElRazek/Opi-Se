@@ -1,11 +1,11 @@
-import { Button, Divider } from '@mui/material'
+import { Divider } from '@mui/material'
 
 import FormikContainer from '../../../components/inputs/FormikContainer'
 import LoopOnInputs from '../../../components/inputs/LoopOnInputs'
 import { loginInitialValues, loginInputs } from './loginInputsData'
 import { loginValidationSchema } from './loginValidationSchema'
 import classes from './Login.module.css'
-import SignInUpQuestion from '../../../components/common/SignInUpQuestion'
+import TextAndLink from '../../../components/common/TextAndLink'
 import Btn from '../../../components/inputs/Btn'
 import LoginWithSocial from '../../../components/loginWithSocial/LoginWithSocial'
 
@@ -17,68 +17,61 @@ import
     FormCard
 } from '../../../components';
 import { IllustrationSection } from '../../../components/ui/IllustrationSection'
+import { Link } from 'react-router-dom'
 const LoginUi = (props) =>
 {
     const {
         handleLogin,
         isLoadingLogin,
-        handleOpenForgetPassword,
     } = props;
     return (
         <div
-            className={classes.login}
+            className='h-100vh center-y center-x'
         >
-            <div
-                className='center-y'
+            <FormCard
+                size="small"
             >
-                <FormCard
-                    size="small"
+                <Logo />
+                <HeaderText>
+                    Login
+                </HeaderText>
+                <Paragraph>
+                    Please, Enter your details
+                </Paragraph>
+                <FormikContainer
+                    initialValues={loginInitialValues}
+                    validationSchema={loginValidationSchema}
+                    onSubmit={handleLogin}
                 >
-                    <Logo />
-                    <HeaderText>
-                        Login
-                    </HeaderText>
-                    <Paragraph>
-                        Please, Enter your details
-                    </Paragraph>
-                    <FormikContainer
-                        initialValues={loginInitialValues}
-                        validationSchema={loginValidationSchema}
-                        onSubmit={handleLogin}
+                    <LoopOnInputs
+                        inputs={loginInputs}
+                        disabled={isLoadingLogin}
+                    />
+                    <div
+                        className={classes.forgetPasswordContainer}
                     >
-                        <LoopOnInputs
-                            inputs={loginInputs}
-                            disabled={isLoadingLogin}
-                        />
-                        <div
-                            className={classes.forgetPasswordContainer}
+                        <Link
+                            to="/forgot-password"
                         >
-                            <Button
-                                onClick={handleOpenForgetPassword}
-                                className={classes.forgetPasswordBtn}
-                                variant="text"
-                            >
-                                Forgot password?
-                            </Button>
-                        </div>
-                        <Btn
-                            type="submit"
-                            isLoading={isLoadingLogin}
-                        >
-                            Login
-                        </Btn>
-                        <Divider className={classes.divider}>Or</Divider>
-                        <SignInUpQuestion type="login" />
-                        <LoginWithSocial />
-                    </FormikContainer>
-                </FormCard>
-            </div>
-
+                            Forgot password?
+                        </Link>
+                    </div>
+                    <Btn
+                        type="submit"
+                        isLoading={isLoadingLogin}
+                    >
+                        Login
+                    </Btn>
+                    <Divider className={classes.divider}>Or</Divider>
+                    <TextAndLink type="login" />
+                    <LoginWithSocial />
+                </FormikContainer>
+            </FormCard>
             <IllustrationSection
                 type="login"
                 size="big"
             />
-        </div >
+        </div>
     )
 }
 

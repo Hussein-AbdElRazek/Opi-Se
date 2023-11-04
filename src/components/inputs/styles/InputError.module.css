@@ -4,6 +4,14 @@
     margin: 0;
 }
 
+.borderError {
+    border-color: var(--error) !important;
+}
+
+.formError svg{
+    color: var(--error) !important;
+}
+
 .formError input {
     border-color: var(--error) !important;
 }

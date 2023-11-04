@@ -1,24 +1,21 @@
-import useHttp from "../../hooks/use-http";
+import { useNavigate } from "react-router-dom";
+import useHttp from "../../../hooks/use-http";
 import ForgetPasswordUi from "./ForgetPasswordUi"
 
 const ForgetPassword = (props) =>
 {
-    const { open, setOpen } = props;
-    const handleClose = () =>
-    {
-        setOpen(false)
-    }
     const {
         isLoading: isLoadingForgetPassword,
         sendRequest: forgetPassword
     } = useHttp();
+    const navigate = useNavigate();
     const handleForgetPassword = (values) =>
     {
         const getResponse = ({ message }) =>
         {
             if (message.includes("success"))
             {
-                handleClose()
+                navigate("login")
             }
         };
 
@@ -34,8 +31,6 @@ const ForgetPassword = (props) =>
 
     return (
         <ForgetPasswordUi
-            open={open}
-            handleClose={handleClose}
             handleForgetPassword={handleForgetPassword}
             isLoadingForgetPassword={isLoadingForgetPassword}
         />

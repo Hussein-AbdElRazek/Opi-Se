@@ -1,3 +1,4 @@
+import Gender from "./Gender";
 import Input from "./Input";
 import InputArray from "./InputArray";
 import Password from "./Password";
@@ -15,6 +16,8 @@ function FormikControl(props)
             return <Select {...rest} />;
         case "array":
             return <InputArray {...rest} />;
+        case "gender":
+            return <Gender {...rest} />;
 
         default:
             return null;

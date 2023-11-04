@@ -29,12 +29,3 @@
     font-weight: 500;
     top: -20px;
 }
-
-.labelEnglish {
-    left: 0;
-}
-
-.labelArabic {
-    right: 0;
-    text-align: right;
-}

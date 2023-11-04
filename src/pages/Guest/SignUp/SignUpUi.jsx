@@ -5,7 +5,7 @@ import { signUpValidationSchema } from './signUpValidationSchema';
 import { FormCard } from '../../../components/ui/FormCard';
 import { HeaderText, Paragraph } from '../../../components';
 import Btn from '../../../components/inputs/Btn';
-import SignInUpQuestion from '../../../components/common/SignInUpQuestion';
+import TextAndLink from '../../../components/common/TextAndLink';
 import { IllustrationSection } from '../../../components/ui/IllustrationSection';
 
 const SignUpUi = (props) =>
@@ -40,13 +40,15 @@ const SignUpUi = (props) =>
           >
             Sign Up
           </Btn>
-          <SignInUpQuestion
+          <TextAndLink
             type="signup"
-            size="small" 
-            />
+          />
         </FormikContainer>
       </FormCard >
-      <IllustrationSection type="signup" />
+      <IllustrationSection
+        type="signup"
+        size="small"
+      />
     </div>
   )
 }
