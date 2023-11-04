@@ -26,7 +26,7 @@ const LoginUi = (props) =>
     } = props;
     return (
         <div
-            className='h-100vh center-y center-x'
+            className='height-100vh  center-y center-x'
         >
             <FormCard
                 size="small"
