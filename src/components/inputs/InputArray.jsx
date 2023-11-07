@@ -1,11 +1,14 @@
 import { FieldArray } from 'formik'
-import FormikControl from './FormikControl';
 import { Grid } from '@mui/material';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
-import OutlinedIconBtn from './OutlinedIconBtn';
-const InputArray = (props) =>
+import
+{
+    FormikControl,
+    OutlinedIconBtn
+} from './';
+export const InputArray = (props) =>
 {
     const { name, inputs } = props;
 
@@ -103,5 +106,3 @@ const InputArray = (props) =>
         </FieldArray>
     )
 }
-
-export default InputArray

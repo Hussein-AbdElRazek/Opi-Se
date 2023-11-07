@@ -1,6 +1,6 @@
 import { IconButton, Tooltip } from "@mui/material"
 import classes from './styles/OutlinedIconBtn.module.css'
-const OutlinedIconBtn = (props) =>
+export const OutlinedIconBtn = (props) =>
 {
     const { children, title, onClick } = props;
     return (
@@ -17,5 +17,3 @@ const OutlinedIconBtn = (props) =>
         </Tooltip>
     )
 }
-
-export default OutlinedIconBtn

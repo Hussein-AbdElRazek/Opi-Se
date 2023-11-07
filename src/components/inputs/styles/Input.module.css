@@ -1,9 +1,8 @@
 .input input {
     height: 26.5px;
-    padding: 0;
     background-color: var(--primary);
     padding: 4px 15px;
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-300);
     border: 1px solid var(--input-border);
     border-radius: var(--border-radius-inputs);
 }
@@ -29,3 +28,10 @@
     font-weight: 500;
     top: -20px;
 }
+
+/* @media (max-width:900px) {
+    .input input {
+        font-size: var(--font-size-200);
+        height: 21.5px;
+    }
+} */

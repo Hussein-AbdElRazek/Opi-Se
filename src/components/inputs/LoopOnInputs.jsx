@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
 
-import FormikControl from './FormikControl';
+import { FormikControl } from './';
 
-const LoopOnInputs = (props) =>
+export const LoopOnInputs = (props) =>
 {
     const { inputs, disabled } = props;
     return (
@@ -42,5 +42,3 @@ const LoopOnInputs = (props) =>
         </Grid>
     )
 }
-
-export default LoopOnInputs

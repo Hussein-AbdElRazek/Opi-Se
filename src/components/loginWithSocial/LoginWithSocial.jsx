@@ -1,10 +1,8 @@
 import LoginWithSocialUi from './LoginWithSocialUi'
 
-const loginWithSocial = () =>
+export const LoginWithSocial = () =>
 {
     return (
         <LoginWithSocialUi />
     )
 }
-
-export default loginWithSocial

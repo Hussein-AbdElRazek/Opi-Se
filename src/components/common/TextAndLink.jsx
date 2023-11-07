@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import classes from './styles/TextAndLink.module.css'
-const TextAndLink = (props) =>
+export const TextAndLink = (props) =>
 {
     const { type } = props;
     return (
@@ -26,5 +26,3 @@ const TextAndLink = (props) =>
         </div>
     )
 }
-
-export default TextAndLink

@@ -1,7 +1,7 @@
 import { FormHelperText, Box } from '@mui/material'
 import classes from "./styles/InputError.module.css"
 
-const InputError = (props) =>
+export const InputError = (props) =>
 {
     const { children } = props;
     return (
@@ -13,5 +13,3 @@ const InputError = (props) =>
         </FormHelperText>
     )
 }
-
-export default InputError

@@ -3,8 +3,8 @@ import { ErrorMessage, Field } from "formik";
 import { FormControl, InputBase, InputLabel } from "@mui/material";
 import classes from './styles/Input.module.css'
 import classesError from './styles/InputError.module.css'
-import InputError from "./InputError";
-const Input = (props) =>
+import { InputError } from "./";
+export const Input = (props) =>
 {
     const {
         label,
@@ -22,7 +22,6 @@ const Input = (props) =>
             {({ field, meta: { touched, error } }) =>
             {
                 const inputError = !!error && touched;
-                console.log("rest", rest)
                 return (
                     <FormControl
                         className={`
@@ -62,5 +61,3 @@ const Input = (props) =>
         </Field >
     );
 }
-
-export default Input;

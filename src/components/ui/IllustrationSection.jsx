@@ -1,8 +1,9 @@
-import { HeaderText, Paragraph } from '../'
+import { HeaderText, Paragraph } from './'
 import classes from './styles/IllustrationSection.module.css'
 import loginBackground from '../../assets/images/loginBackground.png'
 import signupBackground from '../../assets/images/signupBackground.png'
-import forgotPassword from '../../assets/images/forgotPasswordBackground.png'
+import forgotPasswordBackground from '../../assets/images/forgotPasswordBackground.png'
+import resetPasswordBackground from '../../assets/images/resetPasswordBackground.png'
 export const IllustrationSection = ({ type, size }) =>
 {
     return (
@@ -17,7 +18,9 @@ export const IllustrationSection = ({ type, size }) =>
                     type === "signup" ?
                         `url(${signupBackground})` :
                         type === "forgotPassword" ?
-                            `url(${forgotPassword})` :
+                            `url(${forgotPasswordBackground})` :
+                        type === "resetPassword" ?
+                                `url(${resetPasswordBackground})` :
                             null
             }}
         >

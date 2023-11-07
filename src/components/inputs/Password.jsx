@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import Input from './Input'
 import { IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOffOutlined';
 
+import { Input } from './'
 import classes from './styles/Password.module.css'
-const Password = (props) =>
+export const Password = (props) =>
 {
     const {
         ...rest
@@ -42,5 +42,3 @@ const Password = (props) =>
         </Input>
     )
 }
-
-export default Password

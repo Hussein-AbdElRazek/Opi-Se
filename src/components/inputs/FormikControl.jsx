@@ -1,9 +1,12 @@
-import Gender from "./Gender";
-import Input from "./Input";
-import InputArray from "./InputArray";
-import Password from "./Password";
-import Select from "./Select";
-function FormikControl(props)
+import
+{
+    Gender,
+    Input,
+    InputArray,
+    Password,
+    Select,
+} from './'
+export const FormikControl = (props) =>
 {
     const { control, size, ...rest } = props;
     switch (control)
@@ -23,5 +26,3 @@ function FormikControl(props)
             return null;
     }
 }
-
-export default FormikControl;

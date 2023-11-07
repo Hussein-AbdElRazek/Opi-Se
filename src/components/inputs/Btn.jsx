@@ -2,7 +2,7 @@ import { LoadingButton } from '@mui/lab';
 
 import classes from './styles/Btn.module.css'
 
-const Btn = (props) =>
+export const Btn = (props) =>
 {
     const { children, onClick, isLoading, type } = props;
     return (
@@ -18,5 +18,3 @@ const Btn = (props) =>
         </LoadingButton>
     )
 }
-
-export default Btn

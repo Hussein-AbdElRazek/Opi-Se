@@ -1,12 +1,20 @@
 
-import FormikContainer from '../../../components/inputs/FormikContainer';
-import Input from '../../../components/inputs/Input';
 import { forgetPasswordInitialValues } from './forgetPasswordData';
 import { forgetPasswordValidationSchema } from './forgetPasswordValidationSchema';
-import { FormCard, HeaderText, Paragraph } from '../../../components';
-import Btn from '../../../components/inputs/Btn';
-import TextAndLink from '../../../components/common/TextAndLink';
-import { IllustrationSection } from '../../../components/ui/IllustrationSection';
+import { TextAndLink } from '../../../components/common'
+import
+{
+    FormCard,
+    HeaderText,
+    Paragraph,
+    IllustrationSection
+} from '../../../components/ui';
+import
+{
+    Btn,
+    Input,
+    FormikContainer
+} from '../../../components/inputs';
 
 const ForgetPasswordUi = (props) =>
 {

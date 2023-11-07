@@ -3,9 +3,9 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import SelectMui from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Box, CircularProgress, FormControl, InputLabel } from "@mui/material";
-import InputError from "./InputError";
+import {InputError} from "./";
 
-function Select(props)
+export const Select = (props) =>
 {
     const {
         label,
@@ -124,5 +124,3 @@ function Select(props)
         </div>
     );
 }
-
-export default Select;

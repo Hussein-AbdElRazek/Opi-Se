@@ -1,12 +1,19 @@
-import FormikContainer from '../../../components/inputs/FormikContainer';
-import LoopOnInputs from '../../../components/inputs/LoopOnInputs';
 import { signUpInitialValues, signUpInputs } from './signUpInputsData';
 import { signUpValidationSchema } from './signUpValidationSchema';
-import { FormCard } from '../../../components/ui/FormCard';
-import { HeaderText, Paragraph } from '../../../components';
-import Btn from '../../../components/inputs/Btn';
-import TextAndLink from '../../../components/common/TextAndLink';
-import { IllustrationSection } from '../../../components/ui/IllustrationSection';
+import { TextAndLink } from '../../../components/common';
+import
+{
+  IllustrationSection,
+  HeaderText,
+  Paragraph,
+  FormCard
+} from '../../../components/ui';
+import
+{
+  Btn,
+  LoopOnInputs,
+  FormikContainer
+} from '../../../components/inputs';
 
 const SignUpUi = (props) =>
 {

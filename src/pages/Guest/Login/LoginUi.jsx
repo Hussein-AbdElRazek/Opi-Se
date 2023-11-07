@@ -1,23 +1,27 @@
 import { Divider } from '@mui/material'
+import { Link } from 'react-router-dom'
 
-import FormikContainer from '../../../components/inputs/FormikContainer'
-import LoopOnInputs from '../../../components/inputs/LoopOnInputs'
 import { loginInitialValues, loginInputs } from './loginInputsData'
 import { loginValidationSchema } from './loginValidationSchema'
 import classes from './Login.module.css'
-import TextAndLink from '../../../components/common/TextAndLink'
-import Btn from '../../../components/inputs/Btn'
-import LoginWithSocial from '../../../components/loginWithSocial/LoginWithSocial'
+import { LoginWithSocial } from '../../../components/loginWithSocial'
 
 import
 {
     Paragraph,
     HeaderText,
     Logo,
-    FormCard
-} from '../../../components';
-import { IllustrationSection } from '../../../components/ui/IllustrationSection'
-import { Link } from 'react-router-dom'
+    FormCard,
+    IllustrationSection
+} from '../../../components/ui';
+import
+{
+    Btn,
+    LoopOnInputs,
+    FormikContainer,
+} from '../../../components/inputs';
+import { TextAndLink } from '../../../components/common'
+
 const LoginUi = (props) =>
 {
     const {

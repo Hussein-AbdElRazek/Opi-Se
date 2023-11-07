@@ -3,9 +3,9 @@ import { ErrorMessage, Field } from 'formik'
 
 import classes from './styles/Gender.module.css'
 import classesError from './styles/InputError.module.css'
-import InputError from './InputError'
+import { InputError } from './'
 
-const Gender = ({ disabled }) =>
+export const Gender = ({ disabled }) =>
 {
     return (
         <Field
@@ -68,5 +68,3 @@ const Gender = ({ disabled }) =>
 
     )
 }
-
-export default Gender

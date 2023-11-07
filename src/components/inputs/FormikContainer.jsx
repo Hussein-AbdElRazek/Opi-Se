@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 
-const FormikContainer = (props) =>
+export const FormikContainer = (props) =>
 {
     const {
         initialValues,
@@ -23,5 +23,3 @@ const FormikContainer = (props) =>
         </Formik>
     );
 }
-
-export default FormikContainer;
