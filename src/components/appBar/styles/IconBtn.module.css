@@ -1,0 +1,12 @@
+.icon {
+    border: 1px solid var(--secondary-border);
+    background-color: var(--primary);
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.icon img {
+    width: 26px;
+    height: 26px;
+}

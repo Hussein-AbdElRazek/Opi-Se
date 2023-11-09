@@ -12,6 +12,10 @@
     --text-paragraph: rgba(0, 0, 0, 0.60);
     --text-secondary: rgba(0, 0, 0, 0.50);
     --divider: rgba(112, 104, 104, 0.70);
+    --app-bar-border: rgba(0, 0, 0, 0.05);
+    --secondary-border: rgba(3, 102, 102, 0.20);
+    --secondary-40: rgba(3, 105, 105, 0.40);
+    --secondary-10: rgba(3, 105, 105, 0.10);
     /* ------------------------------ */
 
     /* Font Size */

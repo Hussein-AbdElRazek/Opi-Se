@@ -16,4 +16,5 @@ export const loginInputs = [
 export const loginInitialValues = {
     userName:"",
     password:"",
+    deviceToken: "device_token"
 }
