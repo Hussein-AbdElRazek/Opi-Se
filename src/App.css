@@ -3,6 +3,7 @@
     --primary: #ffffff;
     --secondary: #036666;
     --background: #EDEBDE;
+    --background2: #F6F6F6;
     --focus: #1976d2;
     --error: #d3272a;
     --input-border: rgba(0, 0, 0, 0.40);
@@ -16,6 +17,8 @@
     --secondary-border: rgba(3, 102, 102, 0.20);
     --secondary-40: rgba(3, 105, 105, 0.40);
     --secondary-10: rgba(3, 105, 105, 0.10);
+    --secondary-0: rgba(3, 105, 105, 0.0);
+
     /* ------------------------------ */
 
     /* Font Size */
@@ -28,6 +31,9 @@
     /*Border Radius*/
     --border-radius-form: 30px;
     --border-radius-inputs: 10px;
+    /* ------------------------------ */
+    /*Z-Index*/
+    --layer-nav: 999;
     /* ------------------------------ */
 }
 
@@ -47,4 +53,7 @@
 
 .height-100vh {
     height: 100vh;
+}
+.w-100{
+    width: 100%;
 }

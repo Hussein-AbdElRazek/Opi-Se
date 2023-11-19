@@ -4,6 +4,7 @@ import { SearchBar } from './SearchBar'
 import notificationIcon from '../../assets/icons/notification.svg'
 import addFriendIcon from '../../assets/icons/addFriend.svg'
 import { ProfileIcon } from './ProfileIcon'
+import { Logo } from '../ui'
 export const NavBar = ({ title }) =>
 {
     return (
@@ -13,23 +14,19 @@ export const NavBar = ({ title }) =>
             <div
                 className="center-y"
             >
-                <h2
-                    className={classes.title}
-                >
-                    {title}
-                </h2>
+                <Logo />
                 <SearchBar />
-            </div> 
+            </div>
             <div
-            className={classes.iconsGroup}
+                className={classes.iconsGroup}
             >
-                <IconBtn 
+                <IconBtn
                     img={notificationIcon}
                 />
-                <IconBtn 
+                <IconBtn
                     img={addFriendIcon}
                 />
-                <ProfileIcon/>
+                <ProfileIcon />
             </div>
         </div>
     )

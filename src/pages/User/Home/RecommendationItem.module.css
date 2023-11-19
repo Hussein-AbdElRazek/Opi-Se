@@ -1,0 +1,66 @@
+.item {
+    width: 100%;
+    border-radius: 15px;
+    height: 100px;
+    position: relative;
+    background-color: var(--primary);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.item h4 {
+    width: 120px;
+    height: 100%;
+    background-color: var(--secondary-40);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 25px;
+    border-radius: 15px 0 0 15px;
+    margin-right: 10px;
+
+    /* flex-wrap: wrap; */
+
+}
+
+.about {
+    min-width: 100px;
+}
+
+.item img {
+    height: 100%;
+    width: 120px;
+    margin-right: 10px;
+}
+
+.about h3,
+.about p {
+    margin: 2px 0;
+
+}
+
+.about h3 {
+    font-size: 16px;
+}
+
+.about p {
+    font-size: 14px;
+}
+
+.action {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+
+}
+
+.action button {
+    background-color: var(--primary);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    text-transform: none;
+    color: var(--secondary);
+    padding: 2px 15px;
+}

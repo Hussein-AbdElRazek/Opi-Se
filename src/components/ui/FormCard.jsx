@@ -8,7 +8,9 @@ export const FormCard = ({ children, size }) =>
                 ${classes.formCard} 
                 ${size === "big" ?
                     classes.big :
-                    classes.small
+                    size === "full" ?
+                        classes.full :
+                        classes.small
                 }
             `}
         >

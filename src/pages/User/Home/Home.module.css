@@ -1,0 +1,33 @@
+.container {
+    /* background-color: blue; */
+    height: calc(100vh - 130px);
+    /* margin-top: 80px; */
+    display: flex;
+    align-items: center;
+    
+    /* flex-wrap: wrap; */
+}
+.container span {
+    color: var(--secondary);
+    margin: 6px;
+}
+.left {
+    width: 50%;
+    /* background-color: yellowgreen; */
+}
+
+.left h1 {
+    text-align: left;
+}
+
+.left p {
+    width: 80%;
+}
+
+.action {
+    width: 70%;
+}
+.action button{
+    padding: 15px 40px;
+    font-size: 16px;
+}

@@ -1,5 +1,5 @@
 .container {
-    width: calc(100% - 260px);
+    width: calc(100% - 60px);
     height: 60px;
     position: fixed;
     right: 0;
@@ -10,6 +10,12 @@
     padding: 0 30px;
     background-color: var(--primary);
     border-bottom: 1px solid var(--app-bar-border);
+    z-index: var(--layer-nav);
+}
+
+.container h1 {
+    color: var(--secondary);
+    margin-right: 20px !important;
 }
 
 .title {

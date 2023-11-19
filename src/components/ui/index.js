@@ -5,3 +5,4 @@ export { IllustrationSection } from './IllustrationSection';
 export { Logo } from './Logo';
 export { Paragraph } from './Paragraph';
 export { ProfilePic } from './ProfilePic';
+export { Card } from './Card';

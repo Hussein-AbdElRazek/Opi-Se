@@ -1,9 +1,14 @@
-import React from 'react'
+import { useSelector } from 'react-redux';
+import ProfileUi from './ProfileUi'
 
 const Profile = () =>
 {
+    const userData = useSelector((state) => state.auth.userData);
+
     return (
-        <div>Profile</div>
+        <ProfileUi
+            userData={userData}
+        />
     )
 }
 

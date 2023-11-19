@@ -5,6 +5,8 @@
     text-transform: none;
     box-shadow: none !important;
     margin: 15px 0;
+    padding-left:40px;
+    padding-right:40px;
 }
 
 .btn:hover {

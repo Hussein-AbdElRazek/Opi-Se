@@ -4,6 +4,8 @@ import loginBackground from '../../assets/images/loginBackground.png'
 import signupBackground from '../../assets/images/signupBackground.png'
 import forgotPasswordBackground from '../../assets/images/forgotPasswordBackground.png'
 import resetPasswordBackground from '../../assets/images/resetPasswordBackground.png'
+import homeBackground from '../../assets/images/homeBackground.png'
+
 export const IllustrationSection = ({ type, size }) =>
 {
     return (
@@ -12,6 +14,7 @@ export const IllustrationSection = ({ type, size }) =>
                 ${classes.default}
                 ${type !== "login" && classes.background}
                 ${size === "big" ? classes.big : classes.small}
+                ${type === "home" ? classes.home : ""}
             `}
             style={{
                 backgroundImage:
@@ -21,6 +24,8 @@ export const IllustrationSection = ({ type, size }) =>
                             `url(${forgotPasswordBackground})` :
                         type === "resetPassword" ?
                                 `url(${resetPasswordBackground})` :
+                        type === "home" ?
+                                    `url(${homeBackground})` :
                             null
             }}
         >
