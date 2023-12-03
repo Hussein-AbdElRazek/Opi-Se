@@ -12,8 +12,9 @@ import
 {
   Btn,
   LoopOnInputs,
-  FormikContainer
 } from '../../../components/inputs';
+import ExtractNationalId from './ExtractNationalId';
+import { Form, Formik } from 'formik';
 
 const SignUpUi = (props) =>
 {
@@ -31,26 +32,33 @@ const SignUpUi = (props) =>
         <Paragraph>
           Connect with a study buddy today
         </Paragraph>
-        <FormikContainer
+        <Formik
           initialValues={signUpInitialValues}
           validationSchema={signUpValidationSchema}
           onSubmit={handleSignUp}
         >
-          <LoopOnInputs
-            inputs={signUpInputs}
-            disabled={isLoadingSignUp} />
-          <Btn
-            type="submit"
-            variant="contained"
-            loading={isLoadingSignUp}
-            fullWidth
-          >
-            Sign Up
-          </Btn>
-          <TextAndLink
-            type="signup"
-          />
-        </FormikContainer>
+          {(formik) =>
+            <Form >
+              <LoopOnInputs
+                inputs={signUpInputs}
+                disabled={isLoadingSignUp} />
+              <ExtractNationalId
+                setFieldValue={formik.setFieldValue}
+              />
+              <Btn
+                type="submit"
+                variant="contained"
+                isLoading={isLoadingSignUp}
+                fullWidth
+              >
+                Sign Up
+              </Btn>
+            </Form>
+          }
+        </Formik>
+        <TextAndLink
+          type="signup"
+        />
       </FormCard >
       <IllustrationSection
         type="signup"

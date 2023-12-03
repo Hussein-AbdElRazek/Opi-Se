@@ -26,7 +26,7 @@ export const Input = (props) =>
                     <FormControl
                         className={`
                             ${classes.input} 
-                            ${inputError && classesError.formError}
+                            ${inputError ? classesError.formError : ""}
                         `}
                         variant="filled"
                         fullWidth
@@ -36,6 +36,7 @@ export const Input = (props) =>
                         <InputLabel
                             shrink
                             htmlFor={name}
+                            className={classes.label}
                         >
                             {label}
                         </InputLabel>
@@ -48,7 +49,7 @@ export const Input = (props) =>
                             {...rest}
                             inputProps={{ ...rest }}
                             variant="outlined"
-                            className={!!children && classes.password}
+                            className={!!children ? classes.password : ""}
                         />
                         {children}
                         <ErrorMessage

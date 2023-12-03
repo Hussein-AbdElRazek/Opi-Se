@@ -20,7 +20,7 @@
     position: relative;
 }
 
-.input label {
+.label {
     color: var(--label);
     position: absolute;
     transform: none;

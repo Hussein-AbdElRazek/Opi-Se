@@ -21,7 +21,6 @@ function App()
   if (isLoggedIn) document.body.style.backgroundColor = "var(--background2)";
   useEffect(() =>
   {
-    console.log("useEffect1")
     const tempTitle = getWebsiteTitle(location.pathname);
     if (!!tempTitle) document.title = `Opi Se - ${tempTitle}`;
     setTitle(tempTitle);

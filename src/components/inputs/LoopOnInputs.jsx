@@ -31,7 +31,6 @@ export const LoopOnInputs = (props) =>
                         xs={12}
                     >
                         <FormikControl
-                            key={name}
                             name={name}
                             disabled={disabled}
                             {...input}

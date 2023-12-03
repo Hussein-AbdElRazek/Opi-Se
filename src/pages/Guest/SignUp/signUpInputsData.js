@@ -39,6 +39,7 @@ export const signUpInputs = [
     },
     {
         control: "gender",
+        name: "gender",
         size: 6
     },
     {
@@ -46,12 +47,6 @@ export const signUpInputs = [
         type: "text",
         name: "location",
         label: "location",
-    },
-    {
-        control: "input",
-        type: "text",
-        name: "nationalId",
-        label: "National Id",
     },
     {
         control: "password",

@@ -10,19 +10,30 @@ const useHttp = () =>
     const sendRequest = useCallback(async (requestConfig, applyData) =>
     {
         setIsLoading(true);
+        const requestData = requestConfig?.contentType === "form-data" ? {
+            method: requestConfig?.method ? requestConfig.method : "GET",
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+            body: requestConfig?.body
+        } : {
+            method: requestConfig?.method ? requestConfig.method : "GET",
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                "Content-Type": "application/json",
+            },
+            body: requestConfig.body ?
+                JSON.stringify(trimObject(requestConfig.body)) :
+                null
+        }
         try
         {
             const response =
-                await fetch(`https://graduation-project-j6gl.onrender.com/${requestConfig.url}`, {
-                    method: requestConfig.method ? requestConfig.method : "GET",
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                        "Content-Type": "application/json",
-                    },
-                    body: requestConfig.body ?
-                        JSON.stringify(trimObject(requestConfig.body)) :
-                        null
-                });
+                await fetch(
+                    `${requestConfig.baseUrl ?
+                        requestConfig.baseUrl :
+                        "https://graduation-project-j6gl.onrender.com/"}${requestConfig.url}`,
+                    requestData);
             const data = await response.json();
             applyData(data);
             if (!response.ok)
