@@ -1,0 +1,23 @@
+.container {
+    background-color: var(--primary);
+    padding: 20px 50px 30px 30px;
+    border-radius: var(--border-radius-150);
+    margin-bottom: 40px;
+}
+
+.title {
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.line {
+    height: 1px;
+    width: calc(100% + 80px);
+    position: absolute;
+    left: -30px;
+    bottom: -20px;
+    background-color: var(--border-social);
+}

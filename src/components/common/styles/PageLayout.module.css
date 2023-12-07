@@ -1,11 +1,6 @@
 .container {
     /* Based on tabsBar width */
-    margin-left: 20px;
     padding: 20px 30px;
     /* Based on top navbar height */
     margin-top: 60px;
 }
-
-/* @media (max-width:900px) {
-    
-} */

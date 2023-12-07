@@ -4,14 +4,16 @@ const languagesInputs = [
         type: "text",
         name: "languageName",
         label: "Language Name",
-        size: 6
+        size: 5,
+        sm: 4,
     },
     {
         control: "input",
         type: "number",
         name: "level",
         label: "Level",
-        size: 3
+        size: 4,
+        sm: 3,
     },
 ]
 

@@ -6,3 +6,4 @@ export { Logo } from './Logo';
 export { Paragraph } from './Paragraph';
 export { ProfilePic } from './ProfilePic';
 export { Card } from './Card';
+export { Chip } from './Chip';

@@ -3,7 +3,6 @@ import { LoadingButton } from '@mui/lab'
 
 import uploadIcon from '../../../assets/icons/upload.svg'
 import inputClasses from '../../../components/inputs/styles/Input.module.css'
-import outlinedClasses from '../../../components/inputs/styles/OutlinedIconBtn.module.css'
 import classes from './ExtractNationalIdUi.module.css'
 import { Input } from '../../../components/inputs'
 const ExtractNationalIdUi = (props) =>
@@ -21,7 +20,7 @@ const ExtractNationalIdUi = (props) =>
                 >
                     <div
                         className={`
-                    ${outlinedClasses.outlinedIconBtn} 
+                    ${classes.outlined} 
                     ${classes.container}
                     ${isLoadingExtractID ? classes.cursorDefault : ""}
                 `}

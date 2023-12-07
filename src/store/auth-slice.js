@@ -13,7 +13,6 @@ const authSlice = createSlice({
     reducers: {
         login(state, action)
         {
-
             state.token = action.payload.token;
             state.userData = action.payload.userData;
             state.isLoggedIn = true;
@@ -29,8 +28,8 @@ const authSlice = createSlice({
         },
         updateUserData(state, action)
         {
-            state.userData = action.payload;
-            localStorage.setItem("userData", JSON.stringify(action.payload))
+            state.userData = { ...state.userData, ...action.payload };
+            localStorage.setItem("userData", JSON.stringify(state.userData))
         }
     }
 })

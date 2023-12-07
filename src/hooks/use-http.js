@@ -44,7 +44,7 @@ const useHttp = () =>
             if (message)
             {
                 message = message.toLowerCase();
-                if (message.includes("success")) { popMessage(message, { variant: "success" }) }
+                if (!message.includes("success")) { popMessage(message, { variant: "success" }) }
                 else { popMessage(message) }
             }
         } catch (error)

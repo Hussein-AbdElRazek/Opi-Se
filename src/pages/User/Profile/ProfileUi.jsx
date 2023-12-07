@@ -5,6 +5,7 @@ import editIcon from '../../../assets/icons/edit.svg'
 import plusIcon from '../../../assets/icons/plus.svg'
 import { Btn } from '../../../components/inputs'
 import copyIcon from '../../../assets/icons/copy.svg'
+import { Link } from 'react-router-dom'
 const ProfileUi = (props) =>
 {
     const {
@@ -34,9 +35,14 @@ const ProfileUi = (props) =>
                     <div
                         className={classes.editBtn}
                     >
-                        <Btn>
-                            Edit Profile
-                        </Btn>
+                        <Link
+                            to="/profile/edit"
+                        >
+                            <Btn>
+                                Edit Profile
+                            </Btn>
+                        </Link>
+
                     </div>
                 </div>
                 <div
@@ -114,7 +120,7 @@ const ProfileUi = (props) =>
                             sm={12}
                             sx={{
                                 // height: "70px",
-                                marginBottom:"20px"
+                                marginBottom: "20px"
 
                             }}
                         >
@@ -126,7 +132,7 @@ const ProfileUi = (props) =>
                                         justifyContent: "space-between",
                                         width: "100%",
                                         flexWrap: "nowrap",
-                                        height:"50px"
+                                        height: "50px"
                                         // backgroundColor: "blue"
                                     }}
                                 >

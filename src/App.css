@@ -30,10 +30,13 @@
 
     /*Border Radius*/
     --border-radius-form: 30px;
+    --border-radius-150: 15px;
+    --border-radius-200: 20px;
     --border-radius-inputs: 10px;
     /* ------------------------------ */
     /*Z-Index*/
     --layer-nav: 999;
+    --layer-100: 10;
     /* ------------------------------ */
 }
 

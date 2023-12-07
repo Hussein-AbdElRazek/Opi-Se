@@ -23,3 +23,12 @@
     white-space: nowrap;
     width: 1px;
 }
+
+.outlined{
+    height: 36.5px;
+    margin-top: 35px;
+    border-radius: var(--border-radius-inputs);
+    border: 1px solid var(--input-border);
+    background-color: var(--primary);
+    cursor: pointer;
+}

@@ -6,15 +6,15 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import
 {
     FormikControl,
-    OutlinedIconBtn
+    ArrayIconBtn
 } from './';
 export const InputArray = (props) =>
 {
-    const { name, inputs } = props;
+    const { name, inputs,intialObject, disabled } = props;
 
-    const addOne = (push, addInputs) => () =>
+    const addOne = (push) => () =>
     {
-        push(addInputs)
+        push(intialObject)
     }
 
     const removeOne = (remove, index) => () =>
@@ -42,7 +42,7 @@ export const InputArray = (props) =>
                             }}
                             key={index}
                         >
-                            {inputs.map(({ size, ...input }) => 
+                            {inputs.map(({ size, sm, ...input }) => 
                             {
                                 const columns = size ? size : 4
                                 return (
@@ -51,54 +51,47 @@ export const InputArray = (props) =>
                                         item
                                         xl={columns}
                                         lg={columns}
-                                        md={columns}
-                                        sm={12}
-                                        xs={12}
+                                        md={sm}
+                                        sm={sm}
+                                        xs={sm}
                                     >
                                         <FormikControl
                                             {...input}
                                             name={`${name}.${index}.${input.name}`}
+                                            disabled={disabled}
                                         />
                                     </Grid>
                                 )
                             }
                             )}
-                            {/* Add Btn */}
 
                             <Grid
                                 item
-                                xl={1.5}
-                                lg={1.5}
-                                md={1.5}
-                                sm={6}
-                                xs={6}
+                                xl={2.5}
+                                lg={2.5}
+                                md={3}
+                                sm={5}
+                                xs={5}
                             >
-                                <OutlinedIconBtn
+                                {/* Add Btn */}
+                                <ArrayIconBtn
                                     title="Add one"
-                                    onClick={addOne(push, form.initialValues[name][0])}
+                                    onClick={addOne(push)}
+                                    disabled={disabled}
                                 >
                                     <AddRoundedIcon />
-                                </OutlinedIconBtn>
-                            </Grid>
-
-                            {/* Remove Btn */}
-                            {index !== 0 && (
-                                <Grid
-                                    item
-                                    xl={1.5}
-                                    lg={1.5}
-                                    md={1.5}
-                                    sm={6}
-                                    xs={6}
-                                >
-                                    <OutlinedIconBtn
+                                </ArrayIconBtn>
+                                {/* Remove Btn */}
+                                {index !== 0 && (
+                                    <ArrayIconBtn
                                         title="Remove"
                                         onClick={removeOne(remove, index)}
+                                        disabled={disabled}
                                     >
                                         <RemoveRoundedIcon />
-                                    </OutlinedIconBtn>
-                                </Grid>
-                            )}
+                                    </ArrayIconBtn>
+                                )}
+                            </Grid>
                         </Grid>
                     ))
                 )
