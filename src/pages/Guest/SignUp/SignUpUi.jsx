@@ -15,6 +15,7 @@ import
 } from '../../../components/inputs';
 import ExtractNationalId from './ExtractNationalId';
 import { Form, Formik } from 'formik';
+import { Outlet } from 'react-router-dom';
 
 const SignUpUi = (props) =>
 {
@@ -64,6 +65,7 @@ const SignUpUi = (props) =>
         type="signup"
         size="small"
       />
+      <Outlet />
     </div>
   )
 }

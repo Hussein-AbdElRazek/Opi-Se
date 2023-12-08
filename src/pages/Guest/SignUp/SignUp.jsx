@@ -1,9 +1,8 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 import useHttp from '../../../hooks/use-http';
 import SignUpUi from './SignUpUi';
-import { useSnackbar } from 'notistack';
 import { clearArrayOfObjects } from '../../../helpers/clearArrayOfObjects';
 
 const SignUp = () =>
@@ -15,7 +14,7 @@ const SignUp = () =>
         isLoading: isLoadingSignUp,
         sendRequest: signUp
     } = useHttp();
-    const handleSignUp = (values) =>
+    const handleSignUp = (values, { resetForm }) =>
     {
         let submitData = { ...values };
         submitData.languages = clearArrayOfObjects(submitData.languages)
@@ -28,8 +27,8 @@ const SignUp = () =>
         {
             if (message.includes("success"))
             {
-                popMessage("Your account created successfully and verification email sent", { variant: "success" })
-                navigate("/login", { replace: true });
+                resetForm();
+                navigate(`resend-email?email=${values.email}`)
             }
         };
         signUp(
