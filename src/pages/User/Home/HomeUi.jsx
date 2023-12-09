@@ -3,9 +3,12 @@ import { HeaderText, IllustrationSection } from '../../../components/ui'
 import classes from './Home.module.css'
 import { Btn } from '../../../components/inputs'
 import RecommendationList from './RecommendationList'
+import { IconButton } from '@mui/material'
+import messageIcon from '../../../assets/icons/message.svg'
+import { Outlet, useNavigate } from 'react-router-dom'
 const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommendedList, setRecommendedList }) =>
 {
-    
+    const navigate = useNavigate();
     return (
         <div
             className={classes.container}
@@ -45,14 +48,22 @@ const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommended
                         </div>
                     </>)
                 }
-
-
-
             </div>
-            <IllustrationSection
-                size="small"
-                type="home"
-            />
+            <div
+                className={classes.right}
+            >
+                <IllustrationSection
+                    size="small"
+                    type="home"
+                />
+            </div>
+            <IconButton
+                onClick={() => navigate("chats")}
+                className={classes.messageIcon}
+            >
+                <img src={messageIcon} alt="messageIcon" />
+            </IconButton>
+            <Outlet />
         </div>
     )
 }

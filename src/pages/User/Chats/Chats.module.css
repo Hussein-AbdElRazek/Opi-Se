@@ -1,0 +1,67 @@
+.container {
+    width: 300px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background-color: var(--primary);
+    border-radius: var(--border-radius-150);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.content {
+    overflow: auto;
+    height: 300px;
+    padding-top: 20px;
+}
+
+.header {
+    background-color: var(--secondary);
+    color: var(--primary);
+    border-radius: var(--border-radius-150) var(--border-radius-150) 0 0;
+    padding: 6px 5px 6px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header svg {
+    color: var(--primary);
+    font-size: var(--font-size-400);
+}
+
+.header h5 {
+    margin: 0;
+    font-size: var(--font-size-300);
+    font-weight: 500;
+    display: inline-block;
+}
+
+.list h6 {
+    font-size: var(--font-size-200);
+    margin-top: 0;
+    margin-bottom: 2px;
+    margin-left: 15px;
+}
+
+.listTitle {
+    color: var(--Text-Paragraph, var(--text-secondary, rgba(0, 0, 0, 0.60)));
+}
+
+.chatItem {
+    height: 60px;
+}
+
+.username {
+    color: var(--text-header);
+    margin: 0 !important;
+}
+
+.lastMessage {
+    margin: 0;
+    font-size: var(--font-size-100);
+    color: var(--text-paragraph);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
