@@ -12,16 +12,22 @@
     --text-header: #000000;
     --text-paragraph: rgba(0, 0, 0, 0.60);
     --text-secondary: rgba(0, 0, 0, 0.50);
+    --text-secondary2:rgba(121, 124, 123, 0.50);
     --divider: rgba(112, 104, 104, 0.70);
     --app-bar-border: rgba(0, 0, 0, 0.05);
     --secondary-border: rgba(3, 102, 102, 0.20);
     --secondary-40: rgba(3, 105, 105, 0.40);
     --secondary-10: rgba(3, 105, 105, 0.10);
     --secondary-0: rgba(3, 105, 105, 0.0);
-
+    --chat-receive:#F5F5F5;
+    --chat-date:#F8FBFA;
+    --chat-input:#F3F6F6;
+    --date-text:#000E08;
+    --secondary-darker:#125454;
     /* ------------------------------ */
 
     /* Font Size */
+    --font-size-40: 10px;
     --font-size-50: 12px;
     --font-size-100: 13px;
     --font-size-200: 14px;
@@ -31,6 +37,7 @@
 
     /*Border Radius*/
     --border-radius-form: 30px;
+    --border-radius-5: 5px;
     --border-radius-150: 15px;
     --border-radius-200: 20px;
     --border-radius-inputs: 10px;

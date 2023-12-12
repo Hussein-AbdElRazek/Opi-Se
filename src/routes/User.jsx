@@ -6,6 +6,7 @@ import Questions from '../pages/User/QuestionsAndAbout/Questions'
 import EditProfile from '../pages/User/EditProfile/EditProfile'
 import ChangePassword from '../pages/User/ChangePassword/ChangePassword'
 import Chats from '../pages/User/Chats/Chats'
+import Chat from '../pages/User/Chat/Chat'
 
 
 
@@ -15,6 +16,7 @@ const User = () =>
         <Routes>
             <Route path='/' element={<Home />} >
                 <Route path='chats' element={<Chats />} />
+                <Route path='chats/:id' element={<Chat/>} />
             </Route>
             <Route path='/profile' element={<Profile />} />
             <Route path='/profile/edit' element={<EditProfile />} />

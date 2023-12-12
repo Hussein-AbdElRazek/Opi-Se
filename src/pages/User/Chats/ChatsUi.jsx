@@ -1,9 +1,6 @@
-import { IconButton } from '@mui/material'
-import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
-
-import classes from './Chats.module.css'
-import { useNavigate } from 'react-router-dom';
 import ChatList from './ChatList';
+import { PopChatCard } from '../../../components/ui';
+import ChatsHeader from './ChatsHeader';
 const mentorsDummy = [
     {
         profilePic: "", userName: "Nada Abdelnasser",
@@ -56,43 +53,27 @@ const mentorsDummy = [
 ]
 const ChatsUi = () =>
 {
-    const navigate = useNavigate()
     return (
-        <div
-            className={classes.container}
+        <PopChatCard
+            header={<ChatsHeader />}
         >
-            <div
-                className={classes.header}
-            >
-                <h5>Chats</h5>
-                <IconButton
-                    onClick={() => navigate("/")}
-                >
-                    <ClearRoundedIcon />
-                </IconButton>
-            </div>
-            <div
-                className={classes.content}
-            >
-                <ChatList
-                    title="Your Partner"
-                    chatList={[
+            <ChatList
+                title="Your Partner"
+                chatList={[
+                    {
+                        profilePic: "", userName: "Nada Abdelnasser",
+                        lastMessage:
                         {
-                            profilePic: "", userName: "Nada Abdelnasser",
-                            lastMessage:
-                            {
-                                from: "You",
-                                message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
-                            }
-                        }]}
-                />
-                <ChatList
-                    title="Mentors"
-                    chatList={mentorsDummy}
-                />
-            </div>
-
-        </div>
+                            from: "You",
+                            message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
+                        }
+                    }]}
+            />
+            <ChatList
+                title="Mentors"
+                chatList={mentorsDummy}
+            />
+        </PopChatCard>
     )
 }
 

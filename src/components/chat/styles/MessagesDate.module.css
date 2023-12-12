@@ -1,0 +1,10 @@
+.container{
+    width: fit-content;
+    margin: 15px auto;
+    padding: 5px 10px;
+    border-radius: var(--border-radius-inputs);
+    background-color: var(--chat-date);
+    color: var(--date-text);
+    font-size: var(--font-size-100);
+    font-weight: 500;
+}

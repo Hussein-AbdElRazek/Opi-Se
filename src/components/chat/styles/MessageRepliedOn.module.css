@@ -1,0 +1,43 @@
+.container {
+    background-color: var(--primary);
+    position: relative;
+    border-radius: var(--border-radius-5);
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.containerSent {
+    background-color: var(--secondary-darker);
+}
+.pip {
+    position: absolute;
+    left: 0;
+    width: 4px;
+    flex: none;
+    display: flex;
+    height: 100%;
+    background-color: var(--secondary);
+}
+
+.pipSent {
+    background-color: var(--background);
+}
+
+.content {
+    padding: 10px;
+    color: var(--text-header);
+}
+
+.contentSent {
+    color: var(--primary);
+}
+
+.replyOn {
+    font-weight: 600;
+    color: var(--secondary) !important;
+    font-size: var(--font-size-100) !important;
+    margin-bottom: 5px !important;
+}
+
+.replyOnSent {
+    color: var(--background) !important;
+}
