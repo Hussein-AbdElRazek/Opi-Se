@@ -1,7 +1,7 @@
 import React from 'react'
 import { PopChatCard } from '../../../components/ui'
 import ChatHeader from './ChatHeader'
-import { MessagesList } from '../../../components/chat'
+import { InputBar, MessagesList } from '../../../components/chat'
 const dummyHeader = {
     profilePic: "",
     userName: "Nada Abdelnasser",
@@ -50,16 +50,22 @@ const dummyMessages = [
         _id: 1
     },
 ]
-const ChatUi = () =>
+const ChatUi = (props) =>
 {
+    const { messages, header, submitTextMessage } = props;
     return (
         <PopChatCard
             header={<ChatHeader userData={dummyHeader} />}
-            
+            inputBar={
+                <InputBar
+                    submitTextMessage={submitTextMessage}
+                />
+            }
         >
             <MessagesList
-                messages={dummyMessages}
+                messages={messages}
             />
+
         </PopChatCard>
     )
 }

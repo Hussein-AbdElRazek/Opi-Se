@@ -22,7 +22,7 @@ const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommended
                     (<>
                         <HeaderText>
                             With
-                            <span>
+                            <span className={classes.logo}>
                                 Opi Se
                             </span>
                             You

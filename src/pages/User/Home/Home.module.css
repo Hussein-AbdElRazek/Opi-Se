@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-.container span {
+.logo {
     color: var(--secondary);
     margin: 6px;
 }

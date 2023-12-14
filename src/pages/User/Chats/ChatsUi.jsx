@@ -11,42 +11,42 @@ const mentorsDummy = [
         }
     },
     {
-        profilePic: "", userName: "Nada Abdelnasser",
+        profilePic: "", userName: "Nada Abdelnasser2",
         lastMessage:
         {
-            from: "Nada Abdelnasser",
+            from: "Nada Abdelnasser2",
             message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
         }
     },
     {
-        profilePic: "", userName: "Nada Abdelnasser",
+        profilePic: "", userName: "Nada Abdelnasser3",
         lastMessage:
         {
-            from: "Nada Abdelnasser",
+            from: "Nada Abdelnasser3",
             message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
         }
     },
     {
-        profilePic: "", userName: "Nada Abdelnasser",
+        profilePic: "", userName: "Nada Abdelnasser4",
         lastMessage:
         {
-            from: "Nada Abdelnasser",
+            from: "Nada Abdelnasser4",
             message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
         }
     },
     {
-        profilePic: "", userName: "Nada Abdelnasser",
+        profilePic: "", userName: "Nada Abdelnasser5",
         lastMessage:
         {
-            from: "Nada Abdelnasser",
+            from: "Nada Abdelnasser5",
             message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
         }
     },
     {
-        profilePic: "", userName: "Nada Abdelnasser",
+        profilePic: "", userName: "Nada Abdelnasser6",
         lastMessage:
         {
-            from: "Nada Abdelnasser",
+            from: "Nada Abdelnasser6",
             message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
         }
     },

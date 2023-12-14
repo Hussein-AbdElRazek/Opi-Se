@@ -1,6 +1,6 @@
 import classes from './styles/PopChatCard.module.css'
 
-export const PopChatCard = ({ header, children }) =>
+export const PopChatCard = ({ header, children, inputBar }) =>
 {
     return (
         <div
@@ -12,6 +12,7 @@ export const PopChatCard = ({ header, children }) =>
             >
                 {children}
             </div>
+            {inputBar}
         </div>
     )
 }
