@@ -12,19 +12,21 @@
     --text-header: #000000;
     --text-paragraph: rgba(0, 0, 0, 0.60);
     --text-secondary: rgba(0, 0, 0, 0.50);
-    --text-secondary2:rgba(121, 124, 123, 0.50);
+    --text-secondary2: rgba(121, 124, 123, 0.50);
     --divider: rgba(112, 104, 104, 0.70);
     --app-bar-border: rgba(0, 0, 0, 0.05);
     --secondary-border: rgba(3, 102, 102, 0.20);
     --secondary-40: rgba(3, 105, 105, 0.40);
     --secondary-10: rgba(3, 105, 105, 0.10);
     --secondary-0: rgba(3, 105, 105, 0.0);
-    --chat-receive:#F5F5F5;
-    --chat-date:#F8FBFA;
-    --chat-input:#F3F6F6;
-    --date-text:#000E08;
-    --secondary-darker:#125454;
-    --chat-input-border:#EEFAF8;
+    --chat-receive: #F5F5F5;
+    --chat-date: #F8FBFA;
+    --chat-input: #F3F6F6;
+    --date-text: #000E08;
+    --secondary-darker: #125454;
+    --chat-input-border: #EEFAF8;
+    --end-call-icon: #EA4335;
+    --video-time: #8D9196;
     /* ------------------------------ */
 
     /* Font Size */
@@ -34,6 +36,10 @@
     --font-size-200: 14px;
     --font-size-300: 15px;
     --font-size-400: 16px;
+    --font-size-500: 17px;
+    --font-size-600: 18px;
+    --font-size-700: 19px;
+    --font-size-800: 20px;
     /* ------------------------------ */
 
     /*Border Radius*/
@@ -41,10 +47,12 @@
     --border-radius-5: 5px;
     --border-radius-150: 15px;
     --border-radius-200: 20px;
+    --border-radius-400: 40px;
     --border-radius-inputs: 10px;
     /* ------------------------------ */
     /*Z-Index*/
     --layer-nav: 999;
+    --layer-video-call: 1000;
     --layer-100: 10;
     /* ------------------------------ */
 }
@@ -66,6 +74,7 @@
 .height-100vh {
     height: 100vh;
 }
-.w-100{
+
+.w-100 {
     width: 100%;
 }
