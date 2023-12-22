@@ -41,6 +41,7 @@
 }
 
 .lastMessage {
+    display: block;
     margin: 0;
     font-size: var(--font-size-100);
     color: var(--text-paragraph);

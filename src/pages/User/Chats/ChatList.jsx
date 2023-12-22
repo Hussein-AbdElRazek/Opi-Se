@@ -20,6 +20,7 @@ const ChatList = (props) =>
                 {chatList.map(chatItem => (
                     <ChatItem
                         chatItemData={chatItem}
+                        key={chatItem.userName}
                     />
                 ))}
             </List>

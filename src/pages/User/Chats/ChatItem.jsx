@@ -1,13 +1,17 @@
-import { Avatar, ListItem, ListItemAvatar, ListItemButton, ListItemText, Tooltip } from '@mui/material'
-import avatarTest from '../../../assets/images/avatar.png'
+import { Avatar, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
 import classes from './Chats.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 const ChatItem = ({ chatItemData }) =>
 {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const openChat = () =>
     {
-        navigate(`${chatItemData.userName}`)
+        searchParams.set("userName", chatItemData.userName)
+        searchParams.set("profileImage", chatItemData.profileImage)
+        searchParams.set("id", chatItemData.id)
+        navigate(`chat?${searchParams}`)
+
     }
     return (
         <ListItem
@@ -24,7 +28,8 @@ const ChatItem = ({ chatItemData }) =>
             >
                 <ListItemAvatar>
                     <Avatar
-                        src={avatarTest}
+                        // src={chatItemData.profileImage}
+                        sx={{ backgroundImage: `url(${chatItemData.profileImage})` }}
                     />
                 </ListItemAvatar>
                 <ListItemText
@@ -37,22 +42,16 @@ const ChatItem = ({ chatItemData }) =>
                         </h6>
                     }
                     secondary={
-                        <Tooltip
+                        <span
+                            className={classes.lastMessage}
                             title={`
-                                ${chatItemData.lastMessage.from}: 
-                                ${chatItemData.lastMessage.message}
-                            `}
-                        >
-                            <p
-                                className={classes.lastMessage}
-                            >
-                                {`
+                                ${chatItemData.lastMessage.from}: \n${chatItemData.lastMessage.message}
+                            `}                            >
+                            {`
                                     ${chatItemData.lastMessage.from}: 
                                     ${chatItemData.lastMessage.message}
                                 `}
-                            </p>
-                        </Tooltip>
-
+                        </span>
                     }
                 />
             </ListItemButton>

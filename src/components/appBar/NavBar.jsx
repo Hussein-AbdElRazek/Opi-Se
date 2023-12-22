@@ -5,8 +5,10 @@ import notificationIcon from '../../assets/icons/notification.svg'
 import addFriendIcon from '../../assets/icons/addFriend.svg'
 import { ProfileIcon } from './ProfileIcon'
 import { Logo } from '../ui'
+import { NavLink } from 'react-router-dom'
 export const NavBar = ({ title }) =>
 {
+
     return (
         <div
             className={classes.container}
@@ -25,6 +27,8 @@ export const NavBar = ({ title }) =>
                 />
                 <IconBtn
                     img={addFriendIcon}
+                    component={NavLink}
+                    to={title === "Requests" ? "/" : "requests"}
                 />
                 <ProfileIcon />
             </div>

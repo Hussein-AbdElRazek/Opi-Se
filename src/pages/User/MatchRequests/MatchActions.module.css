@@ -1,0 +1,17 @@
+.action {
+    display: flex;
+    margin-top: 10px;
+}
+
+.action button {
+    margin: 0 15px 0 0;
+    padding: 3px 20px;
+    width: auto;
+    font-size: var(--font-size-100);
+}
+
+.deleteBtn {
+    background-color: var(--secondary-btn) !important;
+    color: var(--text-header);
+    margin: 0;
+}

@@ -43,6 +43,8 @@
     width: 170px;
     justify-content: flex-start;
     padding-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .userInfo span {

@@ -51,7 +51,7 @@ const mentorsDummy = [
         }
     },
 ]
-const ChatsUi = () =>
+const ChatsUi = ({ partner }) =>
 {
     return (
         <PopChatCard
@@ -61,7 +61,9 @@ const ChatsUi = () =>
                 title="Your Partner"
                 chatList={[
                     {
-                        profilePic: "", userName: "Nada Abdelnasser",
+                        profileImage: partner.profileImage,
+                        userName: partner.userName,
+                        id: partner._id,
                         lastMessage:
                         {
                             from: "You",

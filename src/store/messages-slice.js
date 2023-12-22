@@ -12,13 +12,18 @@ const messagesSlice = createSlice({
         setMessages(state, action)
         {
             state.messages[action.payload.id] = action.payload.messages;
-            localStorage.setItem("messages", JSON.stringify(action.payload))
+            localStorage.setItem("messages", JSON.stringify(state.messages))
         },
         updateMessages(state, action)
         {
             if (!!state.messages[action.payload.id])
             {
-                state.messages[action.payload.id] = [...state.messages[action.payload.id], action.payload.message]
+                //check for duplication
+                const isDuplicate = state.messages[action.payload.id].some(msg => JSON.stringify(msg) === JSON.stringify(action.payload.message));
+                if (!isDuplicate)
+                {
+                    state.messages[action.payload.id] = [...state.messages[action.payload.id], action.payload.message]
+                }
             } else
             {
                 state.messages[action.payload.id] = [action.payload.message]

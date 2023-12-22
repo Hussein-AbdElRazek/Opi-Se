@@ -1,0 +1,39 @@
+.container {
+    padding: 0px 20px;
+    margin-bottom: 20px;
+    /* background-color: yellowgreen; */
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.message {
+    margin: 0;
+    font-size: var(--font-size-200);
+}
+
+.message a {
+    color: var(--text-header) !important;
+    margin-right: 4px;
+}
+
+.action {
+    display: flex;
+    margin-top: 10px;
+}
+
+.action button {
+    margin: 0 15px 0 0;
+    padding: 3px 20px;
+    width: auto;
+    font-size: var(--font-size-100);
+}
+
+.deleteBtn {
+    background-color: var(--secondary-btn) !important;
+    color: var(--text-header);
+    margin: 0;
+}

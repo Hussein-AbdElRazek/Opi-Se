@@ -27,6 +27,7 @@
     --chat-input-border: #EEFAF8;
     --end-call-icon: #EA4335;
     --video-time: #8D9196;
+    --secondary-btn: #eeeeee;
     /* ------------------------------ */
 
     /* Font Size */
@@ -77,4 +78,8 @@
 
 .w-100 {
     width: 100%;
+}
+
+a {
+    text-decoration: none;
 }

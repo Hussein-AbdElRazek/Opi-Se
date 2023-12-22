@@ -1,7 +1,6 @@
 import { Avatar, ButtonBase, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-import avatarTest from '../../../assets/images/avatar.png'
 import classes from './Chat.module.css'
 
 const ChatHeader = ({ userData }) =>
@@ -29,7 +28,7 @@ const ChatHeader = ({ userData }) =>
                     className={classes.userInfo}
                 >
                     <Avatar
-                        src={avatarTest}
+                        src={userData.profileImage}
                         className={classes.avatar}
                     />
                     <div>
