@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import { messagesActions } from "../store/messages-slice";
+import { useSearchParams } from "react-router-dom";
 
 const useChat = () =>
 {
@@ -17,7 +18,7 @@ const useChat = () =>
     }, [])
     // listen to new messages, listen to messageDeleted
     const dispatch = useDispatch();
-    const userId = useSelector(state=>state.auth.userData._id);
+    const userId = useSelector(state => state.auth.userData._id);
     useEffect(() =>
     {
         // listen to new messages and update messages when new message income
@@ -51,9 +52,11 @@ const useChat = () =>
             getResponse(res)
         })
     }
-
+    const [searchParams] = useSearchParams();
     const deleteMessage = (body, getResponse) =>
     {
+        const messagesId = searchParams.get("id")
+        dispatch(messagesActions.deleteMessage({ id: messagesId, messageId: body.id }))
         socket.emit("deleteMessage", body, (res) =>
         {
             console.log('deleteMessage', res)

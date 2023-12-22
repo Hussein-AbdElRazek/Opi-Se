@@ -16,10 +16,11 @@
     overflow-wrap: break-word;
     white-space: pre-wrap;
     max-width: 200px;
+    position: relative;
 }
 
 
-.containerBasics span {
+.date {
     display: block;
     font-size: var(--font-size-40);
     color: var(--text-secondary2);
@@ -38,7 +39,7 @@
     justify-content: flex-end;
 }
 
-.sentContainer svg {
+.seen {
     position: absolute;
     right: 5px;
 }

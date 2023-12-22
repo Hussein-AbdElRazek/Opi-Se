@@ -29,6 +29,11 @@ const messagesSlice = createSlice({
                 state.messages[action.payload.id] = [action.payload.message]
             }
             localStorage.setItem("messages", JSON.stringify(state.messages))
+        },
+        deleteMessage(state, action)
+        {
+            state.messages[action.payload.id] = state.messages[action.payload.id].filter((msg) => msg._id !== action.payload.messageId)
+            localStorage.setItem("messages", JSON.stringify(state.messages))
         }
     }
 })

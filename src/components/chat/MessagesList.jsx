@@ -29,6 +29,7 @@ export const MessagesList = ({ messages }) =>
                             type={message.messageSender === userId ? "sent" : "received"}
                             seen={message.isSeen}
                             key={message._id}
+                            id={message._id}
                         >
                             {message.messageContent}
                         </Message>
