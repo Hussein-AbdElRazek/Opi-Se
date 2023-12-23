@@ -63,7 +63,7 @@ const Chat = () =>
 
         getChatData(
             {
-                url: `getPartnerChat?matchId=${matchId}&page=1&limit=25`,
+                url: `getPartnerChat?matchId=${matchId}&page=1&limit=100`,
             },
             getResponse
         );

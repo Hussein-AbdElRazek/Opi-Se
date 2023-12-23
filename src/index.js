@@ -7,19 +7,22 @@ import { SnackbarProvider } from 'notistack';
 import './index.css';
 import App from './App';
 import store from './store';
-import {GlobalCssPriority} from './components/ui';
+import { GlobalCssPriority } from './components/ui';
+import { ImagesContextProvider } from './imagesStore/images-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <SnackbarProvider autoHideDuration={3000} maxSnack={5}>
-          <GlobalCssPriority>
-            <App />
-          </GlobalCssPriority>
-        </SnackbarProvider>
-      </BrowserRouter>
+      <ImagesContextProvider>
+        <BrowserRouter>
+          <SnackbarProvider autoHideDuration={3000} maxSnack={5}>
+            <GlobalCssPriority>
+              <App />
+            </GlobalCssPriority>
+          </SnackbarProvider>
+        </BrowserRouter>
+      </ImagesContextProvider>
     </Provider>
   </React.StrictMode>
 );
