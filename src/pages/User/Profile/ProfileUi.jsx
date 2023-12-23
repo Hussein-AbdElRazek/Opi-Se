@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom'
 const ProfileUi = (props) =>
 {
     const {
-        userData,
+        profileData,
+        type
     } = props;
     return (
         <div>
@@ -17,51 +18,63 @@ const ProfileUi = (props) =>
                 <div
                     className={classes.cover}
                 >
-                    <IconButton
-                        className={classes.editIcon}
-                    >
-                        <img src={editIcon} alt="edit" />
-                    </IconButton>
+                    {type === "MY_PROFILE" && (
+                        <IconButton
+                            className={classes.editIcon}
+                        >
+                            <img src={editIcon} alt="edit" />
+                        </IconButton>
+                    )}
+
                     <div
                         className={classes.pic}
                     >
-                        <ProfilePic />
-                        <IconButton
-                            className={classes.plusIcon}
-                        >
-                            <img src={plusIcon} alt="add" />
-                        </IconButton>
-                    </div>
-                    <div
-                        className={classes.editBtn}
-                    >
-                        <Link
-                            to="/profile/edit"
-                        >
-                            <Btn>
-                                Edit Profile
-                            </Btn>
-                        </Link>
+                        {type === "MY_PROFILE" && (
+                            <>
+                                <ProfilePic />
+                                <IconButton
+                                    className={classes.plusIcon}
+                                >
+                                    <img src={plusIcon} alt="add" />
+                                </IconButton>
+                            </>
+
+                        )}
 
                     </div>
+                    {type === "MY_PROFILE" && (
+                        <div
+                            className={classes.editBtn}
+                        >
+                            <Link
+                                to="/profile/edit"
+                            >
+                                <Btn>
+                                    Edit Profile
+                                </Btn>
+                            </Link>
+
+                        </div>
+                    )}
+
                 </div>
                 <div
                     className={classes.content}
                 >
                     <div
-                        className={classes.userData}
+                        className={classes.profileData}
                     >
                         <h4>
-                            {userData.userName}
+                            {profileData.userName}
                         </h4>
                         <p>
                             Web Developer
                         </p>
                         <p>
-                            {userData.age} Years
+                            {profileData.age} Years
                         </p>
                         <p>
-                            {userData.location}
+                            {profileData.location}
                         </p>
                     </div>
                     <Grid
@@ -137,7 +150,7 @@ const ProfileUi = (props) =>
                                     }}
                                 >
                                     <span>
-                                        Id:https/Opi-se/{userData.userName}
+                                        Id:https/Opi-se/{profileData.userName}
                                     </span>
                                     <IconButton
                                         sx={{

@@ -6,11 +6,16 @@ import { useNavigate } from "react-router-dom"
 
 export const ProfileIcon = () =>
 {
-    const navigate= useNavigate();
+    const navigate = useNavigate();
+
+    const goToMyProfile = () =>
+    {
+        navigate(`/profile?type=MY_PROFILE`)
+    }
     return (
         <IconButton
             className={classes.profileIcon}
-            onClick={()=>{navigate("/profile")}}
+            onClick={goToMyProfile}
         >
             <ProfilePic />
         </IconButton>

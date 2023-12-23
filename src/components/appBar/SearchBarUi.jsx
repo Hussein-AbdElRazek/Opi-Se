@@ -1,27 +1,42 @@
-import { InputBase } from '@mui/material'
+import { CircularProgress, IconButton, InputBase } from '@mui/material'
 import { Field } from 'formik'
 
 import classes from './styles/SearchBar.module.css'
 import { FormikContainer } from '../inputs'
 import searchIcon from '../../assets/icons/search.svg'
-export const SearchBarUi = () =>
+export const SearchBarUi = ({ handleSearchForPartner, isLoadingSearchForPartner }) =>
 {
     return (
-        <div
-
-        >
+        <div>
             <FormikContainer
-                initialValues={{ searchValue: "" }}
-            // validationSchema={searchValidationSchema}
-            // onSubmit={handleSearch}
+                initialValues={{ userId: "" }}
+                onSubmit={handleSearchForPartner}
             >
-                <Field name="searchValue">
+                <Field name="userId">
                     {({ field }) => (
                         <InputBase
                             className={classes.searchInput}
-                            name="searchValue"
+                            name="userId"
                             placeholder="Search your study partner..."
-                            startAdornment={<img src={searchIcon} alt='search icon' />}
+                            startAdornment={
+                                isLoadingSearchForPartner ?
+                                    <CircularProgress size={20} sx={{ margin: 1, color: "var(--secondary)" }} /> :
+                                    <IconButton
+                                        sx={{
+                                            marginRight: 1,
+                                            padding: 0,
+                                        }}
+                                        type='submit'
+                                        disabled={isLoadingSearchForPartner}
+                                    >
+                                        <img
+                                            src={searchIcon}
+                                            alt='search icon'
+                                        />
+                                    </IconButton>
+
+                            }
+                            disabled={isLoadingSearchForPartner}
                             {...field}
                         />
                     )}
