@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import VideoSessionUi from './VideoSessionUi'
 import { useDispatch, useSelector } from 'react-redux';
 import { messagesActions } from '../../../store/messages-slice';
+import VideoContext from '../../../videoSessionStore/video-session-context';
 
 const VideoSession = () =>
 {
@@ -9,6 +10,7 @@ const VideoSession = () =>
 
     const dispatch = useDispatch();
     const messages = useSelector(state => state.messages.messages[id]) || [];
+
     const submitTextMessage = (values, { resetForm }) =>
     {
         if (values.message.trim() === "") return
@@ -30,6 +32,14 @@ const VideoSession = () =>
         dispatch(messagesActions.updateMessages({ id: id, message: newMessage }))
         resetForm();
     }
+    const { call, callAccepted } = useContext(VideoContext);
+    useEffect(() =>
+    {
+        console.log("useEffect")
+        if(call.isReceivingCall){
+            console.log("someone call u")
+        }
+    }, [call])
     return (
         <VideoSessionUi
             messages={messages}

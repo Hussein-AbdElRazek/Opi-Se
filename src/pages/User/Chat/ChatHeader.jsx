@@ -2,6 +2,9 @@ import { Avatar, ButtonBase, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import classes from './Chat.module.css'
+import { useContext } from 'react';
+import VideoContext from '../../../videoSessionStore/video-session-context';
+import { useSelector } from 'react-redux';
 
 const ChatHeader = ({ userData }) =>
 {
@@ -9,6 +12,12 @@ const ChatHeader = ({ userData }) =>
     const goBack = () =>
     {
         navigate("/chats")
+    }
+    const { callUser } = useContext(VideoContext);
+    const myId = useSelector(state => state.auth.userData._id)
+    const handleStartVideoSession = () =>
+    {
+        callUser(userData.id);
     }
     return (
         <div
@@ -58,6 +67,7 @@ const ChatHeader = ({ userData }) =>
                 {/* video icon */}
                 <IconButton
                     title='Video session'
+                    onClick={handleStartVideoSession}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path fillRule="evenodd" clipRule="evenodd" d="M13.125 17.75H5.25C4.007 17.75 3 16.743 3 15.5V8.5C3 7.257 4.007 6.25 5.25 6.25H13.125C14.368 6.25 15.375 7.257 15.375 8.5V15.5C15.375 16.743 14.368 17.75 13.125 17.75Z" stroke="#000E08" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

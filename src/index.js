@@ -9,6 +9,7 @@ import App from './App';
 import store from './store';
 import { GlobalCssPriority } from './components/ui';
 import { ImagesContextProvider } from './imagesStore/images-context';
+import { VideoContextProvider } from './videoSessionStore/video-session-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,11 +17,13 @@ root.render(
     <Provider store={store}>
       <ImagesContextProvider>
         <BrowserRouter>
-          <SnackbarProvider autoHideDuration={3000} maxSnack={5}>
-            <GlobalCssPriority>
-              <App />
-            </GlobalCssPriority>
-          </SnackbarProvider>
+          <VideoContextProvider>
+            <SnackbarProvider autoHideDuration={3000} maxSnack={5}>
+              <GlobalCssPriority>
+                <App />
+              </GlobalCssPriority>
+            </SnackbarProvider>
+          </VideoContextProvider>
         </BrowserRouter>
       </ImagesContextProvider>
     </Provider>

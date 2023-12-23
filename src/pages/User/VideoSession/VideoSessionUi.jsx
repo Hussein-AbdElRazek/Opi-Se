@@ -4,6 +4,8 @@ import t from '../../../assets/images/t.jpg';
 import { ProfilePic } from '../../../components/ui/ProfilePic';
 import { InputBar, MessagesList } from '../../../components/chat';
 import { NavLink, useSearchParams } from 'react-router-dom';
+import { useContext } from 'react';
+import VideoContext from '../../../videoSessionStore/video-session-context';
 
 const MicrophoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="31" height="30" viewBox="0 0 31 30" fill="none">
     <path d="M24.25 13.75C24.25 18.5825 20.3325 22.5 15.5 22.5M15.5 22.5C10.6675 22.5 6.75 18.5825 6.75 13.75M15.5 22.5V27.5M15.5 27.5H10.5M15.5 27.5H20.5M15.5 17.5C13.4289 17.5 11.75 15.8211 11.75 13.75V6.25C11.75 4.17893 13.4289 2.5 15.5 2.5C17.5711 2.5 19.25 4.17893 19.25 6.25V13.75C19.25 15.8211 17.5711 17.5 15.5 17.5Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -56,6 +58,14 @@ const VideoSessionUi = (props) =>
 
     const [searchParams] = useSearchParams();
 
+    const {
+        myVideo,
+        stream,
+        callAccepted,
+        callEnded,
+        anotherVideo
+    } = useContext(VideoContext)
+
     return (
         <div
             className={classes.container}
@@ -64,7 +74,14 @@ const VideoSessionUi = (props) =>
                 <div
                     className={`${classes.borderRadius} ${classes.person}`}
                 >
-                    <img src={t} alt="t" />
+                    {callAccepted && !callEnded && (
+                        <video
+                            playsInline
+                            ref={anotherVideo}
+                            autoPlay
+                            className={classes.video}
+                        />
+                    )}
                     <div
                         className={classes.statusBar}
                     >
@@ -79,7 +96,17 @@ const VideoSessionUi = (props) =>
                         </IconButton>
                     </div>
                     <div className={`${classes.me} ${classes.borderRadius} ${classes.shadow}`}>
-                        <ProfilePic />
+                        {/* <ProfilePic /> */}
+                        {stream && (
+                            <video
+                                playsInline
+                                muted
+                                ref={myVideo}
+                                autoPlay
+                                className={classes.video}
+                            />
+                        )}
+
                     </div>
                 </div>
                 <div className={classes.bottomBar}>
