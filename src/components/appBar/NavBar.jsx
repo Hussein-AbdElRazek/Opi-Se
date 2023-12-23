@@ -24,6 +24,8 @@ export const NavBar = ({ title }) =>
             >
                 <IconBtn
                     img={notificationIcon}
+                    component={NavLink}
+                    to={title === "Notifications" ? "/" : "notifications"}
                 />
                 <IconBtn
                     img={addFriendIcon}

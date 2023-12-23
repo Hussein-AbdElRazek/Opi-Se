@@ -9,6 +9,7 @@ import Chats from '../pages/User/Chats/Chats'
 import Chat from '../pages/User/Chat/Chat'
 import VideoSession from '../pages/User/VideoSession/VideoSession'
 import MatchRequests from '../pages/User/MatchRequests/MatchRequests'
+import Notifications from '../pages/User/Notifications/Notifications'
 
 
 
@@ -20,6 +21,7 @@ const User = () =>
                 <Route path='chats' element={<Chats />} />
                 <Route path='chats/chat' element={<Chat />} />
                 <Route path='requests' element={<MatchRequests />} />
+                <Route path='notifications' element={<Notifications />} />
             </Route>
             <Route path='/profile' element={<Profile />} />
             <Route path='/profile/edit' element={<EditProfile />} />

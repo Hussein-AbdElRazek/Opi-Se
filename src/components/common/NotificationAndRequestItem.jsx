@@ -9,14 +9,17 @@ export const NotificationAndRequestItem = ({ itemData, action }) =>
             disablePadding
             className={classes.container}
         >
-            <ListItemAvatar>
-                <Avatar
-                    src={itemData.profilePic}
-                    component={NavLink}
-                    to="/"
-                    className={classes.avatar}
-                />
-            </ListItemAvatar>
+            {itemData.profileImage && (
+                <ListItemAvatar>
+                    <Avatar
+                        src={itemData.profileImage}
+                        component={NavLink}
+                        to="/"
+                        className={classes.avatar}
+                    />
+                </ListItemAvatar>
+            )}
+
             <div>
                 <ListItemText
                     sx={{ "& span": { margin: "0 !important" } }}
@@ -24,9 +27,12 @@ export const NotificationAndRequestItem = ({ itemData, action }) =>
                         <h6
                             className={classes.message}
                         >
-                            <NavLink>
-                                {itemData.userName || itemData.partnerUserName}
-                            </NavLink>
+                            {(itemData.userName || itemData.partnerUserName) && (
+                                <NavLink>
+                                    {itemData.userName || itemData.partnerUserName}
+                                </NavLink>
+                            )}
+
                             {itemData.message}
                         </h6>
                     }
