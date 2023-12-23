@@ -9,3 +9,4 @@ export { Card } from './Card';
 export { Chip } from './Chip';
 export { PopChatCard } from './PopChatCard';
 export { PopUpCard } from './PopUpCard';
+export { LoadingCenter } from './LoadingCenter';

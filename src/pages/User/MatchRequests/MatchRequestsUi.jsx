@@ -1,72 +1,10 @@
 import { List } from "@mui/material"
-import { PopUpCard } from "../../../components/ui"
+import { LoadingCenter, PopUpCard } from "../../../components/ui"
 import { NotificationAndRequestItem } from "../../../components/common/NotificationAndRequestItem"
 import MatchActions from "./MatchActions"
 
-const MatchRequestsUi = () =>
+const MatchRequestsUi = ({ requests, isLoadingGetRequests }) =>
 {
-    const requestsList = [
-        {
-            _id: 1,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-        {
-            _id: 2,
-            message: "send you add request",
-            userName: "Khadija Ahmed",
-            profileImage: ""
-        },
-    ]
     return (
         <PopUpCard
             title="Requests"
@@ -74,14 +12,28 @@ const MatchRequestsUi = () =>
             <List
                 dense={true}
             >
-                {requestsList.map(request => (
-                    <NotificationAndRequestItem
-                        itemData={request}
-                        action={<MatchActions />}
-                        key={request._id}
-                    />
-                ))}
+                {requests.map(request =>
+                {
+                    request.message = "send you add request"
+                    return (
+                        < NotificationAndRequestItem
+                            itemData={request}
+                            action={< MatchActions requestData={request} />}
+                            key={request._id}
+                        />
+                    )
+                })}
             </List>
+            {(!requests.length && !isLoadingGetRequests) && (<p
+                style={{
+                    width: "100%",
+                    textAlign: "center"
+                }}
+            >
+                No requests yet!
+            </p>
+            )}
+            {isLoadingGetRequests && <LoadingCenter />}
         </PopUpCard>
     )
 }

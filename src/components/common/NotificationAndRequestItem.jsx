@@ -25,7 +25,7 @@ export const NotificationAndRequestItem = ({ itemData, action }) =>
                             className={classes.message}
                         >
                             <NavLink>
-                                {itemData.userName}
+                                {itemData.userName || itemData.partnerUserName}
                             </NavLink>
                             {itemData.message}
                         </h6>
