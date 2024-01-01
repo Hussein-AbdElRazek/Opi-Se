@@ -2,8 +2,8 @@ import { Avatar, ButtonBase, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import classes from './Chat.module.css'
-import { useContext } from 'react';
-import VideoContext from '../../../videoSessionStore/video-session-context';
+// import { useContext } from 'react';
+// import VideoContext from '../../../videoSessionStore/video-session-context';
 import { useSelector } from 'react-redux';
 
 const ChatHeader = ({ userData }) =>
@@ -13,11 +13,11 @@ const ChatHeader = ({ userData }) =>
     {
         navigate("/chats")
     }
-    const { callUser } = useContext(VideoContext);
+    // const { callUser } = useContext(VideoContext);
     const myId = useSelector(state => state.auth.userData._id)
     const handleStartVideoSession = () =>
     {
-        callUser(userData.id);
+        // callUser(userData.id);
     }
     return (
         <div

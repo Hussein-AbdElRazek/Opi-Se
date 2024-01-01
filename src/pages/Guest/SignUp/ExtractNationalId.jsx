@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import ExtractNationalIdUi from './ExtractNationalIdUi'
 import useHttp from '../../../hooks/use-http';
-import { useSnackbar } from 'notistack';
 
 const ExtractNationalId = (props) =>
 {
     const { setFieldValue } = props;
-    const { enqueueSnackbar: popMessage } = useSnackbar();
     const {
         isLoading: isLoadingExtractID,
         sendRequest: extractID
@@ -14,10 +12,10 @@ const ExtractNationalId = (props) =>
     const [showNationalId, setShowNationalId] = useState(false)
 
     //extract national id from the selected file
-    const idImageInput = document.getElementById('idImageInput');
-    
     useEffect(() =>
     {
+        const idImageInput = document.getElementById('idImageInput');
+
         const handleExtractID = (values) =>
         {
             const getResponse = ({ status, nationalId, message }) =>
@@ -26,9 +24,6 @@ const ExtractNationalId = (props) =>
                 {
                     setFieldValue("nationalId", nationalId)
                     setShowNationalId(true)
-                } else
-                {
-                    popMessage(message || "Something went wrong", { variant: "error" })
                 }
             };
             extractID(
@@ -44,6 +39,7 @@ const ExtractNationalId = (props) =>
         }
         const handleIdImageSelection = (event) =>
         {
+            console.log("event", event)
             if (!isLoadingExtractID)
             {
                 const selectedFile = event.target.files[0];
@@ -52,9 +48,9 @@ const ExtractNationalId = (props) =>
                 handleExtractID(formData);
             }
         }
-        idImageInput?.addEventListener('change', handleIdImageSelection);
+        if (idImageInput) idImageInput.addEventListener('change', handleIdImageSelection);
 
-    }, [extractID, idImageInput, isLoadingExtractID, popMessage, setFieldValue])
+    }, [extractID, isLoadingExtractID, setFieldValue])
     return (
         <ExtractNationalIdUi
             isLoadingExtractID={isLoadingExtractID}

@@ -13,20 +13,20 @@ import { VideoContextProvider } from './videoSessionStore/video-session-context'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <ImagesContextProvider>
         <BrowserRouter>
-          <VideoContextProvider>
+          {/* <VideoContextProvider> */}
             <SnackbarProvider autoHideDuration={3000} maxSnack={5}>
               <GlobalCssPriority>
                 <App />
               </GlobalCssPriority>
             </SnackbarProvider>
-          </VideoContextProvider>
+          {/* </VideoContextProvider> */}
         </BrowserRouter>
       </ImagesContextProvider>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 

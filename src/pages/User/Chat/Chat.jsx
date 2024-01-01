@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import ChatUi from './ChatUi'
 import { useDispatch, useSelector } from 'react-redux'
-import { messagesActions } from '../../../store/messages-slice';
+import
+    {
+        chatActions,
+        connectSocket,
+        joinMatchRoom,
+        sendMessage,
+        listenToReceiveMessage,
+        listenToDeleteMessage
+    } from '../../../store/chat-slice';
 import { useSearchParams } from 'react-router-dom';
 import useHttp from '../../../hooks/use-http';
-import useChat from '../../../hooks/use-chat';
 
 const Chat = () =>
 {
@@ -16,10 +23,9 @@ const Chat = () =>
         status: ""
     }
     const dispatch = useDispatch();
-    const messages = useSelector(state => state.messages.messages[openedUserData.id]) || [];
+    const messages = useSelector(state => state.chat.messages[openedUserData.id]) || [];
     const userId = useSelector(state => state.auth.userData._id);
 
-    const { sendMessage } = useChat();
     const submitTextMessage = (values, { resetForm }) =>
     {
         if (values.message.trim() === "") return
@@ -35,8 +41,12 @@ const Chat = () =>
             isSeen: false,
             ...sentMessage
         }
-        sendMessage(sentMessage, () => { })
-        dispatch(messagesActions.updateMessages({ id: openedUserData.id, message: newMessage }))
+        const payload = {
+            message: sentMessage,
+            messagesId: openedUserData.id.toString(),
+            newMessage: newMessage
+        }
+        dispatch(sendMessage(payload))
         resetForm();
     }
 
@@ -51,13 +61,15 @@ const Chat = () =>
 
     const matchId = useSelector((state) => state.auth.userData.matchId)
 
-    const handleGetChatData = () =>
+    const handleGetChatData = useCallback(() =>
     {
+        console.log("useCallback handleGetChatData")
+
         const getResponse = ({ message, data }) =>
         {
             if (message === "success")
             {
-                dispatch(messagesActions.setMessages({ id: openedUserData.id, messages: data }))
+                dispatch(chatActions.setMessages({ id: openedUserData.id, messages: data }))
             }
         };
 
@@ -67,15 +79,15 @@ const Chat = () =>
             },
             getResponse
         );
-    }
+    }, [dispatch, getChatData, matchId, openedUserData.id])
 
-    const handleGetChatMedia = (body) =>
+    const handleGetChatMedia = ((body) =>
     {
         const getResponse = ({ message, data }) =>
         {
             if (message === "success")
             {
-                dispatch(messagesActions.setMessages(data))
+                dispatch(chatActions.setMessages(data))
             }
         };
 
@@ -86,12 +98,25 @@ const Chat = () =>
             },
             getResponse
         );
-    }
+    })
     console.log("i render")
     useEffect(() =>
     {
+        console.log("i handleGetChatData")
+
         handleGetChatData();
-    }, [])
+    }, [handleGetChatData])
+
+    useEffect(() =>
+    {
+        console.log("useEffect.connectSocket")
+        dispatch(connectSocket());
+        dispatch(joinMatchRoom());
+    }, [dispatch])
+    useEffect(()=>{
+        dispatch(listenToReceiveMessage());
+        dispatch(listenToDeleteMessage(searchParams.get("id")));
+    }, [dispatch, searchParams])
     return (
         <ChatUi
             messages={messages}

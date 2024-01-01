@@ -19,12 +19,12 @@ function App()
   //handle background color for user 
   //and guest i had handle it in index.css file 
   if (isLoggedIn) document.body.style.backgroundColor = "var(--background2)";
-  useEffect(() =>
-  {
-    const tempTitle = getWebsiteTitle(location.pathname);
-    if (!!tempTitle) document.title = `Opi Se - ${tempTitle}`;
-    setTitle(tempTitle);
-  }, [location]);
+  // useEffect(() =>
+  // {
+  //   const tempTitle = getWebsiteTitle(location.pathname);
+  //   if (!!tempTitle) document.title = `Opi Se - ${tempTitle}`;
+  //   setTitle(tempTitle);
+  // }, [location]);
   return (
     <div>
       {isLoggedIn ? (

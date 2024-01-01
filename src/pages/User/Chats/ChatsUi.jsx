@@ -59,8 +59,8 @@ const ChatsUi = ({ partner }) =>
         >
             <ChatList
                 title="Your Partner"
-                chatList={[
-                    {
+                chatList={!!partner ?
+                    [{
                         profileImage: partner.profileImage,
                         userName: partner.userName,
                         id: partner._id,
@@ -69,12 +69,12 @@ const ChatsUi = ({ partner }) =>
                             from: "You",
                             message: "Lorem Ipsum is simply dummy Lorem Ipsum is simply dummy"
                         }
-                    }]}
+                    }] : []}
             />
-            <ChatList
+            {/* <ChatList
                 title="Mentors"
                 chatList={mentorsDummy}
-            />
+            /> */}
         </PopChatCard>
     )
 }

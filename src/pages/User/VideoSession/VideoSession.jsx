@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react'
 import VideoSessionUi from './VideoSessionUi'
 import { useDispatch, useSelector } from 'react-redux';
-import { messagesActions } from '../../../store/messages-slice';
 import VideoContext from '../../../videoSessionStore/video-session-context';
+import { chatActions } from '../../../store/chat-slice';
 
 const VideoSession = () =>
 {
     const id = "testVideoCHat"
 
     const dispatch = useDispatch();
-    const messages = useSelector(state => state.messages.messages[id]) || [];
+    const messages = useSelector(state => state.chat.messages[id]) || [];
 
     const submitTextMessage = (values, { resetForm }) =>
     {
@@ -29,7 +29,7 @@ const VideoSession = () =>
             isSeen: false,
             message: values.message.trim(),
         }
-        dispatch(messagesActions.updateMessages({ id: id, message: newMessage }))
+        dispatch(chatActions.updateMessages({ id: id, message: newMessage }))
         resetForm();
     }
     const { call, callAccepted } = useContext(VideoContext);

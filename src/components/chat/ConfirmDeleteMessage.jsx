@@ -1,7 +1,9 @@
 import { Modal } from '@mui/material'
-import useChat from '../../hooks/use-chat';
 import { Btn } from '../inputs';
 import classes from './styles/ConfirmDeleteMessage.module.css'
+import { useDispatch } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import { deleteMessage } from '../../store/chat-slice';
 export const ConfirmDeleteMessage = (props) =>
 {
     const {
@@ -9,14 +11,16 @@ export const ConfirmDeleteMessage = (props) =>
         onClose,
         messageId,
     } = props;
+    const dispatch = useDispatch();
+    const [searchParams] = useSearchParams();
 
-    // const { deleteMessage } = useChat();
     const handleDeleteMessage = () =>
     {
         const requestBody = {
-            id: messageId
+            messageId: messageId
         }
-        // deleteMessage(requestBody, ()=>{});
+        const messagesId = searchParams.get("id")
+        dispatch(deleteMessage({requestBody, messagesId}))
         onClose();
     }
     return (
