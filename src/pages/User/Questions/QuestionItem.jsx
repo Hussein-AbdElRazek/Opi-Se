@@ -1,24 +1,33 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import
-    {
-        FormControl,
-        FormControlLabel,
-        Radio,
-        RadioGroup
-    } from '@mui/material'
+{
+    FormControl,
+    FormControlLabel,
+    Radio,
+    RadioGroup
+} from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux';
 
 import { HeaderText } from '../../../components/ui'
 import classes from './QuestionItem.module.css'
 import checkedIcon from '../../../assets/icons/checked.svg'
+import { authActions } from '../../../store/auth-slice';
 
-const QuestionItem = () =>
+const QuestionItem = ({ question, questionIndex }) =>
 {
-    const [value, setValue] = useState('');
+    const questions = useSelector(state => state.auth.userData?.questions) || [];
+    const initialValue = questions[questionIndex]?.answer;
+    const [value, setValue] = useState(initialValue || '');
+    const dispatch = useDispatch();
 
     const handleChange = (event) =>
     {
         setValue(event.target.value);
+        const updatedQuestions = [...questions];
+        updatedQuestions[questionIndex] = { question, answer: event.target.value }
+        dispatch(authActions.updateUserData({ questions: updatedQuestions }))
     };
+
     return (
         <div
             className={classes.question}
@@ -27,7 +36,7 @@ const QuestionItem = () =>
             <HeaderText
                 size="medium"
             >
-                How many hours do you sleep?
+                {question}
             </HeaderText>
             <FormControl
                 className={`w-100
@@ -40,41 +49,30 @@ const QuestionItem = () =>
                 >
                     <FormControlLabel
                         className={`${classes.answer} 
-                        ${value === "Less than 6 hours" && classes.checked}`}
-                        value="Less than 6 hours"
+                        ${value === "Yes" && classes.checked}`}
+                        value="Yes"
                         control={<Radio
                             sx={{
                                 color: "var(--secondary)"
                             }}
                             checkedIcon={<img src={checkedIcon} alt="checked" />}
                         />}
-                        label="Less than 6 hours"
-
+                        label="Yes"
                     />
                     <FormControlLabel
                         className={`${classes.answer} 
-                        ${value === "6 to 8 hours" && classes.checked}`} value="6 to 8 hours"
+                        ${value === "No" && classes.checked}`}
+                        value="No"
                         control={<Radio
                             sx={{
                                 color: "var(--secondary)"
                             }}
                             checkedIcon={<img src={checkedIcon} alt="checked" />}
                         />}
-                        label="6 to 8 hours"
+                        label="No"
                     />
-                    <FormControlLabel
-                        className={`${classes.answer} 
-                        ${value === "More than 8 hours" && classes.checked}`} value="More than 8 hours"
-                        control={<Radio
-                            sx={{
-                                color: "var(--secondary)"
-                            }}
-                            checkedIcon={<img src={checkedIcon} alt="checked" />}
-                        />}
-                        label="More than 8 hours" />
                 </RadioGroup>
             </FormControl>
-
         </div>
     )
 }

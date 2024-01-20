@@ -4,17 +4,16 @@ import classes from './styles/Chip.module.css'
 
 export const Chip = (props) =>
 {
-    const { key, value, disabled, onDelete } = props;
+    const { value, disabled, onDelete } = props;
     return (
         <ChipMui
-            key={key}
-            label={`${value?.name}    ${value?.rate}`}
+            label={`${value?.skillName}    ${value?.skillRate}`}
             onDelete={!disabled ? onDelete : null}
             className={`
                 ${classes.chip} 
                 ${!!disabled ? classes.disabled : ""}
             `}
-            deleteIcon={<ClearRoundedIcon  />}
+            deleteIcon={<ClearRoundedIcon />}
         />
     )
 }

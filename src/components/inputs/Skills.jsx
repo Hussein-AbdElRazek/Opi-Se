@@ -5,7 +5,7 @@ import { InputBase, Slider } from '@mui/material';
 import { Btn } from './Btn';
 import { Chip } from '../ui';
 
-const rateMarks = [
+const skillRateMarks = [
     {
         value: 1,
         label: '1',
@@ -31,27 +31,34 @@ const rateMarks = [
 export const Skills = (props) =>
 {
     const {
-        initialSkills,
         disabled,
+        formik,
     } = props;
     const [skillName, setSkillName] = useState('');
     const [skillRate, setSkillRate] = useState(1);
-    const [skills, setSkills] = useState(initialSkills || []);
+    const [skills, setSkills] = useState(formik?.initialValues?.userSkills || []);
 
     const handleInputChange = (event) =>
     {
         setSkillName(event.target.value);
     };
+    
     const onChangeSlider = (event) =>
     {
         setSkillRate(event.target.value)
     }
+
     const handleAddSkill = () =>
     {
+        const newSkill = { skillName: skillName, skillRate: skillRate }
         setSkills(prev =>
             [...prev,
-            { name: skillName, rate: skillRate }
+                newSkill
             ])
+        if (!!formik)
+        {
+            formik.setFieldValue("userSkills", [...formik.values.userSkills, newSkill])
+        }
         setSkillName("")
         setSkillRate(1)
     };
@@ -108,7 +115,7 @@ export const Skills = (props) =>
                             min={1}
                             max={5}
                             valueLabelDisplay="auto"
-                            marks={rateMarks}
+                            marks={skillRateMarks}
                             className={classes.slider}
                             onChange={onChangeSlider}
                             value={skillRate}

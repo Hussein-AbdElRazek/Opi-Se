@@ -9,7 +9,7 @@ export const aboutInputs = [
     },
     {
         control: "input",
-        type: "email",
+        type: "text",
         name: "specialization",
         label: "Specialization",
         size: 6
@@ -19,4 +19,5 @@ export const aboutInputs = [
 export const aboutInitialValues = {
     fieldOfStudy: "",
     specialization: "",
+    userSkills:[]
 }

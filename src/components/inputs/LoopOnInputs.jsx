@@ -11,7 +11,7 @@ export const LoopOnInputs = (props) =>
             rowSpacing={0}
             columnSpacing={{
                 xs: 0,
-                sm: 0,
+                sm: 2,
                 md: 2,
                 lg: 2,
                 xl: 2
@@ -27,7 +27,7 @@ export const LoopOnInputs = (props) =>
                         xl={columns}
                         lg={columns}
                         md={columns}
-                        sm={12}
+                        sm={columns}
                         xs={12}
                     >
                         <FormikControl

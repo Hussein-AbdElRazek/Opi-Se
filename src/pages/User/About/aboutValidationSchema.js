@@ -6,4 +6,12 @@ export const aboutValidationSchema = Yup.object({
         .required(required),
     specialization: Yup.string()
         .required(required),
+    userSkills: Yup.array().of(
+        Yup.object().shape({
+            skillName: Yup.string()
+                .required(required),
+            skillRate: Yup.number()
+                .required(required),
+        })
+    )
 });

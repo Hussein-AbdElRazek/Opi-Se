@@ -12,7 +12,11 @@ export const Btn = (props) =>
             loading={isLoading}
             variant='contained'
             fullWidth={size !== "small"}
-            className={`${classes.btn} ${className}`}
+            className={`
+            ${classes.btn} 
+            ${className} 
+            ${size === "small" ? classes.small : ""}
+            `}
             endIcon={endIcon}
         >
             {children}

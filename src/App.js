@@ -14,7 +14,8 @@ import { PageLayout } from './components/common';
 
 function App()
 {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn) 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const firstTime = useSelector((state) => state.auth.userData?.getUserPrefers);
   // const firstTime = useSelector((state) => state.auth.userData.firstTime)
   const location = useLocation();
   const [title, setTitle] = useState("");
@@ -70,7 +71,7 @@ function App()
   
   return (
     <div>
-      {isLoggedIn ? (
+      {isLoggedIn && !firstTime ? (
         <>
           <AppBar title={title} />
           <PageLayout>

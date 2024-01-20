@@ -10,3 +10,4 @@ export { Chip } from './Chip';
 export { PopChatCard } from './PopChatCard';
 export { PopUpCard } from './PopUpCard';
 export { LoadingCenter } from './LoadingCenter';
+export { ButtonGroup } from './ButtonGroup';

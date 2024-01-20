@@ -1,4 +1,5 @@
 export { Btn } from './Btn';
+export { OutlinedBtn } from './OutlinedBtn';
 export { FormikContainer } from './FormikContainer';
 export { FormikControl } from './FormikControl';
 export { Gender } from './Gender';

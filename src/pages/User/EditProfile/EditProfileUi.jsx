@@ -5,8 +5,8 @@ import { Btn, FormikContainer, LoopOnInputs, Skills } from '../../../components/
 import { editProfileInputs } from './editProfileInputsData'
 import { editProfileValidationSchema } from './editProfileValidationSchema'
 import { Grid } from '@mui/material'
-import { aboutInitialValues, aboutInputs } from '../QuestionsAndAbout/aboutInputsData'
-import { aboutValidationSchema } from '../QuestionsAndAbout/aboutValidationSchema'
+import { aboutInitialValues, aboutInputs } from '../About/aboutInputsData'
+import { aboutValidationSchema } from '../About/aboutValidationSchema'
 import classes from './styles/EditProfileUi.module.css'
 const EditProfileUi = (props) =>
 {
