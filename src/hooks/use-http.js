@@ -44,7 +44,9 @@ const useHttp = () =>
             if (message)
             {
                 message = message.toLowerCase();
-                if (!message.includes("success")) { popMessage(message || "Something went wrong", { variant: "error" }) }
+                if (!message.includes("success")
+                // for not make error when no messages in chat
+                    && !message.includes("there is no chat yet!")) { popMessage(message || "Something went wrong", { variant: "error" }) }
             }
         } catch (error)
         {

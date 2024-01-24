@@ -48,7 +48,7 @@ export const sendMessage = createAsyncThunk(
         console.log("payload", payload)
         thunkAPI.dispatch(
             chatActions.addMessage({
-                messagesId: payload.messagesId, message: payload.newMessage
+                messagesId: payload.messagesId, newMessage: payload.newMessage
             })
         );
     }
@@ -73,7 +73,7 @@ export const listenToReceiveMessage = createAsyncThunk(
 
             thunkAPI.dispatch(
                 chatActions.addMessage({
-                    messagesId: newMessage.messageSender, message: newMessage
+                    messagesId: newMessage.messageSender, newMessage: newMessage
                 })
             );
         });
@@ -247,11 +247,11 @@ const chatSlice = createSlice({
             if (!!state.messages[action.payload.messagesId])
             {
                 //check for duplication
-                const isDuplicate = state.messages[action.payload.messagesId].some(msg => JSON.stringify(msg) === JSON.stringify(action.payload.message));
+                const isDuplicate = state.messages[action.payload.messagesId].some(msg => JSON.stringify(msg) === JSON.stringify(action.payload.newMessage));
                 if (!isDuplicate)
                 {
                     console.log("i will put it")
-                    state.messages[action.payload.messagesId] = [...state.messages[action.payload.messagesId], action.payload.message]
+                    state.messages[action.payload.messagesId] = [...state.messages[action.payload.messagesId], action.payload.newMessage]
                 }
             } else
             {
