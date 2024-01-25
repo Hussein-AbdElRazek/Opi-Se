@@ -219,12 +219,35 @@ export const uploadChatMedia = createAsyncThunk(
     async (payload, thunkAPI) =>
     {
         console.log("payload", payload)
-        socket.emit('uploadChatMedia', payload, (res) =>
-        {
-            console.log('uploadChatMedia', res)
-        });
+        socket.emit('uploadChatMedia', payload, (res) =>{});
     }
 );
+export const listenToReceiveMedia = createAsyncThunk(
+    "chat/listenToReceiveMedia",
+    async (payload, thunkAPI) =>
+    {
+        socket.on('showMediainChat', ({ media }) =>
+        {
+            //  update state
+            const imagesList = [];
+            media.forEach((img) =>
+            {
+                let temp = {
+                    mediaUrl: img,
+                    sentAt: new Date().toUTCString(),
+                    messageType: "img",
+                    _id: img,
+                    messageSender: payload
+                };
+                imagesList.push(temp)
+            })
+            thunkAPI.dispatch(
+                chatActions.updateMessages({
+                    id: payload, messages: imagesList
+                }))
+        });
+    }
+)
 
 const chatSlice = createSlice({
     name: 'chat',

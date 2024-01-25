@@ -23,12 +23,10 @@ const ChatUi = (props) =>
                     isLoadingUploadMedia={isLoadingUploadMedia}
                 />
             }
-
         >
             <MessagesList
                 messages={messages}
             />
-            {/* <UploadMedia /> */}
         </PopChatCard>
     )
 }

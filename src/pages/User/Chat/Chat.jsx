@@ -9,7 +9,8 @@ import
     sendMessage,
     listenToReceiveMessage,
     listenToDeleteMessage,
-    uploadChatMedia
+    uploadChatMedia,
+    listenToReceiveMedia
 } from '../../../store/chat-slice';
 import { useSearchParams } from 'react-router-dom';
 import useHttp from '../../../hooks/use-http';
@@ -130,6 +131,7 @@ const Chat = () =>
     useEffect(() =>
     {
         dispatch(listenToReceiveMessage());
+        dispatch(listenToReceiveMedia(searchParams.get("id")));
         dispatch(listenToDeleteMessage(searchParams.get("id")));
     }, [dispatch, searchParams])
 
@@ -171,7 +173,6 @@ const Chat = () =>
                     };
                     imagesList.push(temp)
                 })
-                console.log("imagesList", imagesList)
                 dispatch(chatActions.updateMessages({ id: openedUserData.id, messages: imagesList }))
 
                 imgCtx.deleteAllImages();
@@ -188,8 +189,6 @@ const Chat = () =>
             getResponse
         );
     }
-
-    console.log("chat message____", messages)
 
     return (
         <ChatUi
