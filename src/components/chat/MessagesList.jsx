@@ -37,26 +37,26 @@ export const MessagesList = ({ messages }) =>
     {
         if (messageContainerRef.current)
         {
-            messageContainerRef.current.lastElementChild
-            .scrollIntoView({ behavior: 'smooth' });
+            messageContainerRef.current?.lastElementChild
+            ?.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
     //TODO handle it with pagination u will remove useEffect bcz if u add old messages
     // u will automatic scroll down 
-    
+
     // Scroll to bottom when messages update
     useEffect(() =>
     {
         scrollToBottom();
-    }, [messages]); 
+    }, [messages]);
     return (
         <div
             ref={messageContainerRef}
         >
             {messages.map((message, index) =>
             {
-                if (message.messageType === "text")
+                if (message.messageType === "text" || message.messageType === "img")
                 {
                     return (
                         <Fragment
@@ -75,7 +75,12 @@ export const MessagesList = ({ messages }) =>
                                 key={message._id}
                                 id={message._id}
                             >
-                                {message.messageContent}
+                                {message.messageType === "text" ?
+                                    message.messageContent :
+                                    <img
+                                        src={message.mediaUrl}
+                                        alt=""
+                                    />}
                             </Message>
                         </Fragment>
                     )

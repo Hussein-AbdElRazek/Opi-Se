@@ -218,18 +218,11 @@ export const uploadChatMedia = createAsyncThunk(
     'chat/uploadChatMedia',
     async (payload, thunkAPI) =>
     {
-        console.log("payload.requestBody", payload.requestBody)
-        socket.emit('uploadChatMedia', payload.requestBody, (res) =>
-        {
-            console.log('replyToSessionRequest', res)
-        });
         console.log("payload", payload)
-        //TODO handle state actions
-        // thunkAPI.dispatch(
-        //     chatActions.addMessage({
-        //         messagesId: payload.messagesId, message: payload.newMessage
-        //     })
-        // );
+        socket.emit('uploadChatMedia', payload, (res) =>
+        {
+            console.log('uploadChatMedia', res)
+        });
     }
 );
 
@@ -237,10 +230,22 @@ const chatSlice = createSlice({
     name: 'chat',
     initialState: initialChatState,
     reducers: {
-        setMessages(state, action)
+        updateMessages(state, action)
         {
-            state.messages[action.payload.id] = action.payload.messages;
-            localStorage.setItem("messages", JSON.stringify(state.messages))
+            const existingMessages = new Set(state.messages[action.payload.id]?.map(message => message._id));
+            const uniqueMessages = action.payload.messages.filter(message => !existingMessages.has(message._id));
+
+            const updatedArr = [...state.messages[action.payload.id] || [], ...uniqueMessages];
+
+            updatedArr.sort((a, b) =>
+            {
+                const dateA = new Date(a.sentAt);
+                const dateB = new Date(b.sentAt);
+                return dateA - dateB;
+            });
+
+            state.messages[action.payload.id] = updatedArr;
+            localStorage.setItem("messages", JSON.stringify(state.messages));
         },
         addMessage(state, action)
         {

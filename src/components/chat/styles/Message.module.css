@@ -10,6 +10,11 @@
 
 }
 
+.containerBasics img {
+    width: 100%;
+    border-radius: var(--border-radius-150);
+}
+
 .messageBasics {
     padding: 12px;
     width: fit-content;

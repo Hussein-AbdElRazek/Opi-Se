@@ -2,11 +2,16 @@ import React from 'react'
 import { PopChatCard } from '../../../components/ui'
 import ChatHeader from './ChatHeader'
 import { InputBar, MessagesList } from '../../../components/chat'
-import UploadMedia from '../../../components/chat/UploadMedia'
 
 const ChatUi = (props) =>
 {
-    const { messages, openedUserData, submitTextMessage } = props;
+    const {
+        messages,
+        openedUserData,
+        submitTextMessage,
+        handleUploadMedia,
+        isLoadingUploadMedia,
+    } = props;
 
     return (
         <PopChatCard
@@ -14,9 +19,11 @@ const ChatUi = (props) =>
             inputBar={
                 <InputBar
                     submitTextMessage={submitTextMessage}
+                    handleUploadMedia={handleUploadMedia}
+                    isLoadingUploadMedia={isLoadingUploadMedia}
                 />
             }
-            
+
         >
             <MessagesList
                 messages={messages}

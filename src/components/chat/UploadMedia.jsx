@@ -1,26 +1,27 @@
 import { useContext, useEffect, useState } from 'react'
+import { ButtonBase, CircularProgress, IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import ImageUploading from 'react-images-uploading';
+
 import classes from './styles/UploadMedia.module.css'
-// import uploadIcon from '../../assets/uploadIcon.svg'
-// import FileBorder from '../ui/FileBorder';
 import ImagesContext from '../../imagesStore/images-context';
-import { ButtonBase, IconButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add'; const UploadMedia = ({ maxNumber, size, getImages, name, type, key }) =>
+
+
+const UploadMedia = ({ name, handleUploadMedia, isLoadingUploadMedia }) =>
 {
     const imgCtx = useContext(ImagesContext);
 
-    // let initial = (imgCtx.images[name] || []);
     const [images, setImages] = useState([]);
-    const onChange = (imageList, addUpdateIndex) =>
+
+    const onChangeImage = (imageList) =>
     {
         setImages(imageList);
-        if (typeof getImages === "function") getImages(imageList);
         if (name) imgCtx.updateImages(name, imageList)
     };
-    const handleDelete = (index, onImageRemove) =>
+
+    const handleDeleteOneImage = (index, onImageRemove) =>
     {
         onImageRemove(index);
-        // setImages(prev=>prev.splice(index, 1))
         setOpenedImage((prev) =>
         {
             if (prev)
@@ -29,27 +30,29 @@ import AddIcon from '@mui/icons-material/Add'; const UploadMedia = ({ maxNumber,
             }
         })
     }
-    const handleRemoveAll = () =>
+
+    const handleDeleteAllImages = () =>
     {
-        setImages([])
+        imgCtx.deleteAllImages();
     }
     const [openedImage, setOpenedImage] = useState(0);
+
+    // update state with store images 
+    useEffect(() =>
+    {
+        setImages(imgCtx.images[name] || []);
+    }, [imgCtx.images, name])
     return (
         <ImageUploading
             multiple
             value={images}
-            onChange={onChange}
+            onChange={onChangeImage}
             maxNumber={20}
             dataURLKey="data_url"
-            key={key}
         >
             {({
-                imageList,
                 onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
                 onImageRemove,
-                isDragging,
                 dragProps,
             }) =>
             {
@@ -71,7 +74,7 @@ import AddIcon from '@mui/icons-material/Add'; const UploadMedia = ({ maxNumber,
                         >
                             <IconButton
                                 className={classes.closeIcon}
-                                onClick={handleRemoveAll}
+                                onClick={handleDeleteAllImages}
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M23.3839 6.61612C23.872 7.10427 23.872 7.89573 23.3839 8.38388L8.38388 23.3839C7.89573 23.872 7.10427 23.872 6.61612 23.3839C6.12796 22.8957 6.12796 22.1043 6.61612 21.6161L21.6161 6.61612C22.1043 6.12796 22.8957 6.12796 23.3839 6.61612Z" fill="black" />
@@ -106,7 +109,7 @@ import AddIcon from '@mui/icons-material/Add'; const UploadMedia = ({ maxNumber,
                                         {index === openedImage && (
                                             <IconButton
                                                 className={classes.deleteIcon}
-                                                onClick={() => { handleDelete(index, onImageRemove) }}
+                                                onClick={() => { handleDeleteOneImage(index, onImageRemove) }}
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                                                     <path d="M10.0007 31.6667C10.0007 33.5 11.5007 35 13.334 35H26.6673C28.5007 35 30.0007 33.5 30.0007 31.6667V11.6667H10.0007V31.6667ZM13.334 15H26.6673V31.6667H13.334V15ZM25.834 6.66667L24.1673 5H15.834L14.1673 6.66667H8.33398V10H31.6673V6.66667H25.834Z" fill="white" />
@@ -121,13 +124,21 @@ import AddIcon from '@mui/icons-material/Add'; const UploadMedia = ({ maxNumber,
                                 ))}
                             </div>
                             <div>
-                                <IconButton
-                                className={classes.sendIcon}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="28" viewBox="0 0 31 28" fill="none">
-                                        <path d="M0.264286 28L30.25 14L0.264286 0L0.25 10.8889L21.6786 14L0.25 17.1111L0.264286 28Z" fill="#036666" />
-                                    </svg>
-                                </IconButton>
+                                {isLoadingUploadMedia ? (
+                                    <CircularProgress
+                                        className={classes.loading}
+                                    />
+                                ) : (
+                                    <IconButton
+                                        className={classes.sendIcon}
+                                        onClick={handleUploadMedia}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="28" viewBox="0 0 31 28" fill="none">
+                                            <path d="M0.264286 28L30.25 14L0.264286 0L0.25 10.8889L21.6786 14L0.25 17.1111L0.264286 28Z" fill="#036666" />
+                                        </svg>
+                                    </IconButton>
+                                )}
+
                             </div>
                         </div >
                         )}

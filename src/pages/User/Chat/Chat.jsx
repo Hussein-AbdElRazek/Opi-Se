@@ -1,17 +1,19 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
 import ChatUi from './ChatUi'
 import { useDispatch, useSelector } from 'react-redux'
 import
-    {
-        chatActions,
-        connectSocket,
-        joinMatchRoom,
-        sendMessage,
-        listenToReceiveMessage,
-        listenToDeleteMessage
-    } from '../../../store/chat-slice';
+{
+    chatActions,
+    connectSocket,
+    joinMatchRoom,
+    sendMessage,
+    listenToReceiveMessage,
+    listenToDeleteMessage,
+    uploadChatMedia
+} from '../../../store/chat-slice';
 import { useSearchParams } from 'react-router-dom';
 import useHttp from '../../../hooks/use-http';
+import ImagesContext from '../../../imagesStore/images-context';
 
 const Chat = () =>
 {
@@ -63,13 +65,11 @@ const Chat = () =>
 
     const handleGetChatData = useCallback(() =>
     {
-        console.log("useCallback handleGetChatData")
-
         const getResponse = ({ message, data }) =>
         {
             if (message === "success")
             {
-                dispatch(chatActions.setMessages({ id: openedUserData.id, messages: data }))
+                dispatch(chatActions.updateMessages({ id: openedUserData.id, messages: data }))
             }
         };
 
@@ -81,31 +81,45 @@ const Chat = () =>
         );
     }, [dispatch, getChatData, matchId, openedUserData.id])
 
-    const handleGetChatMedia = ((body) =>
+    const handleGetChatMedia = useCallback(() =>
     {
         const getResponse = ({ message, data }) =>
         {
             if (message === "success")
             {
-                dispatch(chatActions.setMessages(data))
+                const imagesList = []
+                data.forEach((img) =>
+                {
+                    let temp = img;
+                    temp.messageType = "img"
+                    imagesList.push(temp)
+                })
+                dispatch(chatActions.updateMessages({ id: openedUserData.id, messages: imagesList }))
             }
         };
 
         getChatMedia(
             {
-                url: "getChatMedia?page=1&limit=5",
-                body: body,
+                url: `getChatMedia?page=1&limit=50&matchId=${matchId}`,
             },
             getResponse
         );
-    })
+    }, [dispatch, getChatMedia, matchId, openedUserData.id])
+
     console.log("i render")
     useEffect(() =>
     {
         console.log("i handleGetChatData")
 
         handleGetChatData();
-    }, [handleGetChatData])
+        handleGetChatMedia();
+    }, [])
+    // useEffect(() =>
+    // {
+    //     console.log("i handleGetChatMedia")
+
+    //     handleGetChatMedia();
+    // }, [handleGetChatMedia])
 
     useEffect(() =>
     {
@@ -113,19 +127,80 @@ const Chat = () =>
         dispatch(connectSocket());
         dispatch(joinMatchRoom());
     }, [dispatch])
-    useEffect(()=>{
+    useEffect(() =>
+    {
         dispatch(listenToReceiveMessage());
         dispatch(listenToDeleteMessage(searchParams.get("id")));
     }, [dispatch, searchParams])
+
+
+    // Upload Media
+    const imgCtx = useContext(ImagesContext);
+    const {
+        isLoading: isLoadingUploadMedia,
+        sendRequest: uploadMedia
+    } = useHttp();
+
+    const handleUploadMedia = () =>
+    {
+        const images = imgCtx.images[openedUserData.id];
+
+        const submitData = new FormData();
+
+        for (const image of images)
+        {
+            submitData.append("chatMedia", image.file)
+        }
+        const getResponse = ({ success, data }) =>
+        {
+            if (success)
+            {
+                // send images in socket
+                dispatch(uploadChatMedia({ media: data }));
+
+                // update store
+                const imagesList = [];
+                data.forEach((img) =>
+                {
+                    let temp = {
+                        mediaUrl: img,
+                        sentAt: new Date().toUTCString(),
+                        messageType: "img",
+                        _id: img,
+                        messageSender: userId
+                    };
+                    imagesList.push(temp)
+                })
+                console.log("imagesList", imagesList)
+                dispatch(chatActions.updateMessages({ id: openedUserData.id, messages: imagesList }))
+
+                imgCtx.deleteAllImages();
+            }
+        };
+
+        uploadMedia(
+            {
+                url: `uploadChatMedia?matchId=${matchId}`,
+                method: "POST",
+                body: submitData,
+                contentType: "form-data"
+            },
+            getResponse
+        );
+    }
+
+    console.log("chat message____", messages)
+
     return (
         <ChatUi
             messages={messages}
             submitTextMessage={submitTextMessage}
             openedUserData={openedUserData}
+            handleUploadMedia={handleUploadMedia}
+            isLoadingUploadMedia={isLoadingUploadMedia}
         // header={}
         />
     )
 }
-
 
 export default Chat
