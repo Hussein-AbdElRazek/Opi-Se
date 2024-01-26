@@ -6,12 +6,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: 70px;
 }
 
 .backBtn {
     height: 60px;
-    width: 40px;
+    width: 30px;
     border-radius: var(--border-radius-150) 0 0 0;
 }
 
@@ -20,31 +20,35 @@
 }
 
 .avatar {
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .username {
-    font-size: var(--font-size-100);
+    font-size: var(--font-size-50);
     color: var(--text-header);
-    margin: 0 ;
+    margin: 0;
     margin-bottom: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+}
 
+.headerText {
+    width: 100px;
 }
 
 .status {
     margin: 0;
-    font-size: var(--font-size-100);
+    font-size: var(--font-size-40);
     color: var(--text-paragraph);
     text-align: left;
 }
 
 .userInfo {
     height: 60px;
-    width: 170px;
+    width: 160px;
     justify-content: flex-start;
     padding-left: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .userInfo span {

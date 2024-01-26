@@ -1,6 +1,8 @@
 import React, { useCallback, useContext, useEffect } from 'react'
 import ChatUi from './ChatUi'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom';
+
 import
 {
     chatActions,
@@ -10,9 +12,11 @@ import
     listenToReceiveMessage,
     listenToDeleteMessage,
     uploadChatMedia,
-    listenToReceiveMedia
+    listenToReceiveMedia,
+    listenToStartChatSession,
+    listenToReplyToSessionRequest,
+    listenToEndToSessionRequest
 } from '../../../store/chat-slice';
-import { useSearchParams } from 'react-router-dom';
 import useHttp from '../../../hooks/use-http';
 import ImagesContext from '../../../imagesStore/images-context';
 
@@ -128,13 +132,22 @@ const Chat = () =>
         dispatch(connectSocket());
         dispatch(joinMatchRoom());
     }, [dispatch])
+
+    //All chat listener
     useEffect(() =>
     {
+        //Messages listener
         dispatch(listenToReceiveMessage());
-        dispatch(listenToReceiveMedia(searchParams.get("id")));
         dispatch(listenToDeleteMessage(searchParams.get("id")));
-    }, [dispatch, searchParams])
 
+        //Media listener
+        dispatch(listenToReceiveMedia(searchParams.get("id")));
+
+        //Session listener
+        dispatch(listenToStartChatSession());
+        dispatch(listenToReplyToSessionRequest());
+        dispatch(listenToEndToSessionRequest());
+    }, [dispatch, searchParams])
 
     // Upload Media
     const imgCtx = useContext(ImagesContext);

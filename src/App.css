@@ -25,10 +25,11 @@
     --date-text: #000E08;
     --secondary-darker: #125454;
     --chat-input-border: #EEFAF8;
-    --end-call-icon: #EA4335;
+    --danger-btn: #EA4335;
     --video-time: #8D9196;
     --secondary-btn: #eeeeee;
     --black-30: rgba(0, 0, 0, 0.30);
+    --light-green: #27B127;
     /* ------------------------------ */
 
     /* Font Size */

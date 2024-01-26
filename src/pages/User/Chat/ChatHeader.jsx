@@ -5,6 +5,7 @@ import classes from './Chat.module.css'
 // import { useContext } from 'react';
 // import VideoContext from '../../../videoSessionStore/video-session-context';
 import { useSelector } from 'react-redux';
+import Session from './Session';
 
 const ChatHeader = ({ userData }) =>
 {
@@ -40,7 +41,10 @@ const ChatHeader = ({ userData }) =>
                         src={userData.profileImage}
                         className={classes.avatar}
                     />
-                    <div>
+                    <div
+                        className={classes.headerText}
+                        title={userData.userName}
+                    >
                         <h6
                             className={classes.username}
                         >
@@ -55,7 +59,11 @@ const ChatHeader = ({ userData }) =>
                 </ButtonBase>
             </div>
 
-            <div>
+            <div
+                className='center-y'
+            >
+                <Session />
+
                 {/* call icon */}
                 <IconButton
                     title='Audio session'

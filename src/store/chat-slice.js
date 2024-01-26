@@ -1,10 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 
-const initialChatState = {
-    messages: JSON.parse(localStorage.getItem("messages")) || {},
-    connected: false,
-}
+
 // get match id from local storage
 const matchId = JSON.parse(localStorage.getItem("userData"))?.matchId;
 const token = (localStorage.getItem("token"));
@@ -40,28 +37,25 @@ export const sendMessage = createAsyncThunk(
     'chat/sendMessage',
     async (payload, thunkAPI) =>
     {
-        console.log("payload.message", payload.message)
-        socket.emit('sendMessage', payload.message, (res) =>
+        socket.emit('sendMessage', payload.message, ({ success }) =>
         {
-            console.log('sendMessage', res)
+            if (success)
+            {
+                thunkAPI.dispatch(
+                    chatActions.addMessage({
+                        messagesId: payload.messagesId, newMessage: payload.newMessage
+                    })
+                );
+            }
         });
-        console.log("payload", payload)
-        thunkAPI.dispatch(
-            chatActions.addMessage({
-                messagesId: payload.messagesId, newMessage: payload.newMessage
-            })
-        );
     }
 );
 export const listenToReceiveMessage = createAsyncThunk(
     "chat/listenToReceiveMessage",
     async (_, thunkAPI) =>
     {
-        console.log("listenToReceiveMessage")
-
         socket.on('receiveMessage', (data) =>
         {
-            console.log("receiveMessage", data)
             //  update state
             const newMessage = {
                 _id: new Date().toUTCString(),
@@ -84,9 +78,8 @@ export const deleteMessage = createAsyncThunk(
     'chat/deleteMessage',
     async (payload, thunkAPI) =>
     {
-        socket.emit('deleteMessage', payload.requestBody, (res) =>
+        socket.emit('deleteMessage', payload.requestBody, () =>
         {
-            console.log('deleteMessage', res)
             thunkAPI.dispatch(
                 chatActions.deleteMessage({
                     messagesId: payload.messagesId, messageId: payload.requestBody.messageId
@@ -100,13 +93,9 @@ export const listenToDeleteMessage = createAsyncThunk(
     "chat/listenToDeleteMessage",
     async (messagesId, thunkAPI) =>
     {
-        console.log("listenToDeleteMessage")
-
         socket.on('messageDeleted', (data) =>
         {
-            console.log("messageDeleted", data)
             //  update state
-
             thunkAPI.dispatch(
                 chatActions.deleteMessage({
                     messagesId, messageId: data
@@ -119,77 +108,83 @@ export const listenToDeleteMessage = createAsyncThunk(
 //Chat session
 export const startChatSession = createAsyncThunk(
     'chat/startChatSession',
-    async (payload, thunkAPI) =>
+    async (_, thunkAPI) =>
     {
-        console.log("payload.message", payload.message)
+        thunkAPI.dispatch(chatActions.updateSession({ isLoading: true }))
         socket.emit('startChatSession', { chatSessionRequest: true }, (res) =>
         {
-            console.log('startChatSession', res)
+            if (res.success)
+            {
+                thunkAPI.dispatch(chatActions.updateSession({
+                    isLoading: false,
+                    status: "waiting"
+                }))
+            } else
+            {
+                thunkAPI.dispatch(chatActions.updateSession({
+                    isLoading: false,
+                    status: ""
+                }))
+            }
         });
-        console.log("payload", payload)
-        //TODO handle state actions
-        // thunkAPI.dispatch(
-        //     chatActions.addMessage({
-        //         messagesId: payload.messagesId, message: payload.newMessage
-        //     })
-        // );
     }
 );
 export const listenToStartChatSession = createAsyncThunk(
     "chat/listenToStartChatSession",
     async (_, thunkAPI) =>
     {
-        console.log("listenToStartChatSession")
-
         socket.on('newChatSessionRequest', (data) =>
         {
-            console.log("newChatSessionRequest", data)
-            //  update state
-
-            //TODO handle state actions
-            // thunkAPI.dispatch(
-            //     chatActions.deleteMessage({
-            //         messagesId, messageId: data
-            //     })
-            // );
+            if (data?.chatSessionRequest)
+            {
+                thunkAPI.dispatch(chatActions.updateSession({
+                    isLoading: false,
+                    status: "newRequest"
+                }))
+            }
         });
     }
 )
+
 export const replyChatSession = createAsyncThunk(
     'chat/replyToSessionRequest',
     async (payload, thunkAPI) =>
     {
-        console.log("payload.requestBody", payload.requestBody)
-        socket.emit('replyToSessionRequest', payload.requestBody, (res) =>
+        thunkAPI.dispatch(chatActions.updateSession({
+            isLoading: true,
+            status: payload.accept ? "accepting" : "rejecting"
+        }))
+
+        socket.emit('replyToSessionRequest', payload, () =>
         {
-            console.log('replyToSessionRequest', res)
+            if (payload.accept)
+            {
+                thunkAPI.dispatch(chatActions.updateSession({
+                    isLoading: false,
+                    status: "running",
+                    startDate: new Date().toUTCString()
+                }))
+            } else
+            {
+                thunkAPI.dispatch(chatActions.updateSession({
+                    isLoading: false,
+                    status: "",
+                }))
+            }
         });
-        console.log("payload", payload)
-        //TODO handle state actions
-        // thunkAPI.dispatch(
-        //     chatActions.addMessage({
-        //         messagesId: payload.messagesId, message: payload.newMessage
-        //     })
-        // );
     }
 );
 export const listenToReplyToSessionRequest = createAsyncThunk(
     "chat/listenToReplyToSessionRequest",
     async (_, thunkAPI) =>
     {
-        console.log("listenToReplyToSessionRequest")
-
-        socket.on('replyToRequest', (data) =>
+        socket.on('replyToRequest', ({ data }) =>
         {
-            console.log("replyToRequest", data)
-            //  update state
-
-            //TODO handle state actions
-            // thunkAPI.dispatch(
-            //     chatActions.deleteMessage({
-            //         messagesId, messageId: data
-            //     })
-            // );
+            thunkAPI.dispatch(chatActions.updateSession({
+                isLoading: false,
+                status: data.accept ? "running" : "",
+                startDate: data.accept ? new Date().toUTCString() : ""
+            }))
         });
     }
 )
@@ -198,20 +193,36 @@ export const endChatSession = createAsyncThunk(
     'chat/endChatSession',
     async (payload, thunkAPI) =>
     {
-        console.log("payload.requestBody", payload.requestBody)
-        socket.emit('endChatSession', payload.requestBody, (res) =>
+        thunkAPI.dispatch(chatActions.updateSession({
+            isLoading: true,
+        }))
+        socket.emit('endChatSession', payload, ({ success }) =>
         {
-            console.log('replyToSessionRequest', res)
+            if (success)
+            {
+                thunkAPI.dispatch(chatActions.updateSession({
+                    isLoading: false,
+                    status: "",
+                    startDate: ""
+                }))
+            }
         });
-        console.log("payload", payload)
-        //TODO handle state actions
-        // thunkAPI.dispatch(
-        //     chatActions.addMessage({
-        //         messagesId: payload.messagesId, message: payload.newMessage
-        //     })
-        // );
     }
 );
+export const listenToEndToSessionRequest = createAsyncThunk(
+    "chat/listenToEndToSessionRequest",
+    async (_, thunkAPI) =>
+    {
+        socket.on('terminateSession', ({ message }) =>
+        {
+            if (message === "session was ended by your partner !") thunkAPI.dispatch(chatActions.updateSession({
+                isLoading: false,
+                status: "",
+                startDate: ""
+            }))
+        });
+    }
+)
 
 //chat media
 export const uploadChatMedia = createAsyncThunk(
@@ -219,7 +230,7 @@ export const uploadChatMedia = createAsyncThunk(
     async (payload, thunkAPI) =>
     {
         console.log("payload", payload)
-        socket.emit('uploadChatMedia', payload, (res) =>{});
+        socket.emit('uploadChatMedia', payload, (res) => { });
     }
 );
 export const listenToReceiveMedia = createAsyncThunk(
@@ -248,6 +259,16 @@ export const listenToReceiveMedia = createAsyncThunk(
         });
     }
 )
+
+const initialChatState = {
+    messages: JSON.parse(localStorage.getItem("messages")) || {},
+    session: JSON.parse(localStorage.getItem("session")) || {
+        status: "",
+        startDate: "",
+        isLoading: false,
+    },
+    connected: false,
+}
 
 const chatSlice = createSlice({
     name: 'chat',
@@ -294,6 +315,11 @@ const chatSlice = createSlice({
             state.messages[action.payload.messagesId] = state.messages[action.payload.messagesId].filter((msg) => msg._id !== action.payload.messageId)
             localStorage.setItem("messages", JSON.stringify(state.messages))
         },
+        updateSession(state, action)
+        {
+            state.session = { ...state.session, ...action.payload };
+            localStorage.setItem("session", JSON.stringify(state.session))
+        },
     }, extraReducers: (builder) =>
     {
         builder
@@ -303,7 +329,6 @@ const chatSlice = createSlice({
             })
     },
 })
-
 
 export const chatActions = chatSlice.actions
 

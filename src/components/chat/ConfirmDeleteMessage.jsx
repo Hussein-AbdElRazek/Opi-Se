@@ -1,9 +1,10 @@
-import { Modal } from '@mui/material'
-import { Btn } from '../inputs';
-import classes from './styles/ConfirmDeleteMessage.module.css'
 import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+
+import { Btn } from '../inputs';
+import classes from './styles/ConfirmDeleteMessage.module.css'
 import { deleteMessage } from '../../store/chat-slice';
+import { ModalCard } from '../ui';
 export const ConfirmDeleteMessage = (props) =>
 {
     const {
@@ -20,31 +21,26 @@ export const ConfirmDeleteMessage = (props) =>
             messageId: messageId
         }
         const messagesId = searchParams.get("id")
-        dispatch(deleteMessage({requestBody, messagesId}))
+        dispatch(deleteMessage({ requestBody, messagesId }))
         onClose();
     }
     return (
-        <Modal
+        <ModalCard
             open={open}
             onClose={onClose}
-            className='center-x center-y'
         >
-            <div
-                className={classes.container}
+            <p>Delete this Message?</p>
+            <Btn
+                onClick={handleDeleteMessage}
             >
-                <p>Delete this Message?</p>
-                <Btn
-                    onClick={handleDeleteMessage}
-                >
-                    Delete
-                </Btn>
-                <Btn
-                    onClick={onClose}
-                    className={classes.cancelBtn}
-                >
-                    Cancel
-                </Btn>
-            </div>
-        </Modal>
+                Delete
+            </Btn>
+            <Btn
+                onClick={onClose}
+                className={classes.cancelBtn}
+            >
+                Cancel
+            </Btn>
+        </ModalCard>
     )
 }

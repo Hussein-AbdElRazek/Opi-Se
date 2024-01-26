@@ -1,0 +1,29 @@
+.container {
+    width: 70px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.btnBasics {
+    min-width: 0;
+    width: auto;
+    margin: 0;
+    padding: 3px 12px;
+    font-size: var(--font-size-50);
+    border-radius: var(--border-radius-150);
+}
+
+.startBtn {
+    background-color: var(--light-green) !important;
+}
+
+.stopBtn {
+    background-color: var(--danger-btn) !important;
+    position: relative;
+}
+
+.timer {
+    position: absolute;
+    bottom: -20px;
+    color: var(--text-paragraph);
+}

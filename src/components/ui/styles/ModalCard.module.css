@@ -1,0 +1,17 @@
+.container {
+    background-color: var(--primary);
+    padding: 40px;
+    border-radius: var(--border-radius-200);
+    text-align: center;
+}
+
+.container p {
+    font-size: var(--font-size-800);
+    font-weight: 600;
+}
+
+.container button {
+    border-radius: var(--border-radius-200);
+    width: 100px;
+    margin-right: 20px;
+}
