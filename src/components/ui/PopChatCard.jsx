@@ -1,6 +1,6 @@
 import classes from './styles/PopChatCard.module.css'
 
-export const PopChatCard = ({ header, children, inputBar }) =>
+export const PopChatCard = ({ header, children, inputBar, type }) =>
 {
     return (
         <div
@@ -8,7 +8,10 @@ export const PopChatCard = ({ header, children, inputBar }) =>
         >
             {header}
             <div
-                className={classes.content}
+                className={`
+                ${classes.content} 
+                ${type === "mediaPage" ? classes.mediaPage : ""}
+                `}
             >
                 {children}
             </div>

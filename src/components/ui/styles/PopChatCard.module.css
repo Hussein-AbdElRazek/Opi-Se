@@ -1,5 +1,6 @@
 .container {
     width: 350px;
+    max-width: calc(100vw - 60px);
     position: fixed;
     right: 30px;
     bottom: 30px;
@@ -15,4 +16,9 @@
     max-height: calc(100vh - 250px);
     padding-top: 20px;
     position: relative;
+}
+
+.mediaPage {
+    height: 500px;
+    max-height: calc(100vh - 180px);
 }

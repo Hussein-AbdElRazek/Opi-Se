@@ -1,5 +1,5 @@
 import { Avatar, ButtonBase, IconButton } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import classes from './Chat.module.css'
 // import { useContext } from 'react';
@@ -10,6 +10,7 @@ import Session from './Session';
 const ChatHeader = ({ userData }) =>
 {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const goBack = () =>
     {
         navigate("/chats")
@@ -20,10 +21,16 @@ const ChatHeader = ({ userData }) =>
     {
         // callUser(userData.id);
     }
+
+    const navigateChatProfile = () =>
+    {
+        navigate(`/chats/chat/profile?${searchParams}`)
+    }
     return (
         <div
             className={classes.header}
         >
+            {/* back icon , userInfo*/}
             <div>
                 {/* back icon */}
                 <ButtonBase
@@ -34,8 +41,10 @@ const ChatHeader = ({ userData }) =>
                         <path d="M10 8L6 12M6 12L10 16M6 12L18 12" stroke="#000E08" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </ButtonBase>
+                {/* userInfo */}
                 <ButtonBase
                     className={classes.userInfo}
+                    onClick={navigateChatProfile}
                 >
                     <Avatar
                         src={userData.profileImage}

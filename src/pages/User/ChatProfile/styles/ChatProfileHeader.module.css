@@ -1,0 +1,31 @@
+.container {
+    margin: auto;
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.profilePic {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    font-size: var(--font-size-900);
+    font-size: 50px;
+}
+
+.userName {
+    font-size: var(--font-size-800);
+    font-weight: 600;
+    margin: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
+}
+
+.iconBtn {
+    border-radius: var(--border-radius-inputs);
+    background-color: var(--secondary);
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}

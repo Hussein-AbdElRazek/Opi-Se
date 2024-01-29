@@ -31,14 +31,16 @@ const ProfileUi = (props) =>
                     >
                         {type === "MY_PROFILE" && (
                             <>
-                                <ProfilePic />
+                                <ProfilePic
+                                    userName={profileData?.userName}
+                                    profileImage={profileData?.profileImage}
+                                />
                                 <IconButton
                                     className={classes.plusIcon}
                                 >
                                     <img src={plusIcon} alt="add" />
                                 </IconButton>
                             </>
-
                         )}
 
                     </div>

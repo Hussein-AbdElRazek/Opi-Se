@@ -1,7 +1,7 @@
 import { IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
+import { ReactComponent as CloseIcon } from '../../../assets/icons/close.svg'
 import classes from './Chats.module.css'
 
 const ChatsHeader = () =>
@@ -21,7 +21,7 @@ const ChatsHeader = () =>
             <IconButton
                 onClick={closeChats}
             >
-                <ClearRoundedIcon />
+                <CloseIcon fill='var(--primary)' />
             </IconButton>
         </div>
     )

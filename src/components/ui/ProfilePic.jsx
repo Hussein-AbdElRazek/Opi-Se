@@ -1,28 +1,17 @@
-import { useSelector } from "react-redux"
+import { Avatar } from "@mui/material";
 
 import classes from './styles/ProfilePic.module.css'
-export const ProfilePic = () =>
+
+export const ProfilePic = (props) =>
 {
-    const userName = useSelector((state) => state.auth.userData?.userName);
-    const profileImage = useSelector((state) => state.auth.userData?.profileImage);
-    // const profileImage = "default.png";
-    const isHavePic = profileImage !== "default.png";
+    const { userName, profileImage } = props;
+
     return (
-        <div
-            style={{
-                backgroundImage: `url(${isHavePic ? profileImage : null})`
-            }}
-            className={`
-            ${classes.container}
-            center-x
-            center-y
-            `}
+        <Avatar
+            className={classes.container}
+            src={profileImage}
         >
-            {!isHavePic &&
-                <h4>
-                    {userName[0].toUpperCase()}
-                </h4>
-            }
-        </div>
+            {userName && userName[0].toUpperCase()}
+        </Avatar>
     )
 }
