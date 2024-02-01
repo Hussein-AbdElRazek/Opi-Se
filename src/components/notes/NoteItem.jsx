@@ -30,6 +30,7 @@ export const NoteItem = (props) =>
         onCancel,
         makeNoteEditable,
         pinNote,
+        onDelete,
     } = props;
     const disabled = !(isNew || isEdit);
     const initialValues = {
@@ -136,6 +137,8 @@ export const NoteItem = (props) =>
 
                                     <IconButton
                                         className={classes.icon}
+                                        title={isTrash ? 'Delete from trash (delete forever)' : 'Move to trash'}
+                                        onClick={onDelete(_id)}
                                     >
                                         <DeleteIcon />
                                     </IconButton>

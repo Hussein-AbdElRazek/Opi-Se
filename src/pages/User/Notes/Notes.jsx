@@ -10,6 +10,7 @@ import useMakeNoteEditable from './hooks/use-make-note-editable';
 import useEditNote from './hooks/use-edit-note';
 import useCancelEditNote from './hooks/use-cancel-edit-note';
 import usePinNote from './hooks/use-pin-note';
+import useMoveNoteToTrash from './hooks/use-move-note-to-trash';
 
 // in these page i use Facade design pattern
 // bcs it's has many features 
@@ -42,6 +43,9 @@ const Notes = () =>
     // pin note 
     const { handlePinNote } = usePinNote();
 
+    // move note to trash
+    const { handleMoveNoteToTrash } = useMoveNoteToTrash();
+
     return (
         <>
             <NotesList
@@ -53,6 +57,7 @@ const Notes = () =>
                 lastElementRef={lastElementRef}
                 makeNoteEditable={makeNoteEditable}
                 pinNote={handlePinNote}
+                moveToTrash={handleMoveNoteToTrash}
             />
             {isLoadingGetNotes && <LoadingCenter />}
             <NotesBar />

@@ -13,8 +13,11 @@ export const NotesList = (props) =>
         lastElementRef,
         makeNoteEditable,
         pinNote,
+        isTrash,
+        moveToTrash,
+        deleteFromTrash,
     } = props;
-
+    
     return (
         <Grid
             container
@@ -29,6 +32,8 @@ export const NotesList = (props) =>
                     onCancel={note.isNew ? cancelAddNote : cancelEditNote}
                     makeNoteEditable={makeNoteEditable}
                     pinNote={pinNote}
+                    isTrash={isTrash}
+                    onDelete={isTrash ? deleteFromTrash : moveToTrash  }
                     {...note}
                 />
             )}
