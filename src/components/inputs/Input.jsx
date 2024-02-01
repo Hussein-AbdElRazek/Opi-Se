@@ -33,13 +33,16 @@ export const Input = (props) =>
                         disabled={disabled}
                         dir={dir}
                     >
-                        <InputLabel
-                            shrink
-                            htmlFor={name}
-                            className={classes.label}
-                        >
-                            {label}
-                        </InputLabel>
+                        {label && (
+                            <InputLabel
+                                shrink
+                                htmlFor={name}
+                                className={classes.label}
+                            >
+                                {label}
+                            </InputLabel>
+                        )}
+
                         <InputBase
                             name={name}
                             id={name}
@@ -47,7 +50,6 @@ export const Input = (props) =>
                             label={label}
                             {...field}
                             {...rest}
-                            inputProps={{ ...rest }}
                             variant="outlined"
                             className={!!children ? classes.password : ""}
                         />

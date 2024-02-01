@@ -1,7 +1,7 @@
 import { IconButton, InputBase } from '@mui/material'
 import classes from './styles/InputBar.module.css'
 import { Field, Form, Formik } from 'formik'
-import { isArabic } from '../../helpers/isArabic'
+import { getTypingDirection } from '../../helpers/getTypingDirection'
 import UploadMedia from './UploadMedia'
 import { useSearchParams } from 'react-router-dom'
 
@@ -43,9 +43,7 @@ export const InputBar = (props) =>
                                     // maxRows={5}
                                     style={{
                                         direction:
-                                            isArabic(formik.values.message.trim()[0]) ?
-                                                "rtl" :
-                                                "ltr"
+                                            getTypingDirection(formik.values.message)
                                     }}
                                 />
                             )}

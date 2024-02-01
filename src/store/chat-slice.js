@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
+import { mergeToUnique } from '../helpers/mergeToUnique';
 
 
 // get match id from local storage
@@ -276,11 +277,10 @@ const chatSlice = createSlice({
     reducers: {
         updateMessages(state, action)
         {
-            const existingMessages = new Set(state.messages[action.payload.id]?.map(message => message._id));
-            const uniqueMessages = action.payload.messages.filter(message => !existingMessages.has(message._id));
+            const updatedArr = mergeToUnique(state.messages[action.payload.id] || [],
+                action.payload.messages);
 
-            const updatedArr = [...state.messages[action.payload.id] || [], ...uniqueMessages];
-
+            //sort with date
             updatedArr.sort((a, b) =>
             {
                 const dateA = new Date(a.sentAt);

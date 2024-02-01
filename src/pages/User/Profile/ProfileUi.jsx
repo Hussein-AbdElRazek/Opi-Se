@@ -1,7 +1,7 @@
 import { Box, Button, Grid, IconButton } from '@mui/material'
 import { Card, ProfilePic } from '../../../components/ui'
 import classes from './Profile.module.css'
-import editIcon from '../../../assets/icons/edit.svg'
+import { ReactComponent as EditIcon } from '../../../assets/icons/edit.svg'
 import plusIcon from '../../../assets/icons/plus.svg'
 import { Btn } from '../../../components/inputs'
 import copyIcon from '../../../assets/icons/copy.svg'
@@ -22,7 +22,7 @@ const ProfileUi = (props) =>
                         <IconButton
                             className={classes.editIcon}
                         >
-                            <img src={editIcon} alt="edit" />
+                            <EditIcon fill='black' />
                         </IconButton>
                     )}
 

@@ -1,10 +1,10 @@
-import { isArabic } from '../../helpers/isArabic'
+import { getTypingDirection } from '../../helpers/getTypingDirection'
 import { OptionsMenu } from './OptionsMenu';
 import classes from './styles/Message.module.css'
 
 export const Message = ({ children, date, type, seen, id }) =>
 {
-    const isTextArabic = isArabic(children ? children[0] : "");
+    const textDirection = getTypingDirection(children && type === "text" ? children : "");
     return (
         <div
             className={`
@@ -18,15 +18,13 @@ export const Message = ({ children, date, type, seen, id }) =>
                     ${classes.messageBasics}
                     ${type === "sent" ? classes.sentMessage : classes.receiveMessage}
                 `}
-                    style={{
-                        textAlign: isTextArabic ? "right" : "left"
-                    }}
+                    style={{ direction: textDirection }}
                 >
-                    {type === "sent" && <OptionsMenu messageId={id}  />}
+                    {type === "sent" && <OptionsMenu messageId={id} />}
                     {children}
                 </div>
                 <span
-                className={classes.date}
+                    className={classes.date}
                 >
                     {date}
                 </span>

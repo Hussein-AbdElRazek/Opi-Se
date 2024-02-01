@@ -1,0 +1,11 @@
+.iconBtn {
+    padding: 0;
+    margin-left: 10px;
+}
+
+.loading {
+    width: 30px !important;
+    height: 30px !important;
+    color: var(--secondary);
+    margin-left: 10px;
+}
