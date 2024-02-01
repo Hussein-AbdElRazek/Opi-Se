@@ -8,6 +8,7 @@ import useScrollingPagination from "../../../../hooks/use-scrolling-pagination";
 const useGetNotes = () =>
 {
     // useGetNotes hook to handle call addNote API
+
     const {
         sendRequest: getNotes,
         isLoading: isLoadingGetNotes,
@@ -24,7 +25,6 @@ const useGetNotes = () =>
 
     useEffect(() =>
     {
-        console.log("handleGetNotes = useEffect______________>")
         const getResponse = ({ message, data, totalPages }) =>
         {
             if (message.includes("success"))

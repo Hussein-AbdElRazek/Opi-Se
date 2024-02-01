@@ -28,6 +28,7 @@ export const NoteItem = (props) =>
         isLoading,
         lastElementRef,
         onCancel,
+        makeNoteEditable,
     } = props;
     const disabled = !(isNew || isEdit);
     const initialValues = {
@@ -36,7 +37,6 @@ export const NoteItem = (props) =>
         noteColor: noteColor,
         _id
     };
-
     return (
         <Grid
             xl={3}
@@ -92,9 +92,10 @@ export const NoteItem = (props) =>
                                     />
                                 </div>
 
-                                {disabled && (
+                                {(disabled && !isTrash) && (
                                     <ButtonBase
                                         className={classes.containedIconBtn}
+                                        onClick={makeNoteEditable(_id)}
                                     >
                                         <EditIcon fill={`var(${noteColor})`} />
                                     </ButtonBase>
@@ -131,7 +132,7 @@ export const NoteItem = (props) =>
                                     <NoteTimeAndDate date={createdAt} />
 
                                     <IconButton
-                                        className={classes.pinIcon}
+                                        className={classes.icon}
                                     >
                                         <DeleteIcon />
                                     </IconButton>
@@ -144,6 +145,7 @@ export const NoteItem = (props) =>
                                     _id={_id}
                                     onCancel={onCancel}
                                     isLoading={isLoading}
+                                    resetForm={formik.resetForm}
                                 />
                             )}
                         </Form>

@@ -9,16 +9,17 @@ const CancelBtn = (props) =>
         onClick,
         disabled,
         _id,
+        resetForm,
     } = props;
     return (
         <IconButton
             className={classes.iconBtn}
             type="button"
-            onClick={onClick(_id)}
+            onClick={onClick(_id, resetForm)}
             disabled={disabled}
         >
             <CancelIcon />
-        </IconButton>
+        </IconButton >
     )
 }
 

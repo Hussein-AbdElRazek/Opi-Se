@@ -56,3 +56,9 @@
 .color5 {
     background-color: var(--note5);
 }
+
+@media (max-width:900px) {
+    .container {
+        right: 30px;
+    }
+}

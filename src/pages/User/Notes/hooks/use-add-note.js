@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
@@ -8,11 +9,13 @@ const useAddNote = () =>
     // useAddNote hook to handle call addNote API
 
     const {
-        sendRequest: addNote
+        sendRequest: addNote,
+        isLoading: isLoadingAddNote,
     } = useHttp();
 
     const matchId = useSelector(state => state.auth.userData.matchId);
     const dispatch = useDispatch();
+    const [loadingId, setLoadingId] = useState("");
 
     const handleAddNote = (values) =>
     {
@@ -23,21 +26,14 @@ const useAddNote = () =>
             noteColor: values.noteColor,
         }
 
-        // make loading 
-        const updateLoadingState = {
-            isLoading: true,
-            _id: oldId
-        }
-        dispatch(notesActions.updateNote(updateLoadingState))
-
+        // update id of loading note 
+        setLoadingId(oldId)
         const getResponse = ({ message, data }) =>
         {
             if (message.includes("success"))
             {
-                console.log("success")
-                // stop loading 
+                // change isNew state
                 const updateLoadingState = {
-                    isLoading: false,
                     _id: oldId,
                     isNew: false
                 }
@@ -60,8 +56,18 @@ const useAddNote = () =>
             },
             getResponse
         );
-
     }
+
+    // manage loading state
+    useEffect(() =>
+    {
+        let updateLoadingState = {
+            isLoading: isLoadingAddNote,
+            _id: loadingId
+        }
+        dispatch(notesActions.updateNote(updateLoadingState))
+    }, [dispatch, isLoadingAddNote, loadingId])
+
     return {
         handleAddNote,
     }

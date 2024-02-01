@@ -8,13 +8,14 @@ const NotesActions = (props) =>
         _id,
         onCancel,
         isLoading,
+        resetForm,
     } = props;
 
     return (
         <div
             className={classes.actionBtns}
         >
-            <CancelBtn onClick={onCancel} _id={_id} disabled={isLoading} />
+            <CancelBtn onClick={onCancel} _id={_id} disabled={isLoading} resetForm={resetForm} />
             <ConfirmBtn isLoading={isLoading} />
         </div>
     )

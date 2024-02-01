@@ -6,8 +6,6 @@ const useCancelAddNote = () =>
     const dispatch = useDispatch();
     const handleCancelAddNote = (noteId) => () =>
     {
-        console.log("noteId", noteId)
-
         dispatch(notesActions.removeNote(noteId));
     }
     return {
