@@ -8,7 +8,7 @@ const PinBtn = ({ _id, isPinned, pinNote }) =>
     return (
         <IconButton
             className={classes.pinIcon}
-            // onClick={pinNote(_id, isPinned)}
+            onClick={pinNote(_id, isPinned)}
             title={isPinned ? "UnPin Note" : "Pin Note"}
         >
             <PinIcon fill={isPinned ? "var(--secondary)" : "var(--text-header)"} />

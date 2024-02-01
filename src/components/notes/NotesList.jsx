@@ -12,6 +12,7 @@ export const NotesList = (props) =>
         cancelEditNote,
         lastElementRef,
         makeNoteEditable,
+        pinNote,
     } = props;
 
     return (
@@ -27,6 +28,7 @@ export const NotesList = (props) =>
                     onSubmit={note.isNew ? addNote : editNote}
                     onCancel={note.isNew ? cancelAddNote : cancelEditNote}
                     makeNoteEditable={makeNoteEditable}
+                    pinNote={pinNote}
                     {...note}
                 />
             )}

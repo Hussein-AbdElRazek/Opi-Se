@@ -9,6 +9,7 @@ import useCancelAddNote from './hooks/use-cancel-add-note';
 import useMakeNoteEditable from './hooks/use-make-note-editable';
 import useEditNote from './hooks/use-edit-note';
 import useCancelEditNote from './hooks/use-cancel-edit-note';
+import usePinNote from './hooks/use-pin-note';
 
 // in these page i use Facade design pattern
 // bcs it's has many features 
@@ -38,6 +39,9 @@ const Notes = () =>
     // cancel  edit note 
     const { handleCancelEditNote } = useCancelEditNote();
 
+    // pin note 
+    const { handlePinNote } = usePinNote();
+
     return (
         <>
             <NotesList
@@ -48,6 +52,7 @@ const Notes = () =>
                 cancelEditNote={handleCancelEditNote}
                 lastElementRef={lastElementRef}
                 makeNoteEditable={makeNoteEditable}
+                pinNote={handlePinNote}
             />
             {isLoadingGetNotes && <LoadingCenter />}
             <NotesBar />

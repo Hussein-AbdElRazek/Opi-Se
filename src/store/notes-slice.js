@@ -20,7 +20,6 @@ const notesSlice = createSlice({
         },
         removeNote(state, action)
         {
-            console.log("action");
             state.notes = state.notes.filter(ele => ele._id !== action.payload)
         },
         updateNote(state, action)
@@ -50,6 +49,28 @@ const notesSlice = createSlice({
         {
             // to update TotalPages when receive it from server
             state.totalPages = action.payload;
+        },
+        sortNotes(state)
+        {
+            state.notes = state.notes.sort((a, b) =>
+            {
+                // Pinned notes: Sort by pinnedAt date (latest first)
+                if (a.isPinned && b.isPinned)
+                {
+                    let aPinnedAt = new Date(a.pinnedAt);
+                    let bPinnedAt = new Date(b.pinnedAt);
+                    return bPinnedAt.getTime() - aPinnedAt.getTime(); // Latest pinned first
+                }
+
+                // Pinned notes come first
+                if (a.isPinned && !b.isPinned) return -1; // a should come first
+                if (!a.isPinned && b.isPinned) return 1; // b should come first
+
+                // Non-pinned notes: Sort by createdAt date (latest first)
+                let aCreatedAt = new Date(a.createdAt);
+                let bCreatedAt = new Date(b.createdAt);
+                return bCreatedAt.getTime() - aCreatedAt.getTime(); // Latest created first
+            });
         },
     }
 })

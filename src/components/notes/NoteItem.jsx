@@ -29,6 +29,7 @@ export const NoteItem = (props) =>
         lastElementRef,
         onCancel,
         makeNoteEditable,
+        pinNote,
     } = props;
     const disabled = !(isNew || isEdit);
     const initialValues = {
@@ -58,6 +59,8 @@ export const NoteItem = (props) =>
                 >
                     {(formik) => (
                         <Form>
+
+                            {/* NoteDate & PinBtn */}
                             <div
                                 className={`
                                         ${classes.group} 
@@ -67,7 +70,7 @@ export const NoteItem = (props) =>
                             >
                                 {disabled && <NoteDate date={createdAt} />}
 
-                                {!isNew && <PinBtn _id={_id} isPinned={isPinned} />}
+                                {!isNew && <PinBtn pinNote={pinNote} _id={_id} isPinned={isPinned} />}
 
                             </div>
 
