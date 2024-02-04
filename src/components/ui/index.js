@@ -12,3 +12,4 @@ export { PopUpCard } from './PopUpCard';
 export { LoadingCenter } from './LoadingCenter';
 export { ButtonGroup } from './ButtonGroup';
 export { ModalCard } from './ModalCard';
+export { LoadingFullScreen } from './LoadingFullScreen';

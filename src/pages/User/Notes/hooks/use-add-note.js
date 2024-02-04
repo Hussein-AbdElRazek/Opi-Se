@@ -33,16 +33,17 @@ const useAddNote = () =>
             if (message.includes("success"))
             {
                 // change isNew state
-                const updateLoadingState = {
+                const updateNoteState = {
                     _id: oldId,
-                    isNew: false
+                    isNew: false,
+                    ...reqBody
                 }
-                dispatch(notesActions.updateNote(updateLoadingState))
+                dispatch(notesActions.updateNote(updateNoteState))
 
                 //update id when receive it from server 
                 const updatedId = {
                     oldId: oldId,
-                    _id: data._id || oldId
+                    _id: data._id 
                 }
                 dispatch(notesActions.updateNoteId(updatedId))
             }

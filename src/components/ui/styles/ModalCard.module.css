@@ -13,5 +13,8 @@
 .container button {
     border-radius: var(--border-radius-200);
     width: 100px;
+}
+
+.container button:first-of-type {
     margin-right: 20px;
 }

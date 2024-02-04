@@ -1,0 +1,8 @@
+.menu li {
+    padding-left: 10px;
+    width: 160px;
+}
+
+.menu li:hover {
+    color: var(--secondary);
+}

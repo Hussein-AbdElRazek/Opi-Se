@@ -28,15 +28,16 @@
     --danger-btn: #EA4335;
     --video-time: #8D9196;
     --secondary-btn: #eeeeee;
+    --black-10: rgba(0, 0, 0, 0.10);
     --black-30: rgba(0, 0, 0, 0.30);
     --black-80: rgba(0, 0, 0, 0.80);
     --light-green: #27B127;
-    --tab:#797C7B;
-    --note1:#FFF6C8;
-    --note2:#C8F2FF;
-    --note3:#FFC8C8;
-    --note4:#E0FFC8;
-    --note5:#FFE6C8;
+    --tab: #797C7B;
+    --note1: #FFF6C8;
+    --note2: #C8F2FF;
+    --note3: #FFC8C8;
+    --note4: #E0FFC8;
+    --note5: #FFE6C8;
     /* ------------------------------ */
 
     /* Font Size */
@@ -64,6 +65,7 @@
     /*Z-Index*/
     --layer-nav: 999;
     --layer-video-call: 1000;
+    --layer-top: 999999;
     --layer-100: 10;
     /* ------------------------------ */
 }
@@ -92,4 +94,10 @@
 
 a {
     text-decoration: none;
+}
+
+.cancel-btn {
+    border: 1px solid var(--secondary);
+    background-color: var(--primary) !important;
+    color: var(--secondary) !important;
 }

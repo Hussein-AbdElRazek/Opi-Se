@@ -1,11 +1,12 @@
 .container {
     position: fixed;
-    right: 50px;
+    right: 40px;
     top: 90px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 135px);
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: space-between;
     flex-direction: column;
 }
 
@@ -26,6 +27,11 @@
 .addIcon svg {
     width: 15px;
     height: 15px;
+}
+
+.trashIcon svg {
+    width: 35px;
+    height: 35px;
 }
 
 .color {

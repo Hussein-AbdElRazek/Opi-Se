@@ -12,6 +12,7 @@ import { NoteTimeAndDate } from './NoteTimeAndDate';
 import { noteValidationSchema } from './noteValidationSchema';
 import NotesActions from '../../pages/User/Notes/components/NotesActions';
 import PinBtn from '../../pages/User/Notes/components/PinBtn';
+import TrashOptions from '../../pages/User/NotesTrash/components/TrashOptions';
 export const NoteItem = (props) =>
 {
     const {
@@ -32,6 +33,7 @@ export const NoteItem = (props) =>
         pinNote,
         onDelete,
     } = props;
+
     const disabled = !(isNew || isEdit);
     const initialValues = {
         noteTitle: noteTitle || "",
@@ -39,6 +41,7 @@ export const NoteItem = (props) =>
         noteColor: noteColor,
         _id
     };
+    
     return (
         <Grid
             xl={3}
@@ -71,11 +74,11 @@ export const NoteItem = (props) =>
                             >
                                 {disabled && <NoteDate date={createdAt} />}
 
-                                {!isNew && <PinBtn pinNote={pinNote} _id={_id} isPinned={isPinned} />}
+                                {(!isTrash && !isNew) && <PinBtn pinNote={pinNote} _id={_id} isPinned={isPinned} />}
 
                             </div>
 
-                            {/* Title */}
+                            {/* Title && Edit Btn / Options Btn*/}
                             <div
                                 className={`${classes.group} ${classes.mb}`}
                             >
@@ -95,7 +98,7 @@ export const NoteItem = (props) =>
                                         disabled={disabled}
                                     />
                                 </div>
-
+                                {/* Edit Btn */}
                                 {(disabled && !isTrash) && (
                                     <ButtonBase
                                         className={classes.containedIconBtn}
@@ -105,6 +108,8 @@ export const NoteItem = (props) =>
                                     </ButtonBase>
                                 )}
 
+                                {/* Options Btn */}
+                                {isTrash && <TrashOptions noteId={_id} />}
                             </div>
 
                             <Divider className={`${classes.divider} ${classes.mb}`} />
@@ -128,20 +133,23 @@ export const NoteItem = (props) =>
                                 />
                             </div>
 
-                            {/* Time & Delete  */}
+                            {/* Time & Move to trash  */}
                             {disabled && (
                                 <div
                                     className={`${classes.group} ${classes.positionRelative}`}
                                 >
                                     <NoteTimeAndDate date={createdAt} />
 
-                                    <IconButton
-                                        className={classes.icon}
-                                        title={isTrash ? 'Delete from trash (delete forever)' : 'Move to trash'}
-                                        onClick={onDelete(_id)}
-                                    >
-                                        <DeleteIcon />
-                                    </IconButton>
+                                    {/* Move to trash */}
+                                    {!isTrash && (
+                                        <IconButton
+                                            className={classes.icon}
+                                            title={'Move to trash'}
+                                            onClick={onDelete && onDelete(_id)}
+                                        >
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    )}
                                 </div>
                             )}
 

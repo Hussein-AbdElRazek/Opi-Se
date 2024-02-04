@@ -11,11 +11,15 @@ import useEditNote from './hooks/use-edit-note';
 import useCancelEditNote from './hooks/use-cancel-edit-note';
 import usePinNote from './hooks/use-pin-note';
 import useMoveNoteToTrash from './hooks/use-move-note-to-trash';
+import useResetNotesSlice from '../../../hooks/use-reset-notes-slice';
 
 // in these page i use Facade design pattern
 // bcs it's has many features 
 const Notes = () =>
 {
+    // reset notes slice
+    useResetNotesSlice();
+
     // get notes and store it in the notes store
     const {
         isLoadingGetNotes,

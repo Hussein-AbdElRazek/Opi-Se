@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
 import { Btn } from '../inputs';
-import classes from './styles/ConfirmDeleteMessage.module.css'
 import { deleteMessage } from '../../store/chat-slice';
 import { ModalCard } from '../ui';
 export const ConfirmDeleteMessage = (props) =>
@@ -37,7 +36,7 @@ export const ConfirmDeleteMessage = (props) =>
             </Btn>
             <Btn
                 onClick={onClose}
-                className={classes.cancelBtn}
+                className='cancel-btn'
             >
                 Cancel
             </Btn>

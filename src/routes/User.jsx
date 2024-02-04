@@ -12,6 +12,7 @@ import MatchRequests from '../pages/User/MatchRequests/MatchRequests'
 import Notifications from '../pages/User/Notifications/Notifications'
 import ChatProfile from '../pages/User/ChatProfile/ChatProfile'
 import Notes from '../pages/User/Notes/Notes'
+import NotesTrash from '../pages/User/NotesTrash/NotesTrash'
 
 const User = () =>
 {
@@ -30,7 +31,9 @@ const User = () =>
             <Route path='/about' element={<About />} />
             <Route path='/questions' element={<Questions />} />
             <Route path='/video/*' element={<VideoSession />} />
+            
             <Route path='/notes' element={<Notes />} />
+            <Route path='/notes/trash' element={<NotesTrash />} />
             <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
     )

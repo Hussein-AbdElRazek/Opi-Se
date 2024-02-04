@@ -72,6 +72,11 @@ const notesSlice = createSlice({
                 return bCreatedAt.getTime() - aCreatedAt.getTime(); // Latest created first
             });
         },
+        resetNotes(state, action)
+        {
+            state.notes = [];
+            state.totalPages = 1;
+        },
     }
 })
 

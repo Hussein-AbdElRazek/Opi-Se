@@ -2,6 +2,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { NoteItem } from './NoteItem';
 import classes from './styles/NotesList.module.css'
+
 export const NotesList = (props) =>
 {
     const {
@@ -15,9 +16,8 @@ export const NotesList = (props) =>
         pinNote,
         isTrash,
         moveToTrash,
-        deleteFromTrash,
     } = props;
-    
+
     return (
         <Grid
             container
@@ -33,7 +33,7 @@ export const NotesList = (props) =>
                     makeNoteEditable={makeNoteEditable}
                     pinNote={pinNote}
                     isTrash={isTrash}
-                    onDelete={isTrash ? deleteFromTrash : moveToTrash  }
+                    onDelete={moveToTrash}
                     {...note}
                 />
             )}

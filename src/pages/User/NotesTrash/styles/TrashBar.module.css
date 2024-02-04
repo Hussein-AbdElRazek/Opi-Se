@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px 0 32px;
+    /* margin-bottom: 8px; because layout have top 20px between navbar 
+    and in bottom note wrapper have 12px padding so 20px - 12px will be 8px  */
+    margin-bottom: 8px;
+}
+
+.container h1 {
+    margin: 0;
+    text-align: left;
+}
+
+.optionBtn {
+    width: 35px;
+    height: 35px;
+    border-radius: var(--border-radius-inputs);
+    background-color: var(--primary);
+    border: 1px solid var(--black-10);
+}
+
+.optionBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width:900px) {
+    .container {
+        padding: 0;
+    }
+}

@@ -3,8 +3,10 @@ import { IconButton, ButtonBase } from '@mui/material';
 import { useDispatch } from 'react-redux'
 
 import { ReactComponent as AddIcon } from '../../../../assets/icons/add.svg'
+import { ReactComponent as TrashIcon } from '../../../../assets/icons/trash.svg'
 import classes from '../styles/NotesBar.module.css'
 import { notesActions } from '../../../../store/notes-slice';
+import { NavLink } from 'react-router-dom';
 
 const colors = ["--note1", "--note2", "--note3", "--note4", "--note5"];
 
@@ -53,6 +55,14 @@ const NotesBar = () =>
                     ))
                 )}
             </div>
+
+            <IconButton
+                className={classes.trashIcon}
+                LinkComponent={NavLink}
+                to="trash"
+            >
+                <TrashIcon />
+            </IconButton>
         </div >
     )
 }

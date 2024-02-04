@@ -5,13 +5,13 @@ import useHttp from "../../../../hooks/use-http";
 import { notesActions } from "../../../../store/notes-slice";
 import useScrollingPagination from "../../../../hooks/use-scrolling-pagination";
 
-const useGetNotes = () =>
+const useGetTrashNotes = () =>
 {
-    // useGetNotes hook to handle call getAllNotes API
+    // useGetTrashNotes hook to handle call getAllTrashNotes API
 
     const {
-        sendRequest: getNotes,
-        isLoading: isLoadingGetNotes,
+        sendRequest: getTrashNotes,
+        isLoading: isLoadingGetTrashNotes,
     } = useHttp();
     const matchId = useSelector(state => state.auth.userData.matchId);
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const useGetNotes = () =>
     const {
         lastElementRef,
         currentPage
-    } = useScrollingPagination(isLoadingGetNotes, initialTotalPages);
+    } = useScrollingPagination(isLoadingGetTrashNotes, initialTotalPages);
 
     useEffect(() =>
     {
@@ -37,18 +37,18 @@ const useGetNotes = () =>
             }
         };
 
-        getNotes(
+        getTrashNotes(
             {
-                url: `getAllNotes?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
+                url: `getAllTrashNotes?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
             },
             getResponse
         );
-    }, [currentPage, dispatch, getNotes, matchId])
+    }, [currentPage, dispatch, getTrashNotes, matchId])
 
     return {
-        isLoadingGetNotes,
+        isLoadingGetTrashNotes,
         lastElementRef,
     }
 }
 
-export default useGetNotes;
+export default useGetTrashNotes;
