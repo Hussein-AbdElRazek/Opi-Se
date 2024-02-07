@@ -24,6 +24,7 @@ const SessionUi = (props) =>
             {/* Start/Stop Btn and timer */}
             <div
                 className={classes.container}
+                title={status === "waiting" ? "Waiting to respond..." : "Start focus session"}
             >
                 {status === "running" ? (
                     <Btn

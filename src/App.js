@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux'
 import './App.css';
 import IndexRoutes from './routes/IndexRoutes';
 import { AppBar } from './components/appBar';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getWebsiteTitle } from './helpers/getWebsiteTitle';
 import { PageLayout } from './components/common';
+import IncomingVideoCall from './pages/User/IncomingVideoSession/IncomingVideoCall';
+import VideoContext from './videoCallStore/video-call-context';
 // import {messaging} from './FCM/firebase'
 // import { getToken,onMessage } from 'firebase/messaging'
 // import './FCM/messaging_init_in_sw';
@@ -68,12 +70,13 @@ function App()
   //     console.log("on Message", payload);
   //   })
   // },[])
-  
+  const { call } = useContext(VideoContext);
   return (
     <div>
       {isLoggedIn && !firstTime ? (
         <>
           <AppBar title={title} />
+          {(call && call.isReceivingCall) && <IncomingVideoCall />}
           <PageLayout>
             <IndexRoutes />
           </PageLayout>

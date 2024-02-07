@@ -1,18 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import io from 'socket.io-client';
+
 import { mergeToUnique } from '../helpers/mergeToUnique';
+import baseSocket from '../sockets/baseConnection';
 
+// get connection 
+const socket = baseSocket;
 
-// get match id from local storage
-const matchId = JSON.parse(localStorage.getItem("userData"))?.matchId;
-const token = (localStorage.getItem("token"));
-
-//establish connection
-let socket;
 export const connectSocket = createAsyncThunk('chat/connectSocket',
     async () =>
     {
-        socket = io(`https://graduation-project-j6gl.onrender.com?matchId=${matchId}&token=${token}`)
+        console.log("char_______________")
+        // socket.disconnect();
+        // socket.connect();
         let connected = false;
         socket.on("connect", () =>
         {
@@ -262,8 +261,8 @@ export const listenToReceiveMedia = createAsyncThunk(
 )
 
 const initialChatState = {
-    messages: JSON.parse(localStorage.getItem("messages")) || {},
-    session: JSON.parse(localStorage.getItem("session")) || {
+    messages:  {},
+    session:  {
         status: "",
         startDate: "",
         isLoading: false,
@@ -289,7 +288,6 @@ const chatSlice = createSlice({
             });
 
             state.messages[action.payload.id] = updatedArr;
-            localStorage.setItem("messages", JSON.stringify(state.messages));
         },
         addMessage(state, action)
         {
@@ -308,17 +306,14 @@ const chatSlice = createSlice({
 
                 state.messages[action.payload.messagesId] = [action.payload.newMessage]
             }
-            localStorage.setItem("messages", JSON.stringify(state.messages))
         },
         deleteMessage(state, action)
         {
             state.messages[action.payload.messagesId] = state.messages[action.payload.messagesId].filter((msg) => msg._id !== action.payload.messageId)
-            localStorage.setItem("messages", JSON.stringify(state.messages))
         },
         updateSession(state, action)
         {
             state.session = { ...state.session, ...action.payload };
-            localStorage.setItem("session", JSON.stringify(state.session))
         },
     }, extraReducers: (builder) =>
     {

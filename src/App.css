@@ -65,7 +65,9 @@
     /*Z-Index*/
     --layer-nav: 999;
     --layer-video-call: 1000;
-    --layer-top: 999999;
+    --layer-loading: 5000;
+    --layer-modal: 2000;
+    --layer-incoming-call: 3000;
     --layer-100: 10;
     /* ------------------------------ */
 }

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
+import { backendUrl } from '../config';
 
 const initialMatchState = {
     connected: false,
@@ -13,7 +14,7 @@ let socket;
 export const connectMatchSocket = createAsyncThunk('match/connectSocket',
     async () =>
     {
-        socket = io(`https://graduation-project-j6gl.onrender.com?matchId=${matchId}&token=${token}`)
+        socket = io(`${backendUrl}?matchId=${matchId}&token=${token}`)
         let connected = false;
         socket.on("connect", () =>
         {

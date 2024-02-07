@@ -1,0 +1,1 @@
+export const backendUrl = "https://opi-se-test.onrender.com/";

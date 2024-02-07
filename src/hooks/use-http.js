@@ -2,6 +2,7 @@ import { useState, useCallback, } from "react";
 import { useSnackbar } from "notistack";
 import { trimObject } from "../helpers/trimObject";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { backendUrl } from "../config";
 const useHttp = () =>
 {
     const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +33,7 @@ const useHttp = () =>
                 await fetch(
                     `${requestConfig.baseUrl ?
                         requestConfig.baseUrl :
-                        "https://graduation-project-j6gl.onrender.com/"}${requestConfig.url}`,
+                        backendUrl}${requestConfig.url}`,
                     requestData);
             const data = await response.json();
             applyData(data);

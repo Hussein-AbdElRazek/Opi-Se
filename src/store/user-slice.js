@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
+import { backendUrl } from '../config';
 
 const initialUserState = {
     connected: false,
@@ -13,7 +14,7 @@ let socket;
 export const connectUserSocket = createAsyncThunk('user/connectSocket',
     async () =>
     {
-        socket = io(`https://graduation-project-j6gl.onrender.com?userId=${userId}&token=${token}`)
+        socket = io(`${backendUrl}?userId=${userId}&token=${token}`)
         let connected = false;
         socket.on("connect", () =>
         {
@@ -98,7 +99,7 @@ export const listenToMatchRequestApproved = createAsyncThunk(
 export const notifyUserRoom = createAsyncThunk('user/notifyUserRoom',
     async () =>
     {
-        const userRoomSocket = io("https://graduation-project-j6gl.onrender.com/?roomId=1")
+        const userRoomSocket = io(`${backendUrl}?roomId=1`)
         userRoomSocket.emit('notifyUserRoom', {}, (res) =>
         {
             console.log('notifyUserRoom', res)
