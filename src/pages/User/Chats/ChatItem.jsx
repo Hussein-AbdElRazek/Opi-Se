@@ -16,6 +16,7 @@ const ChatItem = ({ chatItemData }) =>
     return (
         <ListItem
             disablePadding
+            className={classes.item}
         >
             <ListItemButton
                 onClick={openChat}

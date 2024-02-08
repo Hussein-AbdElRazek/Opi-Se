@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+
 import ExtractNationalIdUi from './ExtractNationalIdUi'
 import useHttp from '../../../hooks/use-http';
 
@@ -9,52 +10,48 @@ const ExtractNationalId = (props) =>
         isLoading: isLoadingExtractID,
         sendRequest: extractID
     } = useHttp();
-    const [showNationalId, setShowNationalId] = useState(false)
+    const [showNationalId, setShowNationalId] = useState(false);
 
     //extract national id from the selected file
-    useEffect(() =>
+    const handleExtractID = (values) =>
     {
-        const idImageInput = document.getElementById('idImageInput');
-
-        const handleExtractID = (values) =>
+        const getResponse = ({ status, nationalId, message }) =>
         {
-            const getResponse = ({ status, nationalId, message }) =>
+            if (!!status)
             {
-                if (!!status)
-                {
-                    setFieldValue("nationalId", nationalId)
-                    setShowNationalId(true)
-                }
-            };
-            extractID(
-                {
-                    url: "extract_nationalId",
-                    method: "POST",
-                    contentType: "form-data",
-                    body: values,
-                    baseUrl: "https://ml-api-x5og.onrender.com/"
-                },
-                getResponse
-            );
-        }
-        const handleIdImageSelection = (event) =>
-        {
-            console.log("event", event)
-            if (!isLoadingExtractID)
-            {
-                const selectedFile = event.target.files[0];
-                const formData = new FormData();
-                formData.append("file", selectedFile);
-                handleExtractID(formData);
+                setFieldValue("nationalId", nationalId)
             }
-        }
-        if (idImageInput) idImageInput.addEventListener('change', handleIdImageSelection);
+            setShowNationalId(true)
+        };
+        extractID(
+            {
+                url: "extract_nationalId",
+                method: "POST",
+                contentType: "form-data",
+                body: values,
+                baseUrl: "https://ocr-api-ysqv.onrender.com/"
+            },
+            getResponse
+        );
+    }
 
-    }, [extractID, isLoadingExtractID, setFieldValue])
+    const [images] = useState([]);
+
+    //  pass selected image to handleExtractID
+    const onChangeImage = (imageList) =>
+    {
+        const selectedFile = imageList[0];
+        const formData = new FormData();
+        formData.append("file", selectedFile.file);
+        handleExtractID(formData);
+    };
+
     return (
         <ExtractNationalIdUi
             isLoadingExtractID={isLoadingExtractID}
             showNationalId={showNationalId}
+            images={images}
+            onChangeImage={onChangeImage}
         />
     )
 }

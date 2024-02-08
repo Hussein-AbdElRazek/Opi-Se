@@ -1,8 +1,26 @@
 .menu li {
-    padding-left: 10px;
-    width: 160px;
+    padding-left: 16px;
+    width: 100%;
 }
 
 .menu li:hover {
     color: var(--secondary);
+    background-color: var(--secondary-3);
+}
+
+.menu a:hover svg,
+.menu li:hover svg {
+    fill: var(--secondary);
+}
+
+.menu a:hover,
+.menu li:hover {
+    color: var(--secondary);
+    background-color: var(--secondary-3);
+}
+
+.noHover:hover {
+    color: var(--text-header) !important;
+    background-color: var(--primary) !important;
+    cursor: default;
 }

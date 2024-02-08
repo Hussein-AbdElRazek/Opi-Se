@@ -1,0 +1,66 @@
+.openBtn {
+    background-color: var(--chat-receive);
+    border-radius: var(--border-radius-inputs);
+    padding: 4px;
+}
+
+.openBtn svg {
+    width: 25px;
+    height: 25px;
+}
+
+.container ul {
+    width: calc(100vw) !important;
+}
+
+.container a,
+.container li {
+    width: 100%;
+    padding: 12px 0 12px 30px;
+}
+
+.container a,
+.container li {
+    font-size: var(--font-size-600);
+    font-weight: 600;
+    font-family: -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        'Roboto',
+        'Oxygen',
+        'Ubuntu',
+        'Cantarell',
+        'Fira Sans',
+        'Droid Sans',
+        'Helvetica Neue',
+        sans-serif;
+}
+
+.icon {
+    margin-right: 30px;
+}
+
+.icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+.item {
+    color: var(--text-header);
+    font-weight: bold;
+    font-size: var(--font-size-600);
+    display: flex;
+    align-items: center;
+}
+
+.profileItem {
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width:901px) {
+    .container,
+    .openBtn {
+        display: none;
+    }
+}

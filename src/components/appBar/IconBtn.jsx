@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material"
 import classes from './styles/IconBtn.module.css'
 export const IconBtn = (props) =>
 {
-    const { img, onClick, component, to } = props;
+    const { Icon, onClick, component, to } = props;
     return (
         <IconButton
             onClick={onClick}
@@ -11,7 +11,7 @@ export const IconBtn = (props) =>
             component={component}
             to={to}
         >
-            <img src={img} alt='icon' />
+            <Icon fill="var(--secondary)" />
         </IconButton>
     )
 }

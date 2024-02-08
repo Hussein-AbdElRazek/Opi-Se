@@ -2,7 +2,7 @@ import React from 'react'
 import { SearchBarUi } from './SearchBarUi'
 import useSearchForPartner from '../../hooks/commonApis/use-search-for-partner'
 
-export const SearchBar = () =>
+export const SearchBar = ({ fullWidth }) =>
 {
     const {
         handleSearchForPartner,
@@ -13,6 +13,7 @@ export const SearchBar = () =>
         <SearchBarUi
             handleSearchForPartner={handleSearchForPartner}
             isLoadingSearchForPartner={isLoadingSearchForPartner}
+            fullWidth={fullWidth}
         />
     )
 }

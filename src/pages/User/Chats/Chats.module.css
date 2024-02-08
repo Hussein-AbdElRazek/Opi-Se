@@ -25,6 +25,9 @@
     margin-top: 0;
     margin-bottom: 2px;
     margin-left: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: calc(100% - 15px);
 }
 
 .listTitle {
@@ -48,4 +51,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.item {
+    width: 100%;
+    overflow: hidden;
 }

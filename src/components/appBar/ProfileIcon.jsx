@@ -1,29 +1,36 @@
-import { IconButton } from "@mui/material"
 import { useSelector } from "react-redux"
 
 import { ProfilePic } from "../ui"
 import classes from './styles/ProfileIcon.module.css'
-import { useNavigate } from "react-router-dom"
+import { UserMenu } from '../common'
+import { ReactComponent as ArrowTopIcon } from '../../assets/icons/arrowTop.svg'
 
-export const ProfileIcon = () =>
+
+export const ProfileIcon = ({id, onClose}) =>
 {
-    const navigate = useNavigate();
-
-    const goToMyProfile = () =>
-    {
-        navigate(`/profile?type=MY_PROFILE`)
-    }
+    // user data
     const userName = useSelector((state) => state.auth.userData?.userName);
     const profileImage = useSelector((state) => state.auth.userData?.profileImage);
+
+    //handle ui pop menu
+    const profileIconId = id
+    const isMenuOpened = !!useSelector(state => state.ui.isPopMenuOpened)[profileIconId];
     return (
-        <IconButton
-            className={classes.profileIcon}
-            onClick={goToMyProfile}
-        >
-            <ProfilePic
-                userName={userName}
-                profileImage={profileImage}
-            />
-        </IconButton>
+        <UserMenu
+            id={profileIconId}
+            openBtnType="icon"
+            openBtnChild={
+                <>
+                    <ProfilePic
+                        userName={userName}
+                        profileImage={profileImage}
+                    />
+                    {(isMenuOpened && id !=="smallProfileMenu")&& <ArrowTopIcon className={classes.arrow} />}
+                </>
+            }
+            openBtnClassName={classes.profileIcon}
+            containerClassName={classes.container}
+            onClose={onClose}
+        />
     )
 }

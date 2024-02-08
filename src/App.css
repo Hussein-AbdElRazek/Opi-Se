@@ -19,6 +19,7 @@
     --secondary-40: rgba(3, 105, 105, 0.40);
     --secondary-10: rgba(3, 105, 105, 0.10);
     --secondary-0: rgba(3, 105, 105, 0.0);
+    --secondary-3: rgba(3, 105, 105, 0.3);
     --chat-receive: #F5F5F5;
     --chat-date: #F8FBFA;
     --chat-input: #F3F6F6;
@@ -31,6 +32,7 @@
     --black-10: rgba(0, 0, 0, 0.10);
     --black-30: rgba(0, 0, 0, 0.30);
     --black-80: rgba(0, 0, 0, 0.80);
+    --black-40: rgba(0, 0, 0, 0.40);
     --light-green: #27B127;
     --tab: #797C7B;
     --note1: #FFF6C8;
@@ -38,6 +40,7 @@
     --note3: #FFC8C8;
     --note4: #E0FFC8;
     --note5: #FFE6C8;
+    --light-bg: #E4E4E4;
     /* ------------------------------ */
 
     /* Font Size */
@@ -102,4 +105,13 @@ a {
     border: 1px solid var(--secondary);
     background-color: var(--primary) !important;
     color: var(--secondary) !important;
+}
+
+/* handle active link style */
+.active {
+    color: var(--secondary) !important;
+}
+
+.active svg {
+    fill: var(--secondary);
 }

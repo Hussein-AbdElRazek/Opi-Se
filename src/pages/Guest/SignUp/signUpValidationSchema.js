@@ -1,5 +1,5 @@
 import *  as Yup from 'yup';
-import { ageMax, ageMin, emailNotValid, genderNotValid, passwordMatch, passwordMin, required } from '../../../assets/validationMessages/validationMessages';
+import { ageMax, ageMin, emailNotValid, genderNotValid, passwordMatch, passwordMin, required, nationalIdNotValid } from '../../../assets/validationMessages/validationMessages';
 
 export const signUpValidationSchema = Yup.object({
     userName: Yup.string()
@@ -30,5 +30,8 @@ export const signUpValidationSchema = Yup.object({
             level: Yup.number()
                 .required(required),
         })
-    )
+    ),
+    nationalId: Yup.string()
+        .matches(/^\d{14}$/, nationalIdNotValid)
+        .required(required),
 });

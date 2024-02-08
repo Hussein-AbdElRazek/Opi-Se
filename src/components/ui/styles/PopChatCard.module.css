@@ -13,7 +13,7 @@
 .content {
     overflow: auto;
     height: 310px;
-    max-height: calc(100vh - 250px);
+    max-height: calc(100vh - 260px);
     padding-top: 20px;
     position: relative;
 }
@@ -21,4 +21,12 @@
 .mediaPage {
     height: 500px;
     max-height: calc(100vh - 180px);
+}
+
+@media (max-width:425px) {
+    .container {
+        max-width: calc(100vw - 20px);
+        width: 100vw;
+        right: 10px;
+    }
 }

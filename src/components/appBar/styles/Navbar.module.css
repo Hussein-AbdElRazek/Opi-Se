@@ -1,5 +1,4 @@
 .container {
-    width: calc(100% - 60px);
     height: 60px;
     position: fixed;
     right: 0;
@@ -23,4 +22,42 @@
     font-weight: 500;
     color: var(--text-header);
     margin-right: 30px;
+}
+
+.mainIcons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 330px;
+    /* width: 100%; */
+    /* background-color: yellowgreen; */
+}
+
+.mainIcons a {
+    width: 45px;
+    height: 45px;
+    /* margin: 10px; */
+    /* background-color: violet; */
+}
+
+.mainIcons svg:hover {
+    fill: var(--secondary);
+}
+
+.rightIcons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width:900px) {
+
+    .rightIcons,
+    .mainIcons {
+        display: none;
+    }
+}
+
+@media (max-width:375px) {
+    .searchBar {
+        display: none;
+    }
 }

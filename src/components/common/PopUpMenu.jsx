@@ -12,6 +12,8 @@ export const PopUpMenu = (props) =>
         menuProps,
         menuItems,
         id,
+        containerClassName,
+        fullWidth,
     } = props;
 
     // handle open menu btn
@@ -25,7 +27,7 @@ export const PopUpMenu = (props) =>
     const [anchorEl, setAnchorEl] = useState(null);
     const isPopMenuOpened = useSelector(state => state.ui.isPopMenuOpened)[id];
     const dispatch = useDispatch();
-    
+
     const handleOpenOptions = (event) =>
     {
         setAnchorEl(event.currentTarget);
@@ -68,17 +70,30 @@ export const PopUpMenu = (props) =>
                 MenuListProps={{
                     'aria-labelledby': 'openMenuBtn',
                 }}
-                className={classes.menu}
+                className={`${classes.menu} ${containerClassName || ""}`}
                 sx={{
                     ".MuiMenu-paper": {
-                        boxShadow: "0px 1px 4px 0px #00000040",
+                        boxShadow: fullWidth ? "none" : "0px 1px 4px 0px #00000040",
                         borderRadius: "var(--border-radius-inputs)",
+                        maxWidth: "100vw",
+                        left: fullWidth ? "0 !important" : ""
                     }
                 }}
                 {...menuProps}
             >
                 {menuItems.map((item, index) => (
-                    <MenuItem key={index} onClick={item.onClick}>{item.children}</MenuItem>
+                    <MenuItem
+                        component={item.menuItemComponent}
+                        key={index}
+                        onClick={item.onClick}
+                        to={item.to}
+                        disableTouchRipple={item.noHover}
+                        disableGutters={item.noHover}
+                        className={item.noHover ? classes.noHover : ""}
+                        {...item}
+                    >
+                        {item.children}
+                    </MenuItem>
                 ))}
             </Menu>
         </>

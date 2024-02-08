@@ -41,7 +41,7 @@ const TrashOptions = ({ noteId }) =>
     return (
         <>
             <PopUpMenu
-                id={uiId}
+                id={noteId}
                 openBtnType="base"
                 openBtnChild={
                     <OptionsIcon fill='var(--tab)' />

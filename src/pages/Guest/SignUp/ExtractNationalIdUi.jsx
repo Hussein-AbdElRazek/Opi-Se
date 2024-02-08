@@ -1,5 +1,5 @@
-import { Tooltip } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
+import ImageUploading from 'react-images-uploading';
 
 import uploadIcon from '../../../assets/icons/upload.svg'
 import inputClasses from '../../../components/inputs/styles/Input.module.css'
@@ -10,57 +10,68 @@ const ExtractNationalIdUi = (props) =>
     const {
         isLoadingExtractID,
         showNationalId,
+        onChangeImage,
+        images,
     } = props;
+
     return (
         <>
             {!showNationalId ? (
-                <Tooltip
-                    title="Upload your national id image"
-                    disableHoverListener={isLoadingExtractID}
-                >
-                    <div
-                        className={`
+                <div
+                    className={`
                     ${classes.outlined} 
                     ${classes.container}
                     ${isLoadingExtractID ? classes.cursorDefault : ""}
                 `}
+                    title="Upload your national id image"
+                >
+                    <label
+                        className={inputClasses.label}
                     >
-                        <label
-                            className={inputClasses.label}
-                        >
-                            National ID
-                        </label>
-                        <div>
-                            <LoadingButton
-                                startIcon={
-                                    <img
-                                        src={uploadIcon}
-                                        alt="upload icon"
-                                        hidden={isLoadingExtractID}
-                                    />
-                                }
-                                className={classes.btn}
-                                component="label"
-                                fullWidth
-                                loading={isLoadingExtractID}
-                            >
-                                Add File
-                                <input
-                                    id="idImageInput"
-                                    type="file"
-                                    accept="image/*"
-                                    className={classes.hiddenInputFile}
-                                />
-                            </LoadingButton>
-                        </div>
-                    </div>
-                </Tooltip>
+                        National ID
+                    </label>
+
+                    {/* Upload Button */}
+                    <ImageUploading
+                        multiple
+                        value={images}
+                        onChange={onChangeImage}
+                        maxNumber={1}
+                        dataURLKey="data_url"
+                    >
+                        {({
+                            onImageUpload,
+                            dragProps,
+                        }) =>
+                        {
+                            return (
+                                <LoadingButton
+                                    startIcon={
+                                        <img
+                                            src={uploadIcon}
+                                            alt="upload icon"
+                                            hidden={isLoadingExtractID}
+                                        />
+                                    }
+                                    className={classes.btn}
+                                    component="label"
+                                    fullWidth
+                                    loading={isLoadingExtractID}
+                                    onClick={onImageUpload}
+                                    {...dragProps}
+                                >
+                                    Add File
+                                </LoadingButton>
+                            )
+                        }
+                        }
+                    </ImageUploading >
+                </div>
             ) : (
                 <Input
                     label="National Id"
                     name="nationalId"
                     type="text"
-                    disabled={true}
                 />
             )}
         </>

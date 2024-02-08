@@ -25,7 +25,9 @@ const ChatHeader = ({ userData }) =>
             className={classes.header}
         >
             {/* back icon , userInfo*/}
-            <div>
+            <div
+            className={classes.left}
+            >
                 {/* back icon */}
                 <ButtonBase
                     onClick={goBack}

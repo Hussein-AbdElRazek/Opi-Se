@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import HomeUi from './HomeUi'
 import useHttp from '../../../hooks/use-http';
+import { useSelector } from 'react-redux';
 
 const Home = () =>
 {
@@ -29,12 +30,14 @@ const Home = () =>
             getResponse
         );
     }
+    const isHavePartner = !!useSelector(state=>state.auth.userData?.partnerId?._id)
     return (
         <HomeUi
             handleRecommendPartner={handleRecommendPartner}
             isLoadingRecommendPartner={isLoadingRecommendPartner}
             recommendedList={recommendedList}
             setRecommendedList={setRecommendedList}
+            isHavePartner={isHavePartner}
         />
     )
 }

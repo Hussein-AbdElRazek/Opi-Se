@@ -3,4 +3,12 @@
     height: 45px;
     padding: 0px !important;
     margin: 0px !important;
+    position: relative;
+}
+
+.arrow {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: -15px;
 }

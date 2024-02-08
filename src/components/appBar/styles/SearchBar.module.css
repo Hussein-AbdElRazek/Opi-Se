@@ -4,9 +4,15 @@
     padding: 1px 10px;
     width: 300px;
     background-color: var(--primary);
-
+    width: 100%;
+    max-width: 300px;
 }
 
 .searchInput input {
     padding-left: 5px;
+}
+
+.full {
+    max-width: 100% !important;
+    margin: 10px 0;
 }

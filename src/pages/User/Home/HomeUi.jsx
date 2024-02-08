@@ -6,7 +6,8 @@ import RecommendationList from './RecommendationList'
 import { IconButton } from '@mui/material'
 import messageIcon from '../../../assets/icons/message.svg'
 import { Outlet, useNavigate } from 'react-router-dom'
-const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommendedList, setRecommendedList }) =>
+import { SearchBar } from '../../../components/appBar/SearchBar'
+const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommendedList, setRecommendedList, isHavePartner }) =>
 {
     const navigate = useNavigate();
     return (
@@ -16,6 +17,12 @@ const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommended
             <div
                 className={classes.left}
             >
+                <div
+                className={classes.searchBar}
+                >
+                                    <SearchBar fullWidth={true} />
+
+                </div>
                 {recommendedList.length > 0 ? (
                     <RecommendationList recommendedList={recommendedList} setRecommendedList={setRecommendedList} />
                 ) :
@@ -29,7 +36,6 @@ const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommended
                             <br />
                             Can Find The
                             <br />
-
                             Perfect Study Partner
                         </HeaderText>
                         <p>
@@ -42,6 +48,7 @@ const HomeUi = ({ handleRecommendPartner, isLoadingRecommendPartner, recommended
                             <Btn
                                 onClick={handleRecommendPartner}
                                 isLoading={isLoadingRecommendPartner}
+                                disabled={isHavePartner}
                             >
                                 Get a New Brain Buddy
                             </Btn>
