@@ -33,16 +33,17 @@ export const Skills = (props) =>
     const {
         disabled,
         formik,
+        skillsInitial
     } = props;
     const [skillName, setSkillName] = useState('');
     const [skillRate, setSkillRate] = useState(1);
-    const [skills, setSkills] = useState(formik?.initialValues?.userSkills || []);
+    const [skills, setSkills] = useState(skillsInitial || []);
 
     const handleInputChange = (event) =>
     {
         setSkillName(event.target.value);
     };
-    
+
     const onChangeSlider = (event) =>
     {
         setSkillRate(event.target.value)
@@ -74,21 +75,25 @@ export const Skills = (props) =>
         <>
             {/* SKILLS container, label and input hidden when disabled */}
             <div
-                className={classes.container}
+                className={!disabled ? classes.container : ""}
             >
-                <label
-                    className={inputClasses.label}
-                >
-                    Skills
-                </label>
+                {!disabled && (
+                    <label
+                        className={inputClasses.label}
+                    >
+                        Skills
+                    </label>
+                )}
+
                 <div
-                    className={classes.content}
+                    className={!disabled ? classes.content : ""}
                 >
                     {skills.map((value, index) => (
                         <Chip
                             key={index}
                             value={value}
                             onDelete={() => handleDeleteValue(value)}
+                            disabled={disabled}
                         />
                     ))}
                     {!disabled && (

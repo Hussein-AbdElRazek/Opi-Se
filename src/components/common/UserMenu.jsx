@@ -14,6 +14,7 @@ import { authActions } from "../../store/auth-slice"
 export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnType, containerClassName }) =>
 {
     // user data
+    const userId = useSelector((state) => state.auth.userData?._id);
     const userName = useSelector((state) => state.auth.userData?.userName);
     const profileImage = useSelector((state) => state.auth.userData?.profileImage);
 
@@ -37,9 +38,11 @@ export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnT
                             profileImage={profileImage}
                         />
                     </ListItemIcon>
-                    {userName}
+                    <p>
+                        {userName}
+                    </p>
                 </>,
-            to: "/profile?type=MY_PROFILE",
+            to: `/profile?userId=${userId}`,
         },
         {
             onClick: closeMenu,

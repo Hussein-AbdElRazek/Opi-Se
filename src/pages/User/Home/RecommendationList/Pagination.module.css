@@ -1,0 +1,13 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination svg {
+    fill: var(--secondary);
+}
+
+.pagination button {
+    color: var(--secondary);
+    border-radius: var(--border-radius-inputs);
+}

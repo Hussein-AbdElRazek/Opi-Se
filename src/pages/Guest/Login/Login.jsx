@@ -15,11 +15,11 @@ const Login = () =>
 
     const handleLogin = (values) =>
     {
-        const getResponse = ({ message, token, data }) =>
+        const getResponse = ({ message, token, data, profileDetails }) =>
         {
             if (message === "success")
             {
-                dispatch(authActions.login({ token: token, userData: data }))
+                dispatch(authActions.login({ token: token, userData: { ...data, ...profileDetails } }))
                 navigate("/", { replace: true });
             }
         };

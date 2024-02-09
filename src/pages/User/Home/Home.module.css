@@ -1,10 +1,8 @@
 .container {
     min-height: calc(100vh - 200px);
-    /* background-color: yellowgreen; */
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    padding-bottom: 60px;
 }
 
 .logo {
@@ -36,7 +34,7 @@
 }
 
 .right {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 100px);
     width: 50%;
 }
 
@@ -93,6 +91,10 @@
         width: 100%;
     }
 
+    /* for make space for chat icon */
+    .container {
+        padding-bottom: 60px;
+    }
 }
 
 @media (max-width:375px) {

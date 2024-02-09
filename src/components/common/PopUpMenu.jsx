@@ -1,4 +1,4 @@
-import { ButtonBase, IconButton, Menu, MenuItem } from '@mui/material';
+import { ButtonBase, IconButton, ListItem, Menu, MenuItem } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from '../../store/ui-slice';
@@ -82,18 +82,20 @@ export const PopUpMenu = (props) =>
                 {...menuProps}
             >
                 {menuItems.map((item, index) => (
-                    <MenuItem
-                        component={item.menuItemComponent}
-                        key={index}
-                        onClick={item.onClick}
-                        to={item.to}
-                        disableTouchRipple={item.noHover}
-                        disableGutters={item.noHover}
-                        className={item.noHover ? classes.noHover : ""}
-                        {...item}
-                    >
-                        {item.children}
-                    </MenuItem>
+                    item.children && (
+                        <MenuItem
+                            component={!!item.menuItemComponent ? item.menuItemComponent : ListItem}
+                            key={index}
+                            onClick={item.onClick}
+                            to={item.to}
+                            disableTouchRipple={item.noHover}
+                            disableGutters={item.noHover}
+                            className={`${classes.item}${item.noHover ? classes.noHover : ""}`}
+                            target={item.target}
+                        >
+                            {item.children}
+                        </MenuItem>
+                    )
                 ))}
             </Menu>
         </>

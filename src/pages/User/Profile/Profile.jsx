@@ -1,29 +1,63 @@
-import { useSelector } from 'react-redux';
-import ProfileUi from './ProfileUi'
-import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
+import ProfileUi from './ProfileUi'
+import useSearchForPartner from '../../../hooks/commonApis/use-search-for-partner';
+import { LoadingFullScreen } from '../../../components/ui';
 
 const Profile = () =>
 {
-    const userData = useSelector((state) => state.auth.userData);
     const [searchParams] = useSearchParams();
-    const type = searchParams.get("type");
-    const [profileData, setProfileData] = useState({});
+    const [profileData, setProfileData] = useState(null);
+    const myData = useSelector((state) => state.auth?.userData);
+    const myId = useSelector((state) => state.auth?.userData)?._id;
+    const userId = searchParams.get("userId");
+    const userData = useSelector((state) => state.search?.userData);
+    const isMyProfile = myId === userId;
+    const isMyPartner = userId === myData?.partnerId?._id;
+
+    const {
+        handleSearchForPartner,
+        isLoadingSearchForPartner,
+    } = useSearchForPartner();
+    const navigate = useNavigate();
+
     useEffect(() =>
     {
-        if (type === "MY_PROFILE")
+        // in case no id
+        if (!userId) navigate("/");
+
+        // in case if id equal my id then my profile 
+        if (isMyProfile)
         {
-            setProfileData(userData);
-        } else
+            setProfileData(myData);
+        } else 
         {
-            setProfileData(Object.fromEntries(searchParams.entries()));
+            //in case i have searched already and have data in store
+            if (userData && userData._id === userId) setProfileData(userData);
+
+            //in case no data in store
+            //then search with id
+            else handleSearchForPartner({ userId: userId });
         }
-    }, [type, userData, searchParams])
+    }, [handleSearchForPartner, isMyProfile, myData, navigate, searchParams, userData, userId])
+
+    // to handle where i come from like come from partners requests
+    const from = searchParams.get("from");
     return (
-        <ProfileUi
-            profileData={profileData}
-            type={type}
-        />
+        <>
+            {(isLoadingSearchForPartner || !profileData) ?
+                (<LoadingFullScreen />) : (
+                    <ProfileUi
+                        profileData={profileData}
+                        isMyProfile={isMyProfile}
+                        isMyPartner={isMyPartner}
+                        from={from}
+                    />
+                )}
+        </>
+
     )
 }
 

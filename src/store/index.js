@@ -6,6 +6,7 @@ import chatReducer from './chat-slice';
 import userReducer from './user-slice';
 import notesReducer from './notes-slice';
 import uiReducer from './ui-slice';
+import searchReducer from './search-slice';
 
 const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
         user: userReducer,
         notes: notesReducer,
         ui: uiReducer,
+        search: searchReducer,
     }
 });
 

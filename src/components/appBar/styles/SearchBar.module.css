@@ -12,6 +12,11 @@
     padding-left: 5px;
 }
 
+.searchInput div::before,
+.searchInput div::after {
+    border-bottom: none !important;
+}
+
 .full {
     max-width: 100% !important;
     margin: 10px 0;

@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import useHttp from "../use-http";
 import { useNavigate } from "react-router-dom";
+import { searchActions } from "../../store/search-slice";
 const useSearchForPartner = () =>
 {
     const {
@@ -8,17 +10,19 @@ const useSearchForPartner = () =>
     } = useHttp();
 
     const navigate = useNavigate();
-
+    const currentUrl = window.location.pathname;
+    const dispatch = useDispatch();
     const handleSearchForPartner = ({ userId }) =>
     {
         const getResponse = ({ message, data }) =>
         {
             if (message === "success")
             {
-                const searchData = { ...data };
-                searchData.id = userId;
-                searchData.type = "SEARCH_PROFILE";
-                navigate(`/profile?${new URLSearchParams(searchData)}`);
+                dispatch(searchActions.setUserData(data))
+                if (currentUrl !== "/profile") navigate(`/profile?userId=${userId}`)
+            } else
+            {
+                navigate("/")
             }
         };
 

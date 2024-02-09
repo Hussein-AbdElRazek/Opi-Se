@@ -1,0 +1,10 @@
+.lightBtn {
+    background-color: var(--primary) !important;
+    color: var(--text-header);
+    margin-left: 10px;
+}
+
+.addBtn svg {
+    width: 10px;
+    margin-right: 5px;
+}

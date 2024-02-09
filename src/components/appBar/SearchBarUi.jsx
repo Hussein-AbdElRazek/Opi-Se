@@ -1,4 +1,4 @@
-import { CircularProgress, IconButton, InputBase } from '@mui/material'
+import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material'
 import { Field } from 'formik'
 
 import classes from './styles/SearchBar.module.css'
@@ -13,28 +13,34 @@ export const SearchBarUi = ({ handleSearchForPartner, isLoadingSearchForPartner,
         >
             <Field name="userId">
                 {({ field }) => (
-                    <InputBase
+                    <TextField
+                        variant='standard'
                         className={`${classes.searchInput} ${fullWidth ? classes.full : ""}`}
                         name="userId"
                         placeholder="Search your study partner..."
-                        startAdornment={
-                            isLoadingSearchForPartner ?
-                                <CircularProgress size={20} sx={{ margin: 1, color: "var(--secondary)" }} /> :
-                                <IconButton
-                                    sx={{
-                                        marginRight: 1,
-                                        padding: 0,
-                                    }}
-                                    type='submit'
-                                    disabled={isLoadingSearchForPartner || field.value.trim() === ""}
-                                    title="Search..."
-                                >
-                                    <img
-                                        src={searchIcon}
-                                        alt='search icon'
-                                    />
-                                </IconButton>
-                        }
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    {isLoadingSearchForPartner ?
+                                        <CircularProgress size={20} sx={{ margin: 1, color: "var(--secondary)" }} /> :
+                                        <IconButton
+                                            sx={{
+                                                marginRight: 1,
+                                                padding: 0,
+                                            }}
+                                            type='submit'
+                                            disabled={isLoadingSearchForPartner || field.value.trim() === ""}
+                                            title="Search..."
+                                        >
+                                            <img
+                                                src={searchIcon}
+                                                alt='search icon'
+                                            />
+                                        </IconButton>}
+                                </InputAdornment>
+                            ),
+                        }}
+
                         disabled={isLoadingSearchForPartner}
                         {...field}
                     />
