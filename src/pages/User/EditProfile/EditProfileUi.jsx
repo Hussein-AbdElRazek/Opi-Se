@@ -1,13 +1,12 @@
-import React from 'react'
-import { SideBar } from '../../../components/common/SideBar'
-import Card from './Card'
+import { Grid } from '@mui/material'
+
 import { Btn, FormikContainer, LoopOnInputs, Skills } from '../../../components/inputs'
 import { editProfileInputs } from './editProfileInputsData'
 import { editProfileValidationSchema } from './editProfileValidationSchema'
-import { Grid } from '@mui/material'
-import { aboutInitialValues, aboutInputs } from '../About/aboutInputsData'
-import { aboutValidationSchema } from '../About/aboutValidationSchema'
+import { aboutInputs } from '../About/aboutInputsData'
 import classes from './styles/EditProfileUi.module.css'
+import { SideBar } from '../../../components/common/SideBar'
+import Card from './Card'
 const EditProfileUi = (props) =>
 {
     const {
@@ -19,22 +18,34 @@ const EditProfileUi = (props) =>
         <div>
             <Grid
                 container
-                row
+                className={classes.container}
+                columnSpacing={{
+                    xs: 2,
+                    sm: 2,
+                    md: 0,
+                    lg: 1,
+                    xl: 1
+                }}
             >
                 <Grid
                     item
-                    xs={2.5}
+                    md={2.5}
+                    sm={1.5}
+                    xs={2}
                 >
                     <SideBar />
                 </Grid>
                 <Grid
                     item
-                    xs={9.5}
-                ><FormikContainer
-                    initialValues={initialUserData}
-                    validationSchema={editProfileValidationSchema}
-                    onSubmit={handleEditProfile}
+                    md={9.5}
+                    sm={10.5}
+                    xs={10}
                 >
+                    <FormikContainer
+                        initialValues={initialUserData}
+                        validationSchema={editProfileValidationSchema}
+                        onSubmit={handleEditProfile}
+                    >
                         <Card
                             title="Personal Information"
                         >
@@ -48,9 +59,12 @@ const EditProfileUi = (props) =>
                         >
                             <LoopOnInputs
                                 inputs={aboutInputs}
-                            // disabled={isLoadingEditProfile}
+                                disabled={isLoadingEditProfile}
                             />
-                            <Skills />
+                            <Skills
+                                skillsInitial={initialUserData.userSkills}
+                                disabled={isLoadingEditProfile}
+                            />
                         </Card>
                         <div
                             className={classes.action}

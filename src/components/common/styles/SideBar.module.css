@@ -1,0 +1,10 @@
+@media (max-width:900px) {
+    .tabs {
+        width: 45px;
+    }
+
+    .tabs a {
+        padding-left: 0px;
+        margin-left: -2px;
+    }
+}

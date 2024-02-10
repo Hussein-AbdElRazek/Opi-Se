@@ -16,8 +16,9 @@ const EditProfile = () =>
         email: userData.email,
         age: userData.age,
         languages: userData.languages,
-        //TODO handle when zoz add userPrefers data
-        // skills: userData.skills
+        userSkills: userData.userSkills,
+        fieldOfStudy: userData.fieldOfStudy,
+        specialization: userData.specialization,
     }
     const {
         sendRequest: editProfile,

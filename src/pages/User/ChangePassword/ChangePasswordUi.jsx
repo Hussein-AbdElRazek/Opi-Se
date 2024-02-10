@@ -14,17 +14,22 @@ const ChangePasswordUi = (props) =>
     return (
         <Grid
             container
-            row
         >
             <Grid
                 item
-                xs={2.5}
+                md={2.5}
+                sm={1.5}
+                xs={2}
             >
                 <SideBar />
             </Grid>
             <Grid
                 item
-                xs={5}
+                xl={4}
+                lg={4}
+                md={5}
+                sm={6}
+                xs={10}
             >
                 <FormikContainer
                     initialValues={changePasswordInitialValues}

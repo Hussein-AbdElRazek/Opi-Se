@@ -59,8 +59,21 @@
 }
 
 @media (min-width:901px) {
+
     .container,
     .openBtn {
         display: none;
+    }
+}
+
+@media (max-width:600px) {
+
+    .container a,
+    .container li {
+        padding: 12px 0 12px 10px;
+    }
+
+    .icon {
+        margin-right: 10px;
     }
 }

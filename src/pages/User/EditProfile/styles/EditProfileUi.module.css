@@ -1,6 +1,7 @@
 .action {
     max-width: 200px;
 }
-.action button{
+
+.action button {
     margin-top: 0 !important;
 }

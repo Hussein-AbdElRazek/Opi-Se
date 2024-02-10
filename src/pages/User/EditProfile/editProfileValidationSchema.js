@@ -1,11 +1,11 @@
 import *  as Yup from 'yup';
 import
-    {
-        ageMax,
-        ageMin,
-        emailNotValid,
-        required
-    } from '../../../assets/validationMessages/validationMessages';
+{
+    ageMax,
+    ageMin,
+    emailNotValid,
+    required
+} from '../../../assets/validationMessages/validationMessages';
 
 export const editProfileValidationSchema = Yup.object({
     userName: Yup.string()
@@ -22,6 +22,18 @@ export const editProfileValidationSchema = Yup.object({
             languageName: Yup.string()
                 .required(required),
             level: Yup.number()
+                .required(required),
+        })
+    ),
+    fieldOfStudy: Yup.string()
+        .required(required),
+    specialization: Yup.string()
+        .required(required),
+    userSkills: Yup.array().of(
+        Yup.object().shape({
+            skillName: Yup.string()
+                .required(required),
+            skillRate: Yup.number()
                 .required(required),
         })
     )
