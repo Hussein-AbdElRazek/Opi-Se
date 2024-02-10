@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialAuthState = {
     token: localStorage.getItem("token"),
     userData: JSON.parse(localStorage.getItem("userData")),
+    notifications: JSON.parse(localStorage.getItem("notifications")) ? JSON.parse(localStorage.getItem("notifications")) : [],
     isLoggedIn: !!localStorage.getItem("token"),
 }
 
@@ -30,7 +31,13 @@ const authSlice = createSlice({
         {
             state.userData = { ...state.userData, ...action.payload };
             localStorage.setItem("userData", JSON.stringify(state.userData))
-        }
+        },
+        updateUserNotifications(state, action)
+        {
+            console.log("new ",action.payload);
+            state.notifications.unshift(action.payload)
+            localStorage.setItem("notifications", JSON.stringify(state.notifications))
+        },
     }
 })
 

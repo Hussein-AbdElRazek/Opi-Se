@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Grid, IconButton } from '@mui/material'
+import { Badge, Grid, IconButton } from '@mui/material'
 
 import { IconBtn } from './IconBtn'
 import classes from './styles/Navbar.module.css'
@@ -48,6 +48,8 @@ export const NavBar = ({ title }) =>
         },
     ]
 
+    const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
+
     return (
         <Grid
             container
@@ -95,11 +97,18 @@ export const NavBar = ({ title }) =>
                 lg={1.5}
                 className={classes.rightIcons}
             >
-                <IconBtn
-                    Icon={NotificationIcon}
-                    component={NavLink}
-                    to={title === "Notifications" ? "/" : "notifications"}
-                />
+                <Badge
+                    overlap="circular"
+                    badgeContent=" "
+                    invisible={!isNewNotification}
+                >
+                    <IconBtn
+                        Icon={NotificationIcon}
+                        component={NavLink}
+                        to={title === "Notifications" ? "/" : "notifications"}
+                    />
+                </Badge>
+
                 <IconBtn
                     Icon={AddFriendIcon}
                     component={NavLink}

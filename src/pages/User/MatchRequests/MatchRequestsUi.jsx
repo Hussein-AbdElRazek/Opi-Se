@@ -18,7 +18,7 @@ const MatchRequestsUi = ({ requests, isLoadingGetRequests }) =>
                     return (
                         < NotificationAndRequestItem
                             itemData={request}
-                            action={< MatchActions requestData={request} />}
+                            action={< MatchActions requestData={request} smallBtn={true} />}
                             key={request._id}
                         />
                     )

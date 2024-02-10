@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import baseSocket from '../sockets/baseConnection';
 import { updateSocketQuery } from '../helpers/updateSocketsQuery';
+import { authActions } from './auth-slice';
+import { userActions } from './user-slice';
 
 const initialMatchState = {
     connected: false,
@@ -21,23 +23,25 @@ export const disMatch = createAsyncThunk('match/disMatch',
     }
 );
 
+// when the other partner un match me 
 export const listenToLeaveRoom = createAsyncThunk(
     "match/listenToLeaveRoom",
     async (_, thunkAPI) =>
     {
-        console.log("listenToLeaveRoom")
-
         socket.on('leaveRoom', (data) =>
         {
             console.log("leaveRoom", data)
-            //  update state
 
-            //TODO handle state actions
-            // thunkAPI.dispatch(
-            //     chatActions.deleteMessage({
-            //         messagesId, messageId: data
-            //     })
-            // );
+            //  update state
+            thunkAPI.dispatch(
+                authActions.updateUserData({
+                    partnerId: null,
+                    matchId: null
+                })
+            );
+
+            // if open chats navigate home
+            if (window.location.pathname.includes("chat")) window.location.href = "/";
         });
     }
 )
@@ -45,9 +49,15 @@ export const listenToLeaveRoom = createAsyncThunk(
 export const acceptPartnerRequest = createAsyncThunk('match/acceptPartnerRequest',
     async (body) =>
     {
+        console.log("call acceptPartnerRequest", body)
+        socket.io.opts.query = {
+
+        };
+        socket.disconnect()
+        socket.connect();
         socket.emit('acceptPartnerRequest', body, (res) =>
         {
-            console.log('acceptPartnerRequest', res)
+            console.log('acceptPartnerRequest res', res)
         });
     }
 );
@@ -57,7 +67,7 @@ export const joinMatchRoom = createAsyncThunk('match/joinMatchRoom',
     {
         // update query and restart socket connection
         updateSocketQuery();
-        
+
         socket.emit('joinMatchRoom', {}, (res) =>
         {
             console.log('joinMatchRoom', res)
@@ -66,22 +76,34 @@ export const joinMatchRoom = createAsyncThunk('match/joinMatchRoom',
 );
 
 export const listenToMatchRequestApproved = createAsyncThunk(
-    "match/listenToShowNotificationMark",
+    "match/listenToMatchRequestApproved",
     async (_, thunkAPI) =>
     {
-        console.log("listenToShowNotificationMark")
+        console.log("matchRequestApproved")
 
         socket.on('matchRequestApproved', (data) =>
         {
             console.log("matchRequestApproved", data)
             //  update state
 
-            //TODO handle state actions
-            // thunkAPI.dispatch(
-            //     chatActions.deleteMessage({
-            //         messagesId, messageId: data
-            //     })
-            // );
+            thunkAPI.dispatch(
+                authActions.updateUserNotifications({
+                    message: `you have a new partner with a new chance don't miss this !`,
+                    ...data
+                })
+            );
+
+            // TODO ask zezo to send patner id
+            // update match data and join match room
+            thunkAPI.dispatch(authActions.updateUserData({
+                matchId: data.matchId,
+                partnerId: { _id: data.partnerId||"test", userName: data.partnerUserName, profileImage: data.partnerImage }
+            }))
+            thunkAPI.dispatch(joinMatchRoom());
+
+            thunkAPI.dispatch(
+                userActions.updateNewNotificationMark(true)
+            );
         });
     }
 )

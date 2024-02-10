@@ -62,7 +62,7 @@ const ProfileUi = (props) =>
                 {isMyPartner && <MyPartnerActions userData={profileData} />}
 
                 {/* For when come from match requests*/}
-                {from === "matchRequests" && <MatchRequestActions />}
+                {from === "matchRequests" && <MatchRequestActions requestData={profileData} />}
 
                 {/* For when come from recommendation list*/}
                 {from === "recommendation" && <RecommendationActions />}

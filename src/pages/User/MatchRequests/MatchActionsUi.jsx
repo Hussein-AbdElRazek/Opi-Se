@@ -7,10 +7,11 @@ export const MatchActionsUi = (props) =>
         isLoadingAcceptMatch,
         handleDeclineMatch,
         isLoadingDeclineMatch,
+        smallBtn
     } = props;
     return (
         <div
-            className={classes.action}
+            className={`${smallBtn ? classes.action : ""}`}
         >
             <Btn
                 onClick={handleAcceptMatch}

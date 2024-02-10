@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { joinMatchRoom } from "../store/match-slice";
-import { joinUserRoom } from "../store/user-slice";
+
+import { joinMatchRoom, listenToLeaveRoom, listenToMatchRequestApproved } from "../store/match-slice";
+import { joinUserRoom, listenToShowNotificationMark } from "../store/user-slice";
 import { listenToEndToSessionRequest, listenToReceiveMedia, listenToReceiveMessage, listenToReplyToSessionRequest, listenToStartChatSession } from "../store/chat-slice";
 
 const useGeneralSocket = () =>
@@ -14,23 +15,35 @@ const useGeneralSocket = () =>
     // handle all general sockets (app root sockets)
     useEffect(() =>
     {
-        console.log("useGeneralSocket-----")
-
         //if logged in sockets
         if (isLoggedIn)
         {
-            // join user room
+            //-- user module
             dispatch(joinUserRoom());
 
+            dispatch(listenToShowNotificationMark());
+            // ______________________________
+
+            // -- Match module
+
+            //listen to MatchRequestApproved
+            dispatch(listenToMatchRequestApproved());
         }
 
         //if have partner sockets
         if (isHavePartner)
         {
+            //-- Match module
+
             // join match room
             dispatch(joinMatchRoom());
 
-            // chat
+            //listen to if the other partner un match me 
+            dispatch(listenToLeaveRoom());
+            // ______________________________
+
+            //-- chat module
+
             //Messages listener
             dispatch(listenToReceiveMessage());
 
@@ -41,9 +54,9 @@ const useGeneralSocket = () =>
             dispatch(listenToStartChatSession());
             dispatch(listenToReplyToSessionRequest());
             dispatch(listenToEndToSessionRequest());
+            // ______________________________
+
         }
-
-
 
     }, [dispatch, isHavePartner, isLoggedIn, partnerId])
 }

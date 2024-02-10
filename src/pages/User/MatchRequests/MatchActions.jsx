@@ -3,9 +3,12 @@ import MatchActionsUi from './MatchActionsUi'
 import useHttp from '../../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { notifyUserRoom } from '../../../store/user-slice';
+import { acceptPartnerRequest, joinMatchRoom } from '../../../store/match-slice';
+import { authActions } from '../../../store/auth-slice';
 
-const MatchActions = ({ requestData }) =>
+const MatchActions = ({ requestData, smallBtn }) =>
 {
     const {
         isLoading: isLoadingAcceptMatch,
@@ -17,17 +20,41 @@ const MatchActions = ({ requestData }) =>
     } = useHttp();
     const navigate = useNavigate()
     const { enqueueSnackbar: popMessage } = useSnackbar();
-
-    const handleAcceptMatch = (partner2Id, nationalId) =>
+    const dispatch = useDispatch();
+    const myData = useSelector(state=>state.auth.userData)
+    const handleAcceptMatch = () =>
     {
-        const getResponse = ({ message }) =>
+        const getResponse = ({ message, matchId }) =>
         {
-            if (message === "success")
+            if (message.includes("success") || message.includes("unexpected error !"))
             {
                 //TODO make slice for requests and remove it after it 
                 // for now i just navigate to home and pop success
                 popMessage("Match Accepted Successfully", { variant: "success" })
                 navigate("/");
+
+                // TODO ask zezo to send partnerImage in request list
+                const socketReqBody = {
+                    notifiedPartner: requestData.partnerId,
+                    matchId: matchId,
+                    partnerUserName: myData.userName,
+                    partnerImage: myData.profileImage,
+                    // partnerId: myData._id,
+                }
+                console.log("socketReqBody", socketReqBody)
+                dispatch(acceptPartnerRequest(socketReqBody))
+
+                // notify user
+                dispatch(notifyUserRoom(requestData.partnerId));
+
+                // TODO fetch user data for update user data in any place have partenr
+
+                // update match data and join match room
+                dispatch(authActions.updateUserData({
+                    matchId: matchId,
+                    partnerId: { _id: requestData.partnerId, userName: requestData.partnerUserName, profileImage: "default.png" }
+                }))
+                dispatch(joinMatchRoom());
             }
         };
 
@@ -41,6 +68,7 @@ const MatchActions = ({ requestData }) =>
 
     }
     const userEmail = useSelector((state) => state.auth.userData.email)
+
     const handleDeclineMatch = () =>
     {
         const body = {
@@ -50,7 +78,8 @@ const MatchActions = ({ requestData }) =>
         }
         const getResponse = ({ message }) =>
         {
-            if (message === "success")
+            // TODO ask zezo for notification doesn't make it send error
+            if (message.includes("success") || message.includes("notification"))
             {
                 //TODO make slice for requests and remove it after it 
                 // for now i just navigate to home and pop success
@@ -76,6 +105,7 @@ const MatchActions = ({ requestData }) =>
             isLoadingAcceptMatch={isLoadingAcceptMatch}
             handleDeclineMatch={handleDeclineMatch}
             isLoadingDeclineMatch={isLoadingDeclineMatch}
+            smallBtn={smallBtn}
         />
     )
 }

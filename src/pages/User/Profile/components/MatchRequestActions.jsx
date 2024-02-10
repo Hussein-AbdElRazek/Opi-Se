@@ -1,20 +1,26 @@
 import ActionsLayout from './ActionsLayout'
-import { Btn } from '../../../../components/inputs'
-import classes from '../styles/Btns.module.css'
+import classes from '../styles/ActionsLayout.module.css'
+import MatchActions from '../../MatchRequests/MatchActions'
+import { useSearchParams } from 'react-router-dom'
 
-const MatchRequestActions = () =>
+const MatchRequestActions = ({ requestData }) =>
 {
+    const [searchParams] = useSearchParams();
+    const requestId = searchParams.get("requestId");
+
     return (
         <ActionsLayout>
-            <Btn>
-                Accept
-            </Btn>
-
-            <Btn
-                className={classes.lightBtn}
+            <div
+                className={classes.fromMatch}
             >
-                Delete
-            </Btn>
+                <MatchActions requestData={{
+                    partnerId: requestData._id,
+                    partnerUserName: requestData.partnerUserName,
+                    nationalId: requestData.nationalId,
+                    _id: requestId,
+                }} />
+            </div>
+
         </ActionsLayout>
     )
 }

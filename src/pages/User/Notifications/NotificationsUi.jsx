@@ -1,5 +1,5 @@
 import React from 'react'
-import {  PopUpCard } from '../../../components/ui'
+import { PopUpCard } from '../../../components/ui'
 import { NotificationAndRequestItem } from '../../../components/common'
 import { List } from '@mui/material'
 
@@ -12,12 +12,12 @@ const NotificationsUi = ({ notifications, isLoadingGetNotifications }) =>
             <List
                 dense={true}
             >
-                {notifications.map(notification =>
+                {notifications.map((notification, index) =>
                 {
                     return (
                         < NotificationAndRequestItem
                             itemData={notification}
-                            key={notification._id}
+                            key={index}
                         />
                     )
                 })}

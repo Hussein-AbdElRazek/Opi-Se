@@ -120,4 +120,5 @@ a {
 /* new mark */
 .MuiBadge-overlapCircular {
     background-color: var(--secondary) !important;
+    right: 30%;
 }

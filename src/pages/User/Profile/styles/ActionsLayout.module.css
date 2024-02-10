@@ -5,6 +5,18 @@
     display: flex;
 }
 
+.fromMatch div {
+    display: flex;
+}
+
+.fromMatch button {
+    margin: 15px 0;
+}
+
+.fromMatch div :first-child {
+    margin-right: 10px;
+}
+
 @media (max-width:600px) {
     .container {
         bottom: -120px;

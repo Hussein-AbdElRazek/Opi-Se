@@ -47,12 +47,19 @@ const useHttp = () =>
                 message = message.toLowerCase();
                 if (!message.includes("success")
                     // for not make error when no messages in chat
-                    && (!message.includes("no") && !message.includes("yet"))) { popMessage(message || "Something went wrong", { variant: "error" }) }
+                    && (!message.includes("no") && !message.includes("yet")) &&
+                    //  for not make error when notification failed
+                    (!message.includes("notification"))
+                ) { popMessage(message || "Something went wrong", { variant: "error" }) }
             }
         } catch (error)
         {
             setIsLoading(false)
-            popMessage(error.message || "Something went wrong", { variant: "error" })
+
+            //  for not make error when notification failed
+            if (!error.message.includes("notification")
+                && !error.message.includes("unexpected error !"))
+                popMessage(error.message || "Something went wrong", { variant: "error" })
         }
         setIsLoading(false)
     }, [popMessage, token])

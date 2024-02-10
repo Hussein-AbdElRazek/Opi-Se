@@ -9,7 +9,7 @@ import { ReactComponent as ReportIcon } from '../../assets/icons/report.svg'
 import { ReactComponent as NotificationIcon } from '../../assets/icons/notification.svg'
 import { ReactComponent as AddFriendIcon } from '../../assets/icons/addFriend.svg'
 import classes from './styles/PopMenu.module.css'
-import { ListItemIcon } from '@mui/material'
+import { Badge, ListItemIcon } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { uiActions } from '../../store/ui-slice'
@@ -23,6 +23,7 @@ export const PopMenu = () =>
     const profileMenuId = "smallProfileMenu"
     const dispatch = useDispatch();
     const closeMenu = () => { dispatch(uiActions.closePopMenu(menuId)) };
+    const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
 
     const menuItems = [
         {
@@ -101,10 +102,19 @@ export const PopMenu = () =>
             menuItemComponent: NavLink,
             children:
                 <>
-                    <ListItemIcon className={classes.icon}>
-                        <NotificationIcon fill='var(--black-40)' />
-                    </ListItemIcon>
+                    <Badge
+                        overlap="circular"
+                        badgeContent=" "
+                        invisible={!isNewNotification}
+                        variant="dot"
+
+                    >
+                        <ListItemIcon className={classes.icon}>
+                            <NotificationIcon fill='var(--black-40)' />
+                        </ListItemIcon>
+                    </Badge>
                     Notifications
+
                 </>,
             to: "/notifications",
         },
