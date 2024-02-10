@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import ForgetPasswordUi from "./ForgetPasswordUi"
+import {  useSnackbar } from "notistack";
 
 const ForgetPassword = (props) =>
 {
@@ -9,13 +10,15 @@ const ForgetPassword = (props) =>
         sendRequest: forgetPassword
     } = useHttp();
     const navigate = useNavigate();
+    const {enqueueSnackbar:popMessage} = useSnackbar();
     const handleForgetPassword = (values) =>
     {
         const getResponse = ({ message }) =>
         {
             if (message.includes("success"))
             {
-                navigate("login")
+                popMessage("Please check your email", {variant:"success"})
+                navigate("/login")
             }
         };
 
