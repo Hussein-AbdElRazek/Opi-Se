@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ChatProfileUi from './ChatProfileUi'
 import useHttp from '../../../hooks/use-http';
+import useScrollingPagination from '../../../hooks/use-scrolling-pagination';
+import { chatActions } from '../../../store/chat-slice';
 
 const ChatProfile = () =>
 {
@@ -17,36 +19,45 @@ const ChatProfile = () =>
         sendRequest: getChatMedia
     } = useHttp();
     const matchId = useSelector((state) => state.auth.userData.matchId);
+
+    // handle pagination 
+    const initialTotalPages = useSelector(state => state.chat.totalPages) || 1;
+    const dispatch = useDispatch();
+    const {
+        lastElementRef,
+        currentPage
+    } = useScrollingPagination(isLoadingGetChatMedia, initialTotalPages);
+
     const [imageList, setImageList] = useState([]);
 
-    const handleGetChatMedia = useCallback(() =>
+    useEffect(() =>
     {
-        const getResponse = ({ message, data }) =>
+        const getResponse = ({ message, data, totalPages }) =>
         {
             if (message === "success")
             {
-                setImageList(data);
+                setImageList(prev => [...prev, ...data]);
+
+                // set pages limit
+                // update total pages in store
+                dispatch(chatActions.updateTotalPages(totalPages))
             }
         };
 
         getChatMedia(
             {
-                url: `getChatMedia?page=1&limit=50&matchId=${matchId}`,
+                url: `getChatMedia?page=${currentPage + 1}&limit=20&matchId=${matchId}`,
             },
             getResponse
         );
-    }, [getChatMedia, matchId])
+    }, [currentPage, dispatch, getChatMedia, matchId])
 
-    //TODO handle pagination
-    useEffect(() =>
-    {
-        handleGetChatMedia();
-    }, [])
     return (
         <ChatProfileUi
             profileData={profileData}
             imageList={imageList}
             isLoadingGetChatMedia={isLoadingGetChatMedia}
+            lastElementRef={lastElementRef}
         />
     )
 }

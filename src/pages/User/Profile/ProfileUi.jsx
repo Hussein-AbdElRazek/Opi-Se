@@ -129,7 +129,7 @@ const ProfileUi = (props) =>
                             <div
                                 className={classes.idContainer}
                             >
-                                <span>
+                                <span className={classes.idContent}>
                                     Id: {currentUrl}
                                 </span>
                                 <CopyToClipboard text={currentUrl} >

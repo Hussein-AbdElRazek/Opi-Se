@@ -1,5 +1,5 @@
 .cover {
-    width: 100%;
+    width: calc(100% - 60px);
     border-radius: 15px;
     background: linear-gradient(90deg,
             rgba(3, 102, 102, 0.40) 0%,
@@ -7,7 +7,8 @@
     height: 200px;
     position: relative;
     z-index: 1;
-    margin-bottom: 90px;
+    margin: 0 30px 90px 30px;
+
 }
 
 .pic {
@@ -83,7 +84,7 @@
 }
 
 .content {
-    padding-left: 20px;
+    padding: 0 30px;
 }
 
 .content h6 {
@@ -121,19 +122,59 @@
     margin-bottom: 10px;
 }
 
+.id {
+    width: 100%;
+}
+
 .idContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    overflow: hidden;
 }
 
 .idContainer img {
     width: 25px;
 }
 
+.idContent {
+    width: calc(100% - 60px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .id div {
     height: auto;
     padding: 2px 5px;
+}
+
+@media (max-width:900px) {
+    .cover {
+        margin: 0 0px 90px 0px;
+        width: 100%;
+    }
+
+    .content {
+        padding: 0 20px;
+    }
+
+}
+
+@media (max-width:600px) {
+    .cover {
+        height: 100px;
+        margin-bottom: 120px;
+    }
+
+    .pic {
+        width: 100px;
+        height: 100px;
+        bottom: -50px;
+    }
+
+    .content {
+        padding: 0 10px;
+    }
+
 }

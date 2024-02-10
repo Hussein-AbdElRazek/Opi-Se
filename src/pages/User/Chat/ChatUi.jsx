@@ -1,5 +1,5 @@
 import React from 'react'
-import { PopChatCard } from '../../../components/ui'
+import { LoadingCenter, PopChatCard } from '../../../components/ui'
 import ChatHeader from './ChatHeader'
 import { InputBar, MessagesList } from '../../../components/chat'
 
@@ -11,6 +11,9 @@ const ChatUi = (props) =>
         submitTextMessage,
         handleUploadMedia,
         isLoadingUploadMedia,
+        firstElementRef,
+        messageContainerRef,
+        isLoadingGetChat,
     } = props;
 
     return (
@@ -24,9 +27,16 @@ const ChatUi = (props) =>
                 />
             }
         >
-            <MessagesList
-                messages={messages}
-            />
+            {isLoadingGetChat && <LoadingCenter />}
+            {!!messages.length && (
+                <MessagesList
+                    messages={messages}
+                    firstElementRef={firstElementRef}
+                    messageContainerRef={messageContainerRef}
+                    isLoadingGetChat={isLoadingGetChat}
+                />
+            )}
+
         </PopChatCard>
     )
 }

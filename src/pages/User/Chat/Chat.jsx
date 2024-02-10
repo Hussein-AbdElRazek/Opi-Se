@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react'
+import React, {  useContext, useEffect, useRef, useState } from 'react'
 import ChatUi from './ChatUi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom';
@@ -19,6 +19,7 @@ import
 } from '../../../store/chat-slice';
 import useHttp from '../../../hooks/use-http';
 import ImagesContext from '../../../imagesStore/images-context';
+import useGetChat from './hooks/use-get-chat';
 
 const Chat = () =>
 {
@@ -32,7 +33,27 @@ const Chat = () =>
     const dispatch = useDispatch();
     const messages = useSelector(state => state.chat.messages[openedUserData.id]) || [];
     const userId = useSelector(state => state.auth.userData._id);
+    
+    // // Scroll to bottom  first time only and new message add
+    const scrollToBottom = () =>
+    {
+        if (messageContainerRef.current)
+        {
+            messageContainerRef.current?.lastElementChild
+                ?.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+    const [isScrollToBottom, setIsScrollToBottom] = useState(false);
+    useEffect(() =>
+    {
+        if (isScrollToBottom)
+        {
+            setIsScrollToBottom(false)
+            scrollToBottom();
+        }
+    }, [isScrollToBottom]);
 
+    const messageContainerRef = useRef();
     const submitTextMessage = (values, { resetForm }) =>
     {
         if (values.message.trim() === "") return
@@ -51,80 +72,20 @@ const Chat = () =>
         const payload = {
             message: sentMessage,
             messagesId: openedUserData.id.toString(),
-            newMessage: newMessage
+            newMessage: newMessage,
         }
         dispatch(sendMessage(payload))
+        setIsScrollToBottom(true);  
         resetForm();
     }
 
-    const {
-        isLoading: isLoadingGetChatData,
-        sendRequest: getChatData
-    } = useHttp();
-    const {
-        isLoading: isLoadingGetChatMedia,
-        sendRequest: getChatMedia
-    } = useHttp();
-
     const matchId = useSelector((state) => state.auth.userData.matchId)
 
-    const handleGetChatData = useCallback(() =>
-    {
-        const getResponse = ({ message, data }) =>
-        {
-            if (message === "success")
-            {
-                dispatch(chatActions.updateMessages({ id: openedUserData.id, messages: data }))
-            }
-        };
-
-        getChatData(
-            {
-                url: `getPartnerChat?matchId=${matchId}&page=1&limit=100`,
-            },
-            getResponse
-        );
-    }, [dispatch, getChatData, matchId, openedUserData.id])
-
-    const handleGetChatMedia = useCallback(() =>
-    {
-        const getResponse = ({ message, data }) =>
-        {
-            if (message === "success")
-            {
-                const imagesList = []
-                data.forEach((img) =>
-                {
-                    let temp = img;
-                    temp.messageType = "img"
-                    imagesList.push(temp)
-                })
-                dispatch(chatActions.updateMessages({ id: openedUserData.id, messages: imagesList }))
-            }
-        };
-
-        getChatMedia(
-            {
-                url: `getChatMedia?page=1&limit=50&matchId=${matchId}`,
-            },
-            getResponse
-        );
-    }, [dispatch, getChatMedia, matchId, openedUserData.id])
-
-    console.log("i render")
-    useEffect(() =>
-    {
-        console.log("i handleGetChatData")
-
-        handleGetChatData();
-        handleGetChatMedia();
-    }, [])
-    // useEffect(() =>
-    // {
-    //     console.log("i handleGetChatMedia")
-
-    //     handleGetChatMedia();
-    // }, [handleGetChatMedia])
+    // handle get chat data (messages)
+    const {
+        isLoadingGetChat,
+        lastElementRef: firstElementRef,
+    } = useGetChat(setIsScrollToBottom);
 
     useEffect(() =>
     {
@@ -210,7 +171,9 @@ const Chat = () =>
             openedUserData={openedUserData}
             handleUploadMedia={handleUploadMedia}
             isLoadingUploadMedia={isLoadingUploadMedia}
-        // header={}
+            firstElementRef={firstElementRef}
+            messageContainerRef={messageContainerRef}
+            isLoadingGetChat={isLoadingGetChat}
         />
     )
 }

@@ -41,7 +41,7 @@ const SessionUi = (props) =>
                     </Btn>
                 ) : (
                     <Btn
-                        className={`${classes.btnBasics} ${classes.startBtn}`}
+                        className={`${classes.btnBasics} ${classes.startBtn} ${status === "waiting" ? classes.waitBtn : ""}`}
                         onClick={handleStartSession}
                         isLoading={isLoading}
                         disabled={status === "waiting"}

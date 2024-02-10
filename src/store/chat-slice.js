@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { mergeToUnique } from '../helpers/mergeToUnique';
 import baseSocket from '../sockets/baseConnection';
+// import { scrollToBottom } from '../components/chat/helpers/scrollToBottom';
 
 // get connection 
 const socket = baseSocket;
@@ -37,15 +38,17 @@ export const sendMessage = createAsyncThunk(
     'chat/sendMessage',
     async (payload, thunkAPI) =>
     {
+        thunkAPI.dispatch(
+            chatActions.addMessage({
+                messagesId: payload.messagesId, newMessage: payload.newMessage
+            })
+        );
+        // payload?.onPutMessage();
         socket.emit('sendMessage', payload.message, ({ success }) =>
         {
             if (success)
             {
-                thunkAPI.dispatch(
-                    chatActions.addMessage({
-                        messagesId: payload.messagesId, newMessage: payload.newMessage
-                    })
-                );
+                // TODO handle put correct mark and if err but err mark
             }
         });
     }
@@ -261,13 +264,14 @@ export const listenToReceiveMedia = createAsyncThunk(
 )
 
 const initialChatState = {
-    messages:  {},
-    session:  {
+    messages: {},
+    session: {
         status: "",
         startDate: "",
         isLoading: false,
     },
     connected: false,
+    totalPages: 1
 }
 
 const chatSlice = createSlice({
@@ -314,6 +318,11 @@ const chatSlice = createSlice({
         updateSession(state, action)
         {
             state.session = { ...state.session, ...action.payload };
+        },
+        updateTotalPages(state, action)
+        {
+            // to update TotalPages when receive it from server
+            state.totalPages = action.payload;
         },
     }, extraReducers: (builder) =>
     {

@@ -58,7 +58,7 @@ export const NavBar = ({ title }) =>
                 xl={4}
                 lg={4}
                 md={4}
-                xs={10}
+                xs={9}
                 className="center-y"
             >
                 <Logo />

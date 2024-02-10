@@ -42,15 +42,23 @@ const HomeUi = ({ isHavePartner }) =>
                 <div
                     className={classes.action}
                 >
-                    <NavLink
-                        to="recommendation?p=1&l=1"
-                    >
-                        <Btn
+                    {isHavePartner ?
+                        (<Btn
                             disabled={isHavePartner}
                         >
                             Get a New Brain Buddy
-                        </Btn>
-                    </NavLink>
+                        </Btn>) :
+                        (
+                            <NavLink
+                                to="recommendation?p=1&l=1"
+                            >
+                                <Btn
+                                    disabled={isHavePartner}
+                                >
+                                    Get a New Brain Buddy
+                                </Btn>
+                            </NavLink>
+                        )}
 
                 </div>
 

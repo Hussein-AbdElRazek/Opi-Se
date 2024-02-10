@@ -3,18 +3,20 @@ import { PopChatCard } from '../../../components/ui'
 import ChatProfileHeader from './ChatProfileHeader'
 import { ButtonBase } from '@mui/material'
 
-import { ReactComponent as CallIcon } from '../../../assets/icons/call.svg'
+// import { ReactComponent as CallIcon } from '../../../assets/icons/call.svg'
 import { ReactComponent as VideoIcon } from '../../../assets/icons/video.svg'
 import { ProfilePic } from '../../../components/ui'
 import classes from './styles/ChatProfileHeader.module.css'
 import ChatProfileTabs from './ChatProfileTabs'
 import MediaList from './MediaList'
+import { NavLink } from 'react-router-dom'
 const ChatProfileUi = (props) =>
 {
     const {
         profileData,
         imageList,
-        isLoadingGetChatMedia
+        isLoadingGetChatMedia,
+        lastElementRef,
     } = props;
 
     return (
@@ -25,14 +27,18 @@ const ChatProfileUi = (props) =>
             <div
                 className={classes.container}
             >
-                <div
-                    className={classes.profilePic}
+                <NavLink
+                    to={`/profile?userId=${profileData?.id}`}
                 >
-                    <ProfilePic
-                        userName={profileData?.userName}
-                        profileImage={profileData?.profileImage}
-                    />
-                </div>
+                    <div className={classes.profilePic}
+                    >
+                        <ProfilePic
+                            userName={profileData?.userName}
+                            profileImage={profileData?.profileImage}
+                        />
+                    </div>
+
+                </NavLink>
                 <h6
                     className={classes.userName}
                 >
@@ -44,17 +50,19 @@ const ChatProfileUi = (props) =>
                     {/* stroke to change color of border of icon */}
                     <VideoIcon stroke='var(--primary)' />
                 </ButtonBase>
-                <ButtonBase
+                {/* stroke to change color of border of icon */}
+                {/* <ButtonBase
                     className={classes.iconBtn}
                 >
-                    {/* stroke to change color of border of icon */}
+                    
                     <CallIcon stroke='var(--primary)' />
-                </ButtonBase>
+                </ButtonBase> */}
             </div>
             <ChatProfileTabs />
             <MediaList
                 imageList={imageList}
                 isLoadingGetChatMedia={isLoadingGetChatMedia}
+                lastElementRef={lastElementRef}
             />
         </PopChatCard>
     )

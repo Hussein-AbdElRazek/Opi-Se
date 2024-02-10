@@ -23,7 +23,6 @@ const useScrollingPagination = (isLoading, pagesLimit) =>
             // if reach bottom
             if (entries[0].isIntersecting)
             {
-                console.log("bottom");
                 if (currentPage < pagesLimit - 1)
                 {
                     setCurrentPage(prev => prev + 1)

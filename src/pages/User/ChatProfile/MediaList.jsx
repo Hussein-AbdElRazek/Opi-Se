@@ -7,7 +7,7 @@ import classes from './styles/Media.module.css';
 
 const MediaList = (props) =>
 {
-    const { imageList, isLoadingGetChatMedia } = props;
+    const { imageList, isLoadingGetChatMedia, lastElementRef } = props;
     return (
         <div className={classes.listContainer}
         >
@@ -15,23 +15,25 @@ const MediaList = (props) =>
                 container
                 spacing={2}
             >
-                {/* Loading Spinner */}
-                {isLoadingGetChatMedia && (
-                    <LoadingCenter />
-                )}
-
                 {/* Display image list */}
-                {imageList?.map((img) => (
+                {imageList?.map((img, index) => (
                     <Grid
                         xs={6}
                         sm={4}
                         sx={{ aspectRatio: 1, objectFit: 'cover' }}
+                        key={index}
                     >
                         <MediaItem
                             img={img.mediaUrl}
+                            lastElementRef={index === imageList.length - 1 ? lastElementRef : null}
                         />
                     </Grid>
                 ))}
+
+                {/* Loading Spinner */}
+                {isLoadingGetChatMedia && (
+                    <LoadingCenter />
+                )}
             </Grid>
         </div>
 

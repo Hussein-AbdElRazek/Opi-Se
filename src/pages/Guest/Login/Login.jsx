@@ -19,7 +19,7 @@ const Login = () =>
         {
             if (message === "success")
             {
-                dispatch(authActions.login({ token: token, userData: { ...data, ...profileDetails } }))
+                dispatch(authActions.login({ token: token, userData: { ...profileDetails, ...data } }))
                 navigate("/", { replace: true });
             }
         };
@@ -35,10 +35,10 @@ const Login = () =>
     }
 
     return (
-            <LoginUi
-                handleLogin={handleLogin}
-                isLoadingLogin={isLoadingLogin}
-            />
+        <LoginUi
+            handleLogin={handleLogin}
+            isLoadingLogin={isLoadingLogin}
+        />
     )
 }
 

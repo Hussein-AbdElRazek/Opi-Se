@@ -14,11 +14,11 @@ const useSearchForPartner = () =>
     const dispatch = useDispatch();
     const handleSearchForPartner = ({ userId }) =>
     {
-        const getResponse = ({ message, data }) =>
+        const getResponse = ({ message, data, profileDetails }) =>
         {
             if (message === "success")
             {
-                dispatch(searchActions.setUserData(data))
+                dispatch(searchActions.setUserData({ ...profileDetails,...data}))
                 if (currentUrl !== "/profile") navigate(`/profile?userId=${userId}`)
             } else
             {

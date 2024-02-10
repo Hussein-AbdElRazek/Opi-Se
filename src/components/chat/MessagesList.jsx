@@ -1,15 +1,13 @@
 import { useSelector } from 'react-redux'
-import { Fragment, useEffect, useRef } from 'react'
 
 import { Message } from './Message'
 import { MessagesDate } from './MessagesDate'
 import { getDate } from '../../helpers/getDate'
 
 
-export const MessagesList = ({ messages }) =>
+export const MessagesList = ({ messages, firstElementRef, messageContainerRef }) =>
 {
     const userId = useSelector(state => state.auth.userData._id);
-    const messageContainerRef = useRef(null);
 
     const renderMessagesDateLabel = (index, messageDate) =>
     {
@@ -32,35 +30,20 @@ export const MessagesList = ({ messages }) =>
                 </MessagesDate>
             )
     }
-
-    const scrollToBottom = () =>
-    {
-        if (messageContainerRef.current)
-        {
-            messageContainerRef.current?.lastElementChild
-            ?.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    //TODO handle it with pagination u will remove useEffect bcz if u add old messages
-    // u will automatic scroll down 
-
-    // Scroll to bottom when messages update
-    useEffect(() =>
-    {
-        scrollToBottom();
-    }, [messages]);
+    
     return (
         <div
             ref={messageContainerRef}
         >
             {messages.map((message, index) =>
             {
-                if (message.messageType === "text" || message.messageType === "img")
+                if (message.messageType === "text" || message.messageType === "media")
                 {
                     return (
-                        <Fragment
+                        <div
                             key={message._id}
+                            ref={index === 0 ? firstElementRef : null}
+                            id={index === messages.length - 1 ? "lastMessage" : null}
                         >
                             {renderMessagesDateLabel(index, message?.sentAt)}
 
@@ -82,7 +65,7 @@ export const MessagesList = ({ messages }) =>
                                         alt=""
                                     />}
                             </Message>
-                        </Fragment>
+                        </div>
                     )
                 }
                 return (<></>)

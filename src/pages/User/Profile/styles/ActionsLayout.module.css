@@ -4,3 +4,20 @@
     bottom: -90px;
     display: flex;
 }
+
+@media (max-width:600px) {
+    .container {
+        bottom: -120px;
+    }
+
+    .container button,
+    .container a {
+        font-size: var(--font-size-50) !important;
+        padding: 5px 10px;
+    }
+
+    .container svg {
+        width: 20px;
+        height: 20px;
+    }
+}
