@@ -13,7 +13,7 @@ import
   Btn,
   LoopOnInputs,
 } from '../../../components/inputs';
-import ExtractNationalId from './ExtractNationalId';
+
 import { Form, Formik } from 'formik';
 import { Outlet } from 'react-router-dom';
 
@@ -43,9 +43,6 @@ const SignUpUi = (props) =>
               <LoopOnInputs
                 inputs={signUpInputs}
                 disabled={isLoadingSignUp} />
-              <ExtractNationalId
-                setFieldValue={formik.setFieldValue}
-              />
               <Btn
                 type="submit"
                 variant="contained"

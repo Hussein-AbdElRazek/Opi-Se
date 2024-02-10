@@ -19,22 +19,18 @@ import classes from './About.module.css'
 const AboutUi = (props) =>
 {
     const {
-        handleNavigateToQuestions,
-        isCompleteAboutData,
-        initialAboutData
+        handleSubmitUserPrefers,
+        isLoadingSubmitUserPrefers,
     } = props;
+
     return (
         <div
             className='center-x height-100vh'
         >
             <Formik
-                initialValues={
-                    isCompleteAboutData ?
-                        initialAboutData :
-                        aboutInitialValues
-                }
+                initialValues={aboutInitialValues}
                 validationSchema={aboutValidationSchema}
-                onSubmit={handleNavigateToQuestions}
+                onSubmit={handleSubmitUserPrefers}
             >
                 {(formik) => (
                     <Form>
@@ -45,8 +41,9 @@ const AboutUi = (props) =>
                                     size="small"
                                     endIcon={<img src={arrowRightIcon} alt="arrow right" />}
                                     type="submit"
+                                    isLoading={isLoadingSubmitUserPrefers}
                                 >
-                                    Next
+                                    Submit
                                 </Btn>
                             }
                         >

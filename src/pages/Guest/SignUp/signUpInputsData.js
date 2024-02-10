@@ -63,6 +63,13 @@ export const signUpInputs = [
         size: 6
     },
     {
+        control: "input",
+        type: "text",
+        label: "National Id",
+        name: "nationalId",
+        size: 12
+    },
+    {
         control: "array",
         inputs: languagesInputs,
         name: "languages",

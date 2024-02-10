@@ -1,38 +1,51 @@
 import React from 'react'
 import AboutUi from './AboutUi'
-import { useDispatch, useSelector } from 'react-redux'
-import { authActions } from '../../../store/auth-slice';
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+
+import { authActions } from '../../../store/auth-slice';
+import useHttp from '../../../hooks/use-http';
 
 const About = () =>
 {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const initialAboutData = useSelector(state => state.auth.userData.about);
-    const isCompleteAboutData = !!useSelector(state => state.auth.userData.isCompleteAboutData);
 
-    // store about data to send it with questions 
-    const handleStoreAboutData = (aboutData) =>
+    const {
+        isLoading: isLoadingSubmitUserPrefers,
+        sendRequest: submitUserPrefers
+    } = useHttp();
+
+    // fetch api submitUserPrefers
+    const handleSubmitUserPrefers = (aboutData) =>
     {
-        const updatedData = {
-            about: aboutData,
-            isCompleteAboutData: true,
-        }
-        dispatch(authActions.updateUserData(updatedData))
+        const userPrefers = aboutData;
+
+        const getResponse = ({ message }) =>
+        {
+            if (message === "success")
+            {
+                //to update store data to make it update routes and navigate to home
+                //  + update user data
+                dispatch(authActions.updateUserData({ getUserPrefers: false, ...userPrefers }))
+                navigate("/", { replace: true });
+            }
+        };
+
+        submitUserPrefers(
+            {
+                url: "submitUserPrefers",
+                method: "POST",
+                body: userPrefers,
+            },
+            getResponse
+        );
     }
 
-    // when click next after complete about data
-    const handleNavigateToQuestions = (aboutData) =>
-    {
-        handleStoreAboutData(aboutData);
-        navigate("/questions?questionIndex=0");
-    }
-    
     return (
         <AboutUi
-            handleNavigateToQuestions={handleNavigateToQuestions}
-            initialAboutData={initialAboutData}
-            isCompleteAboutData={isCompleteAboutData}
+            handleSubmitUserPrefers={handleSubmitUserPrefers}
+            isLoadingSubmitUserPrefers={isLoadingSubmitUserPrefers}
         />
     )
 }
