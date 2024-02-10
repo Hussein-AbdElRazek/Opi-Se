@@ -16,7 +16,7 @@ export const VideoContextProvider = (props) =>
 {
     // call state
     const [stream, setStream] = useState(null)
-    console.log("JSON.parse(localStorage.getItem", JSON.parse(localStorage.getItem("call")));
+    //console.log("JSON.parse(localStorage.getItem", JSON.parse(localStorage.getItem("call")));
     const [call, setCall] = useState( null);
     const [callAccepted, setCallAccepted] = useState(false);
     const [callEnded, setCallEnded] = useState(false);
@@ -40,7 +40,7 @@ export const VideoContextProvider = (props) =>
     {
         try
         {
-            console.log("connectionRef", connectionRef)
+            //console.log("connectionRef", connectionRef)
             if (connectionRef?.current && !connectionRef.current.isDestroying)
             {
                 connectionRef.current.destroy();
@@ -49,7 +49,7 @@ export const VideoContextProvider = (props) =>
             }
         } catch (error)
         {
-            console.error(error)
+            //console.error(error)
         }
     }, [])
 
@@ -65,7 +65,7 @@ export const VideoContextProvider = (props) =>
             }
         } catch (error)
         {
-            console.error(error)
+            //console.error(error)
         }
     }, [stream])
 
@@ -75,7 +75,7 @@ export const VideoContextProvider = (props) =>
         {
             socket.emit("disconnectCall", {}, (res) =>
             {
-                console.log('disconnect', res)
+                //console.log('disconnect', res)
                 stopStream();
 
             })
@@ -115,18 +115,10 @@ export const VideoContextProvider = (props) =>
 
     useEffect(() =>
     {
-        socket.emit('joinUserRoom', {}, (res) =>
-        {
-            console.log('joinUserRoom', res)
-        });
-        socket.emit('joinMatchRoom', {}, (res) =>
-        {
-            console.log('joinMatchRoom', res)
-        });
-        // console.log("listening to on accepted")
+        // //console.log("listening to on accepted")
         // socket.on('callAccepted', (res) =>
         // {
-        //     console.log("//////// On callAccepted ", res)
+        //     //console.log("//////// On callAccepted ", res)
         //     setCallAccepted(true);
 
         // })
@@ -140,7 +132,7 @@ export const VideoContextProvider = (props) =>
 
             socket.on("callEnded", () =>
             {
-                console.log("callEnded...  _____________",)
+                //console.log("callEnded...  _____________",)
                 setCallEnded(true);
                 setCall(null);
                 localStorage.removeItem("call")
@@ -162,16 +154,16 @@ export const VideoContextProvider = (props) =>
 
     useEffect(() =>
     {
-        console.log("!call && !call.busy", !(call?.busy))
-        console.log("call", call)
+        //console.log("!call && !call.busy", !(call?.busy))
+        //console.log("call", call)
         if (!(call?.busy)) 
         {
             socket.on("callUser", (incomingCall) =>
             {
-                console.log("callUser...", incomingCall)
+                //console.log("callUser...", incomingCall)
                 const { from, name: callerName, profileImage, signalData } = incomingCall;
-                console.log("0000000000000000000the fucken case", call)
-                console.log("0000000000000000000the fucken case condition", !(call?.busy))
+                //console.log("0000000000000000000the fucken case", call)
+                //console.log("0000000000000000000the fucken case condition", !(call?.busy))
 
                 if (!(call?.busy))
                 {
@@ -191,7 +183,7 @@ export const VideoContextProvider = (props) =>
     //     })
     //     socket.on('callAccepted', (signal) =>
     //     {
-    //         console.log("callAccepted________________")
+    //         //console.log("callAccepted________________")
     //         setCallAccepted(true);
 
     //         peer.signal(signal)
@@ -210,7 +202,7 @@ export const VideoContextProvider = (props) =>
     }, [callEnded, popMessage])
     // useEffect(() =>
     // {
-    //     console.log("useEffect__-_-_--___")
+    //     //console.log("useEffect__-_-_--___")
     //     if (stream && myVideo.current) myVideo.current.srcObject = stream;
     // }, [stream])
     const establishStream = useCallback(async () =>
@@ -219,25 +211,25 @@ export const VideoContextProvider = (props) =>
         {
             const temp = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
             setStream(temp);
-            console.log("update my video")
+            //console.log("update my video")
             if (myVideo.current) myVideo.current.srcObject = temp;
         } catch (error)
         {
             if (error.name === "NotAllowedError")
             {
                 //TODO Handle permission denial gracefully
-                console.error("Video/audio permissions not granted.");
+                //console.error("Video/audio permissions not granted.");
                 // Display a user-friendly message and offer retry options
             } else
             {
-                console.error("Other error:", error);
+                //console.error("Other error:", error);
             }
         }
     }, [])
 
     const callUser = (id, getResponse) =>
     {
-        console.log("calling...", id)
+        //console.log("calling...", id)
         try
         {
             const peer = new Peer({
@@ -255,11 +247,11 @@ export const VideoContextProvider = (props) =>
                     name: myData?.userName,
                     profileImage: myData?.profileImage,
                 }
-                console.log("call", call)
-                console.log("!(call?.busy)", !(call?.busy))
+                //console.log("call", call)
+                //console.log("!(call?.busy)", !(call?.busy))
                 if (!(call?.busy))
                 {
-                    console.log("7777777i call")
+                    //console.log("7777777i call")
 
                     socket.emit("callUser", body, ({ success, message }) =>
                     {
@@ -279,12 +271,12 @@ export const VideoContextProvider = (props) =>
             peer.on("stream", (currentStream) =>
             {
                 anotherVideo.current.srcObject = currentStream;
-                console.log("*******callUser stream", currentStream)
+                //console.log("*******callUser stream", currentStream)
             })
 
             socket.on('callAccepted', (res) =>
             {
-                console.log("callAccepted------------------", res)
+                //console.log("callAccepted------------------", res)
                 setCallAccepted(true);
                 setCall(prev => ({ ...prev, isReceivingCall: false, busy: true }))
                 localStorage.setItem("call", JSON.stringify({ ...call, isReceivingCall: false, busy: true }))
@@ -320,11 +312,11 @@ export const VideoContextProvider = (props) =>
                     signal: data,
                     to: call.from
                 }
-                console.log("body for answerCall", body)
+                //console.log("body for answerCall", body)
 
                 socket.emit("answerCall", body, (res) =>
                 {
-                    console.log('answerCall--------------', res)
+                    //console.log('answerCall--------------', res)
 
                     navigate("/video")
                 })
@@ -332,14 +324,14 @@ export const VideoContextProvider = (props) =>
 
             peer.on("stream", (currentStream) =>
             {
-                console.log("--on another stream",)
+                //console.log("--on another stream",)
                 // if (anotherVideo.current)
                 // {
-                console.log("******--on another stream assign", currentStream)
+                //console.log("******--on another stream assign", currentStream)
                 anotherVideo.current.srcObject = currentStream;
                 // }
             })
-            console.log("call ", call)
+            //console.log("call ", call)
             peer.signal(call.signalData)
             connectionRef.current = peer;
         } catch (error)
@@ -357,8 +349,8 @@ export const VideoContextProvider = (props) =>
 
     }, [])
 
-    console.log("my video", myVideo)
-    console.log("user video", anotherVideo)
+    //console.log("my video", myVideo)
+    //console.log("user video", anotherVideo)
 
 
     const contextValue = {

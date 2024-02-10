@@ -6,7 +6,6 @@ import SessionUi from './SessionUi';
 import
     {
         endChatSession,
-        replyChatSession,
         startChatSession
     } from '../../../store/chat-slice';
 
@@ -22,16 +21,7 @@ const Session = () =>
         dispatch(startChatSession());
     };
 
-    const handleAcceptSessionRequest = () =>
-    {
-        dispatch(replyChatSession({ accept: true }));
-    }
-
-    const handleRejectSessionRequest = () =>
-    {
-        dispatch(replyChatSession({ accept: false }));
-    }
-
+    
     // for get session end date
     const addMillisecondsToDate = (date, millisecondsToAdd) =>
     {
@@ -88,8 +78,6 @@ const Session = () =>
             handleStartSession={handleStartSession}
             handleEndSession={handleEndSession}
             formattedTime={formattedTime}
-            handleAcceptSessionRequest={handleAcceptSessionRequest}
-            handleRejectSessionRequest={handleRejectSessionRequest}
         />
     )
 }

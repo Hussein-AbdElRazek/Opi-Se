@@ -7,32 +7,6 @@ import baseSocket from '../sockets/baseConnection';
 // get connection 
 const socket = baseSocket;
 
-export const connectSocket = createAsyncThunk('chat/connectSocket',
-    async () =>
-    {
-        console.log("char_______________")
-        // socket.disconnect();
-        // socket.connect();
-        let connected = false;
-        socket.on("connect", () =>
-        {
-            console.log("socket connected...")
-            connected = true;
-        })
-        return connected;
-    }
-);
-
-export const joinMatchRoom = createAsyncThunk('chat/joinMatchRoom',
-    async () =>
-    {
-        socket.emit('joinMatchRoom', {}, (res) =>
-        {
-            console.log('joinMatchRoom', res)
-        });
-    }
-);
-
 //Text Message
 export const sendMessage = createAsyncThunk(
     'chat/sendMessage',
@@ -73,6 +47,9 @@ export const listenToReceiveMessage = createAsyncThunk(
                     messagesId: newMessage.messageSender, newMessage: newMessage
                 })
             );
+            console.log("receiveMessage", data)
+            // show new message mark
+            thunkAPI.dispatch(chatActions.updateNewMessageMark(true))
         });
     }
 )
@@ -259,6 +236,9 @@ export const listenToReceiveMedia = createAsyncThunk(
                 chatActions.updateMessages({
                     id: payload, messages: imagesList
                 }))
+
+            // show new message mark
+            thunkAPI.dispatch(chatActions.updateNewMessageMark(true))
         });
     }
 )
@@ -270,8 +250,8 @@ const initialChatState = {
         startDate: "",
         isLoading: false,
     },
-    connected: false,
-    totalPages: 1
+    totalPages: 1,
+    newMessageMark: JSON.parse(localStorage.getItem("newMessageMark")) || false
 }
 
 const chatSlice = createSlice({
@@ -324,13 +304,13 @@ const chatSlice = createSlice({
             // to update TotalPages when receive it from server
             state.totalPages = action.payload;
         },
-    }, extraReducers: (builder) =>
-    {
-        builder
-            .addCase(connectSocket.fulfilled, (state) =>
-            {
-                state.connected = true;
-            })
+        updateNewMessageMark(state, action)
+        {
+            // to update NewMessageMark 
+            state.newMessageMark = action.payload;
+            localStorage.setItem("newMessageMark", JSON.stringify(action.payload))
+
+        }
     },
 })
 

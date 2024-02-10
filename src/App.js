@@ -10,6 +10,8 @@ import { getWebsiteTitle } from './helpers/getWebsiteTitle';
 import { PageLayout } from './components/common';
 import IncomingVideoCall from './pages/User/IncomingVideoSession/IncomingVideoCall';
 import VideoContext from './videoCallStore/video-call-context';
+import useGeneralSocket from './hooks/use-general-sockets';
+import SessionConfirmation from './pages/User/SessionConfirmation/SessionConfirmation';
 // import {messaging} from './FCM/firebase'
 // import { getToken,onMessage } from 'firebase/messaging'
 // import './FCM/messaging_init_in_sw';
@@ -71,12 +73,21 @@ function App()
   //   })
   // },[])
   const { call } = useContext(VideoContext);
+
+  // General sockets
+  // handle join rooms + necessary listener in app root
+  useGeneralSocket();
+
   return (
     <div>
       {isLoggedIn && !firstTime ? (
         <>
           <AppBar title={title} />
+          {/* for incoming calls */}
           {(call && call.isReceivingCall) && <IncomingVideoCall />}
+
+          {/* for incoming session */}
+          <SessionConfirmation />
           <PageLayout>
             <IndexRoutes />
           </PageLayout>

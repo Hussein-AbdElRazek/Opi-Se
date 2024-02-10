@@ -1,6 +1,7 @@
-import { Avatar, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
+import { Avatar, Badge, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
 import classes from './Chats.module.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const ChatItem = ({ chatItemData }) =>
 {
     const navigate = useNavigate();
@@ -11,8 +12,10 @@ const ChatItem = ({ chatItemData }) =>
         searchParams.set("profileImage", chatItemData.profileImage)
         searchParams.set("id", chatItemData.id)
         navigate(`chat?${searchParams}`)
-
     }
+
+    const isNewMessage = useSelector(state => state?.chat?.newMessageMark);
+
     return (
         <ListItem
             disablePadding
@@ -26,13 +29,18 @@ const ChatItem = ({ chatItemData }) =>
                         margin: "0 !important"
                     }
                 }}
+            ><Badge
+                overlap="circular"
+                variant="dot"
+                invisible={!isNewMessage}
             >
-                <ListItemAvatar>
-                    <Avatar
-                        // src={chatItemData.profileImage}
-                        sx={{ backgroundImage: `url(${chatItemData.profileImage})` }}
-                    />
-                </ListItemAvatar>
+                    <ListItemAvatar>
+                        <Avatar
+                            // src={chatItemData.profileImage}
+                            sx={{ backgroundImage: `url(${chatItemData.profileImage})` }}
+                        />
+                    </ListItemAvatar>
+                </Badge>
                 <ListItemText
                     sx={{ "& span": { margin: "0 !important" } }}
                     primary={
@@ -41,18 +49,6 @@ const ChatItem = ({ chatItemData }) =>
                         >
                             {chatItemData.userName}
                         </h6>
-                    }
-                    secondary={
-                        <span
-                            className={classes.lastMessage}
-                            title={`
-                                ${chatItemData.lastMessage.from}: \n${chatItemData.lastMessage.message}
-                            `}                            >
-                            {`
-                                    ${chatItemData.lastMessage.from}: 
-                                    ${chatItemData.lastMessage.message}
-                                `}
-                        </span>
                     }
                 />
             </ListItemButton>

@@ -1,33 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import io from 'socket.io-client';
-import { backendUrl } from '../config';
+
+import baseSocket from '../sockets/baseConnection';
+import { updateSocketQuery } from '../helpers/updateSocketsQuery';
 
 const initialUserState = {
-    connected: false,
 }
-// get match id from local storage
-const userId = JSON.parse(localStorage.getItem("userData"))?._id;
-const token = (localStorage.getItem("token"));
 
-//establish connection
-let socket;
-export const connectUserSocket = createAsyncThunk('user/connectSocket',
-    async () =>
-    {
-        socket = io(`${backendUrl}?userId=${userId}&token=${token}`)
-        let connected = false;
-        socket.on("connect", () =>
-        {
-            console.log("socket connected...")
-            connected = true;
-        })
-        return connected;
-    }
-);
+
+
+// get connection 
+const socket = baseSocket;
 
 export const joinUserRoom = createAsyncThunk('user/joinUserRoom',
     async () =>
     {
+        // update query and restart socket connection
+        updateSocketQuery();
+        
         socket.emit('joinUserRoom', {}, (res) =>
         {
             console.log('joinUserRoom', res)
@@ -97,26 +86,28 @@ export const listenToMatchRequestApproved = createAsyncThunk(
 )
 
 export const notifyUserRoom = createAsyncThunk('user/notifyUserRoom',
-    async () =>
+    async (roomId) =>
     {
-        const userRoomSocket = io(`${backendUrl}?roomId=1`)
-        userRoomSocket.emit('notifyUserRoom', {}, (res) =>
+        // const userRoomSocket = io(`${backendUrl}?roomId=1`)
+        //TODO sure it;s work
+        socket.io.opts.query = {
+            roomId: roomId,
+        };
+        socket.disconnect()
+        socket.connect();
+        socket.on("connect", () =>
         {
-            console.log('notifyUserRoom', res)
-        });
+            socket.emit('notifyUserRoom', {}, (res) =>
+            {
+                console.log('notifyUserRoom', res)
+            });
+        })
+
     }
 );
 const userSlice = createSlice({
     name: 'user',
     initialState: initialUserState,
-    extraReducers: (builder) =>
-    {
-        builder
-            .addCase(connectUserSocket.fulfilled, (state) =>
-            {
-                state.connected = true;
-            })
-    },
 })
 
 

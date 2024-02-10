@@ -1,29 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import io from 'socket.io-client';
-import { backendUrl } from '../config';
+
+import baseSocket from '../sockets/baseConnection';
+import { updateSocketQuery } from '../helpers/updateSocketsQuery';
 
 const initialMatchState = {
     connected: false,
 }
-// get match id from local storage
-const matchId = JSON.parse(localStorage.getItem("userData"))?.matchId;
-const token = (localStorage.getItem("token"));
 
-//establish connection
-let socket;
-export const connectMatchSocket = createAsyncThunk('match/connectSocket',
-    async () =>
-    {
-        socket = io(`${backendUrl}?matchId=${matchId}&token=${token}`)
-        let connected = false;
-        socket.on("connect", () =>
-        {
-            console.log("socket connected...")
-            connected = true;
-        })
-        return connected;
-    }
-);
+
+// get connection 
+const socket = baseSocket;
 
 export const disMatch = createAsyncThunk('match/disMatch',
     async () =>
@@ -34,6 +20,7 @@ export const disMatch = createAsyncThunk('match/disMatch',
         });
     }
 );
+
 export const listenToLeaveRoom = createAsyncThunk(
     "match/listenToLeaveRoom",
     async (_, thunkAPI) =>
@@ -68,6 +55,9 @@ export const acceptPartnerRequest = createAsyncThunk('match/acceptPartnerRequest
 export const joinMatchRoom = createAsyncThunk('match/joinMatchRoom',
     async () =>
     {
+        // update query and restart socket connection
+        updateSocketQuery();
+        
         socket.emit('joinMatchRoom', {}, (res) =>
         {
             console.log('joinMatchRoom', res)
@@ -99,14 +89,6 @@ export const listenToMatchRequestApproved = createAsyncThunk(
 const matchSlice = createSlice({
     name: 'match',
     initialState: initialMatchState,
-    extraReducers: (builder) =>
-    {
-        builder
-            .addCase(connectMatchSocket.fulfilled, (state) =>
-            {
-                state.connected = true;
-            })
-    },
 })
 
 

@@ -1,4 +1,4 @@
-import React, {  useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import ChatUi from './ChatUi'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom';
@@ -6,16 +6,9 @@ import { useSearchParams } from 'react-router-dom';
 import
 {
     chatActions,
-    connectSocket,
-    joinMatchRoom,
     sendMessage,
-    listenToReceiveMessage,
     listenToDeleteMessage,
     uploadChatMedia,
-    listenToReceiveMedia,
-    listenToStartChatSession,
-    listenToReplyToSessionRequest,
-    listenToEndToSessionRequest
 } from '../../../store/chat-slice';
 import useHttp from '../../../hooks/use-http';
 import ImagesContext from '../../../imagesStore/images-context';
@@ -33,7 +26,7 @@ const Chat = () =>
     const dispatch = useDispatch();
     const messages = useSelector(state => state.chat.messages[openedUserData.id]) || [];
     const userId = useSelector(state => state.auth.userData._id);
-    
+
     // // Scroll to bottom  first time only and new message add
     const scrollToBottom = () =>
     {
@@ -75,7 +68,7 @@ const Chat = () =>
             newMessage: newMessage,
         }
         dispatch(sendMessage(payload))
-        setIsScrollToBottom(true);  
+        setIsScrollToBottom(true);
         resetForm();
     }
 
@@ -87,27 +80,10 @@ const Chat = () =>
         lastElementRef: firstElementRef,
     } = useGetChat(setIsScrollToBottom);
 
+    //listenToDeleteMessage
     useEffect(() =>
     {
-        console.log("useEffect.connectSocket")
-        dispatch(connectSocket());
-        dispatch(joinMatchRoom());
-    }, [dispatch])
-
-    //All chat listener
-    useEffect(() =>
-    {
-        //Messages listener
-        dispatch(listenToReceiveMessage());
         dispatch(listenToDeleteMessage(searchParams.get("id")));
-
-        //Media listener
-        dispatch(listenToReceiveMedia(searchParams.get("id")));
-
-        //Session listener
-        dispatch(listenToStartChatSession());
-        dispatch(listenToReplyToSessionRequest());
-        dispatch(listenToEndToSessionRequest());
     }, [dispatch, searchParams])
 
     // Upload Media
@@ -163,7 +139,11 @@ const Chat = () =>
             getResponse
         );
     }
-
+    // remove NewMessageMark
+    useEffect(() =>
+    {
+        dispatch(chatActions.updateNewMessageMark(false));
+    }, [dispatch])
     return (
         <ChatUi
             messages={messages}

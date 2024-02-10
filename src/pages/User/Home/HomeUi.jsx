@@ -2,11 +2,11 @@ import React from 'react'
 import { HeaderText, IllustrationSection } from '../../../components/ui'
 import classes from './Home.module.css'
 import { Btn } from '../../../components/inputs'
-import { IconButton } from '@mui/material'
+import { Badge, IconButton } from '@mui/material'
 import messageIcon from '../../../assets/icons/message.svg'
 import { NavLink, Outlet } from 'react-router-dom'
 import { SearchBar } from '../../../components/appBar/SearchBar'
-const HomeUi = ({ isHavePartner }) =>
+const HomeUi = ({ isHavePartner, isNewMessage }) =>
 {
     return (
         <div
@@ -71,12 +71,19 @@ const HomeUi = ({ isHavePartner }) =>
                     type="home"
                 />
             </div>
+
             <IconButton
-                className={classes.messageIcon}
                 LinkComponent={NavLink}
                 to="chats"
+                className={classes.messageIcon}
             >
-                <img src={messageIcon} alt="messageIcon" />
+                <Badge
+                    overlap="circular"
+                    badgeContent=" "
+                    invisible={!isNewMessage}
+                >
+                    <img className={classes.messageIconImg} src={messageIcon} alt="messageIcon" />
+                </Badge>
             </IconButton>
 
             {/* for make nested  pages in home */}

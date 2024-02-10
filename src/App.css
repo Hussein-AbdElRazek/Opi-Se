@@ -116,3 +116,8 @@ a {
 .active svg {
     fill: var(--secondary);
 }
+
+/* new mark */
+.MuiBadge-overlapCircular {
+    background-color: var(--secondary) !important;
+}

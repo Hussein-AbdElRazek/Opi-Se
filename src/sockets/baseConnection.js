@@ -8,9 +8,9 @@ const userId = JSON.parse(localStorage.getItem("userData"))?._id;
 const baseSocket = io(backendUrl, {
     query: {
         matchId: matchId,
-        token: token,
         userId: userId,
         roomId: matchId,
+        token: token,
     }
 });
 
