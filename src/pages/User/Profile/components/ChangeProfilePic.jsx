@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ImageUploading from 'react-images-uploading';
 import { useDispatch, useSelector } from 'react-redux'
-import {  ListItemIcon } from '@mui/material';
+import { ListItemIcon } from '@mui/material';
 
 import { PopUpMenu } from '../../../../components/common'
 import { ReactComponent as AddPicIcon } from '../../../../assets/icons/addPic.svg'
@@ -17,13 +17,13 @@ const ChangeProfilePic = () =>
 
     const profileImage = useSelector(state => state.auth?.userData?.profileImage);
     const dispatch = useDispatch();
-    
+
     const closeMenu = () =>
     {
         dispatch(uiActions.closePopMenu(profileUploadId));
     };
 
-    const [images, setImages] = useState();
+    const [images, setImages] = useState([]);
 
     const {
         handleChangeProfilePic,
@@ -34,7 +34,7 @@ const ChangeProfilePic = () =>
     const onChangeImage = (imageList) =>
     {
         const selectedFile = imageList[0];
-        setImages(selectedFile);
+        setImages([selectedFile]);
         const formData = new FormData();
         formData.append("userImage", selectedFile.file);
         formData.append("type", "upload");
@@ -47,6 +47,7 @@ const ChangeProfilePic = () =>
         const formData = new FormData();
         formData.append("type", "remove");
         handleChangeProfilePic(formData, "default.png");
+        setImages([])
     }
 
     return (
@@ -62,6 +63,7 @@ const ChangeProfilePic = () =>
                     >
                         {({
                             onImageUpload,
+                            onImageUpdate,
                             dragProps,
                         }) =>
                         {
@@ -83,7 +85,11 @@ const ChangeProfilePic = () =>
                                     }}
                                     menuItems={
                                         [{
-                                            onClick: () => { onImageUpload(); closeMenu(); },
+                                            onClick: () =>
+                                            {
+                                                profileImage !== "default.png" ? onImageUpdate(0) : onImageUpload()
+                                                closeMenu();
+                                            },
                                             children:
                                                 <div
                                                     className='center-y'
@@ -92,7 +98,7 @@ const ChangeProfilePic = () =>
                                                     <ListItemIcon className={classes.icon}>
                                                         <AddPicIcon className={classes.listIcon} />
                                                     </ListItemIcon>
-                                                    Upload Photo
+                                                    {profileImage !== "default.png" ? "Change Photo" : "Upload Photo"}
                                                 </div>,
                                         },
                                         {

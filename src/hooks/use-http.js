@@ -50,6 +50,7 @@ const useHttp = () =>
                     && (!message.includes("no") && !message.includes("yet")) &&
                     //  for not make error when notification failed
                     (!message.includes("notification"))
+                    && (data.statusCode !== 500 && !data.success)
                 ) { popMessage(message || "Something went wrong", { variant: "error" }) }
             }
         } catch (error)
