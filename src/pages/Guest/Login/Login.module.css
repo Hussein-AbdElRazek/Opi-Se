@@ -24,3 +24,11 @@
 .divider {
     margin-bottom: 10px;
 }
+
+.logo {
+    margin-bottom: -20px;
+}
+
+.logo svg {
+    width: 180px;
+}

@@ -31,3 +31,14 @@
         padding: 0;
     }
 }
+
+/* No trash img section*/
+.noTrash img {
+    margin-top: -50px;
+}
+
+@media (max-width:900px) {
+    .noTrash img {
+        margin-top: -30px;
+    }
+}

@@ -1,10 +1,10 @@
 import React from 'react'
 import { PopChatCard } from '../../../components/ui'
 import ChatProfileHeader from './ChatProfileHeader'
-import { ButtonBase } from '@mui/material'
+// import { ButtonBase } from '@mui/material'
 
 // import { ReactComponent as CallIcon } from '../../../assets/icons/call.svg'
-import { ReactComponent as VideoIcon } from '../../../assets/icons/video.svg'
+// import { ReactComponent as VideoIcon } from '../../../assets/icons/video.svg'
 import { ProfilePic } from '../../../components/ui'
 import classes from './styles/ChatProfileHeader.module.css'
 import ChatProfileTabs from './ChatProfileTabs'
@@ -44,12 +44,13 @@ const ChatProfileUi = (props) =>
                 >
                     {profileData?.userName}
                 </h6>
-                <ButtonBase
+
+                {/* stroke to change color of border of icon */}
+                {/* <ButtonBase
                     className={classes.iconBtn}
                 >
-                    {/* stroke to change color of border of icon */}
                     <VideoIcon stroke='var(--primary)' />
-                </ButtonBase>
+                </ButtonBase> */}
                 {/* stroke to change color of border of icon */}
                 {/* <ButtonBase
                     className={classes.iconBtn}

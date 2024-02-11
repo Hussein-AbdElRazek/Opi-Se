@@ -12,6 +12,8 @@ import useCancelEditNote from './hooks/use-cancel-edit-note';
 import usePinNote from './hooks/use-pin-note';
 import useMoveNoteToTrash from './hooks/use-move-note-to-trash';
 import useResetNotesSlice from '../../../hooks/use-reset-notes-slice';
+import VectorAndText from '../../../components/common/VectorAndText';
+import noNotesImg from '../../../assets/images/noNotes.png'
 
 // in these page i use Facade design pattern
 // bcs it's has many features 
@@ -64,6 +66,20 @@ const Notes = () =>
                 moveToTrash={handleMoveNoteToTrash}
             />
             {isLoadingGetNotes && <LoadingCenter />}
+            {(!notes.length && !isLoadingGetNotes) && (
+                <VectorAndText
+                    isBig={true}
+                    img={noNotesImg}
+                    h="No Notes yet"
+                    p={
+                        <>
+                            No notes are available yet. Start creating.
+                            <br />
+                            your first note.
+                        </>
+                    }
+                />
+            )}
             <NotesBar />
         </>
     )

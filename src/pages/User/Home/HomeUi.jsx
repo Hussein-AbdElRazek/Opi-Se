@@ -35,8 +35,7 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
                 </HeaderText>
 
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    Welcome to our learning community! Step into a world of opportunity at Opi Se where learning is a shared journey. Start exploring, connecting, and achieving your academic goals.
                 </p>
 
                 <div
@@ -76,6 +75,8 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
                 LinkComponent={NavLink}
                 to="chats"
                 className={classes.messageIcon}
+                disabled={!isHavePartner}
+                title="Chats"
             >
                 <Badge
                     overlap="circular"

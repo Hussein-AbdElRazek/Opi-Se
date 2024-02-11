@@ -14,6 +14,8 @@ const languagesInputs = [
         label: "Level",
         size: 4,
         sm: 3,
+        min:1,
+        max:5,
     },
 ]
 

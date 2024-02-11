@@ -1,7 +1,9 @@
-import React from 'react'
+import { List } from '@mui/material'
+
 import { PopUpCard } from '../../../components/ui'
 import { NotificationAndRequestItem } from '../../../components/common'
-import { List } from '@mui/material'
+import VectorAndText from '../../../components/common/VectorAndText'
+import noNotificationImg from '../../../assets/images/noNotification.png'
 
 const NotificationsUi = ({ notifications, isLoadingGetNotifications }) =>
 {
@@ -22,14 +24,18 @@ const NotificationsUi = ({ notifications, isLoadingGetNotifications }) =>
                     )
                 })}
             </List>
-            {(!notifications.length && !isLoadingGetNotifications) && (<p
-                style={{
-                    width: "100%",
-                    textAlign: "center"
-                }}
-            >
-                No notifications yet!
-            </p>
+            {(!notifications.length && !isLoadingGetNotifications) && (
+                <VectorAndText
+                    img={noNotificationImg}
+                    h={"No Notifications yet"}
+                    p={
+                        <>
+                            You have no notifications right now.
+                            <br />
+                            come back later
+                        </>
+                    }
+                />
             )}
         </PopUpCard>
     )

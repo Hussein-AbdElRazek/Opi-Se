@@ -24,6 +24,7 @@ export const PopMenu = () =>
     const dispatch = useDispatch();
     const closeMenu = () => { dispatch(uiActions.closePopMenu(menuId)) };
     const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
+    const isHavePartner = useSelector(state => state?.auth?.userData?.matchId);
 
     const menuItems = [
         {
@@ -49,8 +50,9 @@ export const PopMenu = () =>
             to: "/",
         },
         {
-            onClick: closeMenu,
-            menuItemComponent: NavLink,
+            // onClick: closeMenu,
+            // menuItemComponent: NavLink,
+            disabled: !isHavePartner,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -58,11 +60,12 @@ export const PopMenu = () =>
                     </ListItemIcon>
                     Progress
                 </>,
-            to: "/progress",
+            // to: "/progress",
         },
         {
-            onClick: closeMenu,
-            menuItemComponent: NavLink,
+            // onClick: closeMenu,
+            // menuItemComponent: NavLink,
+            disabled: true,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -70,11 +73,12 @@ export const PopMenu = () =>
                     </ListItemIcon>
                     Tasks
                 </>,
-            to: "/tasks",
+            // to: "/tasks",
         },
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
+            disabled: !isHavePartner,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -87,6 +91,7 @@ export const PopMenu = () =>
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
+            disabled: !isHavePartner,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>

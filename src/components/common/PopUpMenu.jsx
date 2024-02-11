@@ -92,6 +92,7 @@ export const PopUpMenu = (props) =>
                             disableGutters={item.noHover}
                             className={`${classes.item}${item.noHover ? classes.noHover : ""}`}
                             target={item.target}
+                            disabled={!!item?.disabled}
                         >
                             {item.children}
                         </MenuItem>

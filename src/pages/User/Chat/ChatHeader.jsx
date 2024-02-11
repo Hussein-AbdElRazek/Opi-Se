@@ -1,10 +1,10 @@
-import { useContext } from 'react';
-import { Avatar, ButtonBase, IconButton } from '@mui/material'
+// import { useContext } from 'react';
+import { Avatar, ButtonBase } from '@mui/material'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import classes from './Chat.module.css'
 import Session from './Session';
-import VideoContext from '../../../videoCallStore/video-call-context';
+// import VideoContext from '../../../videoCallStore/video-call-context';
 
 const ChatHeader = ({ userData }) =>
 {
@@ -14,7 +14,7 @@ const ChatHeader = ({ userData }) =>
     {
         navigate("/chats")
     }
-    const { callUser } = useContext(VideoContext);
+    // const { callUser } = useContext(VideoContext);
 
     const navigateChatProfile = () =>
     {
@@ -26,7 +26,7 @@ const ChatHeader = ({ userData }) =>
         >
             {/* back icon , userInfo*/}
             <div
-            className={classes.left}
+                className={classes.left}
             >
                 {/* back icon */}
                 <ButtonBase
@@ -78,14 +78,14 @@ const ChatHeader = ({ userData }) =>
                     </svg>
                 </IconButton> */}
                 {/* video icon */}
-                <IconButton
+                {/* <IconButton
                     title='Video call'
                     onClick={() => { callUser(userData.id) }}                >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path fillRule="evenodd" clipRule="evenodd" d="M13.125 17.75H5.25C4.007 17.75 3 16.743 3 15.5V8.5C3 7.257 4.007 6.25 5.25 6.25H13.125C14.368 6.25 15.375 7.257 15.375 8.5V15.5C15.375 16.743 14.368 17.75 13.125 17.75Z" stroke="#000E08" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M15.375 13.097L19.17 16.151C19.906 16.744 21 16.22 21 15.275V8.72498C21 7.77998 19.906 7.25598 19.17 7.84898L15.375 10.903" stroke="#000E08" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                </IconButton>
+                </IconButton> */}
             </div>
 
         </div>

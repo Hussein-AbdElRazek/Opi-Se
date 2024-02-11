@@ -5,7 +5,9 @@ import useGetTrashNotes from './hooks/use-get-trash-notes';
 import { NotesList } from '../../../components/notes';
 import { LoadingCenter } from '../../../components/ui';
 import useResetNotesSlice from '../../../hooks/use-reset-notes-slice';
-
+import VectorAndText from '../../../components/common/VectorAndText';
+import noTrashImg from '../../../assets/images/noTrash.png'
+import classes from './styles/TrashBar.module.css'
 const NotesTrash = () =>
 {
     // reset notes slice
@@ -29,8 +31,24 @@ const NotesTrash = () =>
                 lastElementRef={lastElementRef}
                 isTrash={true}
             />
-
             {isLoadingGetTrashNotes && <LoadingCenter />}
+            {(!notes.length && !isLoadingGetTrashNotes) && (
+                <div className={classes.noTrash}>
+                    <VectorAndText
+                        isBig={true}
+                        img={noTrashImg}
+                        h="No Notes in Trash yet"
+                        p={
+                            <>
+                                If there are any notes you no longer need, you can
+                                <br />
+                                permanently delete them here.
+                            </>
+                        }
+                    />
+                </div>
+
+            )}
         </>
     )
 }

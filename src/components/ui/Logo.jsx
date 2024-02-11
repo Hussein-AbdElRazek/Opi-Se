@@ -1,17 +1,13 @@
-import { useNavigate } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
+import { ReactComponent as OpiSeLogo } from '../../assets/icons/opiSeLogo.svg'
+import classes from './styles/Logo.module.css'
 export const Logo = () =>
 {
-    const navigate = useNavigate();
-
     return (
-        <h1
-            style={{
-                margin: ' 0',
-                cursor:"pointer"
-            }}
-            onClick={() => { navigate("/") }}
-
-        >Logo</h1>
+        <NavLink
+            to="/"
+        >
+            <OpiSeLogo className={classes.logo} />
+        </NavLink>
     )
 }

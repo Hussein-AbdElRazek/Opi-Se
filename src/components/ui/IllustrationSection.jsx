@@ -22,11 +22,11 @@ export const IllustrationSection = ({ type, size }) =>
                         `url(${signupBackground})` :
                         type === "forgotPassword" ?
                             `url(${forgotPasswordBackground})` :
-                        type === "resetPassword" ?
+                            type === "resetPassword" ?
                                 `url(${resetPasswordBackground})` :
-                        type === "home" ?
+                                type === "home" ?
                                     `url(${homeBackground})` :
-                            null
+                                    null
             }}
         >
             {type === "login" && (
@@ -37,7 +37,7 @@ export const IllustrationSection = ({ type, size }) =>
                         <HeaderText
 
                         >
-                            Welcome Back To, LoGo
+                            Welcome Back To, Opi Se
                         </HeaderText>
                         <Paragraph>
                             Login now for exclusive access!

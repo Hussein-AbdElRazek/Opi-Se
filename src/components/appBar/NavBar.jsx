@@ -49,6 +49,7 @@ export const NavBar = ({ title }) =>
     ]
 
     const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
+    const isHavePartner = useSelector(state => state?.auth?.userData?.matchId);
 
     return (
         <Grid
@@ -63,7 +64,10 @@ export const NavBar = ({ title }) =>
                 xs={9}
                 className="center-y"
             >
-                <Logo />
+                <div className={classes.logo}>
+                    <Logo />
+                </div>
+
                 <div
                     className={classes.searchBar}
                 >
@@ -87,6 +91,7 @@ export const NavBar = ({ title }) =>
                         to={to}
                         component={NavLink}
                         target={target}
+                        disabled={(!isHavePartner && title!=="Home")|| (title === "Progress" || title === "Tasks")}
                     >
                         <Icon fill='var(--black-40)' />
                     </IconButton>

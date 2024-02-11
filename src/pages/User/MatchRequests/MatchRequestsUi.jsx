@@ -1,7 +1,10 @@
 import { List } from "@mui/material"
+
 import { LoadingCenter, PopUpCard } from "../../../components/ui"
 import { NotificationAndRequestItem } from "../../../components/common/NotificationAndRequestItem"
 import MatchActions from "./MatchActions"
+import VectorAndText from "../../../components/common/VectorAndText"
+import noRequestsImg from '../../../assets/images/noRequests.png'
 
 const MatchRequestsUi = ({ requests, isLoadingGetRequests }) =>
 {
@@ -24,14 +27,18 @@ const MatchRequestsUi = ({ requests, isLoadingGetRequests }) =>
                     )
                 })}
             </List>
-            {(!requests.length && !isLoadingGetRequests) && (<p
-                style={{
-                    width: "100%",
-                    textAlign: "center"
-                }}
-            >
-                No requests yet!
-            </p>
+            {(!requests.length && !isLoadingGetRequests) && (
+                <VectorAndText
+                    img={noRequestsImg}
+                    h="No Requests yet"
+                    p={
+                        <>
+                            You have no Requests right now.
+                            <br />
+                            come back later
+                        </>
+                    }
+                />
             )}
             {isLoadingGetRequests && <LoadingCenter />}
         </PopUpCard>

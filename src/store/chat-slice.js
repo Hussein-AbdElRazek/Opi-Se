@@ -17,12 +17,19 @@ export const sendMessage = createAsyncThunk(
                 messagesId: payload.messagesId, newMessage: payload.newMessage
             })
         );
-        // payload?.onPutMessage();
-        socket.emit('sendMessage', payload.message, ({ success }) =>
+        socket.emit('sendMessage', payload.message, (res) =>
         {
-            if (success)
+            console.log("res", res)
+
+            // update id from server
+            if (res?.success)
             {
-                // TODO handle put correct mark and if err but err mark
+                thunkAPI.dispatch(chatActions.updateMessageId(
+                    {
+                        _id: res?.data?._id,
+                        oldId: payload.newMessage?._id,
+                        messagesId: payload.messagesId
+                    }))
             }
         });
     }
@@ -310,7 +317,19 @@ const chatSlice = createSlice({
             state.newMessageMark = action.payload;
             localStorage.setItem("newMessageMark", JSON.stringify(action.payload))
 
-        }
+        },
+        updateMessageId(state, action)
+        {
+            // to update id when receive it from server 
+            state.messages[action.payload.messagesId] = state.messages[action.payload.messagesId].map(ele =>
+            {
+                if (ele._id === action.payload.oldId)
+                {
+                    return { ...ele, _id: action.payload._id }
+                }
+                else return ele;
+            })
+        },
     },
 })
 

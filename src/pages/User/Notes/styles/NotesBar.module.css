@@ -68,3 +68,9 @@
         right: 30px;
     }
 }
+
+@media (max-width:600px) {
+    .container {
+        right: 10px;
+    }
+}

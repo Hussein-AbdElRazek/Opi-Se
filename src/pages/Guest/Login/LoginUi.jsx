@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { loginInitialValues, loginInputs } from './loginInputsData'
 import { loginValidationSchema } from './loginValidationSchema'
 import classes from './Login.module.css'
-import { LoginWithSocial } from '../../../components/loginWithSocial'
 
 import
 {
@@ -35,7 +34,9 @@ const LoginUi = (props) =>
             <FormCard
                 size="small"
             >
-                <Logo />
+                <div className={`center-x ${classes.logo}`}>
+                    <Logo />
+                </div>
                 <HeaderText>
                     Login
                 </HeaderText>
@@ -68,7 +69,6 @@ const LoginUi = (props) =>
                     </Btn>
                     <Divider className={classes.divider}>Or</Divider>
                     <TextAndLink type="login" />
-                    <LoginWithSocial />
                 </FormikContainer>
             </FormCard>
             <IllustrationSection
