@@ -16,11 +16,11 @@ export const compareObjects = (obj1, obj2) =>
             {
                 // Custom comparison for  array of objects
                 if (obj1[key].length !== obj2[key].length) diffs[key] = obj2[key];
-                obj1[key].forEach(ele1 =>
+                obj1[key].forEach((ele1, index1) =>
                 {
-                    obj2[key].forEach(ele2 =>
+                    obj2[key].forEach((ele2, index2) =>
                     {
-                        if (JSON.stringify(ele1) !== JSON.stringify(ele2))
+                        if (JSON.stringify(ele1) !== JSON.stringify(ele2) && (index1 === index2))
                         {
                             diffs[key] = obj2[key];
                             return

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import RecommendationListUi from './RecommendationListUi'
 import useHttp from '../../../../hooks/use-http';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const RecommendationList = () =>
 {
@@ -13,6 +14,8 @@ const RecommendationList = () =>
     const [recommendedList, setRecommendedList] = useState([]);
     const [lastPage, setLastPage] = useState(-1);
 
+    const { enqueueSnackbar: popMessage } = useSnackbar();
+    const navigate = useNavigate()
     // get new data if page changed
     useEffect(() =>
     {
@@ -21,6 +24,11 @@ const RecommendationList = () =>
         {
             const getResponse = ({ message, data, totalPages }) =>
             {
+                if (message === "there is no recommendations yet !")
+                {
+                    popMessage("There is no recommendations yet for you come back later.");
+                    navigate("/");
+                }
                 if (message === "success")
                 {
                     setRecommendedList(data);
@@ -39,7 +47,7 @@ const RecommendationList = () =>
 
         // to get new data only if page changed
         if (lastPage !== currentPage) handleRecommendPartner();
-    }, [RecommendPartner, lastPage, searchParams, setSearchParams])
+    }, [RecommendPartner, lastPage, navigate, popMessage, searchParams, setSearchParams])
 
     return (
         <RecommendationListUi

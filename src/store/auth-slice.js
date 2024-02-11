@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { clearArrayOfObjects } from '../helpers/clearArrayOfObjects';
 
 
 const initialAuthState = {
@@ -15,10 +16,18 @@ const authSlice = createSlice({
         login(state, action)
         {
             state.token = action.payload.token;
-            state.userData = action.payload.userData;
+            let clearLanguagesArray = clearArrayOfObjects(action.payload.userData.languages);
+            let clearUserSkillsArray = clearArrayOfObjects(action.payload.userData.userSkills);
+            let tempUserData = {
+                ...action.payload.userData,
+                languages: clearLanguagesArray,
+                userSkills: clearUserSkillsArray,
+            }
+            state.userData = tempUserData;
+
             state.isLoggedIn = true;
             localStorage.setItem("token", action.payload.token)
-            localStorage.setItem("userData", JSON.stringify(action.payload.userData))
+            localStorage.setItem("userData", JSON.stringify(tempUserData))
         },
         logout(state)
         {
@@ -34,7 +43,7 @@ const authSlice = createSlice({
         },
         updateUserNotifications(state, action)
         {
-            console.log("new ",action.payload);
+            console.log("new ", action.payload);
             state.notifications.unshift(action.payload)
             localStorage.setItem("notifications", JSON.stringify(state.notifications))
         },

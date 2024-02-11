@@ -4,10 +4,9 @@ export const clearArrayOfObjects = (arrayOfObjects) =>
     const filteredObjects = arrayOfObjects.filter(object =>
     {
         // Check if the object is empty
-        delete object._id;
+        if (object._id) delete object._id;
         const isEmpty = Object.values(object).every(value => !value);
         return !isEmpty;
     });
-
     return filteredObjects;
 }

@@ -38,7 +38,8 @@ export const editProfileInputs = [
         label: "Age",
         min: 10,
         max: 60,
-        size: 6
+        size: 6,
+        disabled: true
     },
     {
         control: "array",
