@@ -1,6 +1,6 @@
 import classes from './styles/FormCard.module.css'
 
-export const FormCard = ({ children, size, action }) =>
+export const FormCard = ({ children, size, action, isSignUp }) =>
 {
     return (
         <div
@@ -12,6 +12,7 @@ export const FormCard = ({ children, size, action }) =>
                         classes.full :
                         classes.small
                 }
+                ${!isSignUp ? classes.contentNotSignUp : ""}
             `}
         >
             <div

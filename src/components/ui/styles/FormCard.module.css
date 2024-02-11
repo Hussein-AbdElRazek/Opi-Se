@@ -57,6 +57,7 @@
     }
 }
 
+
 @media (max-width:600px) {
 
     .small,
@@ -80,4 +81,13 @@
         height: calc(100% - 10px);
         width: calc(100% - 10px);
     }
+
+    .contentNotSignUp {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
 }

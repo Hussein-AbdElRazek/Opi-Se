@@ -26,6 +26,7 @@ const SignUpUi = (props) =>
     >
       <FormCard
         size="big"
+        isSignUp={true}
       >
         <HeaderText>
           Sign Up
