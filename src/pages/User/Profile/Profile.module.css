@@ -95,12 +95,15 @@
 
 .userData {
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 .userData h4 {
     font-size: var(--font-size-800);
     color: var(--text-header);
     margin: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .userData p {
