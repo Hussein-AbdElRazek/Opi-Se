@@ -1,0 +1,21 @@
+.container {
+    outline: none;
+    text-align: center;
+}
+
+.container h4 {
+    text-align: center;
+    color: var(--secondary);
+    font-size: var(--font-size-800) !important;
+
+}
+
+.container p {
+    margin: 50px 0 10px 0;
+    font-weight: 500;
+    font-size: var(--font-size-600);
+}
+
+.container span {
+    margin: 10px 0;
+}

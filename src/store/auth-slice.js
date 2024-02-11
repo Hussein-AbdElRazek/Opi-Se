@@ -16,8 +16,8 @@ const authSlice = createSlice({
         login(state, action)
         {
             state.token = action.payload.token;
-            let clearLanguagesArray = clearArrayOfObjects(action.payload.userData.languages);
-            let clearUserSkillsArray = clearArrayOfObjects(action.payload.userData.userSkills);
+            let clearLanguagesArray = clearArrayOfObjects(action.payload?.userData?.languages || []);
+            let clearUserSkillsArray = clearArrayOfObjects(action.payload?.userData?.userSkills || []);
             let tempUserData = {
                 ...action.payload.userData,
                 languages: clearLanguagesArray,

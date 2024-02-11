@@ -1,16 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ActionsLayout from './ActionsLayout'
 import { Btn } from '../../../../components/inputs';
 import { ReactComponent as UnMatchIcon } from '../../../../assets/icons/unMatch.svg';
 import { ReactComponent as MessageCircleIcon } from '../../../../assets/icons/messageCircle.svg';
 import classes from '../styles/Btns.module.css'
+import DisMatchPop from './DisMatchPop';
 const MyPartnerActions = ({ userData }) =>
 {
+    const [isRatePopOpen, setIsRatePopOpen] = useState(false);
 
+    const closeRatePop = () =>
+    {
+        setIsRatePopOpen(false)
+    }
+
+    const openRatePop = () =>
+    {
+        setIsRatePopOpen(true)
+    }
+    
     return (
         <ActionsLayout>
             <Btn
                 startIcon={<UnMatchIcon />}
+                onClick={openRatePop}
             >
                 UnMatch
             </Btn>
@@ -22,6 +35,12 @@ const MyPartnerActions = ({ userData }) =>
             >
                 Message
             </Btn>
+
+            {/* Confirm disMatch modal */}
+            <DisMatchPop
+                open={isRatePopOpen}
+                onClose={closeRatePop}
+            />
         </ActionsLayout>
     )
 }
