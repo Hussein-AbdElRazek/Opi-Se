@@ -11,7 +11,8 @@
     padding-right: 50px !important;
 }
 
-.input input:focus {
+.input input:focus,
+.input textarea:focus {
     border-color: var(--focus);
 }
 

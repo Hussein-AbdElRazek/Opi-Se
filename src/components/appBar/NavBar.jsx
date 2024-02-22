@@ -13,6 +13,7 @@ import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as ReportIcon } from '../../assets/icons/report.svg'
 import { ReactComponent as NotificationIcon } from '../../assets/icons/notification.svg'
 import { ReactComponent as AddFriendIcon } from '../../assets/icons/addFriend.svg'
+import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import { PopMenu } from './PopMenu'
 import { useSelector } from 'react-redux'
 
@@ -45,6 +46,11 @@ export const NavBar = ({ title }) =>
             to: `https://userdashboard-cv8d.onrender.com/${nationalId}`,
             Icon: ReportIcon,
             target: "_blank"
+        },
+        {
+            title: 'Mental Health',
+            to: `/mental-health`,
+            Icon: MentalHealthIcon,
         },
     ]
 

@@ -7,6 +7,7 @@ import userReducer from './user-slice';
 import notesReducer from './notes-slice';
 import uiReducer from './ui-slice';
 import searchReducer from './search-slice';
+import questionsReducer from './questions-slice';
 
 const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
         notes: notesReducer,
         ui: uiReducer,
         search: searchReducer,
+        questions: questionsReducer,
     }
 });
 

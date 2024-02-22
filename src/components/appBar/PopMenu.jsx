@@ -1,4 +1,7 @@
-import React from 'react'
+import { Badge, ListItemIcon } from '@mui/material'
+import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { PopUpMenu as PopUpMenuComponent } from '../common'
 import { ReactComponent as MenuIcon } from '../../assets/icons/menu.svg'
 import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
@@ -8,10 +11,8 @@ import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as ReportIcon } from '../../assets/icons/report.svg'
 import { ReactComponent as NotificationIcon } from '../../assets/icons/notification.svg'
 import { ReactComponent as AddFriendIcon } from '../../assets/icons/addFriend.svg'
+import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import classes from './styles/PopMenu.module.css'
-import { Badge, ListItemIcon } from '@mui/material'
-import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { uiActions } from '../../store/ui-slice'
 import { ProfileIcon } from './ProfileIcon'
 
@@ -27,6 +28,7 @@ export const PopMenu = () =>
     const isHavePartner = useSelector(state => state?.auth?.userData?.matchId);
 
     const menuItems = [
+        // profile menu
         {
             noHover: true,
             children:
@@ -37,6 +39,7 @@ export const PopMenu = () =>
                     {userName}
                 </>,
         },
+        // home 
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
@@ -49,6 +52,7 @@ export const PopMenu = () =>
                 </>,
             to: "/",
         },
+        // progress
         {
             // onClick: closeMenu,
             // menuItemComponent: NavLink,
@@ -62,6 +66,7 @@ export const PopMenu = () =>
                 </>,
             // to: "/progress",
         },
+        // tasks
         {
             // onClick: closeMenu,
             // menuItemComponent: NavLink,
@@ -75,6 +80,7 @@ export const PopMenu = () =>
                 </>,
             // to: "/tasks",
         },
+        // notes
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
@@ -88,6 +94,7 @@ export const PopMenu = () =>
                 </>,
             to: "/notes",
         },
+        // report
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
@@ -102,6 +109,20 @@ export const PopMenu = () =>
             to: `https://userdashboard-cv8d.onrender.com/${nationalId}`,
             target: "_blank"
         },
+        // mental health
+        {
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
+            children:
+                <>
+                    <ListItemIcon className={classes.icon}>
+                        <MentalHealthIcon fill='var(--black-40)' />
+                    </ListItemIcon>
+                    Mental Health
+                </>,
+            to: `/mental-health`,
+        },
+        // notifications
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
@@ -112,17 +133,16 @@ export const PopMenu = () =>
                         badgeContent=" "
                         invisible={!isNewNotification}
                         variant="dot"
-
                     >
                         <ListItemIcon className={classes.icon}>
                             <NotificationIcon fill='var(--black-40)' />
                         </ListItemIcon>
                     </Badge>
                     Notifications
-
                 </>,
             to: "/notifications",
         },
+        // requests
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,

@@ -20,6 +20,7 @@
     --secondary-10: rgba(3, 105, 105, 0.10);
     --secondary-0: rgba(3, 105, 105, 0.0);
     --secondary-3: rgba(3, 105, 105, 0.3);
+    --secondary-25: rgba(3, 105, 105, 0.25);
     --chat-receive: #F5F5F5;
     --chat-date: #F8FBFA;
     --chat-input: #F3F6F6;
@@ -42,6 +43,7 @@
     --note5: #FFE6C8;
     --light-bg: #E4E4E4;
     --light-orange: #F1CE0F;
+    --stepper-bg: #D9D9D9;
     /* ------------------------------ */
 
     /* Font Size */
@@ -89,6 +91,16 @@
 
 .center-text {
     text-align: center;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .height-100vh {

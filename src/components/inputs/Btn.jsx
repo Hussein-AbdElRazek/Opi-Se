@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Btn = (props) =>
 {
-    const { children, onClick, isLoading, disabled, type, size, endIcon, startIcon, className, to } = props;
+    const { children, onClick, isLoading, disabled, type, size, endIcon, startIcon, className, to, ...rest } = props;
     return (
         <LoadingButton
             type={type}
@@ -23,6 +23,7 @@ export const Btn = (props) =>
             disabled={disabled}
             LinkComponent={NavLink}
             to={to}
+            {...rest}
         >
             {children}
         </LoadingButton>

@@ -16,3 +16,5 @@ export const ageMin = "Minimum age is 10 years old"
 
 export const ageMax = "Maximum age is 60 years old"
 
+export const number = "Enter a number"
+

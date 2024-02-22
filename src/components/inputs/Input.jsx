@@ -13,15 +13,18 @@ export const Input = (props) =>
         disabled,
         dir,
         children,
+        onChange,
+        onBlur,
         ...rest
     } = props;
 
     return (
         <Field
             name={name} >
-            {({ field, meta: { touched, error } }) =>
+            {({ field, form, meta: { touched, error } }) =>
             {
                 const inputError = !!error && touched;
+                const {  handleBlur } = form;
                 return (
                     <FormControl
                         className={`
@@ -54,6 +57,11 @@ export const Input = (props) =>
                             className={!!children ? classes.password : ""}
                             // TODO handle it from validation for langauge level
                             inputProps={{ min: rest.min, max: rest.max }}
+                            onBlur={(e) =>
+                            {
+                                if (onBlur) onBlur(e, handleBlur);
+                                else handleBlur();
+                            }}
                         />
                         {children}
                         <ErrorMessage

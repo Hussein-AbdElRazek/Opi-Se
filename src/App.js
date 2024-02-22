@@ -77,7 +77,7 @@ function App()
   // General sockets
   // handle join rooms + necessary listener in app root
   useGeneralSocket();
-  
+
   return (
     <div>
       {isLoggedIn && !firstTime ? (

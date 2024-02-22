@@ -1,0 +1,157 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 20px 40px 20px;
+}
+
+.card {
+    width: 100%;
+    padding: 20px 30px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+    background-color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.scoreParent {
+    position: relative;
+}
+
+.scoreParent,
+.suggestion {
+    flex-wrap: wrap;
+}
+
+.scoreInfo {
+    width: 60%;
+}
+
+.scoreInfo h1,
+.scoreInfo p,
+.suggestion h1 {
+    text-align: left;
+}
+
+.scoreParent h1,
+.suggestion h1,
+.score h4,
+.progress {
+    color: var(--secondary);
+}
+
+.scoreParent h1,
+.suggestion h1 {
+    margin: 0px 0 10px 0;
+}
+
+.score h4 {
+    position: absolute;
+    font-size: var(--font-size-600);
+    font-family: "Montserrat Alternates",
+        sans-serif !important;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.progressBG {
+    position: absolute;
+    color: var(--secondary-3);
+}
+
+.suggestion ul {
+    margin-left: -20px;
+    white-space: pre-line;
+}
+
+.suggestion li {
+    font-size: var(--font-size-800);
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.btn {
+    width: 240px;
+    margin: -20px auto 0 auto;
+}
+
+.btn a {
+    font-size: var(--font-size-500);
+}
+
+@media (max-width:900px) {
+    .content {
+        margin: 20px 0px 40px 0px;
+    }
+
+    .card {
+        padding: 5px 30px;
+    }
+
+    .scoreInfo {
+        width: calc(100% - 160px);
+    }
+
+    .scoreParent h1,
+    .suggestion h1 {
+        margin: 0px 0 8px 0;
+    }
+
+    .progress,
+    .progressBG {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .progress svg,
+    .progressBG svg {
+        width: 120px;
+        height: 120px;
+    }
+
+    .suggestion {
+        padding: 30px;
+    }
+
+    .suggestion li {
+        font-size: var(--font-size-600);
+        margin-bottom: 8px;
+    }
+
+    .suggestion ul {
+        margin-bottom: 0px;
+        margin-top: 5px;
+    }
+
+    .btn a {
+        font-size: var(--font-size-400);
+    }
+
+}
+
+@media (max-width:600px) {
+    .scoreParent {
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .scoreInfo {
+        width: 100%;
+    }
+
+    .scoreInfo h1,
+    .scoreInfo p {
+        text-align: center;
+    }
+
+    .progress svg,
+    .progressBG svg {
+        width: 140px;
+        height: 140px;
+    }
+
+    .suggestion li {
+        font-size: var(--font-size-500);
+    }
+
+}

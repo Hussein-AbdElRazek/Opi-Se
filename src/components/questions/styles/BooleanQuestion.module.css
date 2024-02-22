@@ -1,0 +1,45 @@
+.container {
+    margin: 40px 0;
+    display: block;
+}
+
+.container h1 {
+    font-size: var(--font-size-900);
+    margin-bottom: 25px;
+    margin-top: 0;
+    font-weight: 500 !important;
+}
+
+.formControl label {
+    margin: 0;
+}
+
+.checkBtn {
+    width: 90px;
+    height: 50px;
+    font-size: var(--font-size-300);
+    font-weight: 500;
+    background-color: var(--primary);
+}
+
+.firstCheckBtn {
+    border-radius: 10px 0 0 10px;
+    border-right: 1px solid var(--black-10);
+}
+
+.secondCheckBtn {
+    border-radius: 0 10px 10px 0;
+    border-left: 1px solid var(--black-10);
+}
+
+.checkBtn:hover,
+.checkedBtn {
+    background-color: var(--secondary-25);
+    color: var(--secondary);
+}
+
+@media (max-width:900px) {
+    .container h1 {
+        font-size: var(--font-size-800);
+    }
+}

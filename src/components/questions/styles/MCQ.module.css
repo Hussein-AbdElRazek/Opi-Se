@@ -1,0 +1,29 @@
+.mcqContainer {
+    /* because of answer have margin bottom*/
+    margin-bottom: -20px !important;
+}
+
+.answer {
+    width: calc(100% - 20px);
+    max-width: 500px;
+    background-color: var(--primary);
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 1px solid var(--primary);
+    margin: 0 0 20px 0;
+}
+
+.answer span {
+    font-weight: 500;
+}
+
+.answer svg {
+    width: 20px;
+    height: 20px;
+}
+
+.answer:hover,
+.checked {
+    background-color: var(--secondary-25);
+    color: var(--secondary);
+}

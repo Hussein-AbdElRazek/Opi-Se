@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
 import Home from '../pages/User/Home/Home'
 import Profile from '../pages/User/Profile/Profile'
-import About from '../pages/User/About/About'
 import EditProfile from '../pages/User/EditProfile/EditProfile'
 import ChangePassword from '../pages/User/ChangePassword/ChangePassword'
 import Chats from '../pages/User/Chats/Chats'
@@ -13,8 +14,8 @@ import ChatProfile from '../pages/User/ChatProfile/ChatProfile'
 import Notes from '../pages/User/Notes/Notes'
 import NotesTrash from '../pages/User/NotesTrash/NotesTrash'
 import RecommendationList from '../pages/User/Home/RecommendationList/RecommendationList'
-import { useSelector } from 'react-redux'
-
+import MentalHealthQuestions from '../pages/User/MentalHealth/MentalHealthQuestions/MentalHealthQuestions'
+import MentalHealthResult from '../pages/User/MentalHealth/MentalHealthResult/MentalHealthResult'
 
 const User = () =>
 {
@@ -40,7 +41,8 @@ const User = () =>
             <Route path='/profile/edit' element={<EditProfile />} />
             <Route path='/profile/change-password' element={<ChangePassword />} />
 
-            <Route path='/about' element={<About />} />
+            <Route path='/mental-health' element={<MentalHealthResult />} />
+            <Route path='/mental-health/questions' element={<MentalHealthQuestions />} />
 
             {isHavePartner && (
                 <>

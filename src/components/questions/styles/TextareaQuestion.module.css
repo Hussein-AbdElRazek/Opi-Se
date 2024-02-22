@@ -1,0 +1,16 @@
+.container textarea {
+    background-color: var(--primary);
+    border: none;
+    padding: 15px;
+    border-radius: var(--border-radius-inputs);
+}
+
+.container div {
+    margin-top: 0 !important;
+}
+
+@media (max-width:900px) {
+    .container label {
+        font-size: var(--font-size-800);
+    }
+}
