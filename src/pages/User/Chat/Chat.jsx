@@ -34,7 +34,7 @@ const Chat = () =>
         if (messageContainerRef.current)
         {
             messageContainerRef.current?.lastElementChild
-                ?.scrollIntoView({ behavior: 'smooth' });
+                ?.scrollIntoView();
         }
     };
     const [isScrollToBottom, setIsScrollToBottom] = useState(false);
@@ -169,6 +169,13 @@ const Chat = () =>
     {
         dispatch(chatActions.updateNewMessageMark(false));
     }, [dispatch])
+
+    // when new message scroll bottom
+    const newMessageMark = useSelector(state => state?.chat?.newMessageMark)
+    useEffect(() =>
+    {
+        if (newMessageMark) scrollToBottom();
+    }, [newMessageMark])
     return (
         <ChatUi
             messages={messages}
