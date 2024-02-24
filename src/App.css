@@ -73,6 +73,7 @@
     --layer-nav: 999;
     --layer-video-call: 1000;
     --layer-loading: 5000;
+    --layer-popper: 1500;
     --layer-modal: 2000;
     --layer-incoming-call: 3000;
     --layer-100: 10;
@@ -134,4 +135,10 @@ a {
 .MuiBadge-overlapCircular {
     background-color: var(--secondary) !important;
     right: 30%;
+}
+
+/* Pop menu & popper */
+.MuiPopper-root {
+    z-index: var(--layer-popper);
+    max-width: 100%;
 }

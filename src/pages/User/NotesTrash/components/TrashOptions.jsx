@@ -47,16 +47,6 @@ const TrashOptions = ({ noteId }) =>
                     <OptionsIcon fill='var(--tab)' />
                 }
                 openBtnClassName={noteItemClasses.containedIconBtn}
-                menuProps={{
-                    anchorOrigin: {
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    },
-                    transformOrigin: {
-                        vertical: 'top',
-                        horizontal: 'right',
-                    },
-                }}
                 menuItems={menuItems}
             />
 

@@ -1,0 +1,41 @@
+.container {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.optionBtn {
+    width: calc(100% - 30px);
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: var(--border-radius-inputs);
+    background-color: var(--primary);
+    color: var(--text-header);
+    display: flex;
+    justify-content: space-between;
+    text-wrap: wrap;
+}
+
+
+.chosenOptionBtn {
+    background-color: var(--secondary-darker);
+}
+
+.optionBtn p {
+    word-break: break-word;
+    width: 100%;
+    display: flex;
+    white-space: pre-line;
+    width: calc(100% - 30px);
+    margin: 0;
+}
+
+.avatar {
+    width: 20px;
+    height: 20px;
+}
+
+.ratio {
+    font-size: var(--font-size-100);
+}

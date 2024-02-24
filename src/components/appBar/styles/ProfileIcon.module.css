@@ -12,3 +12,19 @@
     position: absolute;
     right: -15px;
 }
+
+.smallScreens {
+    display: none;
+}
+
+@media (max-width:900px) {
+    .bigScreens {
+        display: none;
+    }
+}
+
+@media (max-width:900px) {
+    .smallScreens {
+        display: flex;
+    }
+}

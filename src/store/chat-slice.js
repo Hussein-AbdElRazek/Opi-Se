@@ -17,6 +17,7 @@ export const sendMessage = createAsyncThunk(
                 messagesId: payload.messagesId, newMessage: payload.newMessage
             })
         );
+        console.log("payload.message", payload.message)
         socket.emit('sendMessage', payload.message, (res) =>
         {
             console.log("res", res)

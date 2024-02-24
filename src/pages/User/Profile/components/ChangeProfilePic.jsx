@@ -7,7 +7,7 @@ import { PopUpMenu } from '../../../../components/common'
 import { ReactComponent as AddPicIcon } from '../../../../assets/icons/addPic.svg'
 import { ReactComponent as BinIcon } from '../../../../assets/icons/bin.svg'
 import classes from '../Profile.module.css'
-import plusIcon from '../../../../assets/icons/plus.svg'
+import plusIcon from '../../../../assets/icons/plusPic.svg'
 import { uiActions } from '../../../../store/ui-slice';
 import useChangeProfilePic from '../hooks/use-change-profile-pic';
 import { LoadingCenter } from '../../../../components/ui';
@@ -73,16 +73,7 @@ const ChangeProfilePic = () =>
                                     openBtnType={"icon"}
                                     openBtnChild={<img src={plusIcon} alt="add" />}
                                     openBtnClassName={classes.plusIcon}
-                                    menuProps={{
-                                        anchorOrigin: {
-                                            vertical: 'bottom',
-                                            horizontal: 'center',
-                                        },
-                                        transformOrigin: {
-                                            vertical: 'top',
-                                            horizontal: 'center',
-                                        }
-                                    }}
+                                    containerClassName={classes.editPicPop}
                                     menuItems={
                                         [{
                                             onClick: () =>

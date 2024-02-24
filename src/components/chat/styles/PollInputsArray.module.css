@@ -1,0 +1,45 @@
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.input {
+    margin-right: 15px;
+    flex-grow: 0.1;
+    display: flex;
+}
+
+.input div {
+    margin-top: 5px;
+}
+
+.input input {
+    position: relative;
+    padding-left: 30px;
+    border-color: var(--secondary);
+}
+
+.input input::placeholder {
+    opacity: 1;
+}
+
+.input svg {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 15px;
+    /* to align in  center  (36.5px width of input)*/
+    top: calc((36.5px - 10px)/2);
+    z-index: 9;
+    /* background-color: yellowgreen; */
+}
+
+.icon {
+    background-color: var(--secondary) !important;
+    padding: 0px;
+    margin-right: 5px;
+    width: 35px !important;
+    height: 35px !important;
+}

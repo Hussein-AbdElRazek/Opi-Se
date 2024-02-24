@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Message } from './Message'
 import { MessagesDate } from './MessagesDate'
 import { getDate } from '../../helpers/getDate'
+import { PollMessage } from './PollMessage'
 
 
 export const MessagesList = ({ messages, firstElementRef, messageContainerRef }) =>
@@ -30,14 +31,19 @@ export const MessagesList = ({ messages, firstElementRef, messageContainerRef })
                 </MessagesDate>
             )
     }
-    
+
     return (
         <div
             ref={messageContainerRef}
         >
             {messages.map((message, index) =>
             {
-                if (message.messageType === "text" || message.messageType === "media")
+                const messageSendType = message.messageSender === userId ? "sent" : "received";
+
+                if (message.messageType === "text" ||
+                    message.messageType === "media" ||
+                    message.messageType === "poll"
+                )
                 {
                     return (
                         <div
@@ -53,17 +59,25 @@ export const MessagesList = ({ messages, firstElementRef, messageContainerRef })
                                     minute: 'numeric',
                                     hour12: true,
                                 })}
-                                type={message.messageSender === userId ? "sent" : "received"}
+                                type={messageSendType}
                                 seen={message.isSeen}
                                 key={message._id}
                                 id={message._id}
+                                messageType={message.messageType}
                             >
-                                {message.messageType === "text" ?
-                                    message.messageContent :
-                                    <img
-                                        src={message.mediaUrl}
-                                        alt=""
-                                    />}
+                                {message.messageType === "text" ? message.messageContent
+                                    :
+                                    message.messageType === "poll" ?
+                                        <PollMessage
+                                            messageSendType={messageSendType}
+                                            pollMessage={message}
+                                            key={index}
+                                        />
+                                        :
+                                        <img
+                                            src={message.mediaUrl}
+                                            alt=""
+                                        />}
                             </Message>
                         </div>
                     )

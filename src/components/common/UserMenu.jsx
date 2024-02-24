@@ -75,16 +75,6 @@ export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnT
             openBtnChild={openBtnChild}
             openBtnClassName={openBtnClassName}
             containerClassName={`${classes.container} ${containerClassName ? containerClassName : ""}`}
-            menuProps={{
-                anchorOrigin: {
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                },
-                transformOrigin: {
-                    vertical: 'top',
-                    horizontal: 'center',
-                }
-            }}
             menuItems={menuItems}
         />
     )

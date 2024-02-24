@@ -9,8 +9,10 @@
     height: 25px;
 }
 
-.container ul {
-    width: calc(100vw) !important;
+.container {
+    height: calc(100vh - 53px);
+    width: 100vw;
+    overflow: auto;
 }
 
 .container a,

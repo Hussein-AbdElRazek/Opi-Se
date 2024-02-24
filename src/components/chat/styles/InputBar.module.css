@@ -24,3 +24,21 @@
 .marginRight {
     margin-right: 4px;
 }
+
+.popContainer {
+    margin-bottom: 20px;
+}
+
+.popContainer ul {
+    width: 240px;
+    max-width: 100%;
+    /* background-color: yellowgreen; */
+}
+
+.pollIcon svg {
+    stroke: var(--text-header);
+}
+
+.pollIcon svg:hover {
+    stroke: var(--secondary);
+}

@@ -26,11 +26,19 @@ export const PopMenu = () =>
     const closeMenu = () => { dispatch(uiActions.closePopMenu(menuId)) };
     const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
     const isHavePartner = useSelector(state => state?.auth?.userData?.matchId);
-
+    const isPopMenuProfileOpened = useSelector(state => state.ui.isPopMenuOpened)[profileMenuId] || false
+    
+    const handleToggleProfileMenu = () =>
+    {
+        if (isPopMenuProfileOpened) dispatch(uiActions.closePopMenu(profileMenuId))
+        else dispatch(uiActions.openPopMenu(profileMenuId))
+    }
+    
     const menuItems = [
         // profile menu
         {
             noHover: true,
+            onClick: handleToggleProfileMenu,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -165,12 +173,6 @@ export const PopMenu = () =>
                 <MenuIcon />
             }
             openBtnClassName={classes.openBtn}
-            menuProps={{
-                anchorReference: "anchorPosition",
-                anchorPosition: {
-                    top: 59, left: 0
-                }
-            }}
             menuItems={menuItems}
             containerClassName={classes.container}
             fullWidth={true}

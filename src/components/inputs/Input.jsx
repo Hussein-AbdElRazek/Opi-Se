@@ -24,7 +24,8 @@ export const Input = (props) =>
             {({ field, form, meta: { touched, error } }) =>
             {
                 const inputError = !!error && touched;
-                const {  handleBlur } = form;
+                const { handleBlur, setFieldValue } = form;
+
                 return (
                     <FormControl
                         className={`
@@ -60,7 +61,12 @@ export const Input = (props) =>
                             onBlur={(e) =>
                             {
                                 if (onBlur) onBlur(e, handleBlur);
-                                else handleBlur();
+                                else handleBlur(e);
+                            }}
+                            onChange={(e) =>
+                            {
+                                setFieldValue(name, e.target.value)
+                                if (onChange) onChange(e);
                             }}
                         />
                         {children}

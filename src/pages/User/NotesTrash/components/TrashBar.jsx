@@ -51,16 +51,6 @@ const TrashBar = () =>
                     <OptionsIcon fill='var(--secondary)' />
                 }
                 openBtnClassName={classes.optionBtn}
-                menuProps={{
-                    anchorOrigin: {
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    },
-                    transformOrigin: {
-                        vertical: 'top',
-                        horizontal: 'right',
-                    },
-                }}
                 menuItems={menuItems}
             />
 

@@ -13,6 +13,7 @@ import
 import useHttp from '../../../hooks/use-http';
 import ImagesContext from '../../../imagesStore/images-context';
 import useGetChat from './hooks/use-get-chat';
+import { uiActions } from '../../../store/ui-slice';
 
 const Chat = () =>
 {
@@ -70,6 +71,30 @@ const Chat = () =>
         dispatch(sendMessage(payload))
         setIsScrollToBottom(true);
         resetForm();
+    }
+
+    const submitPollMessage = (values) =>
+    {
+        const sentPollMessage = {
+            messageSender: userId,
+            messageType: "poll",
+            ...values
+        }
+        const newPollMessage = {
+            _id: new Date().toUTCString(),
+            sentAt: new Date().toUTCString(),
+            ...sentPollMessage
+        }
+        const payload = {
+            message: sentPollMessage,
+            messagesId: openedUserData.id.toString(),
+            newMessage: newPollMessage,
+        }
+        dispatch(sendMessage(payload))
+        setIsScrollToBottom(true);
+        // close poll 
+        dispatch(uiActions.closePopMenu("chatMenu"))
+        dispatch(uiActions.closePopMenu("chatMenu"))
     }
 
     const matchId = useSelector((state) => state.auth.userData.matchId)
@@ -154,6 +179,7 @@ const Chat = () =>
             firstElementRef={firstElementRef}
             messageContainerRef={messageContainerRef}
             isLoadingGetChat={isLoadingGetChat}
+            submitPollMessage={submitPollMessage}
         />
     )
 }

@@ -14,6 +14,7 @@ const ChatUi = (props) =>
         firstElementRef,
         messageContainerRef,
         isLoadingGetChat,
+        submitPollMessage,
     } = props;
 
     return (
@@ -24,6 +25,7 @@ const ChatUi = (props) =>
                     submitTextMessage={submitTextMessage}
                     handleUploadMedia={handleUploadMedia}
                     isLoadingUploadMedia={isLoadingUploadMedia}
+                    submitPollMessage={submitPollMessage}
                 />
             }
         >

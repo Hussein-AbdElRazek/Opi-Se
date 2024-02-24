@@ -51,6 +51,10 @@
     height: 100%;
 }
 
+.editPicPop {
+    max-width: 220px !important;
+}
+
 .plusIcon {
     position: absolute;
     right: 5px;
