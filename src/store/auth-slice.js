@@ -24,10 +24,11 @@ const authSlice = createSlice({
                 userSkills: clearUserSkillsArray,
             }
             state.userData = tempUserData;
-
+            state.notifications = tempUserData?.notifications.reverse();
             state.isLoggedIn = true;
             localStorage.setItem("token", action.payload.token)
             localStorage.setItem("userData", JSON.stringify(tempUserData))
+            localStorage.setItem("notifications", JSON.stringify(tempUserData?.notifications || []))
         },
         logout(state)
         {

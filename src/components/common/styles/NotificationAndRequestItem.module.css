@@ -1,7 +1,6 @@
 .container {
     padding: 0px 20px;
     margin-bottom: 20px;
-    /* background-color: yellowgreen; */
 }
 
 .avatar {
@@ -11,8 +10,10 @@
 }
 
 .message {
+    width: calc(100% - 40px);
     margin: 0;
     font-size: var(--font-size-200);
+    overflow-wrap: break-word;
 }
 
 .message a {

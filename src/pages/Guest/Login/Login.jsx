@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import LoginUi from './LoginUi'
 import useHttp from '../../../hooks/use-http';
 import { authActions } from '../../../store/auth-slice';
+import { requestNotificationPermission } from '../../../FCM/FCM';
 const Login = () =>
 {
     const dispatch = useDispatch();
@@ -13,8 +14,12 @@ const Login = () =>
         sendRequest: login
     } = useHttp();
 
-    const handleLogin = (values) =>
+    const handleLogin = async (values) =>
     {
+        const deviceToken = await requestNotificationPermission();
+
+        values.deviceToken = deviceToken;
+
         const getResponse = ({ message, token, data, profileDetails }) =>
         {
             if (message === "success")
@@ -24,7 +29,7 @@ const Login = () =>
             }
         };
 
-        login(
+        await login(
             {
                 url: "login",
                 method: "post",

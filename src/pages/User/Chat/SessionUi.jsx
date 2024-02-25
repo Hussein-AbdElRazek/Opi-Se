@@ -41,7 +41,7 @@ const SessionUi = (props) =>
                     isLoading={isLoading}
                     disabled={status === "waiting"}
                 >
-                    {status === "waiting" ? "Waiting..." : "Start"}
+                    {status === "waiting" ? "Waiting" : "Start"}
                 </Btn>
             )}
         </div>
