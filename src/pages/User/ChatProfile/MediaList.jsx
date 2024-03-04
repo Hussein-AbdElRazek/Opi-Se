@@ -9,7 +9,7 @@ const MediaList = (props) =>
 {
     const { imageList, isLoadingGetChatMedia, lastElementRef } = props;
     return (
-        <div className={classes.listContainer}
+        <div className={`${classes.listContainer} center-x center-y`}
         >
             <Grid
                 container
@@ -29,6 +29,15 @@ const MediaList = (props) =>
                         />
                     </Grid>
                 ))}
+
+                {/* No media */}
+                {(!imageList?.length && !isLoadingGetChatMedia) && (
+                    <div
+                        className={classes.noMedia}
+                    >
+                        Not Found Media
+                    </div>
+                )}
 
                 {/* Loading Spinner */}
                 {isLoadingGetChatMedia && (

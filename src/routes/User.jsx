@@ -17,6 +17,7 @@ import RecommendationList from '../pages/User/Home/RecommendationList/Recommenda
 import MentalHealthQuestions from '../pages/User/MentalHealth/MentalHealthQuestions/MentalHealthQuestions'
 import MentalHealthResult from '../pages/User/MentalHealth/MentalHealthResult/MentalHealthResult'
 import TestVideo from '../pages/User/TestVideo/TestVideo'
+import NoPartnerYet from '../pages/User/NoPartnerYet/NoPartnerYet'
 
 const User = () =>
 {
@@ -27,9 +28,9 @@ const User = () =>
             <Route path='/test' element={<TestVideo />} />
 
             <Route path='/' element={<Home />} >
+                <Route path='chats' element={<Chats />} />
                 {isHavePartner && (
                     <>
-                        <Route path='chats' element={<Chats />} />
                         <Route path='chats/chat' element={<Chat />} />
                         <Route path='chats/chat/profile' element={<ChatProfile />} />
                     </>
@@ -47,13 +48,9 @@ const User = () =>
             <Route path='/mental-health' element={<MentalHealthResult />} />
             <Route path='/mental-health/questions' element={<MentalHealthQuestions />} />
 
-            {isHavePartner && (
-                <>
-                    <Route path='/video/*' element={<VideoSession />} />
-                    <Route path='/notes' element={<Notes />} />
-                    <Route path='/notes/trash' element={<NotesTrash />} />
-                </>
-            )}
+            <Route path='/video/*' element={isHavePartner ? <VideoSession /> : <NoPartnerYet />} />
+            <Route path='/notes' element={isHavePartner ? <Notes /> : <NoPartnerYet />} />
+            <Route path='/notes/trash' element={isHavePartner ? <NotesTrash /> : <NoPartnerYet />} />
 
             <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>

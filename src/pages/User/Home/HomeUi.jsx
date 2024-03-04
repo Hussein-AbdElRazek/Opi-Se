@@ -75,7 +75,6 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
                 LinkComponent={NavLink}
                 to="chats"
                 className={classes.messageIcon}
-                disabled={!isHavePartner}
                 title="Chats"
             >
                 <Badge

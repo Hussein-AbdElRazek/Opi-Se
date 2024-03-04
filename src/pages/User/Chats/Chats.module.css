@@ -57,3 +57,11 @@
     width: 100%;
     overflow: hidden;
 }
+
+.noChatsContainer {
+    height: 310px;
+}
+
+.noChatsContainer img {
+    width: 50% !important;
+}

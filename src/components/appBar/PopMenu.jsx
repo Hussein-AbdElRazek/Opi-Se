@@ -25,7 +25,6 @@ export const PopMenu = () =>
     const dispatch = useDispatch();
     const closeMenu = () => { dispatch(uiActions.closePopMenu(menuId)) };
     const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
-    const isHavePartner = useSelector(state => state?.auth?.userData?.matchId);
     const isPopMenuProfileOpened = useSelector(state => state.ui.isPopMenuOpened)[profileMenuId] || false
     
     const handleToggleProfileMenu = () =>
@@ -64,7 +63,6 @@ export const PopMenu = () =>
         {
             // onClick: closeMenu,
             // menuItemComponent: NavLink,
-            disabled: !isHavePartner,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -78,7 +76,6 @@ export const PopMenu = () =>
         {
             // onClick: closeMenu,
             // menuItemComponent: NavLink,
-            disabled: true,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -92,7 +89,6 @@ export const PopMenu = () =>
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
-            disabled: !isHavePartner,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -106,7 +102,6 @@ export const PopMenu = () =>
         {
             onClick: closeMenu,
             menuItemComponent: NavLink,
-            disabled: !isHavePartner,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>

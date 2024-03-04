@@ -1,6 +1,14 @@
 .listContainer {
     width: calc(100% - 30px);
+    height: calc(100% - 190px);
+    min-height: 100px;
     margin: auto;
+}
+
+.noMedia {
+    height: 30px;
+    font-size: var(--font-size-600);
+    color: var(--text-secondary);
 }
 
 .item {

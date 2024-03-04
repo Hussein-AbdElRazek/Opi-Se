@@ -7,15 +7,24 @@ export const PopChatCard = ({ header, children, inputBar, type }) =>
             className={classes.container}
         >
             {header}
+            
             <div
                 className={`
-                ${classes.content} 
-                ${type === "mediaPage" ? classes.mediaPage : ""}
+                    ${classes.content} 
+                    ${type === "mediaPage" ? classes.mediaPage : ""}
+                    ${inputBar ? classes.paddingBottom : ""}
                 `}
             >
                 {children}
             </div>
-            {inputBar}
+
+            {inputBar && (
+                <div
+                    className={classes.inputBarContainer}
+                >
+                    {inputBar}
+                </div>
+            )}
         </div>
     )
 }

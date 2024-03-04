@@ -41,7 +41,7 @@ export const NoteItem = (props) =>
         noteColor: noteColor,
         _id
     };
-    
+
     return (
         <Grid
             xl={3}
@@ -53,7 +53,7 @@ export const NoteItem = (props) =>
         >
             <div
                 className={classes.container}
-                style={{ backgroundColor: `var(${noteColor})` }}
+                style={{ backgroundColor: noteColor ? `var(${noteColor})` : "var(--trash-note)" }}
             >
                 <Formik
                     initialValues={initialValues}
@@ -104,7 +104,7 @@ export const NoteItem = (props) =>
                                         className={classes.containedIconBtn}
                                         onClick={makeNoteEditable(_id)}
                                     >
-                                        <EditIcon fill={`var(${noteColor})`} />
+                                        <EditIcon fill={noteColor ? `var(${noteColor})` : "var(--trash-note)"} />
                                     </ButtonBase>
                                 )}
 
