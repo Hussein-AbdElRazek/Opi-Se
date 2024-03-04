@@ -14,6 +14,7 @@ import useMoveNoteToTrash from './hooks/use-move-note-to-trash';
 import useResetNotesSlice from '../../../hooks/use-reset-notes-slice';
 import VectorAndText from '../../../components/common/VectorAndText';
 import noNotesImg from '../../../assets/images/noNotes.png'
+import useNoteListeners from './hooks/use-note-listeners';
 
 // in these page i use Facade design pattern
 // bcs it's has many features 
@@ -51,6 +52,9 @@ const Notes = () =>
 
     // move note to trash
     const { handleMoveNoteToTrash } = useMoveNoteToTrash();
+
+    // notes socket listeners
+    useNoteListeners();
 
     return (
         <>

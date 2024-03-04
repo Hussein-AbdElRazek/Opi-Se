@@ -1,5 +1,137 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { mergeToUnique } from '../helpers/mergeToUnique';
+import baseSocket from '../sockets/baseConnection';
+
+// get connection 
+const socket = baseSocket;
+
+// sockets:
+// add
+export const emitAddNote = createAsyncThunk(
+    'notes/emitAddNote',
+    async (payload) =>
+    {
+        socket.emit('addNote', payload, () => { });
+    }
+);
+export const listenToGetNote = createAsyncThunk(
+    "notes/listenToGetNote",
+    async (_, thunkAPI) =>
+    {
+        socket.on('getNote', (data) =>
+        {
+            //  update state
+            thunkAPI.dispatch(
+                notesActions.addNote(data.data)
+            );
+        });
+    }
+)
+
+// update
+export const emitUpdateNote = createAsyncThunk(
+    'notes/emitUpdateNote',
+    async (payload) =>
+    {
+        socket.emit('updateNote', payload, (res) => { });
+    }
+);
+export const listenToUpdateNote = createAsyncThunk(
+    "notes/listenToUpdateNote",
+    async (_, thunkAPI) =>
+    {
+        socket.on('getUpdatedNote', (data) =>
+        {
+            //  update state
+            thunkAPI.dispatch(
+                notesActions.updateNote(data.data)
+            );
+        });
+    }
+)
+
+// pin
+export const emitPinNote = createAsyncThunk(
+    'notes/emitPinNote',
+    async (payload) =>
+    {
+        socket.emit('pinNote', payload, () => { });
+    }
+);
+export const listenToPinNote = createAsyncThunk(
+    "notes/listenToPinNote",
+    async (_, thunkAPI) =>
+    {
+        socket.on('notePinned', (data) =>
+        {
+            // update state
+            thunkAPI.dispatch(
+                notesActions.updateNote(data.data)
+            );
+        });
+    }
+)
+
+// delete
+export const emitDeleteNote = createAsyncThunk(
+    'notes/emitDeleteNote',
+    async (payload) =>
+    {
+        socket.emit('deleteNote', payload, () => { });
+    }
+);
+export const listenToNoteDeleted = createAsyncThunk(
+    "notes/listenToNoteDeleted",
+    async (_, thunkAPI) =>
+    {
+        socket.on('noteDeleted', (data) =>
+        {
+            //  update state
+            thunkAPI.dispatch(
+                notesActions.removeNote(data.data)
+            );
+        });
+    }
+)
+
+// delete
+export const emitRestoreNote = createAsyncThunk(
+    'notes/emitRestoreNote',
+    async (payload) =>
+    {
+        console.log("fire emit restoreNote", payload)
+
+        socket.emit('restoreNote', payload, (res) => { console.log("restoreNote response", res) });
+    }
+);
+export const listenToNoteRestored = createAsyncThunk(
+    "notes/listenToNoteRestored",
+    async (_, thunkAPI) =>
+    {
+        socket.on('noteRestored', (data) =>
+        {
+            const currentPathname = window.location.pathname;
+            console.log("noteRestored", data)
+            //  update state
+            // if in notes page add it
+            if (currentPathname === "/notes")
+            {
+                thunkAPI.dispatch(
+                    notesActions.addNote(data.data)
+                )
+            }
+            // if in trash notes page remove it
+            else
+            {
+                thunkAPI.dispatch(
+                    notesActions.removeNote(data.data._id)
+                )
+            }
+        });
+    }
+)
+
 
 const initialNotesState = {
     notes: [],

@@ -9,7 +9,7 @@ import App from './App';
 import store from './store';
 import { GlobalCssPriority } from './components/ui';
 import { ImagesContextProvider } from './imagesStore/images-context';
-import { VideoContextProvider } from './videoCallStore/video-call-context';
+import { CallContextProvider } from './callStore/call-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,9 +19,9 @@ root.render(
       <BrowserRouter>
         <SnackbarProvider autoHideDuration={3000} maxSnack={5}>
           <GlobalCssPriority>
-            <VideoContextProvider>
+            <CallContextProvider>
               <App />
-            </VideoContextProvider>
+            </CallContextProvider>
 
           </GlobalCssPriority>
         </SnackbarProvider>

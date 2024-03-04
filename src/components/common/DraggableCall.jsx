@@ -1,17 +1,17 @@
+import React from 'react'
 import Draggable from 'react-draggable';
 
-import { HeaderText, ProfilePic } from '../../../components/ui';
-import classes from './styles/IncomingVideoCall.module.css'
-import { AnswerIconBtn, DeclineIconBtn, Video } from '../../../components/common';
-import videoRingtone from '../../../assets/audios/videoRingtone.mp3';
-const IncomingVideoCallUi = (props) =>
+import classes from './styles/DraggableCall.module.css'
+import { HeaderText, ProfilePic } from '../ui';
+import { Video } from './Video';
+export const DraggableCall = (props) =>
 {
     const {
-        myVideo,
-        answerCall,
-        declineCall,
         call,
-        stream,
+        secondaryText,
+        type,
+        video,
+        actions,
     } = props;
 
     // handle default position
@@ -24,7 +24,6 @@ const IncomingVideoCallUi = (props) =>
         x: xPos,
         y: 0,
     };
-
     return (
         <Draggable bounds={"html"} defaultPosition={defaultPosition}  >
             <div
@@ -39,16 +38,21 @@ const IncomingVideoCallUi = (props) =>
                             userName={call?.userName}
                         />
                     </div>
-                    <HeaderText>
-                        {call?.name}
-                    </HeaderText>
-                    <span>
-                        Incoming Video Call...
-                    </span>
-                    {true && (
+                    {call?.name && (
+                        <HeaderText>
+                            {call?.name}
+                        </HeaderText>
+                    )}
+                    {secondaryText && (
+                        <span>
+                            {secondaryText}
+                        </span>
+                    )}
+
+                    {type === "video" && (
                         <div className={`${classes.marginTop} ${classes.videoContainer}`}>
                             <Video
-                                videoRef={myVideo}
+                                videoRef={video}
                                 muted={true}
                             />
                         </div>
@@ -57,19 +61,14 @@ const IncomingVideoCallUi = (props) =>
                     <div
                         className={`${classes.action}  ${classes.marginTop}`}
                     >
-                        <DeclineIconBtn onClick={declineCall} />
-                        <AnswerIconBtn onClick={answerCall} />
+                        {actions}
                     </div>
 
                 </div>
 
-                {/* Automatic play Video Ringtone  */}
-                <audio src={videoRingtone} autoPlay loop />
+
             </div>
 
         </Draggable>
-
     )
 }
-
-export default IncomingVideoCallUi

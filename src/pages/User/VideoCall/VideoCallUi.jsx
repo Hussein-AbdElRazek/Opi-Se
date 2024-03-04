@@ -41,6 +41,7 @@ const VideoCallUi = (props) =>
     const {
         myVideo,
         stream,
+        anotherStream,
         callAccepted,
         callEnded,
         call,
@@ -48,11 +49,11 @@ const VideoCallUi = (props) =>
         myData,
         leaveCall,
     } = props
-    console.log("callAccepted", callAccepted)
-    console.log("callEnded", callEnded)
+    // console.log("callAccepted", callAccepted)
+    // console.log("callEnded", callEnded)
     // console.log("stream", stream ? "lol" : "no")
-    console.log("waiting", !callAccepted && !callEnded ? true : false);
-    console.log("answered", callAccepted && !callEnded ? true : false);
+    // console.log("waiting", !callAccepted && !callEnded ? true : false);
+    // console.log("answered", callAccepted && !callEnded ? true : false);
     return (
         <div
             className={classes.container}
@@ -62,9 +63,8 @@ const VideoCallUi = (props) =>
                     className={`${classes.borderRadius} ${classes.person}`}
                 >
                     {/* Another Person video */}
-                    {(true) && (
+                    {(anotherStream || (callAccepted && !callEnded)) && (
                         <Video
-                            muted={true}
                             videoRef={anotherVideo}
                             profileImage={call?.profileImage}
                             userName={call?.userName}
@@ -93,7 +93,7 @@ const VideoCallUi = (props) =>
 
                     {/* My video */}
                     <div className={`${classes.shadow} ${classes.me} ${classes.borderRadius}`}>
-                        {true && (
+                        {stream && (
                             <Video
                                 muted={true}
                                 videoRef={myVideo}

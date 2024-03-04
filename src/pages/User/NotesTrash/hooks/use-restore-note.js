@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
-import { notesActions } from "../../../../store/notes-slice";
+import { emitRestoreNote, notesActions } from "../../../../store/notes-slice";
 import { uiActions } from "../../../../store/ui-slice";
 
-const useRestoreNote = (noteId, uiId) =>
+const useRestoreNote = (note, uiId) =>
 {
     // useRestoreNote hook to handle call restoreNote API
 
@@ -22,7 +22,17 @@ const useRestoreNote = (noteId, uiId) =>
             if (message.includes("success"))
             {
                 // remove  note from store
-                dispatch(notesActions.removeNote(noteId));
+                dispatch(notesActions.removeNote(note._id));
+                console.log("restore.....", note)
+                // emit restore note
+                dispatch(emitRestoreNote({
+                    noteId: note._id,
+                    noteTitle: note.noteTitle,
+                    noteContent: note.noteContent,
+                    noteColor: "--note1",
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                }))
 
                 // close modal of confirmation
                 dispatch(uiActions.closeModal(uiId))
@@ -34,7 +44,7 @@ const useRestoreNote = (noteId, uiId) =>
 
         restoreNote(
             {
-                url: `restoreNote?matchId=${matchId}&noteId=${noteId}`,
+                url: `restoreNote?matchId=${matchId}&noteId=${note._id}`,
                 method: "DELETE",
             },
             getResponse

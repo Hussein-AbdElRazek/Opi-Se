@@ -12,6 +12,5 @@ const titleMap = {
 };
 export const getWebsiteTitle = (pathname) =>
 {
-    console.log("pathname", pathname)
     return titleMap[pathname] || null;
 }

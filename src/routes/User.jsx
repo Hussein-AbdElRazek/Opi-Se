@@ -16,6 +16,7 @@ import NotesTrash from '../pages/User/NotesTrash/NotesTrash'
 import RecommendationList from '../pages/User/Home/RecommendationList/RecommendationList'
 import MentalHealthQuestions from '../pages/User/MentalHealth/MentalHealthQuestions/MentalHealthQuestions'
 import MentalHealthResult from '../pages/User/MentalHealth/MentalHealthResult/MentalHealthResult'
+import TestVideo from '../pages/User/TestVideo/TestVideo'
 
 const User = () =>
 {
@@ -23,6 +24,8 @@ const User = () =>
 
     return (
         <Routes>
+            <Route path='/test' element={<TestVideo />} />
+
             <Route path='/' element={<Home />} >
                 {isHavePartner && (
                     <>

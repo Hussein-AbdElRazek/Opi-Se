@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
-import { notesActions } from "../../../../store/notes-slice";
+import { emitAddNote, notesActions } from "../../../../store/notes-slice";
 
 const useAddNote = () =>
 {
@@ -36,14 +36,18 @@ const useAddNote = () =>
                 const updateNoteState = {
                     _id: oldId,
                     isNew: false,
+                    createdAt: new Date().toISOString(),
                     ...reqBody
                 }
                 dispatch(notesActions.updateNote(updateNoteState))
 
+                // emit add note
+                dispatch(emitAddNote({ ...reqBody, _id: data._id, createdAt: new Date() }))
+
                 //update id when receive it from server 
                 const updatedId = {
                     oldId: oldId,
-                    _id: data._id 
+                    _id: data._id
                 }
                 dispatch(notesActions.updateNoteId(updatedId))
             }

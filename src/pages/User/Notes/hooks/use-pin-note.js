@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
-import { notesActions } from "../../../../store/notes-slice";
+import { emitPinNote, notesActions } from "../../../../store/notes-slice";
 
 const usePinNote = () =>
 {
@@ -20,15 +20,18 @@ const usePinNote = () =>
             isPinned: !isPinned
         }
         // change isPinned state in store automatic not wait to loading
-        const updateLoadingState = {
+        const updateNoteState = {
             _id: noteId,
             pinnedAt: new Date().toISOString(),
             ...reqBody
         }
-        dispatch(notesActions.updateNote(updateLoadingState))
+        dispatch(notesActions.updateNote(updateNoteState))
 
         // sort all notes
         dispatch(notesActions.sortNotes())
+
+        // emit pin note
+        dispatch(emitPinNote(updateNoteState))
 
         pinNote(
             {

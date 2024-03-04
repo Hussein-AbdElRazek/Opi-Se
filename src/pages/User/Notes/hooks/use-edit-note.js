@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
-import { notesActions } from "../../../../store/notes-slice";
+import { emitUpdateNote, notesActions } from "../../../../store/notes-slice";
 import { compareObjects } from "../../../../helpers/compareObjects";
 
 const useEditNote = () =>
@@ -41,6 +41,12 @@ const useEditNote = () =>
                     createdAt: new Date().toUTCString()
                 }
                 dispatch(notesActions.updateNote(updatedNote))
+                
+                // emit update note
+                dispatch(emitUpdateNote({
+                    ...values,
+                    _id,
+                }))
             }
         };
 

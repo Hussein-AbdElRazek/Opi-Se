@@ -83,6 +83,7 @@ export const listenToDeleteMessage = createAsyncThunk(
     {
         socket.on('messageDeleted', (data) =>
         {
+            console.log("messageDeleted", data)
             //  update state
             thunkAPI.dispatch(
                 chatActions.deleteMessage({

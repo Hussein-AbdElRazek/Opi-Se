@@ -16,7 +16,7 @@
     --divider: rgba(112, 104, 104, 0.70);
     --app-bar-border: rgba(0, 0, 0, 0.05);
     --secondary-border: rgba(3, 102, 102, 0.20);
-    --secondary-40: rgba(3, 105, 105, 0.40);
+    --secondary-40: rgb(145, 192, 192);
     --secondary-10: rgba(3, 105, 105, 0.10);
     --secondary-0: rgba(3, 105, 105, 0.0);
     --secondary-3: rgba(3, 105, 105, 0.3);
@@ -34,6 +34,8 @@
     --black-30: rgba(0, 0, 0, 0.30);
     --black-80: rgba(0, 0, 0, 0.80);
     --black-40: rgba(0, 0, 0, 0.40);
+    --incoming-call: rgb(77, 77, 77);
+    --incoming-call-span: rgba(255, 255, 255, 0.6);
     --light-green: #27B127;
     --tab: #797C7B;
     --note1: #FFF6C8;

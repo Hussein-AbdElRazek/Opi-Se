@@ -109,7 +109,7 @@ export const NoteItem = (props) =>
                                 )}
 
                                 {/* Options Btn */}
-                                {isTrash && <TrashOptions noteId={_id} />}
+                                {isTrash && <TrashOptions note={initialValues} />}
                             </div>
 
                             <Divider className={`${classes.divider} ${classes.mb}`} />

@@ -6,7 +6,7 @@ import useModal from '../hooks/use-modal'
 import useDeleteTrashNote from '../hooks/use-delete-trash-note'
 import useRestoreNote from '../hooks/use-restore-note'
 import { LoadingFullScreen } from '../../../../components/ui'
-const TrashOptions = ({ noteId }) =>
+const TrashOptions = ({ note }) =>
 {
     // handle modal ui state 
     const uiId = "trashNoteOptions";
@@ -20,13 +20,13 @@ const TrashOptions = ({ noteId }) =>
     const {
         isLoadingDeleteTrashNote,
         handleDeleteTrashNote,
-    } = useDeleteTrashNote(noteId, uiId);
+    } = useDeleteTrashNote(note._id, uiId);
 
     // restore trash note
     const {
         isLoadingRestoreNote,
         handleRestoreNote,
-    } = useRestoreNote(noteId, uiId);
+    } = useRestoreNote(note, uiId);
 
     const menuItems = [
         {
@@ -41,7 +41,7 @@ const TrashOptions = ({ noteId }) =>
     return (
         <>
             <PopUpMenu
-                id={noteId}
+                id={note._id}
                 openBtnType="base"
                 openBtnChild={
                     <OptionsIcon fill='var(--tab)' />

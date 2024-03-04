@@ -53,7 +53,6 @@
     justify-content: flex-start;
     padding-left: 5px;
     overflow: hidden;
-
 }
 
 .userInfo span {
@@ -61,5 +60,5 @@
 }
 
 .left {
-    width: calc(100% - 120px);
+    width: calc(100% - 170px);
 }

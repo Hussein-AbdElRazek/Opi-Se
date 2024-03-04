@@ -8,10 +8,11 @@ import { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getWebsiteTitle } from './helpers/getWebsiteTitle';
 import { PageLayout } from './components/common';
-import IncomingVideoCall from './pages/User/IncomingVideoSession/IncomingVideoCall';
-import VideoContext from './videoCallStore/video-call-context';
+import IncomingVideoCall from './pages/User/IncomingVideoCall/IncomingVideoCall';
+import CallContext from './callStore/call-context';
 import useGeneralSocket from './hooks/use-general-sockets';
 import SessionConfirmation from './pages/User/SessionConfirmation/SessionConfirmation';
+import VoiceCall from './pages/User/VoiceCall/VoiceCall';
 
 function App()
 {
@@ -30,19 +31,20 @@ function App()
     if (!!tempTitle) document.title = `Opi Se - ${tempTitle}`;
   }, [location]);
 
-  const { call } = useContext(VideoContext);
+  const { call } = useContext(CallContext);
 
   // General sockets
   // handle join rooms + necessary listener in app root
   useGeneralSocket();
-
+  console.log("```````app call", call)
   return (
     <div>
       {isLoggedIn && !firstTime ? (
         <>
           <AppBar />
           {/* for incoming calls */}
-          {(call && call.isReceivingCall) && <IncomingVideoCall />}
+          {(call && call?.isReceivingCall && !(call?.busy) && call?.callType === "video") && <IncomingVideoCall />}
+          {(call && call?.callType === "voice") && <VoiceCall />}
 
           {/* for incoming session */}
           <SessionConfirmation />
