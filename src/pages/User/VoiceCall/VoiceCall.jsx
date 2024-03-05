@@ -37,6 +37,21 @@ const VoiceCall = () =>
     {
         if (callAccepted && !callEnded) setCallStarted(true)
     }, [callAccepted, callEnded])
+
+    //  update another media when another stream
+    useEffect(() =>
+    {
+        if (anotherStream && anotherMedia.current)
+        {
+            anotherMedia.current.srcObject = anotherStream;
+        }
+    }, [anotherStream, anotherMedia])
+
+    //  update my media when  stream
+    useEffect(() =>
+    {
+        if (stream && myMedia.current) myMedia.current.srcObject = stream;
+    }, [stream, myMedia])
     return (
         <VoiceCallUi
             formattedTime={formattedTime}

@@ -2,7 +2,6 @@ import { IconButton } from '@mui/material'
 
 import classes from './VideoCall.module.css'
 import { Video } from '../../../components/common';
-import testVideo from '../../../assets/testVideo.mp4'
 
 const MicrophoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="31" height="30" viewBox="0 0 31 30" fill="none">
     <path d="M24.25 13.75C24.25 18.5825 20.3325 22.5 15.5 22.5M15.5 22.5C10.6675 22.5 6.75 18.5825 6.75 13.75M15.5 22.5V27.5M15.5 27.5H10.5M15.5 27.5H20.5M15.5 17.5C13.4289 17.5 11.75 15.8211 11.75 13.75V6.25C11.75 4.17893 13.4289 2.5 15.5 2.5C17.5711 2.5 19.25 4.17893 19.25 6.25V13.75C19.25 15.8211 17.5711 17.5 15.5 17.5Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -48,12 +47,10 @@ const VideoCallUi = (props) =>
         anotherVideo,
         myData,
         leaveCall,
+        toggleMedia,
+        formattedTime,
     } = props
-    // console.log("callAccepted", callAccepted)
-    // console.log("callEnded", callEnded)
-    // console.log("stream", stream ? "lol" : "no")
-    // console.log("waiting", !callAccepted && !callEnded ? true : false);
-    // console.log("answered", callAccepted && !callEnded ? true : false);
+
     return (
         <div
             className={classes.container}
@@ -76,40 +73,39 @@ const VideoCallUi = (props) =>
                             Waiting for user...
                         </h1>
                     )}
-
-                    <div
-                        className={classes.statusBar}
-                    >
-                        <div className={`${classes.time}`}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                <path d="M12.5 8.33333V12.5L15.625 15.625M21.875 12.5C21.875 17.6777 17.6777 21.875 12.5 21.875C7.32233 21.875 3.125 17.6777 3.125 12.5C3.125 7.32233 7.32233 3.125 12.5 3.125C17.6777 3.125 21.875 7.32233 21.875 12.5Z" stroke="#8D9196" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            01:25:03
+                    {(callAccepted && !callEnded) && (
+                        <div
+                            className={classes.statusBar}
+                        >
+                            <div className={`${classes.time}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                    <path d="M12.5 8.33333V12.5L15.625 15.625M21.875 12.5C21.875 17.6777 17.6777 21.875 12.5 21.875C7.32233 21.875 3.125 17.6777 3.125 12.5C3.125 7.32233 7.32233 3.125 12.5 3.125C17.6777 3.125 21.875 7.32233 21.875 12.5Z" stroke="#8D9196" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                                {formattedTime}
+                            </div>
+                            <IconButton disabled className={`${classes.iconLabel} ${classes.icon}`}>
+                                <MicrophoneIcon />
+                            </IconButton>
                         </div>
-                        <IconButton disabled className={`${classes.iconLabel} ${classes.icon}`}>
-                            <MicrophoneIcon />
-                        </IconButton>
-                    </div>
+                    )}
 
                     {/* My video */}
                     <div className={`${classes.shadow} ${classes.me} ${classes.borderRadius}`}>
-                        {stream && (
-                            <Video
-                                muted={true}
-                                videoRef={myVideo}
-                                profileImage={myData.profileImage}
-                                userName={myData.userName}
-                            />
-                        )}
+                        <Video
+                            muted={true}
+                            videoRef={myVideo}
+                            profileImage={myData.profileImage}
+                            userName={myData.userName}
+                        />
                     </div>
 
                 </div>
                 <div className={classes.bottomBar}>
-                    <IconButton className={classes.icon}>
+                    <IconButton className={classes.icon} onClick={() => toggleMedia("audio")}>
                         <MicrophoneIcon />
                     </IconButton>
 
-                    <IconButton className={classes.icon}>
+                    <IconButton className={classes.icon} onClick={() => toggleMedia("video")}>
                         <OpenedCameraIcon />
                     </IconButton>
 

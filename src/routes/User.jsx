@@ -16,7 +16,6 @@ import NotesTrash from '../pages/User/NotesTrash/NotesTrash'
 import RecommendationList from '../pages/User/Home/RecommendationList/RecommendationList'
 import MentalHealthQuestions from '../pages/User/MentalHealth/MentalHealthQuestions/MentalHealthQuestions'
 import MentalHealthResult from '../pages/User/MentalHealth/MentalHealthResult/MentalHealthResult'
-import TestVideo from '../pages/User/TestVideo/TestVideo'
 import NoPartnerYet from '../pages/User/NoPartnerYet/NoPartnerYet'
 
 const User = () =>
@@ -25,8 +24,6 @@ const User = () =>
 
     return (
         <Routes>
-            <Route path='/test' element={<TestVideo />} />
-
             <Route path='/' element={<Home />} >
                 <Route path='chats' element={<Chats />} />
                 {isHavePartner && (
@@ -49,6 +46,7 @@ const User = () =>
             <Route path='/mental-health/questions' element={<MentalHealthQuestions />} />
 
             <Route path='/video/*' element={isHavePartner ? <VideoSession /> : <NoPartnerYet />} />
+            
             <Route path='/notes' element={isHavePartner ? <Notes /> : <NoPartnerYet />} />
             <Route path='/notes/trash' element={isHavePartner ? <NotesTrash /> : <NoPartnerYet />} />
 

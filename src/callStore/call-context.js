@@ -42,6 +42,7 @@ export const CallContextProvider = (props) =>
         try
         {
             tempStream = await navigator.mediaDevices.getUserMedia({ video: callType === "video", audio: true });
+            console.log("current stream", stream);
             if (!stream)
             {
                 console.log("set stream...")
@@ -71,33 +72,42 @@ export const CallContextProvider = (props) =>
 
     const stopStream = useCallback(() =>
     {
-        // try
-        // {
-        //     if (stream && stream.getTracks)
-        //     {
-        //         stream.getTracks().forEach(track => track.stop());
-        //         if (myMedia?.current) myMedia.current = null;
-        //         setStream(null)
-        //     }
-        //     if (anotherStream && anotherStream.getTracks)
-        //     {
-        //         anotherStream.getTracks().forEach(track => track.stop());
-        //         if (anotherMedia?.current) anotherMedia.current = null;
-        //         setAnotherStream(null)
-        //     }
-        // } catch (error)
-        // {
-        //     //console.error(error)
-        // }
-    }, [])
+        try
+        {
+            if (stream && stream.getTracks)
+            {
+                stream.getTracks().forEach(track => track.stop());
+                if (myMedia?.current) myMedia.current = null;
+                setStream(null)
+            }
+            if (anotherStream && anotherStream.getTracks)
+            {
+                anotherStream.getTracks().forEach(track => track.stop());
+                if (anotherMedia?.current) anotherMedia.current = null;
+                setAnotherStream(null)
+            }
+        } catch (error)
+        {
+            //console.error(error)
+        }
+    }, [anotherStream, stream])
 
     const destroyConnectionRef = useCallback(() =>
     {
         try
         {
-            console.log("destroy")
-            connectionRef.current.destroy();
-            window.location.reload();
+            if (connectionRef?.current)
+            {
+                setTimeout(() =>
+                {
+                    console.log("destroy")
+                    connectionRef.current.destroy();
+
+                    window.location.reload();
+                }, 2000);
+            }
+
+
         } catch (error)
         {
             console.error(error)
@@ -141,20 +151,19 @@ export const CallContextProvider = (props) =>
 
             peer.on("stream", (currentStream) =>
             {
-                anotherMedia.current.srcObject = currentStream;
+                // anotherMedia.current.srcObject = currentStream;
+                setAnotherStream(currentStream);
                 console.log("*******callUser stream", currentStream)
             })
 
-            if (!callAccepted)
+
+            socket.on('callAccepted', (res) =>
             {
-                socket.on('callAccepted', (res) =>
-                {
-                    console.log("callAccepted------------------", res)
-                    setCallAccepted(true);
-                    setCall((prev) => ({ ...prev, isReceivingCall: false, busy: true }))
-                    peer.signal(res.signal)
-                })
-            }
+                console.log("callAccepted------------------", res)
+                setCallAccepted(true);
+                setCall((prev) => ({ ...prev, isReceivingCall: false, busy: true }))
+                peer.signal(res.signal)
+            })
             peer.on('error', (err) => { console.log("peer err", err) })
             peer.on('close', (data) => { console.log("99999999999999closed", data) })
             connectionRef.current = peer;
@@ -164,7 +173,7 @@ export const CallContextProvider = (props) =>
             setCallAccepted(false);
             popMessage(error, { variant: "error" })
         }
-    }, [call?.busy, call?.callType, call?.isReceivingCall, callAccepted, myData?._id, myData?.profileImage, myData?.userName, popMessage, stream])
+    }, [call?.busy, call?.callType, call?.isReceivingCall, myData?._id, myData?.profileImage, myData?.userName, popMessage, stream])
 
     // when ui setCallerId fire callUser 
     useEffect(() =>
@@ -180,7 +189,7 @@ export const CallContextProvider = (props) =>
     {
         try
         {
-            if (callAccepted) return;
+            // if (callAccepted) return;
             console.log("my stream wehen answer", stream)
             const peer = new Peer({
                 initiator: false,
@@ -212,6 +221,7 @@ export const CallContextProvider = (props) =>
                 console.log("******--on another stream assign", currentStream)
                 // if (anotherMedia?.current) anotherMedia.current.srcObject = currentStream;
                 setAnotherStream(currentStream);
+
             })
             peer.on('close', (data) => { console.log("99999999999999closed", data) })
 
@@ -235,6 +245,19 @@ export const CallContextProvider = (props) =>
         }
     }, [answerCall, isAnswer, stream])
 
+    const toggleMedia = (mediaType) =>
+    {
+        const mediaTrack = stream.getTracks().find(track => track.kind === mediaType);
+        console.log("toggle mediaTrack", mediaTrack)
+
+        if (mediaTrack.enabled)
+        {
+            mediaTrack.enabled = false
+        } else
+        {
+            mediaTrack.enabled = true
+        }
+    }
     const navigateHome = useCallback(() => { navigate("/") }, [navigate]);
 
     const removeCallData = () =>
@@ -253,9 +276,9 @@ export const CallContextProvider = (props) =>
                 setCallEnded(true);
                 localStorage.setItem("callEnded", JSON.stringify(true));
                 removeCallData();
+                stopStream();
                 navigateHome();
                 destroyConnectionRef();
-                stopStream();
             })
 
         } catch (error)
@@ -285,6 +308,22 @@ export const CallContextProvider = (props) =>
         leaveCall();
     }, [leaveCall])
 
+
+    //  update another media when another stream
+    useEffect(() =>
+    {
+        if (anotherStream && anotherMedia.current)
+        {
+            anotherMedia.current.srcObject = anotherStream;
+        }
+    }, [anotherStream, anotherMedia])
+
+    //  update my media when  stream
+    useEffect(() =>
+    {
+        if (stream && myMedia.current) myMedia.current.srcObject = stream;
+    }, [stream, myMedia])
+
     // listeners:
 
     // listen to incoming calls
@@ -308,12 +347,16 @@ export const CallContextProvider = (props) =>
             {
                 socket.on("callEnded", () =>
                 {
-                    setCallEnded(true);
-                    localStorage.setItem("callEnded", JSON.stringify(true));
-                    removeCallData();;
-                    navigateHome();
-                    destroyConnectionRef();
-                    stopStream();
+                    if (call && !callEnded)
+                    {
+                        console.log("call ended.....")
+                        setCallEnded(true);
+                        localStorage.setItem("callEnded", JSON.stringify(true));
+                        removeCallData();
+                        stopStream();
+                        navigateHome();
+                        destroyConnectionRef();
+                    }
                 })
             }
         } catch (error)
@@ -321,7 +364,7 @@ export const CallContextProvider = (props) =>
             removeCallData();
             popMessage(error.message, { variant: "error" })
         }
-    }, [call, destroyConnectionRef, navigateHome, popMessage, stopStream])
+    }, [call, callEnded, destroyConnectionRef, navigateHome, popMessage, stopStream])
 
     // pop message when call ended 
     useEffect(() =>
@@ -356,6 +399,7 @@ export const CallContextProvider = (props) =>
         setIsAnswer,
         setCall,
         anotherStream,
+        toggleMedia,
     }
 
     return (
