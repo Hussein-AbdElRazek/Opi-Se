@@ -26,7 +26,6 @@ const MatchRequests = () =>
             },
             getResponse
         );
-        console.log("useEff")
     }, [getRequests])
     return (
         <MatchRequestsUi

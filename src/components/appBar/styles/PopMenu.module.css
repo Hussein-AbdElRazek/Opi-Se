@@ -60,6 +60,10 @@
     height: 100%;
 }
 
+.popIconBtn {
+    margin-left: -8px
+}
+
 @media (min-width:901px) {
 
     .container,

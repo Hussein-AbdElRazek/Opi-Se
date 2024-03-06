@@ -10,7 +10,7 @@ const RecommendationItem = ({ userData }) =>
         handleSendPartnerRequest,
         isLoadingSendPartnerRequest,
     } = useSendPartnerRequest();
-    
+
     return (
         <div
             className={classes.btnContainer}
@@ -48,7 +48,7 @@ const RecommendationItem = ({ userData }) =>
                         loading={isLoadingSendPartnerRequest}
                         onClick={() => { handleSendPartnerRequest(userData) }}
                     >
-                        Take First Step
+                        Add Partner
                     </LoadingButton>
                 </div>
             </div>

@@ -1,4 +1,10 @@
 .logo {
-    width: 150px;
+    max-width: 150px;
     height: 100%;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
 }

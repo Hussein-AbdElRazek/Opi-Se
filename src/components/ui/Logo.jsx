@@ -6,6 +6,7 @@ export const Logo = () =>
     return (
         <NavLink
             to="/"
+            className={classes.logoContainer}
         >
             <OpiSeLogo className={classes.logo} />
         </NavLink>

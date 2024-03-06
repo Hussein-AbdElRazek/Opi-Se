@@ -1,11 +1,11 @@
 
 import { useSelector } from 'react-redux'
+import { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import './App.css';
 import IndexRoutes from './routes/IndexRoutes';
-import { AppBar } from './components/appBar';
-import { useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavBar } from './components/appBar';
 import { getWebsiteTitle } from './helpers/getWebsiteTitle';
 import { PageLayout } from './components/common';
 import IncomingVideoCall from './pages/User/IncomingVideoCall/IncomingVideoCall';
@@ -22,7 +22,7 @@ function App()
 
   //handle background color for user 
   //and guest i had handle it in index.css file 
-  if (isLoggedIn) document.body.style.backgroundColor = "var(--background2)";
+  if (isLoggedIn && !firstTime) document.body.style.backgroundColor = "var(--background2)";
 
   // Update title based on page
   useEffect(() =>
@@ -36,18 +36,20 @@ function App()
   // General sockets
   // handle join rooms + necessary listener in app root
   useGeneralSocket();
-  console.log("```````app call", call)
+
   return (
     <div>
       {isLoggedIn && !firstTime ? (
         <>
-          <AppBar />
+          <NavBar />
+
           {/* for incoming calls */}
           {(call && call?.isReceivingCall && !(call?.busy) && call?.callType === "video") && <IncomingVideoCall />}
           {(call && call?.callType === "voice") && <VoiceCall />}
 
           {/* for incoming session */}
           <SessionConfirmation />
+
           <PageLayout>
             <IndexRoutes />
           </PageLayout>

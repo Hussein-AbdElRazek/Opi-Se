@@ -143,5 +143,8 @@ a {
 /* Pop menu & popper */
 .MuiPopper-root {
     z-index: var(--layer-popper);
-    max-width: 100%;
+}
+
+.test {
+    max-width: 350px;
 }

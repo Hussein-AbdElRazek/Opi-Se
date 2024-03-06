@@ -3,7 +3,8 @@
     max-width: 100%;
     border-radius: var(--border-radius-inputs);
     background-color: var(--primary);
-    margin-top: "4px";
+    margin-top: 4px;
+    min-width: fit-content;
 }
 
 .menu li {

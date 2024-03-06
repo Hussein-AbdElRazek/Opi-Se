@@ -13,6 +13,8 @@ export const PopUpMenu = (props) =>
         id,
         containerClassName,
         fullWidth,
+        children,
+        placement,
     } = props;
 
     // handle open menu btn
@@ -84,9 +86,12 @@ export const PopUpMenu = (props) =>
                 open={isPopMenuOpened}
                 anchorEl={anchorRef.current}
                 role={undefined}
-                placement="bottom-start"
+                placement={placement ? placement : "bottom-start"}
                 transition
                 disablePortal
+                sx={{
+                    maxWidth: children ? "fit-content" : "100%",
+                }}
             >
                 {({ TransitionProps, placement }) => (
                     <Grow
@@ -105,28 +110,33 @@ export const PopUpMenu = (props) =>
                             <ClickAwayListener
                                 onClickAway={handleClose}
                             >
-                                <MenuList
-                                    id="menu"
-                                >
-                                    {menuItems.map((item, index) => (
-                                        item.component ? (<div key={index}>{item.component}</div>) :
-                                            (item.children && (
-                                                <MenuItem
-                                                    component={!!item.menuItemComponent ? item.menuItemComponent : ListItem}
-                                                    key={index}
-                                                    onClick={item.onClick}
-                                                    to={item.to}
-                                                    disableTouchRipple={item.noHover}
-                                                    disableGutters={item.noHover}
-                                                    className={`${classes.item}${item.noHover ? classes.noHover : ""} ${item.haveStroke ? classes.hoverStroke : ""}`}
-                                                    target={item.target}
-                                                    disabled={!!item?.disabled}
-                                                >
-                                                    {item.children}
-                                                </MenuItem>
-                                            ))
-                                    ))}
-                                </MenuList>
+                                <div>
+                                    {menuItems && (
+                                        <MenuList
+                                            id="menu"
+                                        >
+                                            {menuItems.map((item, index) => (
+                                                item.component ? (<div key={index}>{item.component}</div>) :
+                                                    (item.children && (
+                                                        <MenuItem
+                                                            component={!!item.menuItemComponent ? item.menuItemComponent : ListItem}
+                                                            key={index}
+                                                            onClick={item.onClick}
+                                                            to={item.to}
+                                                            disableTouchRipple={item.noHover}
+                                                            disableGutters={item.noHover}
+                                                            className={`${classes.item}${item.noHover ? classes.noHover : ""} ${item.haveStroke ? classes.hoverStroke : ""}`}
+                                                            target={item.target}
+                                                            disabled={!!item?.disabled}
+                                                        >
+                                                            {item.children}
+                                                        </MenuItem>
+                                                    ))
+                                            ))}
+                                        </MenuList>
+                                    )}
+                                    {children && (children)}
+                                </div>
                             </ClickAwayListener>
                         </div>
                     </Grow>)}

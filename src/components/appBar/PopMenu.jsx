@@ -9,12 +9,12 @@ import { ReactComponent as ProgressIcon } from '../../assets/icons/progress.svg'
 import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as ReportIcon } from '../../assets/icons/report.svg'
-import { ReactComponent as NotificationIcon } from '../../assets/icons/notification.svg'
 import { ReactComponent as AddFriendIcon } from '../../assets/icons/addFriend.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import classes from './styles/PopMenu.module.css'
 import { uiActions } from '../../store/ui-slice'
 import { ProfileIcon } from './ProfileIcon'
+import Notifications from '../../pages/User/Notifications/Notifications'
 
 export const PopMenu = () =>
 {
@@ -24,15 +24,24 @@ export const PopMenu = () =>
     const profileMenuId = "smallProfileMenu"
     const dispatch = useDispatch();
     const closeMenu = () => { dispatch(uiActions.closePopMenu(menuId)) };
-    const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
     const isPopMenuProfileOpened = useSelector(state => state.ui.isPopMenuOpened)[profileMenuId] || false
-    
+
     const handleToggleProfileMenu = () =>
     {
         if (isPopMenuProfileOpened) dispatch(uiActions.closePopMenu(profileMenuId))
         else dispatch(uiActions.openPopMenu(profileMenuId))
     }
-    
+
+    const notificationsId = "notifications"
+    const isPopNotificationsOpened = useSelector(state => state.ui.isPopMenuOpened)[notificationsId] || false
+
+    const handleToggleNotifications = () =>
+    {
+        if (isPopNotificationsOpened) dispatch(uiActions.closePopMenu(notificationsId))
+        else dispatch(uiActions.openPopMenu(notificationsId))
+    }
+    const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
+
     const menuItems = [
         // profile menu
         {
@@ -127,8 +136,8 @@ export const PopMenu = () =>
         },
         // notifications
         {
-            onClick: closeMenu,
-            menuItemComponent: NavLink,
+            noHover: true,
+            onClick: handleToggleNotifications,
             children:
                 <>
                     <Badge
@@ -138,12 +147,12 @@ export const PopMenu = () =>
                         variant="dot"
                     >
                         <ListItemIcon className={classes.icon}>
-                            <NotificationIcon fill='var(--black-40)' />
+                            <Notifications />
                         </ListItemIcon>
                     </Badge>
                     Notifications
-                </>,
-            to: "/notifications",
+                </>
+            ,
         },
         // requests
         {

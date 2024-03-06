@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { Badge, Grid, IconButton } from '@mui/material'
 
-import { IconBtn } from './IconBtn'
 import classes from './styles/Navbar.module.css'
 import { SearchBar } from './SearchBar'
 import { ProfileIcon } from './ProfileIcon'
@@ -11,11 +10,11 @@ import { ReactComponent as ProgressIcon } from '../../assets/icons/progress.svg'
 import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as ReportIcon } from '../../assets/icons/report.svg'
-import { ReactComponent as NotificationIcon } from '../../assets/icons/notification.svg'
-import { ReactComponent as AddFriendIcon } from '../../assets/icons/addFriend.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import { PopMenu } from './PopMenu'
 import { useSelector } from 'react-redux'
+import Notifications from '../../pages/User/Notifications/Notifications'
+import MatchRequests from '../../pages/User/MatchRequests/MatchRequests'
 
 export const NavBar = ({ title }) =>
 {
@@ -104,25 +103,18 @@ export const NavBar = ({ title }) =>
             <Grid
                 item
                 lg={1.5}
-                className={classes.rightIcons}
+                className={`${classes.rightIcons} center-y`}
             >
                 <Badge
                     overlap="circular"
                     badgeContent=" "
                     invisible={!isNewNotification}
                 >
-                    <IconBtn
-                        Icon={NotificationIcon}
-                        component={NavLink}
-                        to={title === "Notifications" ? "/" : "notifications"}
-                    />
+                    <Notifications type="navbar" />
                 </Badge>
 
-                <IconBtn
-                    Icon={AddFriendIcon}
-                    component={NavLink}
-                    to={title === "Requests" ? "/" : "requests"}
-                />
+                <MatchRequests />
+
                 <ProfileIcon id={"profileMenu"} />
             </Grid>
         </Grid>

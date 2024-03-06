@@ -8,8 +8,6 @@ import ChangePassword from '../pages/User/ChangePassword/ChangePassword'
 import Chats from '../pages/User/Chats/Chats'
 import Chat from '../pages/User/Chat/Chat'
 import VideoSession from '../pages/User/VideoCall/VideoCall'
-import MatchRequests from '../pages/User/MatchRequests/MatchRequests'
-import Notifications from '../pages/User/Notifications/Notifications'
 import ChatProfile from '../pages/User/ChatProfile/ChatProfile'
 import Notes from '../pages/User/Notes/Notes'
 import NotesTrash from '../pages/User/NotesTrash/NotesTrash'
@@ -32,9 +30,6 @@ const User = () =>
                         <Route path='chats/chat/profile' element={<ChatProfile />} />
                     </>
                 )}
-
-                <Route path='requests' element={<MatchRequests />} />
-                <Route path='notifications' element={<Notifications />} />
             </Route>
 
             <Route path='/recommendation' element={<RecommendationList />} />

@@ -27,17 +27,11 @@ const EditProfileUi = (props) =>
                     xl: 1
                 }}
             >
+                <SideBar />
+                
                 <Grid
                     item
-                    md={2.5}
-                    sm={1.5}
-                    xs={2}
-                >
-                    <SideBar />
-                </Grid>
-                <Grid
-                    item
-                    md={9.5}
+                    md={8}
                     sm={10.5}
                     xs={10}
                 >

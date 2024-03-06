@@ -15,14 +15,8 @@ const ChangePasswordUi = (props) =>
         <Grid
             container
         >
-            <Grid
-                item
-                md={2.5}
-                sm={1.5}
-                xs={2}
-            >
-                <SideBar />
-            </Grid>
+            <SideBar />
+
             <Grid
                 item
                 xl={4}
