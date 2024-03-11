@@ -144,7 +144,3 @@ a {
 .MuiPopper-root {
     z-index: var(--layer-popper);
 }
-
-.test {
-    max-width: 350px;
-}
