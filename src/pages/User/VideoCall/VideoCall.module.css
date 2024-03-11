@@ -28,10 +28,33 @@
     width: 45px;
     height: 45px;
     margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon svg {
-    width: 70%;
+    stroke: var(--text-header);
+}
+
+.iconCam svg {
+    width: 20px;
+}
+
+.iconMic svg {
+    width: 22px;
+}
+
+.iconMuted {
+    background-color: var(--danger-btn) !important;
+}
+
+.iconMuted svg {
+    stroke: var(--primary)
+}
+
+.iconCamOff svg {
+    width: 25px;
 }
 
 .endCall {
@@ -57,24 +80,11 @@
 
 }
 
-/* .person {
-    height: 100%;
-    width: 100%;
-} */
-
-/* .person img {
-    width: 100%;
-} */
-
 .person {
     position: relative;
     overflow: hidden;
     text-align: center;
-    /* background-color: var(--primary); */
     height: 100%;
-
-    /* width: 100%; */
-    background-color: yellowgreen !important;
 }
 
 .statusBar {
@@ -109,6 +119,7 @@
     right: 20px;
     width: 250px;
     height: 140px;
+    max-width: calc(100% - 40px);
 }
 
 .callContainer {
@@ -117,7 +128,6 @@
     padding: 40px 30px 80px 30px;
     position: relative;
 }
-
 
 .title {
     width: 100%;
@@ -138,4 +148,43 @@
 
 .opened path {
     stroke: var(--secondary) !important;
+}
+
+.waiting {
+    width: 200px;
+    margin: 5% auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.waiting h1 {
+    font-size: var(--font-size-800);
+}
+
+.waitingAvatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+@media (max-width:768px) {
+    .waiting {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .waiting h1 {
+        font-size: var(--font-size-500);
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+    }
+
+    .waitingAvatar {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0px;
+    }
 }

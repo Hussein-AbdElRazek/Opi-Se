@@ -252,6 +252,44 @@ export const listenToReceiveMedia = createAsyncThunk(
     }
 )
 
+//select from poll 
+export const selectFromPoll = createAsyncThunk(
+    'chat/selectFromPoll',
+    async (payload) =>
+    {
+        console.log("payload", payload)
+        const matchId = JSON.parse(localStorage.getItem("userData"))?.matchId;
+        const token = (localStorage.getItem("token"));
+        // update query
+        const updatedQuery = {
+            messageId: payload.messageId,
+            optionNumber: Number(payload.optionNumber),
+            matchId: matchId,
+            token: token,
+        }
+        socket.io.opts.query = updatedQuery;
+        socket.disconnect()
+        socket.connect();
+
+        socket.emit('selectFromPoll', {}, (res) => { console.log("selectFromPoll", res) });
+    }
+);
+export const listenToPollOptionSelected = createAsyncThunk(
+    "chat/listenToPollOptionSelected",
+    async (payload, thunkAPI) =>
+    {
+        socket.on('pollOptionSelected', (res) =>
+        {
+            //  update state
+            console.log("pollOptionSelected", res)
+            // thunkAPI.dispatch(
+            //     chatActions.updateMessages({
+
+            //     }))
+        });
+    }
+)
+
 const initialChatState = {
     messages: {},
     session: {
@@ -299,6 +337,17 @@ const chatSlice = createSlice({
 
                 state.messages[action.payload.messagesId] = [action.payload.newMessage]
             }
+        },
+        updateMessage(state, action)
+        {
+            state.messages[action.payload.messagesId] = state.messages[action.payload.messagesId].map(ele =>
+            {
+                if (ele._id === action.payload.updatedMessage._id)
+                {
+                    return { ...ele, ...action.payload.updatedMessage }
+                }
+                else return ele;
+            })
         },
         deleteMessage(state, action)
         {

@@ -1,7 +1,8 @@
-import { Avatar, Badge, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
+import { Badge, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
 import classes from './Chats.module.css';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ProfilePic } from '../../../components/ui/ProfilePic';
 const ChatItem = ({ chatItemData }) =>
 {
     const navigate = useNavigate();
@@ -29,16 +30,21 @@ const ChatItem = ({ chatItemData }) =>
                         margin: "0 !important"
                     }
                 }}
-            ><Badge
-                overlap="circular"
-                variant="dot"
-                invisible={!isNewMessage}
             >
+                <Badge
+                    overlap="circular"
+                    variant="dot"
+                    invisible={!isNewMessage}
+                >
                     <ListItemAvatar>
-                        <Avatar
-                            // src={chatItemData.profileImage}
-                            sx={{ backgroundImage: `url(${chatItemData.profileImage})` }}
-                        />
+                        <div
+                            className={classes.profilePicContainer}
+                        >
+                            <ProfilePic
+                                profileImage={chatItemData.profileImage}
+                                userName={chatItemData.userName}
+                            />
+                        </div>
                     </ListItemAvatar>
                 </Badge>
                 <ListItemText

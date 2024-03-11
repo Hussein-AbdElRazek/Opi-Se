@@ -15,7 +15,7 @@ export const PollInputsArray = (props) =>
     {
         push(
             {
-                "optionNumber": length + 1,
+                "optionNumber": length ,
                 "optionContent": ""
             }
         )
@@ -25,7 +25,7 @@ export const PollInputsArray = (props) =>
     const handleChangeOptionValue = (e, formik, index, remove) =>
     {
         const newValue = e.target.value;
-        if (index > 1
+        if (index > 0
             && !newValue.trim())
         {
             remove(index)

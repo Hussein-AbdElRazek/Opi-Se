@@ -8,7 +8,21 @@ import useTimer from '../../../hooks/use-timer';
 const VideoCall = () =>
 {
 
-    const { call, callAccepted, myMedia, anotherMedia, stream, callEnded, leaveCall, anotherStream, toggleMedia } = useContext(CallContext);
+    const {
+        call,
+        callAccepted,
+        myMedia,
+        anotherMedia,
+        stream,
+        callEnded,
+        leaveCall,
+        anotherStream,
+        toggleMedia,
+        isMyMicOn,
+        isMyCamOn,
+        isAnotherCamOn,
+        isAnotherMicOn,
+    } = useContext(CallContext);
 
     // my data from store
     const myData = useSelector(state => state.auth.userData);
@@ -42,6 +56,7 @@ const VideoCall = () =>
     {
         if (!call) navigate("/")
     }, [call, navigate])
+
     return (
         <VideoCallUi
             call={call}
@@ -55,6 +70,10 @@ const VideoCall = () =>
             leaveCall={leaveCall}
             toggleMedia={toggleMedia}
             formattedTime={formattedTime}
+            isMyMicOn={isMyMicOn}
+            isMyCamOn={isMyCamOn}
+            isAnotherCamOn={isAnotherCamOn}
+            isAnotherMicOn={isAnotherMicOn}
         />
     )
 }

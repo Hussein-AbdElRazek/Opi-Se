@@ -69,6 +69,7 @@ export const MessagesList = ({ messages, firstElementRef, messageContainerRef })
                                     :
                                     message.messageType === "poll" ?
                                         <PollMessage
+                                            messageId={message._id}
                                             messageSendType={messageSendType}
                                             pollMessage={message}
                                             key={index}

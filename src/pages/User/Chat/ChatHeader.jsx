@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import { Avatar, ButtonBase, IconButton } from '@mui/material'
+import { ButtonBase, IconButton } from '@mui/material'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import classes from './Chat.module.css'
 import Session from './Session';
 import CallContext from '../../../callStore/call-context';
+import { ProfilePic } from '../../../components/ui';
 
 const ChatHeader = ({ userData }) =>
 {
@@ -15,7 +16,7 @@ const ChatHeader = ({ userData }) =>
     {
         navigate("/chats")
     }
-    const { setCallerId, setCall, establishStream } = useContext(CallContext);
+    const { setCallerId, setCall, establishStream, stream } = useContext(CallContext);
 
     const navigateChatProfile = () =>
     {
@@ -25,14 +26,16 @@ const ChatHeader = ({ userData }) =>
     const handleVideoCall = () =>
     {
         navigate("/video")
-        establishStream("video");
+        if (!stream) establishStream("video");
         setCallerId(searchParams.get('id'))
+        setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
     }
+
     const handleVoiceCall = () =>
     {
-        establishStream("voice");
+        if (!stream) establishStream("voice");
         setCallerId(searchParams.get('id'))
-        setCall(prev => ({ ...prev, name: searchParams.get('userName') }))
+        setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
     }
     return (
         <div
@@ -56,10 +59,14 @@ const ChatHeader = ({ userData }) =>
                     className={classes.userInfo}
                     onClick={navigateChatProfile}
                 >
-                    <Avatar
-                        src={userData.profileImage}
-                        className={classes.avatar}
-                    />
+                    <div
+                        className={classes.profilePicContainer}
+                    >
+                        <ProfilePic
+                            profileImage={userData.profileImage}
+                            userName={userData.userName}
+                        />
+                    </div>
                     <div
                         className={classes.headerText}
                         title={userData.userName}

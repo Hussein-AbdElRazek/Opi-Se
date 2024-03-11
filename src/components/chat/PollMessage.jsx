@@ -1,8 +1,7 @@
-import React from 'react'
 import { PollOption } from './PollOption';
 import { getTypingDirection } from '../../helpers/getTypingDirection';
 
-export const PollMessage = ({ pollMessage, messageSendType }) =>
+export const PollMessage = ({ pollMessage, messageSendType, messageId }) =>
 {
     const { pollQuestion, pollAnswers } = pollMessage;
     const textDirection = getTypingDirection(pollQuestion);
@@ -19,10 +18,16 @@ export const PollMessage = ({ pollMessage, messageSendType }) =>
                 {pollQuestion}
             </p>
             {pollAnswers.map((answer) => (
-                <PollOption
-                    key={answer.optionNumber}
-                    {...answer}
-                />
+                // TODO remove after bug in back in selecet options  answer?.optionNumber && (
+
+                answer?.optionContent && (
+                    <PollOption
+                        key={answer?.optionNumber}
+                        pollAnswers={pollAnswers}
+                        messageId={messageId}
+                        {...answer}
+                    />
+                )
             ))}
         </div>
     )

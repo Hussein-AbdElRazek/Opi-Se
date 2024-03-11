@@ -9,6 +9,7 @@ import
     sendMessage,
     listenToDeleteMessage,
     uploadChatMedia,
+    listenToPollOptionSelected,
 } from '../../../store/chat-slice';
 import useHttp from '../../../hooks/use-http';
 import ImagesContext from '../../../imagesStore/images-context';
@@ -76,13 +77,13 @@ const Chat = () =>
     const submitPollMessage = (values) =>
     {
         const sentPollMessage = {
-            messageSender: userId,
             messageType: "poll",
             ...values
         }
         const newPollMessage = {
             _id: new Date().toUTCString(),
             sentAt: new Date().toUTCString(),
+            messageSender: userId,
             ...sentPollMessage
         }
         const payload = {
@@ -96,6 +97,14 @@ const Chat = () =>
         dispatch(uiActions.closePopMenu("chatMenu"))
         dispatch(uiActions.closePopMenu("chatMenu"))
     }
+
+    // i handle poll select in PollOption component
+
+    // listen to select options
+    useEffect(() =>
+    {
+        dispatch(listenToPollOptionSelected())
+    }, [dispatch])
 
     const matchId = useSelector((state) => state.auth.userData.matchId)
 

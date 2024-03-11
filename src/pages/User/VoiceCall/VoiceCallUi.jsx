@@ -1,10 +1,11 @@
-import React from 'react'
+import { IconButton } from '@mui/material';
+
 import { DraggableCall } from '../../../components/common/DraggableCall'
 import { AnswerIconBtn, DeclineIconBtn, Video } from '../../../components/common'
-import { IconButton } from '@mui/material';
-import { ReactComponent as MicrophoneIcon } from '../../../assets/icons/microphone.svg'
-import { ReactComponent as SpeakerIcon } from '../../../assets/icons/speaker.svg'
+import { ReactComponent as MicIcon } from '../../../assets/icons/mic.svg';
+import { ReactComponent as MutedMicIcon } from '../../../assets/icons/mutedMic.svg';
 import videoRingtone from '../../../assets/audios/videoRingtone.mp3';
+import classes from '../VideoCall/VideoCall.module.css'
 
 const VoiceCallUi = (props) =>
 {
@@ -18,8 +19,9 @@ const VoiceCallUi = (props) =>
         leaveCall,
         myMedia,
         anotherMedia,
-        stream,
         anotherStream,
+        toggleMedia,
+        isMyMicOn,
     } = props;
 
     const RenderIncomingActions = () => (
@@ -28,17 +30,19 @@ const VoiceCallUi = (props) =>
             <AnswerIconBtn onClick={answerCall} />
         </>
     )
+
     const RenderRingingActions = () => (
         <>
-            <IconButton>
-                <MicrophoneIcon />
-            </IconButton>
-            <IconButton>
-                <SpeakerIcon />
+            <IconButton
+                className={`${classes.icon} ${classes.iconMic} ${!isMyMicOn ? classes.iconMuted : ""}`}
+                onClick={() => toggleMedia("audio")}
+            >
+                {isMyMicOn ? (<MicIcon />) : (<MutedMicIcon />)}
             </IconButton>
             <DeclineIconBtn onClick={leaveCall} />
         </>
     )
+
     const RenderCallAction = () =>
     {
         if (call?.isReceivingCall)
@@ -54,6 +58,7 @@ const VoiceCallUi = (props) =>
             return (<></>)
         }
     }
+
     const RenderSecondaryText = () =>
     {
         if (!call?.isReceivingCall && !callAccepted && !callEnded && !call?.busy)
@@ -71,6 +76,7 @@ const VoiceCallUi = (props) =>
             return ("Ringing...")
         }
     }
+
     return (
         <div>
             <DraggableCall
@@ -78,22 +84,17 @@ const VoiceCallUi = (props) =>
                 call={call}
                 secondaryText={RenderSecondaryText()}
                 actions={<RenderCallAction />}
+                isReceivingCall={call?.isReceivingCall}
             />
-            {/* Automatic play Ringtone  */}
+
             {/* My video */}
-            <div >
-                {stream && (
-                    <div
-                        style={{ display: "none" }}
-                    >
-                        <Video
-                            muted={true}
-                            videoRef={myMedia}
-                        // profileImage={myData.profileImage}
-                        // userName={myData.userName}
-                        />
-                    </div>
-                )}
+            <div
+                style={{ display: "none" }}
+            >
+                <Video
+                    muted={true}
+                    videoRef={myMedia}
+                />
             </div>
             {/* Another Person video */}
             {(anotherStream || (callAccepted && !callEnded)) && (
@@ -102,11 +103,8 @@ const VoiceCallUi = (props) =>
                 >
                     <Video
                         videoRef={anotherMedia}
-                        profileImage={call?.profileImage}
-                        userName={call?.userName}
                     />
                 </div>
-
             )}
 
             {/* Automatic play Ringtone  */}

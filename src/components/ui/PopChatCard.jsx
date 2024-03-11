@@ -12,7 +12,7 @@ export const PopChatCard = ({ header, children, inputBar, type }) =>
                 className={`
                     ${classes.content} 
                     ${type === "mediaPage" ? classes.mediaPage : ""}
-                    ${inputBar ? classes.paddingBottom : ""}
+                    ${inputBar ? classes.marginBottom : ""}
                 `}
             >
                 {children}

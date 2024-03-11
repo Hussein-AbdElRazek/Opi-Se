@@ -12,7 +12,14 @@
     z-index: var(--layer-incoming-call);
 }
 
-.container h1 {
+.info {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.info h1 {
     text-overflow: ellipsis;
     overflow: hidden;
     text-wrap: nowrap;
@@ -20,7 +27,7 @@
     color: var(--primary);
 }
 
-.container span {
+.info span {
     width: 100%;
     color: var(--incoming-call-span);
     font-size: var(--font-size-100);
@@ -28,6 +35,15 @@
 
 .content {
     margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: 340px;
+    max-height: calc(100vh - 60px);
+    align-items: space-between;
+    justify-content: center;
+}
+
+.info {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -43,6 +59,15 @@
     min-width: 180px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+}
+
+.voiceAction {
+    justify-content: center !important;
+}
+
+.voiceAction button {
+    margin: 10px ;
 }
 
 .marginTop {

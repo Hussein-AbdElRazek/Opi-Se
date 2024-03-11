@@ -2,11 +2,11 @@ export const pollInitialValues = {
     pollQuestion: "",
     pollAnswers: [
         {
-            "optionNumber": 1,
+            "optionNumber": 0,
             "optionContent": ""
         },
         {
-            "optionNumber": 2,
+            "optionNumber": 1,
             "optionContent": ""
         },
     ]

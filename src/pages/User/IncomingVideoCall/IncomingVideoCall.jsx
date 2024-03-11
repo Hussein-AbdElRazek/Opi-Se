@@ -18,8 +18,8 @@ const IncomingVideoCall = () =>
 
     useEffect(() =>
     {
-        establishStream("video");
-    }, [establishStream])
+        if (!stream) establishStream("video");
+    }, [establishStream, stream])
     return (
         <IncomingVideoCallUi
             myMedia={myMedia}

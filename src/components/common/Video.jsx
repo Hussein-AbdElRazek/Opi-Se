@@ -8,35 +8,22 @@ export const Video = (props) =>
         muted,
         userName,
         profileImage,
+        isCamOn,
+        isIncoming
     } = props;
 
     return (
         <div
-            className={`${classes.container} center-x center-y`}
+            className={`${classes.container} ${isIncoming ? classes.incoming : ""} center-x center-y`}
         >
             <video
                 ref={videoRef}
                 playsInline
                 muted={muted}
                 autoPlay
+                style={{ display: isCamOn || isIncoming ? "block" : "none" }}
             />
-        </div>
-
-    )
-}
-/*
-<div
-            className={`${classes.container} center-x center-y`}
-        >
-            {true ? (
-                <video
-                    ref={videoRef}
-                    playsInline
-                    muted={muted}
-                    autoPlay
-                />
-                ) 
-                : (
+            {!(isCamOn || isIncoming) && (
                 <div
                     className={classes.profilePic}
                 >
@@ -46,6 +33,6 @@ export const Video = (props) =>
                     />
                 </div>
             )}
-
         </div>
-*/
+    )
+}

@@ -12,6 +12,7 @@ export const DraggableCall = (props) =>
         type,
         video,
         actions,
+        isReceivingCall
     } = props;
 
     // handle default position
@@ -30,45 +31,48 @@ export const DraggableCall = (props) =>
                 className={classes.container}
             >
                 <div className={classes.content}>
+
                     <div
-                        className={`${classes.profilePic} ${classes.marginTop}`}
+                        className={classes.info}
                     >
-                        <ProfilePic
-                            profileImage={call?.profileImage}
-                            userName={call?.userName}
-                        />
+                        <div
+                            className={`${classes.profilePic} ${classes.marginTop}`}
+                        >
+                            <ProfilePic
+                                profileImage={call?.profileImage}
+                                userName={call?.userName}
+                            />
+                        </div>
+                        {call?.name && (
+                            <HeaderText>
+                                {call?.name}
+                            </HeaderText>
+                        )}
+                        {secondaryText && (
+                            <span>
+                                {secondaryText}
+                            </span>
+                        )}
                     </div>
-                    {call?.name && (
-                        <HeaderText>
-                            {call?.name}
-                        </HeaderText>
-                    )}
-                    {secondaryText && (
-                        <span>
-                            {secondaryText}
-                        </span>
-                    )}
 
                     {type === "video" && (
                         <div className={`${classes.marginTop} ${classes.videoContainer}`}>
                             <Video
                                 videoRef={video}
                                 muted={true}
+                                isIncoming={true}
                             />
                         </div>
                     )}
 
                     <div
-                        className={`${classes.action}  ${classes.marginTop}`}
+                        className={`${classes.action}  ${classes.marginTop} ${(type === "voice" && !isReceivingCall) ? classes.voiceAction : ""}`}
                     >
                         {actions}
                     </div>
 
                 </div>
-
-
             </div>
-
         </Draggable>
     )
 }

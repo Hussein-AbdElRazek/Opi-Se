@@ -65,3 +65,8 @@
 .noChatsContainer img {
     width: 50% !important;
 }
+
+.profilePicContainer {
+    width: 45px;
+    height: 45px;
+}

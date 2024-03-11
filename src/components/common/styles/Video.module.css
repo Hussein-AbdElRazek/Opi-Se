@@ -4,7 +4,11 @@
     height: 100%;
     min-height: 100px;
     overflow: hidden;
-    background-color: var(--stepper-bg);
+    background-color: var(--background2);
+}
+
+.incoming {
+    background-color: var(--stepper-bg)
 }
 
 .container video {

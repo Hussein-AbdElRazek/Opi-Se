@@ -6,7 +6,7 @@
 }
 
 .optionBtn {
-    width: calc(100% - 30px);
+    width: calc(100% - 45px);
     padding: 10px;
     margin-right: 10px;
     border-radius: var(--border-radius-inputs);
@@ -15,11 +15,28 @@
     display: flex;
     justify-content: space-between;
     text-wrap: wrap;
+    position: relative;
+    z-index: var(--layer-100);
 }
 
-
 .chosenOptionBtn {
+    color: var(--primary);
+}
+
+.chosenOptionBG {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: calc(100% + 2px);
+    width: calc(100% + 2px);
+    border-radius: var(--border-radius-inputs);
     background-color: var(--secondary-darker);
+    z-index: -1;
+}
+
+.chosenOptionBG50 {
+    width: calc(50% + 2px);
+    border-radius: var(--border-radius-inputs) 0 0 var(--border-radius-inputs);
 }
 
 .optionBtn p {

@@ -22,6 +22,10 @@ export const CallContextProvider = (props) =>
     const [isAnswer, setIsAnswer] = useState(false);
     const [name, setName] = useState("");
     const [anotherStream, setAnotherStream] = useState(null);
+    const [isMyMicOn, setIsMyMicOn] = useState(true);
+    const [isMyCamOn, setIsMyCamOn] = useState(true);
+    const [isAnotherCamOn, setIsAnotherCamOn] = useState(true);
+    const [isAnotherMicOn, setIsAnotherMicOn] = useState(true);
 
     // call refs
     const myMedia = useRef();
@@ -41,7 +45,7 @@ export const CallContextProvider = (props) =>
         let tempStream;
         try
         {
-            tempStream = await navigator.mediaDevices.getUserMedia({ video: callType === "video", audio: true });
+            if (!stream) tempStream = await navigator.mediaDevices.getUserMedia({ video: callType === "video", audio: true });
             console.log("current stream", stream);
             if (!stream)
             {
@@ -142,7 +146,6 @@ export const CallContextProvider = (props) =>
                         if (success)
                         {
                             setCall(prev => ({ ...prev, from: myData?._id, name: prev.name, busy: true }))
-                            // navigate("/video");
                         }
                         else throw new Error(message || "Something went wrong")
                     })
@@ -245,6 +248,43 @@ export const CallContextProvider = (props) =>
         }
     }, [answerCall, isAnswer, stream])
 
+    // emit toggleCamera
+    const toggleCamera = (isCameraOn) =>
+    {
+        socket.emit("toggleCamera", { camera: isCameraOn }, () => { })
+    }
+
+    // emit toggleMicrophone
+    const toggleMicrophone = (isMicOn) =>
+    {
+        socket.emit("toggleMicrophone", { microphone: isMicOn }, () => { })
+    }
+
+    // set my media and call sockets
+    const handleMyMediaToggle = (mediaType, newState) =>
+    {
+        if (mediaType === "audio")
+        {
+            setIsMyMicOn(newState);
+            toggleMicrophone(newState)
+        } else
+        {
+            setIsMyCamOn(newState);
+            toggleCamera(newState)
+        }
+    }
+
+    const setAnotherMediaState = (mediaType, newState) =>
+    {
+        if (mediaType === "audio")
+        {
+            setIsAnotherMicOn(newState);
+        } else
+        {
+            setIsAnotherCamOn(newState);
+        }
+    }
+
     const toggleMedia = (mediaType) =>
     {
         const mediaTrack = stream.getTracks().find(track => track.kind === mediaType);
@@ -252,12 +292,15 @@ export const CallContextProvider = (props) =>
 
         if (mediaTrack.enabled)
         {
-            mediaTrack.enabled = false
+            mediaTrack.enabled = false;
+            handleMyMediaToggle(mediaType, false)
         } else
         {
             mediaTrack.enabled = true
+            handleMyMediaToggle(mediaType, true)
         }
     }
+
     const navigateHome = useCallback(() => { navigate("/") }, [navigate]);
 
     const removeCallData = () =>
@@ -308,22 +351,6 @@ export const CallContextProvider = (props) =>
         leaveCall();
     }, [leaveCall])
 
-
-    //  update another media when another stream
-    useEffect(() =>
-    {
-        if (anotherStream && anotherMedia.current)
-        {
-            anotherMedia.current.srcObject = anotherStream;
-        }
-    }, [anotherStream, anotherMedia])
-
-    //  update my media when  stream
-    useEffect(() =>
-    {
-        if (stream && myMedia.current) myMedia.current.srcObject = stream;
-    }, [stream, myMedia])
-
     // listeners:
 
     // listen to incoming calls
@@ -366,6 +393,22 @@ export const CallContextProvider = (props) =>
         }
     }, [call, callEnded, destroyConnectionRef, navigateHome, popMessage, stopStream])
 
+    // listen to cameraToggeled, microphoneToggeled
+    useEffect(() =>
+    {
+        socket.on("cameraToggeled", (res) =>
+        {
+            console.log("cameraToggeled", res)
+            setAnotherMediaState("video", res?.camera)
+        })
+
+        socket.on("microphoneToggeled", (res) =>
+        {
+            console.log("microphoneToggeled", res)
+            setAnotherMediaState("audio", res?.microphone)
+        })
+    }, [])
+
     // pop message when call ended 
     useEffect(() =>
     {
@@ -400,6 +443,10 @@ export const CallContextProvider = (props) =>
         setCall,
         anotherStream,
         toggleMedia,
+        isMyMicOn,
+        isMyCamOn,
+        isAnotherCamOn,
+        isAnotherMicOn,
     }
 
     return (

@@ -19,20 +19,27 @@ const VoiceCall = () =>
         leaveCall,
         callAccepted,
         callEnded,
+        toggleMedia,
+        isMyMicOn,
     } = useContext(CallContext);
 
     // establish stream (take permission & get video, audio)
     const handleAnswer = () =>
     {
-
         setCall(prev => ({ ...prev, isReceivingCall: false }))
         setIsAnswer(true)
     }
 
+    // establishStream
     useEffect(() =>
     {
-        establishStream("voice");
-    }, [establishStream])
+        if (!stream && call?.isReceivingCall)
+        {
+            establishStream("voice");
+        }
+    }, [call?.isReceivingCall, establishStream, stream])
+
+    // begin call
     useEffect(() =>
     {
         if (callAccepted && !callEnded) setCallStarted(true)
@@ -52,6 +59,7 @@ const VoiceCall = () =>
     {
         if (stream && myMedia.current) myMedia.current.srcObject = stream;
     }, [stream, myMedia])
+
     return (
         <VoiceCallUi
             formattedTime={formattedTime}
@@ -65,6 +73,8 @@ const VoiceCall = () =>
             anotherStream={anotherStream}
             myMedia={myMedia}
             anotherMedia={anotherMedia}
+            toggleMedia={toggleMedia}
+            isMyMicOn={isMyMicOn}
         />
     )
 }
