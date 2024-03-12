@@ -37,7 +37,7 @@
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    height: 340px;
+    min-height: 340px;
     max-height: calc(100vh - 60px);
     align-items: space-between;
     justify-content: center;
