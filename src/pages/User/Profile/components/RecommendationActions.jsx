@@ -7,7 +7,7 @@ const RecommendationActions = () =>
     return (
         <ActionsLayout>
             <Btn
-                startIcon={<AddIcon />}
+                startIcon={<AddIcon fill='var(--primary)'/>}
                 className={classes.addBtn}
             >
                 Add

@@ -15,6 +15,8 @@ import RecommendationList from '../pages/User/Home/RecommendationList/Recommenda
 import MentalHealthQuestions from '../pages/User/MentalHealth/MentalHealthQuestions/MentalHealthQuestions'
 import MentalHealthResult from '../pages/User/MentalHealth/MentalHealthResult/MentalHealthResult'
 import NoPartnerYet from '../pages/User/NoPartnerYet/NoPartnerYet'
+import TasksHome from '../pages/User/Tasks/TasksHome'
+import Tasks from '../pages/User/Tasks/Tasks/Tasks'
 
 const User = () =>
 {
@@ -41,9 +43,16 @@ const User = () =>
             <Route path='/mental-health/questions' element={<MentalHealthQuestions />} />
 
             <Route path='/video/*' element={isHavePartner ? <VideoSession /> : <NoPartnerYet />} />
-            
+
             <Route path='/notes' element={isHavePartner ? <Notes /> : <NoPartnerYet />} />
             <Route path='/notes/trash' element={isHavePartner ? <NotesTrash /> : <NoPartnerYet />} />
+
+            <Route path='/tasks/*' element={isHavePartner ? <TasksHome /> : <NoPartnerYet />} >
+                {/* for handle all paths for tasks page  */}
+                {['', 'todo', 'inprogress', 'done'].map((tasksPath, index) => (
+                    <Route key={index} path={tasksPath} element={<Tasks />} />
+                ))}
+            </Route>
 
             <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>

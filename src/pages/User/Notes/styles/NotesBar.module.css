@@ -27,6 +27,7 @@
 .addIcon svg {
     width: 15px;
     height: 15px;
+    fill: var(--primary);
 }
 
 .trashIcon svg {

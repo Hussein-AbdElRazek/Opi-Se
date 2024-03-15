@@ -1,0 +1,59 @@
+.container {
+    padding: 15px 12px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius-150);
+    background-color: var(--background2);
+    box-shadow: 0px 1px 2px 0px #00000020;
+    position: relative;
+}
+
+.container h6 {
+    margin: 0 0 10px 0;
+    font-size: var(--font-size-200);
+    font-weight: 600;
+}
+
+.container p {
+    margin: 0 0 10px 0;
+    font-size: var(--font-size-35);
+    color: rgb(29, 45, 53, .8);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.date {
+    width: fit-content;
+    display: block;
+    padding: 5px;
+    border: 1px solid var(--todo);
+    border-radius: var(--border-radius-5);
+    font-size: var(--font-size-35);
+    background-color: var(--primary);
+}
+
+.inProgress {
+    border-color: var(--in-progress);
+}
+
+.done {
+    border-color: var(--done);
+}
+
+.optionsBtn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background-color: var(--primary);
+    padding: 5px;
+    box-shadow: 0px 1px 2px 0px #00000020;
+
+}
+
+.optionsBtn svg {
+    transform: rotate(90deg);
+    fill: var(--text-header);
+    width: 15px;
+    height: 15px;
+}
