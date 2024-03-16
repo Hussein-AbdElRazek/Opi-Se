@@ -1,13 +1,12 @@
 import moment from 'moment';
-import { IconButton } from '@mui/material';
 
 import classes from './styles/Task.module.css'
-import { ReactComponent as OptionsIcon } from '../../../../../assets/icons/options.svg';
+import TaskOptions from './TaskOptions';
 
 const Task = (props) =>
 {
-    const { title, content, createdAt, taskStatus, lastElementRef } = props;
-
+    const { lastElementRef, ...rest } = props;
+    const {  title, content, createdAt, taskStatus } = rest;
     const formattedDate = moment(createdAt).format('MMM DD, YYYY');
 
     return (
@@ -40,11 +39,9 @@ const Task = (props) =>
             </span>
 
             {/*Options btn  */}
-            <IconButton
-                className={classes.optionsBtn}
-            >
-                <OptionsIcon />
-            </IconButton>
+            <TaskOptions
+                task={rest}
+            />
         </div>
     )
 }

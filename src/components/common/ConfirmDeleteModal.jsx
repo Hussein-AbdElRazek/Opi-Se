@@ -1,23 +1,23 @@
 import React from 'react'
-import { ModalCard } from '../../../../components/ui'
-import { Btn } from '../../../../components/inputs';
+import { ModalCard } from '../ui';
+import { Btn } from '../inputs';
 
-const ConfirmModal = (props) =>
+export const ConfirmDeleteModal = (props) =>
 {
     const {
         open,
         onClose,
-        type,
+        deleteMessage,
         onDelete,
         isLoading,
     } = props;
-    
+
     return (
         <ModalCard
             open={open}
             onClose={onClose}
         >
-            <p>Delete {type === "one" ? "this Note" : "All Notes"}?</p>
+            <p>Delete {deleteMessage}?</p>
             <Btn
                 onClick={onDelete}
                 isLoading={isLoading}
@@ -34,5 +34,3 @@ const ConfirmModal = (props) =>
         </ModalCard>
     )
 }
-
-export default ConfirmModal

@@ -9,6 +9,11 @@ export const ModalCard = (props) =>
             open={open}
             onClose={onClose}
             className={`center-x center-y ${classes.modal}`}
+            sx={{
+                ".MuiBackdrop-root": {
+                    backgroundColor: "rgba(0, 0, 0, 0.1) !important"
+                }
+            }}
         >
             <div
                 className={classes.container}

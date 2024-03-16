@@ -31,6 +31,7 @@ export const ItemCard = (props) =>
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
+                    enableReinitialize={true}
                 >
                     {children}
 

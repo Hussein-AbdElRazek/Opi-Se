@@ -1,11 +1,10 @@
-import { PopUpMenu } from '../../../../components/common'
+import { ConfirmDeleteModal, PopUpMenu } from '../../../../components/common'
 import { ReactComponent as OptionsIcon } from '../../../../assets/icons/options.svg'
 import noteItemClasses from '../../../../components/notes/styles/NoteItem.module.css'
-import ConfirmModal from './ConfirmModal'
-import useModal from '../hooks/use-modal'
 import useDeleteTrashNote from '../hooks/use-delete-trash-note'
 import useRestoreNote from '../hooks/use-restore-note'
 import { LoadingFullScreen } from '../../../../components/ui'
+import useModal from '../../../../hooks/use-modal'
 const TrashOptions = ({ note }) =>
 {
     // handle modal ui state 
@@ -51,10 +50,10 @@ const TrashOptions = ({ note }) =>
             />
 
             {/* Confirm delete trash note modal  */}
-            <ConfirmModal
+            <ConfirmDeleteModal
                 open={!!isModalOpened}
                 onClose={closeModal}
-                type="one"
+                deleteMessage="this Note"
                 onDelete={handleDeleteTrashNote}
                 isLoading={isLoadingDeleteTrashNote}
             />

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { mergeToUnique } from '../helpers/mergeToUnique';
+import { taskInitialValues } from '../pages/User/Tasks/Tasks/taskData/taskInputs';
 
 
 
@@ -16,7 +17,15 @@ const initialTasksState = {
         "toDo": 1,
         "inProgress": 1,
         "done": 1,
-    }
+    },
+    totalLength: {
+        "all": 0,
+        "toDo": 0,
+        "inProgress": 0,
+        "done": 0,
+    },
+    openedTask: localStorage.getItem("openedTask") ?
+        JSON.parse(localStorage.getItem("openedTask")) : taskInitialValues
 }
 
 const tasksSlice = createSlice({
@@ -26,6 +35,7 @@ const tasksSlice = createSlice({
         addTask(state, action)
         {
             state.tasks[action.payload.tasksType].unshift(action.payload.task)
+            state.totalLength[action.payload.tasksType] += 1;
         },
         mergeTasks(state, action)
         {
@@ -33,27 +43,18 @@ const tasksSlice = createSlice({
         },
         removeTask(state, action)
         {
-            state.tasks = state.tasks.filter(ele => ele._id !== action.payload)
+            state.tasks[action.payload.tasksType] =
+                state.tasks[action.payload.tasksType].filter(ele => ele._id !== action.payload.taskId)
+
+            state.totalLength[action.payload.tasksType] -= 1;
         },
         updateTask(state, action)
         {
-            state.tasks = state.tasks.map(ele =>
+            state.tasks[action.payload.tasksType] = state.tasks[action.payload.tasksType].map(ele =>
             {
-                if (ele._id === action.payload._id)
+                if (ele._id === action.payload.task._id)
                 {
-                    return { ...ele, ...action.payload }
-                }
-                else return ele;
-            })
-        },
-        updateTaskId(state, action)
-        {
-            // to update id when receive it from server 
-            state.tasks = state.tasks.map(ele =>
-            {
-                if (ele._id === action.payload.oldId)
-                {
-                    return { ...ele, _id: action.payload._id }
+                    return { ...ele, ...action.payload.task }
                 }
                 else return ele;
             })
@@ -63,7 +64,16 @@ const tasksSlice = createSlice({
             // to update TotalPages when receive it from server
             state.totalPages[action.payload.tasksType] = action.payload.totalPages;
         },
-    }
+        updateTotalLength(state, action)
+        {
+            state.totalLength[[action.payload.tasksType]] = action.payload.totalLength;
+        },
+        updateOpenedTask(state, action)
+        {
+            state.openedTask = action.payload;
+            localStorage.setItem("openedTask", JSON.stringify(action.payload))
+        }
+    },
 })
 
 export const tasksActions = tasksSlice.actions

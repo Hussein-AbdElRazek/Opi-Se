@@ -49,6 +49,12 @@
     -webkit-text-fill-color: var(--text-header) !important;
 }
 
+.content textarea {
+    background-color: transparent ;
+    border: none;
+    padding: 0;
+}
+
 .content {
     margin-bottom: 16px;
 }

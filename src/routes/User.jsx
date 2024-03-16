@@ -18,6 +18,7 @@ import NoPartnerYet from '../pages/User/NoPartnerYet/NoPartnerYet'
 import TasksHome from '../pages/User/Tasks/TasksHome'
 import Tasks from '../pages/User/Tasks/Tasks/Tasks'
 import AddTask from '../pages/User/Tasks/Tasks/components/AddTask'
+import EditTask from '../pages/User/Tasks/Tasks/components/EditTask'
 
 const User = () =>
 {
@@ -53,6 +54,7 @@ const User = () =>
                 {['', 'todo', 'inprogress', 'done'].map((tasksPath, index) => (
                     <Route key={index} path={tasksPath} element={<Tasks />}>
                         <Route path='new' element={<AddTask />} />
+                        <Route path='edit' element={<EditTask />} />
                     </Route>
                 ))}
             </Route>

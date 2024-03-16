@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../store/ui-slice";
 
-import { uiActions } from "../../../../store/ui-slice";
 
 const useModal = (id) =>
 {

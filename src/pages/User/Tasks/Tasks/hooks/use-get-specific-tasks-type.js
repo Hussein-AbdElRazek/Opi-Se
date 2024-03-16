@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useHttp from '../../../../../hooks/use-http';
 import { useDispatch, useSelector } from 'react-redux';
 import useScrollingPagination from '../../../../../hooks/use-scrolling-pagination';
@@ -8,7 +8,6 @@ const useGetSpecificTasksType = (tasksType) =>
 {
     // useGetSpecificTasksType hook to handle call getSpecificTasksType API
 
-    const [totalTasksLength, setTotalTasksLength] = useState(0);
     const {
         sendRequest: specificTasksType,
         isLoading: isLoadingSpecificTasksType,
@@ -36,7 +35,8 @@ const useGetSpecificTasksType = (tasksType) =>
                 // update total pages in store
                 dispatch(tasksActions.updateTotalPages({ tasksType, totalPages }))
 
-                setTotalTasksLength(totalNumOfItems)
+                // update total length in store
+                dispatch(tasksActions.updateTotalLength({ tasksType, totalLength: totalNumOfItems }))
             }
         };
 
@@ -51,7 +51,6 @@ const useGetSpecificTasksType = (tasksType) =>
     return {
         isLoadingSpecificTasksType,
         lastElementRef,
-        totalTasksLength,
     }
 }
 

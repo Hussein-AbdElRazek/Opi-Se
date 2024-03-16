@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HeaderText } from '../../../../components/ui'
 import { ReactComponent as OptionsIcon } from '../../../../assets/icons/options.svg'
 import classes from '../styles/TrashBar.module.css'
-import { PopUpMenu } from '../../../../components/common/'
+import { ConfirmDeleteModal, PopUpMenu } from '../../../../components/common/'
 import useEmptyTheTrashNotes from '../hooks/use-empty-the-trash-notes'
 import { uiActions } from '../../../../store/ui-slice'
-import ConfirmModal from './ConfirmModal'
 const TrashBar = () =>
 {
     // handle empty the trash
@@ -55,10 +54,10 @@ const TrashBar = () =>
             />
 
             {/* Confirm empty trash modal  */}
-            <ConfirmModal
+            <ConfirmDeleteModal
                 open={!!isConfirmEmptyTheTrashOpen}
                 onClose={handleCloseConfirmEmptyTheTrash}
-                type="all"
+                deleteMessage="All Notes"
                 onDelete={handleEmptyTheTrashNotes}
                 isLoading={isLoadingEmptyTheTrashNotes}
             />

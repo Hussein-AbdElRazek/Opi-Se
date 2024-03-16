@@ -12,10 +12,10 @@ const RenderTodoTasks = () =>
     const {
         isLoadingSpecificTasksType: isLoadingGetTodoTasks,
         lastElementRef: lastTodoTaskRef,
-        totalTasksLength: totalTodoTasksLength,
     } = useGetSpecificTasksType("toDo");
 
     const todoTasks = useSelector(state => state.tasks.tasks.toDo);
+    const totalTodoTasksLength = useSelector(state => state.tasks.totalLength.toDo);
 
     return (
         <TasksList
@@ -33,10 +33,10 @@ const RenderInProgressTasks = () =>
     const {
         isLoadingSpecificTasksType: isLoadingGetInProgressTasks,
         lastElementRef: lastInProgressTaskRef,
-        totalTasksLength: totalInProgressTasksLength,
     } = useGetSpecificTasksType("inProgress")
 
     const inProgressTasks = useSelector(state => state.tasks.tasks.inProgress);
+    const totalInProgressTasksLength = useSelector(state => state.tasks.totalLength.inProgress);
 
     return (
         <TasksList
@@ -54,10 +54,10 @@ const RenderDoneTasks = () =>
     const {
         isLoadingSpecificTasksType: isLoadingGetDoneTasks,
         lastElementRef: lastDoneTaskRef,
-        totalTasksLength: totalDoneTasksLength,
     } = useGetSpecificTasksType("done")
 
     const doneTasks = useSelector(state => state.tasks.tasks.done);
+    const totalDoneTasksLength = useSelector(state => state.tasks.totalLength.done);
 
     return (
         <TasksList
