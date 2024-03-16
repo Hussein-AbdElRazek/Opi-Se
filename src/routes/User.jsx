@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import {  Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import Home from '../pages/User/Home/Home'
@@ -19,6 +19,7 @@ import TasksHome from '../pages/User/Tasks/TasksHome'
 import Tasks from '../pages/User/Tasks/Tasks/Tasks'
 import AddTask from '../pages/User/Tasks/Tasks/components/AddTask'
 import EditTask from '../pages/User/Tasks/Tasks/components/EditTask'
+import PageNotFound from '../pages/User/PageNotFound/PageNotFound'
 
 const User = () =>
 {
@@ -59,7 +60,7 @@ const User = () =>
                 ))}
             </Route>
 
-            <Route path="*" element={<Navigate to="/" replace={true} />} />
+            <Route path="*" element={<PageNotFound  />} />
         </Routes>
     )
 }

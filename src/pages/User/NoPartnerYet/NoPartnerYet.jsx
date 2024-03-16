@@ -5,6 +5,8 @@ const NoPartnerYet = () =>
 {
     return (
         <VectorAndText
+            isBig={true}
+            fullScreen={true}
             img={noPartnerImg}
             h="You don't have a partner yet"
             p={

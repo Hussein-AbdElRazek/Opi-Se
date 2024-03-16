@@ -103,6 +103,7 @@ const MentalHealthResultUi = (props) =>
                 <>
                     <VectorAndText
                         isBig={true}
+                        fullScreen={true}
                         img={mentalHealthTestImg}
                         h="Mental Health Test"
                         p={
@@ -110,20 +111,17 @@ const MentalHealthResultUi = (props) =>
                                 You can know your mental health score and get some suggestions
                                 <br />
                                 Start a test and take your time answering the questions
-
-
                             </>
                         }
+                        action={
+                            <Btn
+                                to="questions"
+                                size="small"
+                            >
+                                Start a test
+                            </Btn>
+                        }
                     />
-                    <div
-                        className={classes.btn}
-                    >
-                        <Btn
-                            to="questions"
-                        >
-                            Start a test
-                        </Btn>
-                    </div>
                 </>
             )}
         </div>

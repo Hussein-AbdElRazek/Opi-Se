@@ -4,10 +4,14 @@ import { Paragraph } from '../ui/Paragraph'
 import classes from './styles/VectorAndText.module.css'
 const VectorAndText = (props) =>
 {
-    const { img, h, p, isBig } = props
+    const { img, h, p, isBig, action, fullScreen } = props
     return (
         <div
-            className={`${classes.container} ${isBig ? classes.isBig : ""}`}
+            className={`${classes.container} 
+            ${isBig ? classes.isBig : ""}
+            ${fullScreen ? classes.fullScreen : ""}
+            
+            `}
         >
             <img src={img} alt='' />
 
@@ -21,6 +25,14 @@ const VectorAndText = (props) =>
                 <Paragraph>
                     {p}
                 </Paragraph>
+            )}
+
+            {action && (
+                <div
+                    className={`${classes.action} center-x`}
+                >
+                    {action}
+                </div>
             )}
 
         </div>
