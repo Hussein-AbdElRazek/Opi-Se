@@ -29,6 +29,7 @@ const EditTask = () =>
             <LoopOnInputs
                 inputs={taskInputs}
                 disabled={isLoadingEditTask}
+                isEdit={true}
             />
         </ItemCard>
     )

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { mergeToUnique } from '../helpers/mergeToUnique';
 import baseSocket from '../sockets/baseConnection';
+import { notesInitialValues } from '../components/notes/notesInputsData';
 
 // get connection 
 const socket = baseSocket;
@@ -135,7 +136,9 @@ export const listenToNoteRestored = createAsyncThunk(
 
 const initialNotesState = {
     notes: [],
-    totalPages: 1
+    totalPages: 1,
+    openedNote: localStorage.getItem("openedNote") ?
+        JSON.parse(localStorage.getItem("openedNote")) : notesInitialValues
 }
 
 const notesSlice = createSlice({
@@ -209,6 +212,11 @@ const notesSlice = createSlice({
             state.notes = [];
             state.totalPages = 1;
         },
+        updateOpenedNote(state, action)
+        {
+            state.openedNote = action.payload;
+            localStorage.setItem("openedNote", JSON.stringify(action.payload))
+        }
     }
 })
 

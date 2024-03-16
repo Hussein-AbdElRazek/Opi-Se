@@ -20,6 +20,8 @@ import Tasks from '../pages/User/Tasks/Tasks/Tasks'
 import AddTask from '../pages/User/Tasks/Tasks/components/AddTask'
 import EditTask from '../pages/User/Tasks/Tasks/components/EditTask'
 import PageNotFound from '../pages/User/PageNotFound/PageNotFound'
+import AddNote from '../pages/User/Notes/components/AddNote'
+import EditNote from '../pages/User/Notes/components/EditNote'
 
 const User = () =>
 {
@@ -47,7 +49,10 @@ const User = () =>
 
             <Route path='/video/*' element={isHavePartner ? <VideoSession /> : <NoPartnerYet />} />
 
-            <Route path='/notes' element={isHavePartner ? <Notes /> : <NoPartnerYet />} />
+            <Route path='/notes' element={isHavePartner ? <Notes /> : <NoPartnerYet />} >
+                <Route path='new' element={<AddNote />} />
+                <Route path='edit' element={<EditNote />} />
+            </Route>
             <Route path='/notes/trash' element={isHavePartner ? <NotesTrash /> : <NoPartnerYet />} />
 
             <Route path='/tasks' element={isHavePartner ? <TasksHome /> : <NoPartnerYet />} >

@@ -10,9 +10,11 @@ import { getTypingDirection } from '../../helpers/getTypingDirection';
 import { NoteDate } from './NoteDate';
 import { NoteTimeAndDate } from './NoteTimeAndDate';
 import { noteValidationSchema } from './noteValidationSchema';
-import NotesActions from '../../pages/User/Notes/components/NotesActions';
 import PinBtn from '../../pages/User/Notes/components/PinBtn';
 import TrashOptions from '../../pages/User/NotesTrash/components/TrashOptions';
+import { NavLink } from 'react-router-dom';
+import { notesActions } from '../../store/notes-slice';
+import { useDispatch } from 'react-redux';
 export const NoteItem = (props) =>
 {
     const {
@@ -21,27 +23,25 @@ export const NoteItem = (props) =>
         noteContent,
         createdAt,
         noteColor,
-        isNew,
-        isEdit,
         isPinned,
         isTrash,
         onSubmit,
-        isLoading,
         lastElementRef,
-        onCancel,
-        makeNoteEditable,
         pinNote,
         onDelete,
     } = props;
 
-    const disabled = !(isNew || isEdit);
     const initialValues = {
         noteTitle: noteTitle || "",
         noteContent: noteContent || '',
         noteColor: noteColor,
         _id
     };
-
+    const dispatch = useDispatch();
+    const onEdit = () =>
+    {
+        dispatch(notesActions.updateOpenedNote(initialValues))
+    }
     return (
         <Grid
             xl={3}
@@ -72,9 +72,9 @@ export const NoteItem = (props) =>
                                         ${classes.mb}
                                     `}
                             >
-                                {disabled && <NoteDate date={createdAt} />}
+                                <NoteDate date={createdAt} />
 
-                                {(!isTrash && !isNew) && <PinBtn pinNote={pinNote} _id={_id} isPinned={isPinned} />}
+                                {(!isTrash) && <PinBtn pinNote={pinNote} _id={_id} isPinned={isPinned} />}
 
                             </div>
 
@@ -95,14 +95,15 @@ export const NoteItem = (props) =>
                                         type="text"
                                         name="noteTitle"
                                         placeholder="Note Title"
-                                        disabled={disabled}
                                     />
                                 </div>
                                 {/* Edit Btn */}
-                                {(disabled && !isTrash) && (
+                                {(!isTrash) && (
                                     <ButtonBase
                                         className={classes.containedIconBtn}
-                                        onClick={makeNoteEditable(_id)}
+                                        LinkComponent={NavLink}
+                                        to="edit"
+                                        onClick={onEdit}
                                     >
                                         <EditIcon fill={noteColor ? `var(${noteColor})` : "var(--trash-note)"} />
                                     </ButtonBase>
@@ -129,39 +130,27 @@ export const NoteItem = (props) =>
                                     placeholder="Type..."
                                     multiline={true}
                                     rows={6}
-                                    disabled={disabled}
+                                    disabled={true}
                                 />
                             </div>
 
                             {/* Time & Move to trash  */}
-                            {disabled && (
-                                <div
-                                    className={`${classes.group} ${classes.positionRelative}`}
-                                >
-                                    <NoteTimeAndDate date={createdAt} />
+                            <div
+                                className={`${classes.group} ${classes.positionRelative}`}
+                            >
+                                <NoteTimeAndDate date={createdAt} />
 
-                                    {/* Move to trash */}
-                                    {!isTrash && (
-                                        <IconButton
-                                            className={classes.icon}
-                                            title={'Move to trash'}
-                                            onClick={onDelete && onDelete(_id)}
-                                        >
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    )}
-                                </div>
-                            )}
-
-                            {/* NotesActions (Confirm & Cancel btns) */}
-                            {(!disabled && !isTrash) && (
-                                <NotesActions
-                                    _id={_id}
-                                    onCancel={onCancel}
-                                    isLoading={isLoading}
-                                    resetForm={formik.resetForm}
-                                />
-                            )}
+                                {/* Move to trash */}
+                                {!isTrash && (
+                                    <IconButton
+                                        className={classes.icon}
+                                        title={'Move to trash'}
+                                        onClick={onDelete && onDelete(_id)}
+                                    >
+                                        <DeleteIcon />
+                                    </IconButton>
+                                )}
+                            </div>
                         </Form>
                     )}
                 </Formik>

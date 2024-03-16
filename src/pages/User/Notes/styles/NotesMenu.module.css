@@ -1,0 +1,31 @@
+.container {
+    position: fixed;
+    right: 40px;
+    top: 90px;
+    height: calc(100vh - 135px);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 110px;
+}
+
+
+.trashIcon svg {
+    width: 35px;
+    height: 35px;
+}
+
+
+@media (max-width:900px) {
+    .container {
+        right: 30px;
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        right: 10px;
+    }
+}

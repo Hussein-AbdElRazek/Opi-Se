@@ -9,4 +9,6 @@ export const noteValidationSchema = Yup.object({
         .required(required),
     noteContent: Yup.string()
         .required(required),
+    noteColor: Yup.string()
+        .required(required),
 });

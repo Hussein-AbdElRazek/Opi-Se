@@ -20,7 +20,7 @@ export const ItemCard = (props) =>
             onClose={onClose}
         >
             <div
-                className={classes.content}
+                className={`${classes.content} ${type === "edit" ? classes.edit : ""}`}
             >
                 {title && <HeaderText
                     size='medium'

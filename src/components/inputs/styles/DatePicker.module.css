@@ -2,6 +2,11 @@
     width: 100%;
     margin-top: 60px;
     position: relative;
+    border-radius: var(--border-radius-inputs);
+}
+
+.edit {
+    background-color: var(--chat-receive);
 }
 
 .date div {
@@ -15,6 +20,7 @@
 
 .date input {
     height: 28.5px;
+    border-radius: var(--border-radius-inputs);
 }
 
 .date fieldset,

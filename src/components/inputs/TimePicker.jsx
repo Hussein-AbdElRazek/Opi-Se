@@ -13,6 +13,7 @@ export const TimePicker = (props) =>
     const {
         label,
         name,
+        isEdit,
         disabled,
     } = props;
 
@@ -29,19 +30,20 @@ export const TimePicker = (props) =>
                     <div
                         className={classes.container}
                     >
-                            <DesktopTimePicker
-                                id={name}
-                                name={name}
-                                label={label}
-                                slots={{ openPickerIcon: ArrowBottomIcon }}
-                                value={(field.value && moment(field.value)) || null}
-                                onChange={(newValue) => { setFieldValue(name, newValue._d) }}
-                                className={`
+                        <DesktopTimePicker
+                            id={name}
+                            name={name}
+                            label={label}
+                            slots={{ openPickerIcon: ArrowBottomIcon }}
+                            value={(field.value && moment(field.value)) || null}
+                            onChange={(newValue) => { setFieldValue(name, newValue._d) }}
+                            className={`
                                     ${classes.date} 
                                     ${inputError ? errorClasses.formError : ""}
+                                    ${isEdit ? classes.edit : ""}
                                 `}
-                                disabled={disabled}
-                            />
+                            disabled={disabled}
+                        />
 
                         <ErrorMessage
                             name={name}

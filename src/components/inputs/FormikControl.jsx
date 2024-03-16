@@ -11,7 +11,7 @@ import
 
 export const FormikControl = (props) =>
 {
-    const { control, size, ...rest } = props;
+    const { control, size, isEdit, ...rest } = props;
     switch (control)
     {
         case "input":
@@ -25,9 +25,9 @@ export const FormikControl = (props) =>
         case "gender":
             return <Gender {...rest} />;
         case "date":
-            return <DatePicker {...rest} />;
+            return <DatePicker isEdit={isEdit} {...rest} />;
         case "time":
-            return <TimePicker {...rest} />;
+            return <TimePicker isEdit={isEdit} {...rest} />;
 
         default:
             return null;

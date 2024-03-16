@@ -98,7 +98,7 @@ export const PopUpMenu = (props) =>
                         {...TransitionProps}
                         style={{
                             transformOrigin:
-                                placement === 'bottom-start' ? 'left top' : 'left bottom',
+                                placement === 'bottom-start' ? 'left bottom' : 'left top',
                         }}
                     >
                         <div

@@ -13,6 +13,7 @@ export const DatePicker = (props) =>
     const {
         label,
         name,
+        isEdit,
         disabled
     } = props;
 
@@ -38,6 +39,7 @@ export const DatePicker = (props) =>
                                 className={`
                                     ${classes.date} 
                                     ${inputError ? errorClasses.formError : ""}
+                                    ${isEdit ? classes.edit : ""}
                                 `}
                                 disabled={disabled}
                             />

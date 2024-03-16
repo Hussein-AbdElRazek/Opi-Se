@@ -174,7 +174,7 @@ export const PopMenu = () =>
             id={menuId}
             openBtnType="base"
             openBtnChild={
-                <MenuIcon />
+                <MenuIcon fill='var(--text-header)'/>
             }
             openBtnClassName={classes.openBtn}
             menuItems={menuItems}

@@ -33,6 +33,17 @@
     display: block;
 }
 
+.edit input,
+.edit textarea,
+.edit fieldset {
+    border: none !important;
+}
+
+.edit input,
+.edit textarea {
+    background-color: var(--chat-receive);
+}
+
 .actions {
     width: 100%;
     display: flex;
