@@ -8,12 +8,16 @@ export const ModalCard = (props) =>
         <Modal
             open={open}
             onClose={onClose}
-            className='center-x center-y'
+            className={`center-x center-y ${classes.modal}`}
         >
             <div
                 className={classes.container}
             >
-                {children}
+                <div
+                    className={classes.content}
+                >
+                    {children}
+                </div>
             </div>
         </Modal>
     )

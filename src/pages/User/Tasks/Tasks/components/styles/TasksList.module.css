@@ -7,7 +7,7 @@
 }
 
 .content {
-    height: calc(100% - 127px);
+    max-height: calc(100% - 127px);
     overflow: auto;
     margin-bottom: 10px;
 }

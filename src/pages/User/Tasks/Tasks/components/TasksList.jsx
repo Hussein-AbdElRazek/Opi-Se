@@ -6,13 +6,14 @@ import { ReactComponent as AddTaskIcon } from '../../../../../assets/icons/add.s
 import { Btn } from '../../../../../components/inputs/Btn';
 import { LoadingCenter } from '../../../../../components/ui/LoadingCenter';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import { NavLink } from 'react-router-dom';
 const TasksList = (props) =>
 {
     const { tasks, type, totalTasksLength, lastElementRef, isLoading } = props;
 
     const getTitle = () =>
     {
-        if (type === "todo")
+        if (type === "toDo")
         {
             return ('To do')
         } else if (type === "inProgress")
@@ -50,6 +51,8 @@ const TasksList = (props) =>
                     </span>
                     <ButtonBase
                         className={classes.addIconBtn}
+                        LinkComponent={NavLink}
+                        to={`new?type=${type}`}
                     >
                         <AddTaskIcon />
                     </ButtonBase>
@@ -78,6 +81,7 @@ const TasksList = (props) =>
                 <Btn
                     className={classes.addBtn}
                     startIcon={<AddTaskIcon />}
+                    to={`new?type=${type}`}
                 >
                     Add Task
                 </Btn>

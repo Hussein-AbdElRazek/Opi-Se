@@ -8,11 +8,15 @@
     border-color: var(--error) !important;
 }
 
-.formError svg{
+.formError svg,
+.formError svg path {
     color: var(--error) !important;
+    fill: var(--error) !important;
+    fill-opacity: 1;
 }
 
-.formError input {
+.formError input,
+.formError fieldset {
     border-color: var(--error) !important;
 }
 

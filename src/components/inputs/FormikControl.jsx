@@ -5,7 +5,10 @@ import
     InputArray,
     Password,
     Select,
+    DatePicker,
+    TimePicker,
 } from './'
+
 export const FormikControl = (props) =>
 {
     const { control, size, ...rest } = props;
@@ -21,6 +24,10 @@ export const FormikControl = (props) =>
             return <InputArray {...rest} />;
         case "gender":
             return <Gender {...rest} />;
+        case "date":
+            return <DatePicker {...rest} />;
+        case "time":
+            return <TimePicker {...rest} />;
 
         default:
             return null;

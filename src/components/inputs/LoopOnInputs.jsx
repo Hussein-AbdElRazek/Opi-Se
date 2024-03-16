@@ -10,28 +10,27 @@ export const LoopOnInputs = (props) =>
             container
             rowSpacing={0}
             columnSpacing={{
-                xs: 0,
+                xs: 2,
                 sm: 2,
                 md: 2,
                 lg: 2,
                 xl: 2
             }}
         >
-            {inputs.map(({ name, size, ...input }) =>
+            {inputs.map(({size, xs, ...input }, index) =>
             {
                 const columns = !!size ? size : 12;
                 return (
                     <Grid
-                        key={name}
+                        key={index}
                         item
                         xl={columns}
                         lg={columns}
                         md={columns}
                         sm={columns}
-                        xs={12}
+                        xs={xs || 12}
                     >
                         <FormikControl
-                            name={name}
                             disabled={disabled}
                             {...input}
                         />

@@ -13,6 +13,7 @@ import CallContext from './callStore/call-context';
 import useGeneralSocket from './hooks/use-general-sockets';
 import SessionConfirmation from './pages/User/SessionConfirmation/SessionConfirmation';
 import VoiceCall from './pages/User/VoiceCall/VoiceCall';
+import moment from 'moment';
 
 function App()
 {
@@ -36,6 +37,12 @@ function App()
   // General sockets
   // handle join rooms + necessary listener in app root
   useGeneralSocket();
+
+  // Update locale of moment (language of date)
+  // because use LocalizationProvider in index.js
+  //  for date and time picker make language
+  //  change for date in another pages
+  moment.updateLocale('en', {});
 
   return (
     <div>

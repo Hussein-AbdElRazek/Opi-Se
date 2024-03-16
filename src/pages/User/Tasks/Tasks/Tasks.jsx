@@ -1,12 +1,13 @@
 import { useSelector } from 'react-redux'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import { Outlet } from 'react-router-dom'
 
 import useGetSpecificTasksType from './hooks/use-get-specific-tasks-type'
 import TasksList from './components/TasksList'
 import classes from './styles/Tasks.module.css'
 import TasksTabs, { tasksTabsMap } from './components/TasksTabs'
 
-const Tasks = () =>
+const RenderTodoTasks = () =>
 {
     const {
         isLoadingSpecificTasksType: isLoadingGetTodoTasks,
@@ -14,34 +15,30 @@ const Tasks = () =>
         totalTasksLength: totalTodoTasksLength,
     } = useGetSpecificTasksType("toDo");
 
-    const {
-        isLoadingSpecificTasksType: isLoadingGetInProgressTasks,
-        lastElementRef: lastInProgressTaskRef,
-        totalTasksLength: totalInProgressTasksLength,
-
-    } = useGetSpecificTasksType("inProgress")
-
-    const {
-        isLoadingSpecificTasksType: isLoadingGetDoneTasks,
-        lastElementRef: lastDoneTaskRef,
-        totalTasksLength: totalDoneTasksLength,
-    } = useGetSpecificTasksType("done")
-
     const todoTasks = useSelector(state => state.tasks.tasks.toDo);
-    const inProgressTasks = useSelector(state => state.tasks.tasks.inProgress);
-    const doneTasks = useSelector(state => state.tasks.tasks.done);
 
-    const RenderTodoTasks = () => (
+    return (
         <TasksList
-            type="todo"
+            type="toDo"
             tasks={todoTasks}
             totalTasksLength={totalTodoTasksLength}
             lastElementRef={lastTodoTaskRef}
             isLoading={isLoadingGetTodoTasks}
         />
     )
+}
 
-    const RenderInProgressTasks = () => (
+const RenderInProgressTasks = () =>
+{
+    const {
+        isLoadingSpecificTasksType: isLoadingGetInProgressTasks,
+        lastElementRef: lastInProgressTaskRef,
+        totalTasksLength: totalInProgressTasksLength,
+    } = useGetSpecificTasksType("inProgress")
+
+    const inProgressTasks = useSelector(state => state.tasks.tasks.inProgress);
+
+    return (
         <TasksList
             type="inProgress"
             tasks={inProgressTasks}
@@ -50,8 +47,19 @@ const Tasks = () =>
             isLoading={isLoadingGetInProgressTasks}
         />
     )
+}
 
-    const RenderDoneTasks = () => (
+const RenderDoneTasks = () =>
+{
+    const {
+        isLoadingSpecificTasksType: isLoadingGetDoneTasks,
+        lastElementRef: lastDoneTaskRef,
+        totalTasksLength: totalDoneTasksLength,
+    } = useGetSpecificTasksType("done")
+
+    const doneTasks = useSelector(state => state.tasks.tasks.done);
+
+    return (
         <TasksList
             type="done"
             tasks={doneTasks}
@@ -60,11 +68,14 @@ const Tasks = () =>
             isLoading={isLoadingGetDoneTasks}
         />
     )
+}
 
+const Tasks = () =>
+{
     const tasksTypeMap = {
-        0: RenderTodoTasks,
-        1: RenderInProgressTasks,
-        2: RenderDoneTasks,
+        0: <RenderTodoTasks />,
+        1: <RenderInProgressTasks />,
+        2: <RenderDoneTasks />,
     }
 
     const RenderOpenedTypeForSmallScreens = tasksTypeMap[tasksTabsMap[window.location.pathname]]
@@ -89,8 +100,10 @@ const Tasks = () =>
                 className={classes.smallScreens}
             >
                 <TasksTabs />
-                <RenderOpenedTypeForSmallScreens />
+                {RenderOpenedTypeForSmallScreens}
             </div>
+
+            <Outlet />
         </div>
     )
 }

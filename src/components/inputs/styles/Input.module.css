@@ -1,10 +1,17 @@
-.input input {
+.input input,
+.input textarea {
     height: 26.5px;
     background-color: var(--primary);
     padding: 4px 15px;
     font-size: var(--font-size-300);
     border: 1px solid var(--input-border);
     border-radius: var(--border-radius-inputs);
+}
+
+.input input:hover,
+.input textarea:hover {
+    border-color: var(--text-header);
+
 }
 
 .password input {

@@ -1,8 +1,15 @@
 .container {
+    border-radius: var(--border-radius-200);
+    overflow: hidden;
+    outline: none;
+}
+
+.content {
+    max-height: calc(100vh - 120px);
     background-color: var(--primary);
     padding: 40px;
-    border-radius: var(--border-radius-200);
     text-align: center;
+    overflow: auto;
 }
 
 .container p {
@@ -17,4 +24,12 @@
 
 .container button:first-of-type {
     margin-right: 20px;
+}
+
+@media (max-width:600px) {
+    .content {
+
+        padding: 30px 20px;
+    }
+
 }

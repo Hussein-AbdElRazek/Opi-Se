@@ -10,6 +10,8 @@ import store from './store';
 import { GlobalCssPriority } from './components/ui';
 import { ImagesContextProvider } from './imagesStore/images-context';
 import { CallContextProvider } from './callStore/call-context';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,9 +22,10 @@ root.render(
         <SnackbarProvider autoHideDuration={3000} maxSnack={5}>
           <GlobalCssPriority>
             <CallContextProvider>
-              <App />
+              <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="en">
+                <App />
+              </LocalizationProvider>
             </CallContextProvider>
-
           </GlobalCssPriority>
         </SnackbarProvider>
       </BrowserRouter>
