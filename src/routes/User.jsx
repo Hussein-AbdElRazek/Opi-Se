@@ -1,4 +1,4 @@
-import {  Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import Home from '../pages/User/Home/Home'
@@ -22,6 +22,8 @@ import EditTask from '../pages/User/Tasks/Tasks/components/EditTask'
 import PageNotFound from '../pages/User/PageNotFound/PageNotFound'
 import AddNote from '../pages/User/Notes/components/AddNote'
 import EditNote from '../pages/User/Notes/components/EditNote'
+import Calender from '../pages/User/Tasks/Calender/Calender'
+import DayEventsModal from '../pages/User/Tasks/Calender/components/DayEventsModal'
 
 const User = () =>
 {
@@ -63,9 +65,12 @@ const User = () =>
                         <Route path='edit' element={<EditTask />} />
                     </Route>
                 ))}
+                <Route path='calender' element={<Calender />} >
+                    <Route path=':day' element={<DayEventsModal />} />
+                </Route>
             </Route>
 
-            <Route path="*" element={<PageNotFound  />} />
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     )
 }

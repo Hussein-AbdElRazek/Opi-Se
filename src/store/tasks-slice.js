@@ -72,7 +72,7 @@ const tasksSlice = createSlice({
         {
             state.openedTask = action.payload;
             localStorage.setItem("openedTask", JSON.stringify(action.payload))
-        }
+        },
     },
 })
 

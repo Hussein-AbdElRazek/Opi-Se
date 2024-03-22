@@ -32,6 +32,7 @@
     --video-time: #8D9196;
     --secondary-btn: #eeeeee;
     --black-10: rgba(0, 0, 0, 0.10);
+    --black-20: rgba(0, 0, 0, 0.20);
     --black-30: rgba(0, 0, 0, 0.30);
     --black-80: rgba(0, 0, 0, 0.80);
     --black-40: rgba(0, 0, 0, 0.40);
@@ -49,11 +50,18 @@
     --light-orange: #F1CE0F;
     --stepper-bg: #D9D9D9;
     --todo: #8724D3;
+    --todo-bg: rgba(135, 36, 211, 0.10);
     --in-progress: #FF7A00;
+    --in-progress-bg: rgb(255, 242, 229);
     --done: #00B81D;
+    --done-bg: rgb(229, 248, 232);
+    --dark-grey: #585757;
+    --date-cell: #8F9BB3;
+    --date-cell-current-month: #222B45;
     /* ------------------------------ */
 
     /* Font Size */
+    --font-size-30: 9px;
     --font-size-40: 10px;
     --font-size-35: 11px;
     --font-size-50: 12px;
@@ -85,6 +93,7 @@
     --layer-modal: 2000;
     --layer-incoming-call: 3000;
     --layer-100: 10;
+    --layer-200: 20;
     /* ------------------------------ */
 }
 
