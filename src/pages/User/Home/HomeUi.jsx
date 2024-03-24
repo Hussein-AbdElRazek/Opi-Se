@@ -5,7 +5,8 @@ import { Btn } from '../../../components/inputs'
 import { Badge, IconButton } from '@mui/material'
 import messageIcon from '../../../assets/icons/message.svg'
 import { NavLink, Outlet } from 'react-router-dom'
-import { SearchBar } from '../../../components/appBar/SearchBar'
+import homeBackground from '../../../assets/images/homeBackground.png'
+
 const HomeUi = ({ isHavePartner, isNewMessage }) =>
 {
     return (
@@ -15,13 +16,6 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
             <div
                 className={classes.left}
             >
-                {/* search bar for small screens only*/}
-                <div
-                    className={classes.searchBar}
-                >
-                    <SearchBar fullWidth={true} />
-                </div>
-
                 <HeaderText>
                     With
                     <span className={classes.logo}>
@@ -58,10 +52,13 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
                                 </Btn>
                             </NavLink>
                         )}
-
                 </div>
 
+                {/* illustration  section sm screens*/}
+                <img className={classes.smBg} src={homeBackground} alt="" />
             </div>
+
+            {/* illustration  section big screens*/}
             <div
                 className={classes.right}
             >
@@ -71,6 +68,7 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
                 />
             </div>
 
+            {/* chat btn */}
             <IconButton
                 LinkComponent={NavLink}
                 to="chats"

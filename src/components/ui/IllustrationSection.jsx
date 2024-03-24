@@ -34,9 +34,7 @@ export const IllustrationSection = ({ type, size }) =>
                     <div
                         className={classes.text}
                     >
-                        <HeaderText
-
-                        >
+                        <HeaderText>
                             Welcome Back To, Opi Se
                         </HeaderText>
                         <Paragraph>

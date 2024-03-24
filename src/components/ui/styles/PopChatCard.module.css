@@ -34,10 +34,22 @@
     bottom: 0;
 }
 
+@media (max-width:900px) {
+    .container {
+        right: 20px;
+        bottom: 20px;
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        right: 10px;
+        bottom: 10px;
+    }
+}
+
 @media (max-width:425px) {
     .container {
-        max-width: calc(100vw - 20px);
-        width: 100vw;
-        right: 10px;
+        max-width: calc(100vw - 40px);
     }
 }

@@ -1,6 +1,5 @@
 import { Grid, IconButton } from '@mui/material'
 import { useSnackbar } from 'notistack';
-import { NavLink } from 'react-router-dom'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { Card, ProfilePic } from '../../../components/ui'
@@ -12,14 +11,14 @@ import ActionsLayout from './components/ActionsLayout';
 import MyPartnerActions from './components/MyPartnerActions';
 import MatchRequestActions from './components/MatchRequestActions';
 import RecommendationActions from './components/RecommendationActions';
-
+import { ReactComponent as ReportIcon } from '../../../assets/icons/report.svg';
 const ProfileUi = (props) =>
 {
     const {
         profileData,
         isMyProfile,
         isMyPartner,
-        from
+        from,
     } = props;
     const currentUrl = window.location.href;
 
@@ -48,13 +47,14 @@ const ProfileUi = (props) =>
                 {/* Edit Profile Btn*/}
                 {isMyProfile && (
                     <ActionsLayout>
-                        <NavLink
-                            to="/profile/edit"
+                        <Btn
+                            to={`https://userdashboard-cv8d.onrender.com/${profileData?.nationalId}`}
+                            startIcon={<ReportIcon />}
+                            target="_blank"
+                            className={classes.reportBtn}
                         >
-                            <Btn>
-                                Edit Profile
-                            </Btn>
-                        </NavLink>
+                            My Report
+                        </Btn>
                     </ActionsLayout>
                 )}
 

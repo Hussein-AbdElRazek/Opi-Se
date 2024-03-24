@@ -18,9 +18,11 @@ const MyPartnerActions = ({ userData }) =>
     {
         setIsRatePopOpen(true)
     }
-    
+
     return (
-        <ActionsLayout>
+        <ActionsLayout
+            isMyPartner={true}
+        >
             <Btn
                 startIcon={<UnMatchIcon />}
                 onClick={openRatePop}

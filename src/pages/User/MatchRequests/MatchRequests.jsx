@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useHttp from '../../../hooks/use-http';
 import MatchRequestsUi from './MatchRequestsUi'
+import { useSelector } from 'react-redux';
 
 const MatchRequests = () =>
 {
@@ -9,6 +10,8 @@ const MatchRequests = () =>
         sendRequest: getRequests
     } = useHttp();
     const [requests, setRequests] = useState([]);
+    const uiId = "requests";
+    const isRequestsOpen = !!useSelector(state => state.ui.isPopMenuOpened)[uiId]
 
     useEffect(() =>
     {
@@ -20,17 +23,19 @@ const MatchRequests = () =>
             }
         };
 
-        getRequests(
+        if (isRequestsOpen) getRequests(
             {
                 url: `getMatchRequest`,
             },
             getResponse
         );
-    }, [getRequests])
+    }, [getRequests, isRequestsOpen])
+
     return (
         <MatchRequestsUi
             requests={requests}
             isLoadingGetRequests={isLoadingGetRequests}
+            uiId={uiId}
         />
     )
 }

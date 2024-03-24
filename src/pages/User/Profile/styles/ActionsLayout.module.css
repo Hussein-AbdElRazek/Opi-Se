@@ -1,7 +1,7 @@
 .container {
     position: absolute;
     right: 0px;
-    bottom: -90px;
+    bottom: -80px;
     display: flex;
 }
 
@@ -17,19 +17,52 @@
     margin-right: 10px;
 }
 
+.myPartner button,
+.myPartner a {
+    font-size: var(--font-size-300) !important;
+    padding: 6px 18px;
+}
+
 @media (max-width:600px) {
     .container {
-        bottom: -120px;
+        bottom: -70px;
     }
 
     .container button,
     .container a {
         font-size: var(--font-size-50) !important;
-        padding: 5px 10px;
+        padding: 6px 30px;
+        min-width: 100px;
     }
 
     .container svg {
         width: 20px;
         height: 20px;
+    }
+
+    .myPartner button,
+    .myPartner a {
+        font-size: var(--font-size-50) !important;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width:420px) {
+
+    .container button,
+    .container a {
+        padding: 6px 12px;
+    }
+
+    .myPartner button,
+    .myPartner a {
+        font-size: var(--font-size-30) !important;
+        padding: 6px 10px;
+        min-width: 0;
+    }
+
+    .myPartner svg {
+        width: 15px;
+        height: 15px;
     }
 }

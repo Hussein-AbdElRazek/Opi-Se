@@ -6,24 +6,20 @@ import MatchActions from "./MatchActions"
 import VectorAndText from "../../../components/common/VectorAndText"
 import noRequestsImg from '../../../assets/images/noRequests.png'
 import popUpCardClasses from '../../../components/ui/styles/PopUpCard.module.css'
-import navbarPopMenuClasses from '../../../components/appBar/styles/PopMenu.module.css'
 import { PopUpMenu as PopUpMenuComponent } from '../../../components/common'
 import { ReactComponent as RequestsIcon } from '../../../assets/icons/addFriend.svg'
 import classes from '../../../components/appBar/styles/IconBtn.module.css'
 
-const MatchRequestsUi = ({ requests, isLoadingGetRequests, type = "navbar" }) =>
+const MatchRequestsUi = ({ requests, isLoadingGetRequests, uiId }) =>
 {
     return (
         <PopUpMenuComponent
-            id="requests"
+            id={uiId}
             openBtnType={"icon"}
-            openBtnClassName={type === "navbar" ? classes.icon : navbarPopMenuClasses.popIconBtn}
+            openBtnClassName={classes.icon }
             openBtnChild={
                 <RequestsIcon
-                    fill={type === "navbar" ?
-                        "var(--secondary)" :
-                        'var(--black-40)'
-                    }
+                    fill={ "var(--secondary)" }
                 />
             }
             containerClassName={popUpCardClasses.parent}

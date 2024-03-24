@@ -1,51 +1,63 @@
-import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material'
-import { Field } from 'formik'
-
+import React from 'react'
+import { SearchBarComponent } from './SearchBarComponent'
+import { PopUpMenu } from '../common';
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
+import { ReactComponent as BackIcon } from '../../assets/icons/backArrow.svg'
 import classes from './styles/SearchBar.module.css'
-import { FormikContainer } from '../inputs'
-import searchIcon from '../../assets/icons/search.svg'
-export const SearchBarUi = ({ handleSearchForPartner, isLoadingSearchForPartner, fullWidth }) =>
-{
-    return (
-        <FormikContainer
-            initialValues={{ userId: "" }}
-            onSubmit={handleSearchForPartner}
-        >
-            <Field name="userId">
-                {({ field }) => (
-                    <TextField
-                        variant='standard'
-                        className={`${classes.searchInput} ${fullWidth ? classes.full : ""}`}
-                        name="userId"
-                        placeholder="Search your study partner..."
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    {isLoadingSearchForPartner ?
-                                        <CircularProgress size={20} sx={{ margin: 1, color: "var(--secondary)" }} /> :
-                                        <IconButton
-                                            sx={{
-                                                marginRight: 1,
-                                                padding: 0,
-                                            }}
-                                            type='submit'
-                                            disabled={isLoadingSearchForPartner || field.value.trim() === ""}
-                                            title="Search..."
-                                        >
-                                            <img
-                                                src={searchIcon}
-                                                alt='search icon'
-                                            />
-                                        </IconButton>}
-                                </InputAdornment>
-                            ),
-                        }}
+import { IconButton } from '@mui/material';
 
-                        disabled={isLoadingSearchForPartner}
-                        {...field}
-                    />
-                )}
-            </Field>
-        </FormikContainer>
+export const SearchBarUi = (props) =>
+{
+    const {
+        handleSearchForPartner,
+        isLoadingSearchForPartner,
+        fullWidth,
+        closeSmSearchBar,
+        smSearchId,
+    } = props;
+
+    return (
+        <div>
+            {/*  search bar for  screens bigger than 768px*/}
+            <div
+                className={classes.bigSmContainer}
+            >
+                <SearchBarComponent
+                    handleSearchForPartner={handleSearchForPartner}
+                    isLoadingSearchForPartner={isLoadingSearchForPartner}
+                />
+            </div>
+
+            {/*  search bar for  screens smaller than 768px*/}
+            <PopUpMenu
+                id={smSearchId}
+                openBtnType="icon"
+                openBtnChild={
+                    <SearchIcon fill='var(--text-header)' />
+                }
+                openBtnClassName={classes.openBtnSmSearch}
+                children={
+                    <div
+                        className={classes.smContainer}
+                    >
+                        <IconButton
+                            className={classes.backBtn}
+                            onClick={closeSmSearchBar}
+                        >
+                            <BackIcon className={classes.backIcon} />
+                        </IconButton>
+                        <SearchBarComponent
+                            handleSearchForPartner={handleSearchForPartner}
+                            isLoadingSearchForPartner={isLoadingSearchForPartner}
+                            fullWidth={fullWidth}
+                        />
+                    </div>
+                }
+                popperClassName={classes.popperContainer}
+                containerClassName={classes.smContainerP}
+                fullWidth={true}
+            />
+        </div>
+
     )
 }

@@ -15,6 +15,7 @@ export const PopUpMenu = (props) =>
         fullWidth,
         children,
         placement,
+        popperClassName
     } = props;
 
     // handle open menu btn
@@ -23,8 +24,6 @@ export const PopUpMenu = (props) =>
         "base": ButtonBase,
     }
     const OpenBtn = btnsTypes[openBtnType];
-
-
 
     //handle menu open or not
     const isPopMenuOpened = useSelector(state => state.ui.isPopMenuOpened)[id] || false;
@@ -92,6 +91,7 @@ export const PopUpMenu = (props) =>
                 sx={{
                     maxWidth: children ? "fit-content" : "100%",
                 }}
+                className={popperClassName}
             >
                 {({ TransitionProps, placement }) => (
                     <Grow
@@ -141,8 +141,6 @@ export const PopUpMenu = (props) =>
                         </div>
                     </Grow>)}
             </Popper>
-
-
         </>
     )
 }

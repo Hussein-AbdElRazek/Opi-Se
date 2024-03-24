@@ -9,16 +9,14 @@ import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as ProgressIcon } from '../../assets/icons/progress.svg'
 import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
-import { ReactComponent as ReportIcon } from '../../assets/icons/report.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import { PopMenu } from './PopMenu'
 import { useSelector } from 'react-redux'
 import Notifications from '../../pages/User/Notifications/Notifications'
 import MatchRequests from '../../pages/User/MatchRequests/MatchRequests'
 
-export const NavBar = ({ title }) =>
+export const NavBar = () =>
 {
-    const nationalId = useSelector(state => state.auth?.userData.nationalId);
     const mainLinks = [
         {
             title: 'Home',
@@ -41,12 +39,6 @@ export const NavBar = ({ title }) =>
             Icon: NotesIcon,
         },
         {
-            title: 'Report',
-            to: `https://userdashboard-cv8d.onrender.com/${nationalId}`,
-            Icon: ReportIcon,
-            target: "_blank"
-        },
-        {
             title: 'Mental Health',
             to: `/mental-health`,
             Icon: MentalHealthIcon,
@@ -59,13 +51,16 @@ export const NavBar = ({ title }) =>
         <Grid
             container
             className={classes.container}
+            columnSpacing={{ sm: 0.5 }}
         >
+            {/* logo + search bar */}
             <Grid
                 item
                 xl={4}
                 lg={4}
-                md={4}
-                xs={9}
+                md={5}
+                sm={6}
+                xs={4}
                 className="center-y"
             >
                 <div className={classes.logo}>
@@ -79,13 +74,13 @@ export const NavBar = ({ title }) =>
                 </div>
             </Grid>
 
-            <PopMenu />
-
+            {/* main links */}
             <Grid
                 item
                 xl={3}
                 lg={3}
-                md={4}
+                md={3}
+                sm={3}
                 className={classes.mainIcons}
             >
                 {mainLinks.map(({ title, to, Icon, target }) => (
@@ -100,22 +95,26 @@ export const NavBar = ({ title }) =>
                     </IconButton>
                 ))}
             </Grid>
+
+            {/* rights icons */}
             <Grid
                 item
-                lg={1.5}
-                className={`${classes.rightIcons} center-y`}
+                lg={2}
+                md={2}
+                sm={2.5}
+                className={`${classes.rightIcons} center-y `}
             >
                 <Badge
                     overlap="circular"
                     badgeContent=" "
                     invisible={!isNewNotification}
                 >
-                    <Notifications type="navbar" />
+                    <Notifications />
                 </Badge>
 
                 <MatchRequests />
-
-                <ProfileIcon id={"profileMenu"} />
+                <div className={classes.popMenu}><PopMenu /></div>
+                <div className={classes.profileIcon}><ProfileIcon id={"profileMenu"} /></div>
             </Grid>
         </Grid>
     )

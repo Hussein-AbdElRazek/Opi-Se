@@ -2,6 +2,7 @@
     background-color: var(--chat-receive);
     border-radius: var(--border-radius-inputs);
     padding: 4px;
+    border: 1px solid var(--black-10);
 }
 
 .openBtn svg {
@@ -10,7 +11,6 @@
 }
 
 .container {
-    height: calc(100vh - 53px);
     width: 100vw;
     overflow: auto;
 }

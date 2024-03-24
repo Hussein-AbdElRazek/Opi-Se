@@ -1,9 +1,9 @@
 import classes from '../styles/ActionsLayout.module.css'
 
-const ActionsLayout = ({ children }) =>
+const ActionsLayout = ({ children, isMyPartner }) =>
 {
     return (
-        <div className={classes.container}>
+        <div className={`${classes.container} ${isMyPartner ? classes.myPartner : ""}`}>
             {children}
         </div>
     )

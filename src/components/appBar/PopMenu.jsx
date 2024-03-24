@@ -1,4 +1,4 @@
-import { Badge, ListItemIcon } from '@mui/material'
+import {ListItemIcon } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,18 +8,14 @@ import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as ProgressIcon } from '../../assets/icons/progress.svg'
 import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
-import { ReactComponent as ReportIcon } from '../../assets/icons/report.svg'
-import { ReactComponent as AddFriendIcon } from '../../assets/icons/addFriend.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import classes from './styles/PopMenu.module.css'
 import { uiActions } from '../../store/ui-slice'
 import { ProfileIcon } from './ProfileIcon'
-import Notifications from '../../pages/User/Notifications/Notifications'
 
 export const PopMenu = () =>
 {
     const userName = useSelector((state) => state.auth.userData?.userName);
-    const nationalId = useSelector((state) => state.auth.userData?.nationalId);
     const menuId = "navbarPopMenu"
     const profileMenuId = "smallProfileMenu"
     const dispatch = useDispatch();
@@ -31,16 +27,6 @@ export const PopMenu = () =>
         if (isPopMenuProfileOpened) dispatch(uiActions.closePopMenu(profileMenuId))
         else dispatch(uiActions.openPopMenu(profileMenuId))
     }
-
-    const notificationsId = "notifications"
-    const isPopNotificationsOpened = useSelector(state => state.ui.isPopMenuOpened)[notificationsId] || false
-
-    const handleToggleNotifications = () =>
-    {
-        if (isPopNotificationsOpened) dispatch(uiActions.closePopMenu(notificationsId))
-        else dispatch(uiActions.openPopMenu(notificationsId))
-    }
-    const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
 
     const menuItems = [
         // profile menu
@@ -70,8 +56,8 @@ export const PopMenu = () =>
         },
         // progress
         {
-            // onClick: closeMenu,
-            // menuItemComponent: NavLink,
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -79,12 +65,12 @@ export const PopMenu = () =>
                     </ListItemIcon>
                     Progress
                 </>,
-            // to: "/progress",
+            to: "/progress",
         },
         // tasks
         {
-            // onClick: closeMenu,
-            // menuItemComponent: NavLink,
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
@@ -92,7 +78,7 @@ export const PopMenu = () =>
                     </ListItemIcon>
                     Tasks
                 </>,
-            // to: "/tasks",
+            to: "/tasks",
         },
         // notes
         {
@@ -107,20 +93,6 @@ export const PopMenu = () =>
                 </>,
             to: "/notes",
         },
-        // report
-        {
-            onClick: closeMenu,
-            menuItemComponent: NavLink,
-            children:
-                <>
-                    <ListItemIcon className={classes.icon}>
-                        <ReportIcon fill='var(--black-40)' />
-                    </ListItemIcon>
-                    Report
-                </>,
-            to: `https://userdashboard-cv8d.onrender.com/${nationalId}`,
-            target: "_blank"
-        },
         // mental health
         {
             onClick: closeMenu,
@@ -133,39 +105,6 @@ export const PopMenu = () =>
                     Mental Health
                 </>,
             to: `/mental-health`,
-        },
-        // notifications
-        {
-            noHover: true,
-            onClick: handleToggleNotifications,
-            children:
-                <>
-                    <Badge
-                        overlap="circular"
-                        badgeContent=" "
-                        invisible={!isNewNotification}
-                        variant="dot"
-                    >
-                        <ListItemIcon className={classes.icon}>
-                            <Notifications />
-                        </ListItemIcon>
-                    </Badge>
-                    Notifications
-                </>
-            ,
-        },
-        // requests
-        {
-            onClick: closeMenu,
-            menuItemComponent: NavLink,
-            children:
-                <>
-                    <ListItemIcon className={classes.icon}>
-                        <AddFriendIcon fill='var(--black-40)' />
-                    </ListItemIcon>
-                    Requests
-                </>,
-            to: "/requests",
         },
     ]
 

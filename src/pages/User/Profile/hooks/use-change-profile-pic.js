@@ -20,7 +20,7 @@ const useChangeProfilePic = () =>
         {
             if (res?.success || res?.message.includes("success"))
             {
-                dispatch(authActions.updateUserData({ profileImage: newImage }))
+                dispatch(authActions.updateUserData({ profileImage: res?.imageUrl || newImage }))
             }
         };
 

@@ -18,13 +18,18 @@
 }
 
 @media (max-width:900px) {
-    .bigScreens {
-        display: none;
+    .profileIcon {
+        width: 40px;
+        height: 40px;
     }
 }
 
-@media (max-width:900px) {
+@media (max-width:768px) {
     .smallScreens {
         display: flex;
+    }
+
+    .bigScreens {
+        display: none;
     }
 }

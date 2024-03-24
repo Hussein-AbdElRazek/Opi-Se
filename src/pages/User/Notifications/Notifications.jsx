@@ -7,7 +7,8 @@ const Notifications = ({ type }) =>
 {
     const notifications = useSelector((state) => state.auth.notifications) || [];
     const dispatch = useDispatch();
-    const isNotificationsOpened = useSelector(state => state.ui.isPopMenuOpened)["notifications"] || false
+    const uiId = "notifications";
+    const isNotificationsOpened = !!useSelector(state => state.ui.isPopMenuOpened)[uiId];
 
     useEffect(() =>
     {
@@ -18,6 +19,7 @@ const Notifications = ({ type }) =>
         <NotificationsUi
             notifications={notifications}
             type={type}
+            uiId={uiId}
         />
     )
 }

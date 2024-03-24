@@ -8,21 +8,17 @@ import { PopUpMenu as PopUpMenuComponent } from '../../../components/common'
 import classes from '../../../components/appBar/styles/IconBtn.module.css'
 import { ReactComponent as NotificationIcon } from '../../../assets/icons/notification.svg'
 import popUpCardClasses from '../../../components/ui/styles/PopUpCard.module.css'
-import navbarPopMenuClasses from '../../../components/appBar/styles/PopMenu.module.css'
 
-const NotificationsUi = ({ notifications, isLoadingGetNotifications, type }) =>
+const NotificationsUi = ({ notifications, isLoadingGetNotifications, uiId }) =>
 {
     return (
         <PopUpMenuComponent
-            id="notifications"
+            id={uiId}
             openBtnType={"icon"}
-            openBtnClassName={type === "navbar" ? classes.icon : navbarPopMenuClasses.popIconBtn}
+            openBtnClassName={classes.icon}
             openBtnChild={
                 <NotificationIcon
-                    fill={type === "navbar" ?
-                        "var(--secondary)" :
-                        'var(--black-40)'
-                    }
+                    fill={"var(--secondary)"}
                 />
             }
             containerClassName={popUpCardClasses.parent}

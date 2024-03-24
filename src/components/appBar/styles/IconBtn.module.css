@@ -6,7 +6,16 @@
     margin-right: 10px;
 }
 
-.icon img {
+.icon svg {
     width: 26px;
     height: 26px;
+}
+
+@media (max-width:900px) {
+    .icon {
+        width: 35px;
+        height: 35px;
+        margin-right: 5px;
+        padding: 6px;
+    }
 }
