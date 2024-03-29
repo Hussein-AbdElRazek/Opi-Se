@@ -1,0 +1,44 @@
+.container {
+    margin-bottom: 20px;
+}
+
+.container>span:first-of-type {
+    width: 25px;
+    font-size: var(--font-size-50);
+    color: var(--text-header);
+    font-weight: 400;
+    text-align: left;
+    padding-right: 2px;
+}
+
+.profilePic {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
+    margin-right: 5px;
+}
+
+.profilePic div {
+    font-size: var(--font-size-30) !important;
+}
+
+.container h6,
+.container p,
+.container span {
+    font-size: var(--font-size-30);
+    width: 20%;
+    margin: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+}
+
+.container span {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.myData {
+    margin-bottom: 0;
+}

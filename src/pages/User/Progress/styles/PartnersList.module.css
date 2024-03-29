@@ -1,0 +1,10 @@
+.myData {
+    padding: 5px 0;
+    border: 1px solid var(--black-30);
+    border-radius: var(--border-radius-inputs);
+    position: sticky;
+    bottom: 0;
+    background-color: var(--primary);
+    z-index: var(--layer-100);
+    margin-bottom: 20px;
+}

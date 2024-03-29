@@ -1,0 +1,197 @@
+.container {
+    padding: 0 30px;
+}
+
+.left {
+    width: calc(65% - 30px) !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.right {
+    width: 35% !important;
+    margin: 0 !important;
+    box-shadow: 0px 1px 8px var(--black-25);
+    border: none !important;
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+.rightContent {
+    width: calc(100% - 30px);
+    max-height: calc(100vh - 130px);
+    overflow: auto;
+    padding: 15px;
+}
+
+.card {
+    border-radius: var(--border-radius-200);
+    height: fit-content;
+    width: calc(100% - 30px);
+    margin-bottom: 0px;
+    border: 1px solid var(--black-40);
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.card p,
+.card h1,
+.card h5 {
+    text-align: left !important;
+    margin: 0;
+}
+
+.welcome {
+    padding: 40px 30px;
+    background-color: var(--secondary);
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    border: none;
+}
+
+.welcome,
+.welcome p {
+    color: var(--primary);
+}
+
+.welcome h1 {
+    margin-bottom: 20px;
+    font-size: var(--font-size-1000);
+}
+
+.welcome p {
+    font-weight: 300 !important;
+}
+
+.welcome img {
+    width: 150px;
+    margin-right: -10px;
+}
+
+.progress {
+    padding: 10px 30px;
+}
+
+.coins {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.coins span {
+    font-size: var(--font-size-200);
+    font-weight: 600;
+    color: var(--coin);
+}
+
+.coins img {
+    height: 40px;
+}
+
+.currentProgress {
+    margin-bottom: 20px;
+}
+
+.currentProgress img {
+    height: 80px;
+    margin-right: 20px;
+    margin-left: -10px;
+}
+
+.points h3 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.stepper {
+    padding: 0;
+}
+
+.stepperContainer {
+    position: relative;
+    text-align: center;
+}
+
+.stepper span {
+    height: 20px;
+    border-radius: var(--border-radius-150);
+}
+
+.badgeScore {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 20px);
+    color: var(--primary);
+}
+
+.badges {
+    max-width: 500px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.circle {
+    width: 8px;
+    height: 8px;
+    border: 4px solid var(--secondary);
+    border-radius: 50%;
+}
+
+.badgeStepper {
+    margin-top: 10px;
+}
+
+.hours {
+    font-weight: 600 !important;
+    color: var(--text-header);
+}
+
+@media (max-width:1000px) {
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .left,
+    .right {
+        width: 100% !important;
+    }
+}
+
+@media (max-width:768px) {
+    .container {
+        padding: 0;
+    }
+}
+
+@media (max-width:600px) {
+    .welcome h1 {
+        font-weight: 600;
+        font-size: var(--font-size-800);
+    }
+
+    .welcome img {
+        display: none;
+    }
+
+    .coins {
+        margin-bottom: 10px;
+    }
+
+    .coins img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card h3 {
+        font-size: var(--font-size-500);
+    }
+
+    .currentProgress img {
+        width: 70px;
+        height: 70px;
+    }
+}

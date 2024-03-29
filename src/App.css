@@ -32,7 +32,9 @@
     --video-time: #8D9196;
     --secondary-btn: #eeeeee;
     --black-10: rgba(0, 0, 0, 0.10);
+    --black-15: rgba(0, 0, 0, 0.15);
     --black-20: rgba(0, 0, 0, 0.20);
+    --black-25: rgba(0, 0, 0, 0.25);
     --black-30: rgba(0, 0, 0, 0.30);
     --black-80: rgba(0, 0, 0, 0.80);
     --black-40: rgba(0, 0, 0, 0.40);
@@ -58,6 +60,7 @@
     --dark-grey: #585757;
     --date-cell: #8F9BB3;
     --date-cell-current-month: #222B45;
+    --coin: #FFD700;
     /* ------------------------------ */
 
     /* Font Size */
@@ -121,6 +124,14 @@
     justify-content: flex-end;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+
 .height-100vh {
     height: 100vh;
 }
@@ -157,4 +168,20 @@ a {
 /* Pop menu & popper */
 .MuiPopper-root {
     z-index: var(--layer-popper);
+}
+
+/* handle stepper styling in progress page */
+.MuiStepConnector-root {
+    top: 7px;
+    left: calc(-50% + 8px);
+    right: calc(50% + 8px);
+}
+
+.MuiStepConnector-line {
+    border-color: var(--secondary);
+    border-top-width: 3px;
+}
+
+.MuiStepLabel-label {
+    margin-top: 4px !important;
 }

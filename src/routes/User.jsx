@@ -24,6 +24,7 @@ import AddNote from '../pages/User/Notes/components/AddNote'
 import EditNote from '../pages/User/Notes/components/EditNote'
 import Calender from '../pages/User/Tasks/Calender/Calender'
 import DayEventsModal from '../pages/User/Tasks/Calender/components/DayEventsModal'
+import Progress from '../pages/User/Progress/Progress'
 
 const User = () =>
 {
@@ -69,6 +70,8 @@ const User = () =>
                     <Route path=':day' element={<DayEventsModal />} />
                 </Route>
             </Route>
+
+            <Route path="/progress" element={<Progress />} />
 
             <Route path="*" element={<PageNotFound />} />
         </Routes>

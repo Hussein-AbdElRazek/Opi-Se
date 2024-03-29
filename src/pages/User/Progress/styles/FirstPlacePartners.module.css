@@ -1,0 +1,14 @@
+.container {
+    max-width: 200px;
+    box-shadow: 0 1px 4px var(--black-15);
+    position: relative;
+    border-radius: var(--border-radius-200);
+    padding: 10px;
+    margin: 20px 0 30px 0;
+}
+
+.crown {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+}

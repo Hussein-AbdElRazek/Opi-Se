@@ -1,0 +1,29 @@
+.container {
+    width: 25%;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.container img {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.title {
+    font-size: var(--font-size-100);
+    font-weight: 500;
+    margin-top: 5px !important;
+    text-align: center;
+
+}
+
+@media (max-width:600px) {
+    .container {
+        margin-top: 10px;
+    }
+
+    .container img {
+        max-width: 40px;
+        max-height: 40px;
+    }
+}
