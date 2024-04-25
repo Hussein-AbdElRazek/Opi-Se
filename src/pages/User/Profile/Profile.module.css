@@ -76,13 +76,20 @@
 }
 
 .content {
-    padding: 0 30px;
+    padding: 0 30px 0 50px;
+    /* width: (100%); */
 }
 
 .content h6 {
     margin: 0;
-    font-size: 18px;
+    font-size: var(--font-size-600);
     font-weight: 500;
+}
+
+.card {
+    padding: 20px;
+    background-color: var(--primary);
+    border-radius: var(--border-radius-150);
 }
 
 .userData {
@@ -117,8 +124,9 @@
     margin-bottom: 10px !important;
 }
 
-.id {
-    width: 100%;
+.idContent span {
+    font-weight: 500;
+    font-size: var(--font-size-600);
 }
 
 .idContainer {
@@ -127,22 +135,21 @@
     justify-content: space-between;
     flex-wrap: wrap;
     overflow: hidden;
+    padding: 10px 5px 10px 20px !important;
 }
 
 .idContainer img {
-    width: 25px;
+    width: 22px;
+
 }
 
 .idContent {
-    width: calc(100% - 60px);
+    width: calc(100% - 45px);
+    font-size: var(--font-size-200);
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.id div {
-    height: auto;
-    padding: 2px 5px;
-}
 
 .reportBtn {
     padding: 6px 30px;
@@ -164,7 +171,7 @@
     }
 
     .content {
-        padding: 0 20px;
+        padding: 0 0 0 20px;
     }
 }
 
@@ -180,10 +187,6 @@
         bottom: -60px;
     }
 
-    .content {
-        padding: 0 10px;
-    }
-
     .reportBtn svg {
         height: 15px !important;
     }
@@ -196,7 +199,6 @@
         width: 25px;
         height: 25px;
     }
-
 }
 
 @media (max-width:425px) {
@@ -209,6 +211,5 @@
     .plusIcon {
         right: 0px;
         bottom: 0px;
-
     }
 }

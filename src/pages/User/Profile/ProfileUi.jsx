@@ -1,8 +1,9 @@
-import { Grid, IconButton } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { useSnackbar } from 'notistack';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
-import { Card, ProfilePic } from '../../../components/ui'
+import { ProfilePic } from '../../../components/ui'
 import classes from './Profile.module.css'
 import { Btn, Skills } from '../../../components/inputs'
 import copyIcon from '../../../assets/icons/copy.svg'
@@ -12,6 +13,7 @@ import MyPartnerActions from './components/MyPartnerActions';
 import MatchRequestActions from './components/MatchRequestActions';
 import RecommendationActions from './components/RecommendationActions';
 import { ReactComponent as ReportIcon } from '../../../assets/icons/report.svg';
+
 const ProfileUi = (props) =>
 {
     const {
@@ -20,9 +22,12 @@ const ProfileUi = (props) =>
         isMyPartner,
         from,
     } = props;
-    const currentUrl = window.location.href;
 
     const { enqueueSnackbar: popMessage } = useSnackbar();
+
+    const currentUrl = window.location.href;
+    const haveBio = profileData.bio && profileData.bio !== "blank"
+
     const onCopy = () =>
     {
         popMessage("Copied successfully")
@@ -91,47 +96,67 @@ const ProfileUi = (props) =>
                     </p>
                 </div>
 
-                <Grid
+                <Grid2
                     container
-                    rowSpacing={5}
-                    columnSpacing={{
-                        xs: 2,
-                        sm: 2,
-                        md: 2,
-                        lg: 2,
-                        xl: 2
-                    }}
+                    rowSpacing={2}
+                    columnSpacing={{ lg: haveBio ? 4 : 0, md: haveBio ? 4 : 0, sm: 0, xs: 0 }}
+                    alignContent={"flex-start"}
+                    alignItems={"flex-start"}
                 >
-                    {/* Skills */}
-                    <Grid
-                        item
+                    {/* About */}
+                    {haveBio && <Grid2
                         md={6}
                         sm={12}
                         xs={12}
-                        className={classes.skills}
+                        className={classes.about}
                     >
-                        <Card>
+                        <div className={classes.card} >
                             <h6>
-                                Skills
+                                About me
                             </h6>
-                            <Skills disabled={true} skillsInitial={profileData?.userSkills} />
-                        </Card>
-                    </Grid>
+                            <p>
+                                {profileData.bio}
+                            </p>
+                        </div>
+                    </Grid2>}
 
-                    {/* Copy id section */}
-                    <Grid
-                        item
-                        md={6}
+                    {/* Skills */}
+                    <Grid2
+                        md={haveBio ? 6 : 12}
                         sm={12}
-                        className={classes.id}
+                        xs={12}
+                        container
+                        rowSpacing={2}
+                        columnSpacing={{ lg: 4, md: 4, sm: 0, xs: 0 }}
                     >
-                        <Card>
-                            <div
-                                className={classes.idContainer}
-                            >
-                                <span className={classes.idContent}>
-                                    Id: {currentUrl}
-                                </span>
+                        <Grid2
+                            md={haveBio ? 12 : 6}
+                            sm={12}
+                            xs={12}
+                            className={classes.skills}
+                        >
+                            <div className={classes.card}>
+                                <h6>
+                                    Skills
+                                </h6>
+                                <Skills disabled={true} skillsInitial={profileData?.userSkills} />
+                            </div>
+                        </Grid2>
+
+                        {/* Copy id section */}
+                        <Grid2
+                            md={haveBio ? 12 : 6}
+                            sm={12}
+                            xs={12}
+                        >
+                            <div className={`${classes.card} ${classes.idContainer}`}>
+                                <div className={classes.idContent}>
+                                    <span >
+                                        {"Id: "}
+                                    </span>
+                                    {currentUrl}
+                                </div>
+
                                 <CopyToClipboard text={currentUrl} >
                                     <IconButton
                                         onClick={onCopy}
@@ -140,9 +165,9 @@ const ProfileUi = (props) =>
                                     </IconButton>
                                 </CopyToClipboard>
                             </div>
-                        </Card>
-                    </Grid>
-                </Grid>
+                        </Grid2>
+                    </Grid2>
+                </Grid2>
             </div>
         </>
     )
