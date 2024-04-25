@@ -1,4 +1,3 @@
-import { Grid } from '@mui/material'
 import { SideBar } from '../../../components/common/SideBar'
 import { Btn, FormikContainer, LoopOnInputs } from '../../../components/inputs'
 import { changePasswordInitialValues, changePasswordInputs } from './changePasswordData'
@@ -11,19 +10,15 @@ const ChangePasswordUi = (props) =>
         isLoadingChangePassword,
         handleChangePassword
     } = props;
+
     return (
-        <Grid
-            container
+        <div
+            className={editProfileClasses.container}
         >
             <SideBar />
 
-            <Grid
-                item
-                xl={4}
-                lg={4}
-                md={5}
-                sm={6}
-                xs={10}
+            <div
+                className={editProfileClasses.data}
             >
                 <FormikContainer
                     initialValues={changePasswordInitialValues}
@@ -33,13 +28,17 @@ const ChangePasswordUi = (props) =>
                     <Card
                         title="Change Password"
                     >
-                        <LoopOnInputs
-                            inputs={changePasswordInputs}
-                            disabled={isLoadingChangePassword}
-                        />
+                        <div
+                            style={{ maxWidth: '400px' }}
+                        >
+                            <LoopOnInputs
+                                inputs={changePasswordInputs}
+                                disabled={isLoadingChangePassword}
+                            />
+                        </div>
+
                         <div
                             className={editProfileClasses.action}
-                            style={{ marginTop: "30px" }}
                         >
                             <Btn
                                 type="submit"
@@ -50,8 +49,8 @@ const ChangePasswordUi = (props) =>
                         </div>
                     </Card>
                 </FormikContainer>
-            </Grid>
-        </Grid>
+            </div>
+        </div>
     )
 }
 

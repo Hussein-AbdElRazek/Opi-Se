@@ -1,7 +1,27 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.data {
+    width: calc(100% - 250px);
+}
+
 .action {
-    max-width: 200px;
+    width: fit-content;
+    margin-top: 30px;
 }
 
 .action button {
     margin-top: 0 !important;
+    padding: 4px 25px;
+    min-width: 0;
+}
+
+@media (max-width:900px) {
+    .data {
+        width: calc(100% - 70px);
+    }
 }

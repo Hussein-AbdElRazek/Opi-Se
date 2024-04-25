@@ -20,6 +20,8 @@ export const SideBar = () =>
     return (
         <Grid
             item
+            xl={3.5}
+            lg={3.5}
             md={3.5}
             sm={1.5}
             xs={2}

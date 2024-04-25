@@ -16,6 +16,7 @@ const EditProfile = () =>
         email: userData.email,
         age: userData.age,
         languages: userData.languages,
+        bio: userData.bio === "blank" ? "" : userData.bio,
         userSkills: userData.userSkills,
         fieldOfStudy: userData.fieldOfStudy,
         specialization: userData.specialization,

@@ -3,6 +3,7 @@
     margin-top: 35px;
     border-radius: var(--border-radius-inputs);
     border: 1px solid var(--input-border);
+    max-width: calc(600px - 16px);
 }
 
 .content {

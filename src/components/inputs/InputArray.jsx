@@ -10,7 +10,7 @@ import
 } from './';
 export const InputArray = (props) =>
 {
-    const { name, inputs,intialObject, disabled } = props;
+    const { name, inputs, intialObject, disabled } = props;
 
     const addOne = (push) => () =>
     {
@@ -42,18 +42,16 @@ export const InputArray = (props) =>
                             }}
                             key={index}
                         >
-                            {inputs.map(({ size, sm, ...input }) => 
+                            {inputs.map(({ size, sm,xs, ...input }) => 
                             {
                                 const columns = size ? size : 4
                                 return (
                                     <Grid
                                         key={`${name}.${index}.${input.name}`}
                                         item
-                                        xl={columns}
-                                        lg={columns}
-                                        md={sm}
+                                        md={columns}
                                         sm={sm}
-                                        xs={sm}
+                                        xs={xs}
                                     >
                                         <FormikControl
                                             {...input}
@@ -67,10 +65,8 @@ export const InputArray = (props) =>
 
                             <Grid
                                 item
-                                xl={2.5}
-                                lg={2.5}
-                                md={3}
-                                sm={5}
+                                md={2}
+                                sm={3}
                                 xs={5}
                             >
                                 {/* Add Btn */}

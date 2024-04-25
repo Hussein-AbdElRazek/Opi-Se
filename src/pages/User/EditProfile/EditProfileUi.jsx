@@ -1,12 +1,13 @@
-import { Grid } from '@mui/material'
-
-import { Btn, LoopOnInputs } from '../../../components/inputs'
-import { editProfileInputs } from './editProfileInputsData'
+import { Btn, FormikContainer, LoopOnInputs, Skills } from '../../../components/inputs'
+import { aboutInput, editProfileInputs } from './editProfileInputsData'
 import { editProfileValidationSchema } from './editProfileValidationSchema'
 import classes from './styles/EditProfileUi.module.css'
 import { SideBar } from '../../../components/common/SideBar'
 import Card from './Card'
+import { aboutInputs } from '../About/aboutInputsData'
+
 import { Formik, Form } from 'formik'
+
 const EditProfileUi = (props) =>
 {
     const {
@@ -15,59 +16,101 @@ const EditProfileUi = (props) =>
         handleEditProfile
     } = props;
     return (
-        <div>
-            <Grid
-                container
-                className={classes.container}
-                columnSpacing={{
-                    xs: 2,
-                    sm: 2,
-                    md: 0,
-                    lg: 1,
-                    xl: 1
-                }}
+        <div
+            className={classes.container}
+        >
+            <SideBar />
+            <div
+                className={classes.data}
             >
-                <SideBar />
-                
-                <Grid
-                    item
-                    md={8}
-                    sm={10.5}
-                    xs={10}
+                <FormikContainer
+                    initialValues={initialUserData}
+                    validationSchema={editProfileValidationSchema}
+                    onSubmit={handleEditProfile}
+                    enableReinitialize={true}
+                >
+                    <Card
+                        title="Personal Information"
+                    >
+
+                        <LoopOnInputs
+                            inputs={editProfileInputs}
+                            disabled={isLoadingEditProfile}
+                        />
+                        <div
+                            className={classes.action}
+                        >
+                            <Btn
+                                type="submit"
+                                isLoading={isLoadingEditProfile}
+                            >
+                                Save
+                            </Btn>
+                        </div>
+
+
+                    </Card>
+
+                    <Card
+                        title="About me"
+                    >
+                        <LoopOnInputs
+                            inputs={aboutInput}
+                            disabled={isLoadingEditProfile}
+                        />
+                        <div
+                            className={classes.action}
+                        >
+                            <Btn
+                                type="submit"
+                                isLoading={isLoadingEditProfile}
+                            >
+                                Save
+                            </Btn>
+                        </div>
+
+                    </Card>
+
+                </FormikContainer>
+
+                <Card
+                    title="Interests"
                 >
                     <Formik
                         initialValues={initialUserData}
-                        validationSchema={editProfileValidationSchema}
-                        onSubmit={handleEditProfile}
-                        enableReinitialize={true}
                     >
                         {(formik) =>
-                            <Form >
-                                <Card
-                                    title="Personal Information"
-                                >
+                        {
+                            return (
+                                <Form>
                                     <LoopOnInputs
-                                        inputs={editProfileInputs}
-                                        disabled={isLoadingEditProfile}
+                                        inputs={aboutInputs}
+                                    // disabled={isLoadingEditProfile}
                                     />
-                                </Card>
-                                <div
-                                    className={classes.action}
-                                >
-                                    <Btn
-                                        type="submit"
-                                        isLoading={isLoadingEditProfile}
-                                    >
-                                        Save All Data
-                                    </Btn>
-                                </div>
-                            </Form>
-                        }
+                                    <Skills
+                                        skillsInitial={initialUserData.userSkills}
+                                        formik={formik}
+                                    />
 
+                                    <div
+                                        className={classes.action}
+                                    >
+                                        <Btn
+                                            type="submit"
+                                        // isLoading={isLoadingEditProfile}
+                                        >
+                                            Save
+                                        </Btn>
+                                    </div>
+
+                                </Form>
+                            )
+
+                        }}
                     </Formik>
-                </Grid>
-            </Grid>
-        </div>
+                </Card>
+            </div>
+        </div >
     )
 }
 

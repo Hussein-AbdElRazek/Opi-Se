@@ -5,6 +5,7 @@ import { FormikControl } from './';
 export const LoopOnInputs = (props) =>
 {
     const { inputs, disabled, isEdit } = props;
+    
     return (
         <Grid
             container
@@ -16,9 +17,9 @@ export const LoopOnInputs = (props) =>
                 lg: 2,
                 xl: 2
             }}
+            maxWidth={"600px"}
         >
-            {inputs.map(({size, xs, ...input }, index) =>
-            {
+            {inputs.map(({ size, xs, ...input }, index) =>{
                 const columns = !!size ? size : 12;
                 return (
                     <Grid

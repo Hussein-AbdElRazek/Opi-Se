@@ -4,8 +4,9 @@ const languagesInputs = [
         type: "text",
         name: "languageName",
         label: "Language Name",
-        size: 5,
-        sm: 4,
+        size: 6,
+        sm: 6,
+        xs: 4,
     },
     {
         control: "input",
@@ -14,6 +15,7 @@ const languagesInputs = [
         label: "Level",
         size: 4,
         sm: 3,
+        xs: 3,
     },
 ]
 
@@ -23,6 +25,7 @@ export const editProfileInputs = [
         type: "email",
         name: "email",
         label: "Email",
+        size: 6
     },
     {
         control: "input",
@@ -30,16 +33,6 @@ export const editProfileInputs = [
         name: "userName",
         label: "User Name",
         size: 6
-    },
-    {
-        control: "input",
-        type: "number",
-        name: "age",
-        label: "Age",
-        min: 10,
-        max: 60,
-        size: 6,
-        disabled: true
     },
     {
         control: "array",
@@ -51,4 +44,28 @@ export const editProfileInputs = [
             level: ""
         },
     },
+];
+
+export const aboutInput = [
+    {
+        control: "input",
+        type: "text",
+        multiline: true,
+        maxRows: 5,
+        rows: 5,
+        name: "bio",
+        label: "Description",
+    }
+];
+
+export const interestsInputs = [
+    {
+        control: "input",
+        type: "text",
+        multiline: true,
+        maxRows: 5,
+        rows: 5,
+        name: "bio",
+        label: "Description",
+    }
 ];
