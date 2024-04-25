@@ -1,19 +1,16 @@
-const languagesInputs = [
+export const languagesInputs = [
     {
         control: "input",
         type: "text",
         name: "languageName",
         label: "Language Name",
-        size: 5,
-        sm: 4,
+        isFirst:true,
     },
     {
         control: "input",
         type: "number",
         name: "level",
         label: "Level",
-        size: 4,
-        sm: 3,
         min:1,
         max:5,
     },

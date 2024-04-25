@@ -125,7 +125,7 @@ export const PopUpMenu = (props) =>
                                                             to={item.to}
                                                             disableTouchRipple={item.noHover}
                                                             disableGutters={item.noHover}
-                                                            className={`${classes.item}${item.noHover ? classes.noHover : ""} ${item.haveStroke ? classes.hoverStroke : ""}`}
+                                                            className={`${classes.item}${item.noHover ? classes.noHover : ""} ${item.haveStroke ? classes.hoverStroke : ""} ${item.className ? item.className : ""}`}
                                                             target={item.target}
                                                             disabled={!!item?.disabled}
                                                         >

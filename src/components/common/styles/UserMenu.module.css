@@ -36,3 +36,18 @@
     width: 50% !important;
     height: 50% !important;
 }
+
+/* for handle settings and edit profile and change password ui */
+.smItem {
+    display: none;
+}
+
+@media (max-width:425px) {
+    .bigItem {
+        display: none;
+    }
+
+    .smItem {
+        display: flex;
+    }
+}

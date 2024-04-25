@@ -18,3 +18,5 @@ export const ageMax = "Maximum age is 60 years old"
 
 export const number = "Enter a number"
 
+export const aboutMax = "About cannot exceed 1000 characters"
+

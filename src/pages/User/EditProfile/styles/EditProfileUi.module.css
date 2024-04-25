@@ -20,8 +20,26 @@
     min-width: 0;
 }
 
+.aboutContainer {
+    position: relative;
+    max-width:calc(600px - 16px) ;
+}
+
+.aboutLength {
+    color: var(--black-40);
+    font-weight: 500;
+    position: absolute;
+    right: 0;
+}
+
 @media (max-width:900px) {
     .data {
         width: calc(100% - 70px);
+    }
+}
+
+@media (max-width:425px) {
+    .data {
+        width: 100%;
     }
 }

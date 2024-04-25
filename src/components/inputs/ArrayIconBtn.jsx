@@ -4,7 +4,9 @@ export const ArrayIconBtn = (props) =>
 {
     const { children, title, onClick, disabled } = props;
     return (
-        <>
+        <div
+            style={{ width: "30px" }}
+        >
             {!disabled ? (
                 <Tooltip
                     title={title}
@@ -20,7 +22,7 @@ export const ArrayIconBtn = (props) =>
             ) :
                 (null)
             }
-        </>
+        </div>
 
     )
 }

@@ -5,6 +5,7 @@
     background-color: var(--primary);
     margin-top: 4px;
     min-width: fit-content;
+    z-index: 5;
 }
 
 .menu li {
@@ -15,7 +16,6 @@
 .menu li,
 .menu a {
     color: var(--text-header);
-
 }
 
 .menu li:hover {

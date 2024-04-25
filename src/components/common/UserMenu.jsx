@@ -7,9 +7,10 @@ import classes from './styles/UserMenu.module.css'
 import { PopUpMenu as PopUpMenuComponent } from '../common'
 import { uiActions } from "../../store/ui-slice"
 import { ReactComponent as SettingIcon } from '../../assets/icons/setting.svg'
+import { ReactComponent as EditProfileIcon } from '../../assets/icons/profile.svg'
+import { ReactComponent as ChangePasswordIcon } from '../../assets/icons/shield.svg'
 import { ReactComponent as ExitIcon } from '../../assets/icons/exit.svg'
 import { authActions } from "../../store/auth-slice"
-
 
 export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnType, containerClassName }) =>
 {
@@ -55,6 +56,33 @@ export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnT
                     Setting
                 </>,
             to: "/profile/edit",
+            className: classes.bigItem
+        },
+        {
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
+            children:
+                <>
+                    <ListItemIcon className={classes.icon}>
+                        <EditProfileIcon fill='var(--text-header)' />
+                    </ListItemIcon>
+                    Edit Profile
+                </>,
+            to: "/profile/edit",
+            className: classes.smItem
+        },
+        {
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
+            children:
+                <>
+                    <ListItemIcon className={classes.icon}>
+                        <ChangePasswordIcon fill='var(--text-header)' />
+                    </ListItemIcon>
+                    Change Password
+                </>,
+            to: "/profile/change-password",
+            className: classes.smItem
         },
         {
             onClick: () => { dispatch(authActions.logout()); closeMenu(); },

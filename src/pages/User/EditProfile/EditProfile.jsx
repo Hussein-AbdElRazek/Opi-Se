@@ -31,6 +31,8 @@ const EditProfile = () =>
     const handleEditProfile = (values) =>   
     {
         values.languages = clearArrayOfObjects(values.languages)
+        console.log("v", values)
+        console.log("initialUserData", initialUserData)
         const submitData = compareObjects(initialUserData, values)
         if (!Object.keys(submitData).length)
         {

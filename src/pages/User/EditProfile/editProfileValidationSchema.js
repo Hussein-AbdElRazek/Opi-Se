@@ -1,6 +1,7 @@
 import *  as Yup from 'yup';
 import
 {
+    aboutMax,
     ageMax,
     ageMin,
     emailNotValid,
@@ -25,6 +26,8 @@ export const editProfileValidationSchema = Yup.object({
                 .required(required),
         })
     ),
+    bio: Yup.string()
+        .max(1000, aboutMax),
     fieldOfStudy: Yup.string()
         .required(required),
     specialization: Yup.string()

@@ -1,5 +1,4 @@
 import { FieldArray } from 'formik'
-import { Grid } from '@mui/material';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
@@ -8,6 +7,8 @@ import
     FormikControl,
     ArrayIconBtn
 } from './';
+import classes from './styles/InputArray.module.css'
+
 export const InputArray = (props) =>
 {
     const { name, inputs, intialObject, disabled } = props;
@@ -30,65 +31,45 @@ export const InputArray = (props) =>
             {
                 return (
                     form.values[name].map((ele, index) => (
-                        <Grid
-                            container
-                            rowSpacing={0}
-                            columnSpacing={{
-                                xs: 2,
-                                sm: 2,
-                                md: 2,
-                                lg: 2,
-                                xl: 2
-                            }}
+                        <div
+                            className={classes.container}
                             key={index}
                         >
-                            {inputs.map(({ size, sm,xs, ...input }) => 
+                            {inputs.map(({ size, isFirst, ...input }) => 
                             {
-                                const columns = size ? size : 4
                                 return (
-                                    <Grid
+                                    <div
                                         key={`${name}.${index}.${input.name}`}
-                                        item
-                                        md={columns}
-                                        sm={sm}
-                                        xs={xs}
+                                        className={isFirst ? classes.firstInput : classes.secondInput}
                                     >
                                         <FormikControl
                                             {...input}
                                             name={`${name}.${index}.${input.name}`}
                                             disabled={disabled}
                                         />
-                                    </Grid>
+                                    </div>
                                 )
                             }
                             )}
-
-                            <Grid
-                                item
-                                md={2}
-                                sm={3}
-                                xs={5}
+                            {/* Add Btn */}
+                            <ArrayIconBtn
+                                title="Add one"
+                                onClick={addOne(push)}
+                                disabled={disabled}
                             >
-                                {/* Add Btn */}
+                                <AddRoundedIcon />
+                            </ArrayIconBtn>
+                            {/* Remove Btn */}
+                            {index !== 0 && (
                                 <ArrayIconBtn
-                                    title="Add one"
-                                    onClick={addOne(push)}
+                                    title="Remove"
+                                    onClick={removeOne(remove, index)}
                                     disabled={disabled}
                                 >
-                                    <AddRoundedIcon />
+                                    <RemoveRoundedIcon />
                                 </ArrayIconBtn>
-                                {/* Remove Btn */}
-                                {index !== 0 && (
-                                    <ArrayIconBtn
-                                        title="Remove"
-                                        onClick={removeOne(remove, index)}
-                                        disabled={disabled}
-                                    >
-                                        <RemoveRoundedIcon />
-                                    </ArrayIconBtn>
-                                )}
-                            </Grid>
-                        </Grid>
+                            )}
+                        </div>
                     ))
                 )
             }}

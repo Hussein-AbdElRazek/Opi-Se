@@ -1,23 +1,4 @@
-const languagesInputs = [
-    {
-        control: "input",
-        type: "text",
-        name: "languageName",
-        label: "Language Name",
-        size: 6,
-        sm: 6,
-        xs: 4,
-    },
-    {
-        control: "input",
-        type: "number",
-        name: "level",
-        label: "Level",
-        size: 4,
-        sm: 3,
-        xs: 3,
-    },
-]
+import { languagesInputs } from '../../Guest/SignUp/signUpInputsData'
 
 export const editProfileInputs = [
     {
@@ -51,7 +32,6 @@ export const aboutInput = [
         control: "input",
         type: "text",
         multiline: true,
-        maxRows: 5,
         rows: 5,
         name: "bio",
         label: "Description",
