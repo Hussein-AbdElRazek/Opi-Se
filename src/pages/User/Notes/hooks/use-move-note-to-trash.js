@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
 import { emitDeleteNote, notesActions } from "../../../../store/notes-slice";
+import { noteModulePath } from "../../../../config";
 
 const useMoveNoteToTrash = () =>
 {
@@ -24,7 +25,7 @@ const useMoveNoteToTrash = () =>
         }
         moveNoteToTrash(
             {
-                url: `deleteNote?matchId=${matchId}&noteId=${noteId}`,
+                url: `${noteModulePath}/deleteNote?matchId=${matchId}&noteId=${noteId}`,
                 method: "DELETE",
             },
             onSuccess

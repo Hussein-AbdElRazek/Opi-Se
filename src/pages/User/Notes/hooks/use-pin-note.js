@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
 import { emitPinNote, notesActions } from "../../../../store/notes-slice";
+import { noteModulePath } from "../../../../config";
 
 const usePinNote = () =>
 {
@@ -35,7 +36,7 @@ const usePinNote = () =>
 
         pinNote(
             {
-                url: `pinNote?matchId=${matchId}&noteId=${noteId}`,
+                url: `${noteModulePath}/pinNote?matchId=${matchId}&noteId=${noteId}`,
                 method: "PATCH",
                 body: reqBody,
             },

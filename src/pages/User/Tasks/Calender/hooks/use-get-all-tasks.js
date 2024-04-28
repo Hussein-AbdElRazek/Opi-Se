@@ -3,6 +3,7 @@ import useHttp from '../../../../../hooks/use-http';
 import { useDispatch, useSelector } from 'react-redux';
 import useScrollingPagination from '../../../../../hooks/use-scrolling-pagination';
 import { tasksActions } from '../../../../../store/tasks-slice';
+import { taskModulePath } from '../../../../../config';
 
 const useGetAllTasks = () =>
 {
@@ -42,7 +43,7 @@ const useGetAllTasks = () =>
 
         getAllTasks(
             {
-                url: `getAllTasks?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
+                url: `${taskModulePath}/getAllTasks?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
             },
             getResponse
         );

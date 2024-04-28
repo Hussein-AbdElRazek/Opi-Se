@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
 import { emitAddNote, notesActions } from "../../../../store/notes-slice";
+import { noteModulePath } from "../../../../config";
 
 const useAddNote = (goBack) =>
 {
@@ -39,7 +40,7 @@ const useAddNote = (goBack) =>
 
         addNote(
             {
-                url: `addNote?matchId=${matchId}`,
+                url: `${noteModulePath}/addNote?matchId=${matchId}`,
                 method: "POST",
                 body: reqBody,
             },

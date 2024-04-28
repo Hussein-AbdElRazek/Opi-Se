@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useHttp from '../../../hooks/use-http';
 import MatchRequestsUi from './MatchRequestsUi'
 import { useSelector } from 'react-redux';
+import { matchModulePath } from '../../../config';
 
 const MatchRequests = () =>
 {
@@ -25,7 +26,7 @@ const MatchRequests = () =>
 
         if (isRequestsOpen) getRequests(
             {
-                url: `getMatchRequest`,
+                url: `${matchModulePath}/getMatchRequest`,
             },
             getResponse
         );

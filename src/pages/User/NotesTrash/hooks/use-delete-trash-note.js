@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../../../../hooks/use-http";
 import { notesActions } from "../../../../store/notes-slice";
 import { uiActions } from "../../../../store/ui-slice";
+import { trashModulePath } from "../../../../config";
 
 const useDeleteTrashNote = (noteId, uiId) =>
 {
@@ -34,7 +35,7 @@ const useDeleteTrashNote = (noteId, uiId) =>
 
         deleteTrashNote(
             {
-                url: `deleteNoteFromTrash?matchId=${matchId}&noteId=${noteId}`,
+                url: `${trashModulePath}/deleteNoteFromTrash?matchId=${matchId}&noteId=${noteId}`,
                 method: "DELETE",
             },
             getResponse

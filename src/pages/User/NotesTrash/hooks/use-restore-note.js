@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../../../../hooks/use-http";
 import { emitRestoreNote, notesActions } from "../../../../store/notes-slice";
 import { uiActions } from "../../../../store/ui-slice";
+import { noteModulePath } from "../../../../config";
 
 const useRestoreNote = (note, uiId) =>
 {
@@ -44,7 +45,7 @@ const useRestoreNote = (note, uiId) =>
 
         restoreNote(
             {
-                url: `restoreNote?matchId=${matchId}&noteId=${note._id}`,
+                url: `${noteModulePath}/restoreNote?matchId=${matchId}&noteId=${note._id}`,
                 method: "DELETE",
             },
             getResponse

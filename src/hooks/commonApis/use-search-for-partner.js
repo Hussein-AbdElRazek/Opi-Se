@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import useHttp from "../use-http";
 import { useNavigate } from "react-router-dom";
 import { searchActions } from "../../store/search-slice";
+import { matchModulePath } from "../../config";
 const useSearchForPartner = () =>
 {
     const {
@@ -28,7 +29,7 @@ const useSearchForPartner = () =>
 
         searchForPartner(
             {
-                url: `searchForSpecificPartner?userId=${userId}`,
+                url: `${matchModulePath}/searchForSpecificPartner?userId=${userId}`,
             },
             getResponse
         );

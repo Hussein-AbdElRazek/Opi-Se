@@ -5,6 +5,7 @@ import useHttp from "../../../../hooks/use-http";
 import useScrollingPagination from "../../../../hooks/use-scrolling-pagination";
 import { chatActions } from "../../../../store/chat-slice";
 import { useSearchParams } from "react-router-dom";
+import { chatModulePath } from "../../../../config";
 
 const useGetChat = (setIsScrollToBottom) =>
 {
@@ -50,7 +51,7 @@ const useGetChat = (setIsScrollToBottom) =>
 
         getChatData(
             {
-                url: `getPartnerChat?matchId=${matchId}&page=${currentPage + 1}&limit=20`,
+                url: `${chatModulePath}/getPartnerChat?matchId=${matchId}&page=${currentPage + 1}&limit=20`,
             },
             getResponse
         );

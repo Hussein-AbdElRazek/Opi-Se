@@ -5,6 +5,7 @@ import LoginUi from './LoginUi'
 import useHttp from '../../../hooks/use-http';
 import { authActions } from '../../../store/auth-slice';
 import { requestNotificationPermission } from '../../../FCM/FCM';
+import { userModulePath } from '../../../config';
 const Login = () =>
 {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const Login = () =>
 
         await login(
             {
-                url: "login",
+                url: `${userModulePath}/login`,
                 method: "post",
                 body: values,
             },

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../../../../hooks/use-http";
 import { emitUpdateNote, notesActions } from "../../../../store/notes-slice";
 import { compareObjects } from "../../../../helpers/compareObjects";
+import { noteModulePath } from "../../../../config";
 
 const useEditNote = (goBack) =>
 {
@@ -42,7 +43,7 @@ const useEditNote = (goBack) =>
 
         editNote(
             {
-                url: `updateNote?matchId=${matchId}&noteId=${_id}`,
+                url: `${noteModulePath}/updateNote?matchId=${matchId}&noteId=${_id}`,
                 method: "PATCH",
                 body: reqBody,
             },

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { authActions } from '../../../store/auth-slice';
 import useHttp from '../../../hooks/use-http';
+import { recommendationModulePath } from '../../../config';
 
 const About = () =>
 {
@@ -34,7 +35,7 @@ const About = () =>
 
         submitUserPrefers(
             {
-                url: "submitUserPrefers",
+                url: `${recommendationModulePath}/submitUserPrefers`,
                 method: "POST",
                 body: userPrefers,
             },

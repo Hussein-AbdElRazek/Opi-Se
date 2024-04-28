@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../../../../hooks/use-http";
 import { notesActions } from "../../../../store/notes-slice";
 import useScrollingPagination from "../../../../hooks/use-scrolling-pagination";
+import { noteModulePath } from "../../../../config";
 
 const useGetNotes = () =>
 {
@@ -39,7 +40,7 @@ const useGetNotes = () =>
 
         getNotes(
             {
-                url: `getAllNotes?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
+                url: `${noteModulePath}/getAllNotes?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
             },
             getResponse
         );

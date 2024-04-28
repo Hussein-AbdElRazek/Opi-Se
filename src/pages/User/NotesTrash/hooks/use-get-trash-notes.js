@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../../../../hooks/use-http";
 import { notesActions } from "../../../../store/notes-slice";
 import useScrollingPagination from "../../../../hooks/use-scrolling-pagination";
+import { trashModulePath } from "../../../../config";
 
 const useGetTrashNotes = () =>
 {
@@ -39,7 +40,7 @@ const useGetTrashNotes = () =>
 
         getTrashNotes(
             {
-                url: `getAllTrashNotes?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
+                url: `${trashModulePath}/getAllTrashNotes?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
             },
             getResponse
         );

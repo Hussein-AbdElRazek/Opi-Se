@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useHttp from "../../../../hooks/use-http";
 import { authActions } from "../../../../store/auth-slice";
 import { disMatch as disMatchSocketHandler } from "../../../../store/match-slice";
+import { matchModulePath } from "../../../../config";
 
 const useDisMatch = () =>
 {
@@ -32,7 +33,7 @@ const useDisMatch = () =>
 
         disMatch(
             {
-                url: `disMatchWithPartner?matchId=${matchId}`,
+                url: `${matchModulePath}/disMatchWithPartner?matchId=${matchId}`,
                 method: "POST",
                 body: values,
             },

@@ -3,6 +3,7 @@ import ResendEmailUi from './ResendEmailUi'
 import { useSearchParams } from 'react-router-dom';
 import useHttp from '../../../hooks/use-http';
 import { useSnackbar } from 'notistack';
+import { userModulePath } from '../../../config';
 
 const ResendEmail = () =>
 {
@@ -29,7 +30,7 @@ const ResendEmail = () =>
 
         resendEmail(
             {
-                url: `resendVerificationEmail?${email}`,
+                url: `${userModulePath}/resendVerificationEmail?${email}`,
                 method: "GET",
             },
             getResponse

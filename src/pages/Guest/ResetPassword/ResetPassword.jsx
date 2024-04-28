@@ -2,6 +2,7 @@ import { createSearchParams, useNavigate, useSearchParams } from "react-router-d
 import useHttp from "../../../hooks/use-http";
 import ResetPasswordUi from "./ResetPasswordUi"
 import { useSnackbar } from "notistack";
+import { userModulePath } from "../../../config";
 
 const ResetPassword = (props) =>
 {
@@ -27,7 +28,7 @@ const ResetPassword = (props) =>
 
         resetPassword(
             {
-                url: `submitNewPassword?token=${token}`,
+                url: `${userModulePath}/submitNewPassword?token=${token}`,
                 method: "post",
                 body: values,
             },

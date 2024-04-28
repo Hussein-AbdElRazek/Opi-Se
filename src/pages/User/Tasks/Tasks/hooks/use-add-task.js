@@ -4,6 +4,7 @@ import { tasksActions } from '../../../../../store/tasks-slice';
 import useHttp from '../../../../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { taskModulePath } from '../../../../../config';
 
 const useAddTask = () =>
 {
@@ -42,7 +43,7 @@ const useAddTask = () =>
 
         addTask(
             {
-                url: `addTask?matchId=${matchId}`,
+                url: `${taskModulePath}/addTask?matchId=${matchId}`,
                 method: "POST",
                 body: values,
             },

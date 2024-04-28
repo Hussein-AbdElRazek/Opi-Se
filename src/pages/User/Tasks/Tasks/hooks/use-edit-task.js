@@ -4,6 +4,7 @@ import { tasksActions } from '../../../../../store/tasks-slice';
 import useHttp from '../../../../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
 import { compareObjects } from '../../../../../helpers/compareObjects';
+import { taskModulePath } from '../../../../../config';
 
 const useEditTask = (taskInitialValues) =>
 {
@@ -34,7 +35,7 @@ const useEditTask = (taskInitialValues) =>
 
         editTask(
             {
-                url: `editTask?matchId=${matchId}&taskId=${taskInitialValues._id}`,
+                url: `${taskModulePath}/editTask?matchId=${matchId}&taskId=${taskInitialValues._id}`,
                 method: "PATCH",
                 body: editedData,
             },

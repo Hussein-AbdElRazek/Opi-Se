@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { notifyUserRoom } from '../../../store/user-slice';
 import { acceptPartnerRequest, joinMatchRoom } from '../../../store/match-slice';
 import { authActions } from '../../../store/auth-slice';
+import { matchModulePath } from '../../../config';
 
 const MatchActions = ({ requestData, smallBtn }) =>
 {
@@ -60,7 +61,7 @@ const MatchActions = ({ requestData, smallBtn }) =>
 
         acceptMatch(
             {
-                url: `acceptMatchRequest?partner2Id=${requestData.partnerId}&nationalId=${requestData.nationalId}`,
+                url: `${matchModulePath}/acceptMatchRequest?partner2Id=${requestData.partnerId}&nationalId=${requestData.nationalId}`,
                 method: "POST"
             },
             getResponse
@@ -90,7 +91,7 @@ const MatchActions = ({ requestData, smallBtn }) =>
 
         declineMatch(
             {
-                url: `declineMatchRequest`,
+                url: `${matchModulePath}/declineMatchRequest`,
                 method: "POST",
                 body
             },

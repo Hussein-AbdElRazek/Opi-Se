@@ -1,6 +1,7 @@
 import ChangePasswordUi from './ChangePasswordUi'
 import useHttp from '../../../hooks/use-http';
 import { useSnackbar } from 'notistack';
+import { userModulePath } from '../../../config';
 
 const ChangePassword = () =>
 {
@@ -22,7 +23,7 @@ const ChangePassword = () =>
         };
         changePassword(
             {
-                url: "changePassword",
+                url: `${userModulePath}changePassword`,
                 method: "POST",
                 body: values,
             },

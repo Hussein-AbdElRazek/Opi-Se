@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useHttp from "../../../../hooks/use-http";
 import { notesActions } from "../../../../store/notes-slice";
 import { uiActions } from "../../../../store/ui-slice";
+import { trashModulePath } from "../../../../config";
 
 const useEmptyTheTrashNotes = () =>
 {
@@ -34,7 +35,7 @@ const useEmptyTheTrashNotes = () =>
 
         emptyTheTrashNotes(
             {
-                url: `flushTrash?matchId=${matchId}`,
+                url: `${trashModulePath}/flushTrash?matchId=${matchId}`,
                 method: "DELETE",
             },
             getResponse

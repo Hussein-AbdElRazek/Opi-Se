@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import ForgetPasswordUi from "./ForgetPasswordUi"
 import {  useSnackbar } from "notistack";
+import { userModulePath } from "../../../config";
 
 const ForgetPassword = (props) =>
 {
@@ -24,7 +25,7 @@ const ForgetPassword = (props) =>
 
         forgetPassword(
             {
-                url: "forgetPassword",
+                url: `${userModulePath}/forgetPassword`,
                 method: "post",
                 body: values,
             },

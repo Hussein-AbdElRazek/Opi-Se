@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 
 import useHttp from "../../../../hooks/use-http";
 import { authActions } from "../../../../store/auth-slice";
+import { userModulePath } from "../../../../config";
 
 const useChangeProfilePic = () =>
 {
@@ -26,7 +27,7 @@ const useChangeProfilePic = () =>
 
         changeProfilePic(
             {
-                url: `changeProfileImage`,
+                url: `${userModulePath}/changeProfileImage`,
                 method: "POST",
                 body: reqBody,
                 contentType: "form-data",

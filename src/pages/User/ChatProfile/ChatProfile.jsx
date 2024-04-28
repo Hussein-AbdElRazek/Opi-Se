@@ -6,6 +6,7 @@ import ChatProfileUi from './ChatProfileUi'
 import useHttp from '../../../hooks/use-http';
 import useScrollingPagination from '../../../hooks/use-scrolling-pagination';
 import { chatActions } from '../../../store/chat-slice';
+import { chatModulePath } from '../../../config';
 
 const ChatProfile = () =>
 {
@@ -46,7 +47,7 @@ const ChatProfile = () =>
 
         getChatMedia(
             {
-                url: `getChatMedia?page=${currentPage + 1}&limit=20&matchId=${matchId}`,
+                url: `${chatModulePath}/getChatMedia?page=${currentPage + 1}&limit=20&matchId=${matchId}`,
             },
             getResponse
         );

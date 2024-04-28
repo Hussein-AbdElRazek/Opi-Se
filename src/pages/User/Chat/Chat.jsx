@@ -15,6 +15,7 @@ import useHttp from '../../../hooks/use-http';
 import ImagesContext from '../../../imagesStore/images-context';
 import useGetChat from './hooks/use-get-chat';
 import { uiActions } from '../../../store/ui-slice';
+import { chatModulePath } from '../../../config';
 
 const Chat = () =>
 {
@@ -165,7 +166,7 @@ const Chat = () =>
 
         uploadMedia(
             {
-                url: `uploadChatMedia?matchId=${matchId}`,
+                url: `${chatModulePath}/uploadChatMedia?matchId=${matchId}`,
                 method: "POST",
                 body: submitData,
                 contentType: "form-data"

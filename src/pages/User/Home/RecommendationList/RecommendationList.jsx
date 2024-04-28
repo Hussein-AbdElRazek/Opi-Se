@@ -3,6 +3,7 @@ import RecommendationListUi from './RecommendationListUi'
 import useHttp from '../../../../hooks/use-http';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import { recommendationModulePath } from '../../../../config';
 
 const RecommendationList = () =>
 {
@@ -39,7 +40,7 @@ const RecommendationList = () =>
 
             RecommendPartner(
                 {
-                    url: `getPartnerRecommendation?page=${currentPage}&limit=4`,
+                    url: `${recommendationModulePath}getPartnerRecommendation?page=${currentPage}&limit=4`,
                 },
                 getResponse
             );

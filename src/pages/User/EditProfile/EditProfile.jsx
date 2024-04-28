@@ -6,6 +6,7 @@ import { clearArrayOfObjects } from '../../../helpers/clearArrayOfObjects';
 import { compareObjects } from '../../../helpers/compareObjects';
 import { useSnackbar } from 'notistack';
 import { authActions } from '../../../store/auth-slice';
+import { userModulePath } from '../../../config';
 
 const EditProfile = () =>
 {
@@ -49,7 +50,7 @@ const EditProfile = () =>
         };
         editProfile(
             {
-                url: "editProfile",
+                url: `${userModulePath}/editProfile`,
                 method: "PATCH",
                 body: submitData,
             },

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useHttp from '../../../hooks/use-http';
 import SignUpUi from './SignUpUi';
 import { clearArrayOfObjects } from '../../../helpers/clearArrayOfObjects';
+import { userModulePath } from '../../../config';
 
 const SignUp = () =>
 {
@@ -27,7 +28,7 @@ const SignUp = () =>
         };
         signUp(
             {
-                url: "signUp",
+                url: `${userModulePath}/signUp`,
                 method: "POST",
                 body: submitData,
             },

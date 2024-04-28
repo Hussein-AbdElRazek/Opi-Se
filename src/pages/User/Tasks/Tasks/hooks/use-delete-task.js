@@ -2,6 +2,7 @@ import useHttp from '../../../../../hooks/use-http';
 import { useDispatch, useSelector } from 'react-redux';
 import { tasksActions } from '../../../../../store/tasks-slice';
 import { uiActions } from '../../../../../store/ui-slice';
+import { taskModulePath } from '../../../../../config';
 
 const useDeleteTask = (tasksType, taskId) =>
 {
@@ -34,7 +35,7 @@ const useDeleteTask = (tasksType, taskId) =>
 
         deleteTask(
             {
-                url: `deleteTask?matchId=${matchId}&taskId=${taskId}`,
+                url: `${taskModulePath}/deleteTask?matchId=${matchId}&taskId=${taskId}`,
                 method: "DELETE",
             },
             getResponse
