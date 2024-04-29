@@ -7,14 +7,19 @@ import Card from './Card'
 import { aboutInputs } from '../About/aboutInputsData'
 
 import { Formik, Form } from 'formik'
+import { aboutValidationSchema } from '../About/aboutValidationSchema'
 
 const EditProfileUi = (props) =>
 {
     const {
         initialUserData,
         isLoadingEditProfile,
-        handleEditProfile
+        handleEditProfile,
+        initialUserPrefers,
+        isLoadingEditUserPrefers,
+        handleEditUserPrefers,
     } = props;
+    
     return (
         <div
             className={classes.container}
@@ -51,8 +56,6 @@ const EditProfileUi = (props) =>
                                             Save
                                         </Btn>
                                     </div>
-
-
                                 </Card>
 
                                 <Card
@@ -77,19 +80,19 @@ const EditProfileUi = (props) =>
                                             Save
                                         </Btn>
                                     </div>
-
                                 </Card>
                             </Form>)
                     }}
-
-
                 </Formik>
 
                 <Card
                     title="Interests"
                 >
                     <Formik
-                        initialValues={initialUserData}
+                        initialValues={initialUserPrefers}
+                        onSubmit={handleEditUserPrefers}
+                        validationSchema={aboutValidationSchema}
+                        enableReinitialize={true}
                     >
                         {(formik) =>
                         {
@@ -97,11 +100,14 @@ const EditProfileUi = (props) =>
                                 <Form>
                                     <LoopOnInputs
                                         inputs={aboutInputs}
-                                    // disabled={isLoadingEditProfile}
+                                        disabled={isLoadingEditUserPrefers}
                                     />
+
+                                    {isLoadingEditUserPrefers && <br />}
                                     <Skills
-                                        skillsInitial={initialUserData.userSkills}
+                                        skillsInitial={initialUserPrefers.userSkills}
                                         formik={formik}
+                                        disabled={isLoadingEditUserPrefers}
                                     />
 
                                     <div
@@ -109,15 +115,13 @@ const EditProfileUi = (props) =>
                                     >
                                         <Btn
                                             type="submit"
-                                        // isLoading={isLoadingEditProfile}
+                                            isLoading={isLoadingEditUserPrefers}
                                         >
                                             Save
                                         </Btn>
                                     </div>
-
                                 </Form>
                             )
-
                         }}
                     </Formik>
                 </Card>

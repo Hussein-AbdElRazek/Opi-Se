@@ -6,7 +6,7 @@ import { clearArrayOfObjects } from '../../../helpers/clearArrayOfObjects';
 import { compareObjects } from '../../../helpers/compareObjects';
 import { useSnackbar } from 'notistack';
 import { authActions } from '../../../store/auth-slice';
-import { userModulePath } from '../../../config';
+import { recommendationModulePath, userModulePath } from '../../../config';
 
 const EditProfile = () =>
 {
@@ -18,28 +18,38 @@ const EditProfile = () =>
         age: userData.age,
         languages: userData.languages,
         bio: userData.bio === "blank" ? "" : userData.bio,
+    }
+
+    const initialUserPrefers = {
         userSkills: userData.userSkills,
         fieldOfStudy: userData.fieldOfStudy,
         specialization: userData.specialization,
     }
+
     const {
         sendRequest: editProfile,
         isLoading: isLoadingEditProfile
     } = useHttp();
+
+    const {
+        sendRequest: editUserPrefers,
+        isLoading: isLoadingEditUserPrefers
+    } = useHttp();
+
     const { enqueueSnackbar: popMessage } = useSnackbar();
     const dispatch = useDispatch();
 
     const handleEditProfile = (values) =>   
     {
         values.languages = clearArrayOfObjects(values.languages)
-        console.log("v", values)
-        console.log("initialUserData", initialUserData)
         const submitData = compareObjects(initialUserData, values)
+
         if (!Object.keys(submitData).length)
         {
             popMessage("You didn't change anything to save")
             return
         }
+
         const getResponse = ({ message }) =>
         {
             if (message.includes("success"))
@@ -48,6 +58,7 @@ const EditProfile = () =>
                 dispatch(authActions.updateUserData(values))
             }
         };
+
         editProfile(
             {
                 url: `${userModulePath}/editProfile`,
@@ -57,11 +68,45 @@ const EditProfile = () =>
             getResponse
         );
     }
+
+    const handleEditUserPrefers = (values) =>   
+    {
+        const submitData = compareObjects(initialUserPrefers, values)
+
+        if (!Object.keys(submitData).length)
+        {
+            popMessage("You didn't change anything to save")
+            return
+        }
+
+        const getResponse = ({ message }) =>
+        {
+            if (message.includes("success"))
+            {
+                popMessage("Your data edited successfully", { variant: "success" })
+                dispatch(authActions.updateUserData(values))
+            }
+        };
+
+        editUserPrefers(
+            {
+                url: `${recommendationModulePath}/editUserPrefers`,
+                method: "PATCH",
+                body: submitData,
+            },
+            getResponse
+        );
+    }
+
     return (
         <EditProfileUi
             initialUserData={initialUserData}
             handleEditProfile={handleEditProfile}
             isLoadingEditProfile={isLoadingEditProfile}
+            
+            initialUserPrefers={initialUserPrefers}
+            handleEditUserPrefers={handleEditUserPrefers}
+            isLoadingEditUserPrefers={isLoadingEditUserPrefers}
         />
     )
 }

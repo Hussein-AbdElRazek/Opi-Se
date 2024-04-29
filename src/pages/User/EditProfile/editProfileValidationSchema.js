@@ -28,16 +28,4 @@ export const editProfileValidationSchema = Yup.object({
     ),
     bio: Yup.string()
         .max(1000, aboutMax),
-    fieldOfStudy: Yup.string()
-        .required(required),
-    specialization: Yup.string()
-        .required(required),
-    userSkills: Yup.array().of(
-        Yup.object().shape({
-            skillName: Yup.string()
-                .required(required),
-            skillRate: Yup.number()
-                .required(required),
-        })
-    )
 });

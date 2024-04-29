@@ -66,9 +66,9 @@ export const Skills = (props) =>
 
     const handleDeleteValue = (valueToDelete) =>
     {
-        setSkills((prevValues) =>
-            prevValues.filter((value) => value !== valueToDelete)
-        );
+        const afterDelArr = skills.filter((value) => value !== valueToDelete);
+        setSkills(afterDelArr);
+        if (!!formik) formik.setFieldValue("userSkills", afterDelArr)
     };
 
     return (
