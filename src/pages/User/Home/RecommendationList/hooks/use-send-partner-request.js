@@ -2,6 +2,7 @@ import { useSnackbar } from "notistack";
 
 import useHttp from "../../../../../hooks/use-http";
 import { useNavigate } from "react-router-dom";
+import { matchModulePath } from "../../../../../config";
 
 const useSendPartnerRequest = () =>
 {
@@ -27,7 +28,7 @@ const useSendPartnerRequest = () =>
 
         sendPartnerRequest(
             {
-                url: `sendPartnerRequest?userId=${userData._id}`,
+                url: `${matchModulePath}/sendPartnerRequest?userId=${userData._id}`,
                 method: "POST",
             },
             getResponse

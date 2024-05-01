@@ -21,6 +21,7 @@ const ProfileUi = (props) =>
         isMyProfile,
         isMyPartner,
         from,
+        havePartner,
     } = props;
 
     const { enqueueSnackbar: popMessage } = useSnackbar();
@@ -49,7 +50,7 @@ const ProfileUi = (props) =>
                     {isMyProfile && <ChangeProfilePic />}
                 </div>
 
-                {/* Edit Profile Btn*/}
+                {/* My Report Btn*/}
                 {isMyProfile && (
                     <ActionsLayout>
                         <Btn
@@ -67,10 +68,13 @@ const ProfileUi = (props) =>
                 {isMyPartner && <MyPartnerActions userData={profileData} />}
 
                 {/* For when come from match requests*/}
-                {from === "matchRequests" && <MatchRequestActions requestData={profileData} />}
+                {(from === "matchRequests" && !isMyProfile) && <MatchRequestActions requestData={profileData} />}
 
                 {/* For when come from recommendation list*/}
-                {from === "recommendation" && <RecommendationActions />}
+                {(from === "recommendation" && !isMyProfile) && <RecommendationActions />}
+
+                {/* For anyone not me when doesn't have partner*/}
+                {(!havePartner && !isMyProfile) && <RecommendationActions />}
             </div>
             <div
                 className={classes.content}

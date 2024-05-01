@@ -16,6 +16,7 @@ const Profile = () =>
     const userData = useSelector((state) => state.search?.userData);
     const isMyProfile = myId === userId;
     const isMyPartner = userId === myData?.partnerId?._id;
+    const havePartner =  !!myData?.partnerId?._id;
 
     const {
         handleSearchForPartner,
@@ -54,6 +55,7 @@ const Profile = () =>
                         isMyProfile={isMyProfile}
                         isMyPartner={isMyPartner}
                         from={from}
+                        havePartner={havePartner}
                     />
                 )}
         </>
