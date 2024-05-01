@@ -1,10 +1,10 @@
 import useHttp from '../../../../../hooks/use-http';
 import { useDispatch, useSelector } from 'react-redux';
-import { tasksActions } from '../../../../../store/tasks-slice';
+import { emitDeleteTask, tasksActions } from '../../../../../store/tasks-slice';
 import { uiActions } from '../../../../../store/ui-slice';
 import { taskModulePath } from '../../../../../config';
 
-const useDeleteTask = (tasksType, taskId) =>
+const useDeleteTask = (taskStatus, taskId) =>
 {
     // useDeleteTask hook to handle call deleteTask API
 
@@ -21,15 +21,18 @@ const useDeleteTask = (tasksType, taskId) =>
             if (message.includes("success"))
             {
                 console.log("success taskId", taskId)
-
+                const taskData = { taskStatus: taskStatus, taskId: taskId }
                 // remove task from store
-                dispatch(tasksActions.removeTask({ tasksType: tasksType, taskId: taskId }));
+                dispatch(tasksActions.removeTask(taskData));
 
                 // close modal of confirmation
                 dispatch(uiActions.closeModal(taskId))
 
                 // close pop menu of task options
                 dispatch(uiActions.closePopMenu(taskId))
+
+                // emit socket
+                dispatch(emitDeleteTask(taskData))
             }
         };
 

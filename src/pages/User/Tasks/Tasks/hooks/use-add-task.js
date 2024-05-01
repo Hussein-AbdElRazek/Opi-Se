@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { tasksActions } from '../../../../../store/tasks-slice';
+import { emitAddTask, tasksActions } from '../../../../../store/tasks-slice';
 import useHttp from '../../../../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -35,7 +35,11 @@ const useAddTask = () =>
         {
             if (message.includes("success"))
             {
-                dispatch(tasksActions.addTask({ tasksType: "toDo", task: data }))
+                // update state
+                dispatch(tasksActions.addTask( data ))
+                
+                // emit socket
+                dispatch(emitAddTask(data ))
 
                 navigate(-1 || "/tasks")
             }

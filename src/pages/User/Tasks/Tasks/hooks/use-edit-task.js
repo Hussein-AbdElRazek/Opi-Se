@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { tasksActions } from '../../../../../store/tasks-slice';
+import { emitUpdateTask, tasksActions } from '../../../../../store/tasks-slice';
 import useHttp from '../../../../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
 import { compareObjects } from '../../../../../helpers/compareObjects';
@@ -22,13 +22,15 @@ const useEditTask = (taskInitialValues) =>
     const handleEditTask = (values) =>
     {
         const editedData = compareObjects(taskInitialValues, values)
-        
+
         const getResponse = ({ message, data }) =>
         {
             if (message.includes("success"))
             {
-                dispatch(tasksActions.updateTask({ tasksType: values.taskStatus, task: values }))
+                dispatch(tasksActions.updateTask(values))
 
+                // emit socket
+                dispatch(emitUpdateTask(data))
                 navigate(-1 || "/tasks")
             }
         };

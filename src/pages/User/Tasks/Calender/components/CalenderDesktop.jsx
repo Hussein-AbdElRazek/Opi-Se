@@ -4,6 +4,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 
 import MonthToolbar from './MonthToolbar';
 import CalenderEvent from './CalenderEvent';
+import useDate from '../hooks/use-date';
 
 const localizer = momentLocalizer(moment)
 
@@ -29,6 +30,8 @@ const CalenderDesktop = (props) =>
             },
         }), [])
 
+    const { selectedDate, handleDateSelect } = useDate();
+
     return (
         <Calendar
             components={components}
@@ -40,6 +43,8 @@ const CalenderDesktop = (props) =>
             onSelectSlot={onOpenDay}
             selectable
             messages={{ showMore: (total) => `More +${total}` }}
+            date={selectedDate}
+            onNavigate={handleDateSelect}
         />
     )
 }

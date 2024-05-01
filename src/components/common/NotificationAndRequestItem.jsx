@@ -3,13 +3,18 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './styles/NotificationAndRequestItem.module.css'
 import { ProfilePic } from '../ui';
-export const NotificationAndRequestItem = ({ itemData, action }) =>
+
+export const NotificationAndRequestItem = ({ itemData, action, lastElementRef }) =>
 {
-    const to = itemData?.partnerId ? `/profile?userId=${itemData?.partnerId}&from=matchRequests&requestId=${itemData._id}` : null
+    const to = itemData?.partnerId ?
+        `/profile?userId=${itemData?.partnerId}&from=matchRequests&requestId=${itemData._id}`
+        : null;
+
     return (
         <ListItem
             disablePadding
             className={classes.container}
+            ref={lastElementRef}
         >
             {itemData.requestStatus && (
                 <ListItemAvatar>
@@ -29,14 +34,13 @@ export const NotificationAndRequestItem = ({ itemData, action }) =>
                         <h6
                             className={classes.message}
                         >
-                            {((itemData.userName || itemData.partnerUserName) && itemData.requestStatus ) && (
+                            {((itemData.userName || itemData.partnerUserName) && itemData.requestStatus) && (
                                 <NavLink
                                     to={to}
                                 >
                                     {itemData.userName || itemData.partnerUserName}
                                 </NavLink>
                             )}
-
                             {itemData.message}
                         </h6>
                     }

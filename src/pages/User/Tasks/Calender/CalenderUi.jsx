@@ -9,8 +9,6 @@ const CalenderUi = (props) =>
 {
     const { events, onOpenDay, isLoadingGetAllTasks } = props;
 
-
-
     return (
         <div
         // className='calender-container'

@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { clearArrayOfObjects } from '../helpers/clearArrayOfObjects';
+import { mergeToUnique } from '../helpers/mergeToUnique';
 
 
 const initialAuthState = {
     token: localStorage.getItem("token"),
     userData: JSON.parse(localStorage.getItem("userData")),
-    notifications: JSON.parse(localStorage.getItem("notifications")) ? JSON.parse(localStorage.getItem("notifications")) : [],
+    notifications: [],
     isLoggedIn: !!localStorage.getItem("token"),
+    notificationsTotalPages: 1
 }
 
 const authSlice = createSlice({
@@ -46,8 +48,15 @@ const authSlice = createSlice({
         {
             console.log("new ", action.payload);
             state.notifications.unshift(action.payload)
-            localStorage.setItem("notifications", JSON.stringify(state.notifications))
         },
+        mergeUserNotifications(state, action)
+        {
+            state.notifications = mergeToUnique(state.notifications, action.payload);
+        },
+        updateNotificationsTotalPages(state, action)
+        {
+            state.notificationsTotalPages = action.payload;
+        }
     }
 })
 

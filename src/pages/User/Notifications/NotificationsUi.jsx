@@ -1,6 +1,6 @@
 import { List } from '@mui/material'
 
-import { PopUpCard } from '../../../components/ui'
+import { LoadingCenter, PopUpCard } from '../../../components/ui'
 import { NotificationAndRequestItem } from '../../../components/common'
 import VectorAndText from '../../../components/common/VectorAndText'
 import noNotificationImg from '../../../assets/images/noNotification.png'
@@ -9,7 +9,7 @@ import classes from '../../../components/appBar/styles/IconBtn.module.css'
 import { ReactComponent as NotificationIcon } from '../../../assets/icons/notification.svg'
 import popUpCardClasses from '../../../components/ui/styles/PopUpCard.module.css'
 
-const NotificationsUi = ({ notifications, isLoadingGetNotifications, uiId }) =>
+const NotificationsUi = ({ notifications, isLoadingGetNotifications, uiId, lastElementRef }) =>
 {
     return (
         <PopUpMenuComponent
@@ -36,6 +36,7 @@ const NotificationsUi = ({ notifications, isLoadingGetNotifications, uiId }) =>
                                 < NotificationAndRequestItem
                                     itemData={notification}
                                     key={index}
+                                    lastElementRef={notifications.length === index + 1 ? lastElementRef : null}
                                 />
                             )
                         })}
@@ -55,6 +56,8 @@ const NotificationsUi = ({ notifications, isLoadingGetNotifications, uiId }) =>
                             />
                         )
                     }
+                    
+                    {isLoadingGetNotifications && <LoadingCenter />}
                 </PopUpCard>
             }
         />

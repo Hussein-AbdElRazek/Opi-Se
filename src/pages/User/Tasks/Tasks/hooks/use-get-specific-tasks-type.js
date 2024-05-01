@@ -5,7 +5,7 @@ import useScrollingPagination from '../../../../../hooks/use-scrolling-paginatio
 import { tasksActions } from '../../../../../store/tasks-slice';
 import { taskModulePath } from '../../../../../config';
 
-const useGetSpecificTasksType = (tasksType) =>
+const useGetSpecificTasksType = (taskStatus) =>
 {
     // useGetSpecificTasksType hook to handle call getSpecificTasksType API
 
@@ -17,7 +17,7 @@ const useGetSpecificTasksType = (tasksType) =>
     const dispatch = useDispatch();
 
     // handle pagination 
-    const initialTotalPages = useSelector(state => state.tasks.totalPages[tasksType]);
+    const initialTotalPages = useSelector(state => state.tasks.totalPages[taskStatus]);
 
     const {
         lastElementRef,
@@ -31,23 +31,23 @@ const useGetSpecificTasksType = (tasksType) =>
             if (message.includes("success"))
             {
                 // update store with new notes
-                dispatch(tasksActions.mergeTasks({ tasksType, tasks: data }))
+                dispatch(tasksActions.mergeTasks({ taskStatus, tasks: data }))
 
                 // update total pages in store
-                dispatch(tasksActions.updateTotalPages({ tasksType, totalPages }))
+                dispatch(tasksActions.updateTotalPages({ taskStatus, totalPages }))
 
                 // update total length in store
-                dispatch(tasksActions.updateTotalLength({ tasksType, totalLength: totalNumOfItems }))
+                dispatch(tasksActions.updateTotalLength({ taskStatus, totalLength: totalNumOfItems }))
             }
         };
 
         specificTasksType(
             {
-                url: `${taskModulePath}/getSpecificTasksType?matchId=${matchId}&page=${currentPage + 1}&limit=${20}&type=${tasksType}`,
+                url: `${taskModulePath}/getSpecificTasksType?matchId=${matchId}&page=${currentPage + 1}&limit=${20}&type=${taskStatus}`,
             },
             getResponse
         );
-    }, [currentPage, dispatch, matchId, specificTasksType, tasksType])
+    }, [currentPage, dispatch, matchId, specificTasksType, taskStatus])
 
     return {
         isLoadingSpecificTasksType,

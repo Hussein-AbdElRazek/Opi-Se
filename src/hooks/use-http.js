@@ -58,8 +58,10 @@ const useHttp = () =>
             setIsLoading(false)
 
             //  for not make error when notification failed
-            if (!error.message.includes("notification")
+            if ((!error.message.includes("notification")
                 && !error.message.includes("unexpected error !"))
+                // for not make error when No tasks yet !
+                && !error.message.includes("No tasks yet !"))
                 popMessage(error.message || "Something went wrong", { variant: "error" })
         }
         setIsLoading(false)

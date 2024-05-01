@@ -1,8 +1,100 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { mergeToUnique } from '../helpers/mergeToUnique';
 import { taskInitialValues } from '../pages/User/Tasks/Tasks/taskData/taskInputs';
+import baseSocket from '../sockets/baseConnection';
 
+
+// get connection 
+const socket = baseSocket;
+
+// sockets:
+// add
+export const emitAddTask = createAsyncThunk(
+    'tasks/emitAddTask',
+    async (payload) =>
+    {
+        socket.emit('addTask', payload, () => { });
+    }
+);
+
+export const listenToGetTask = createAsyncThunk(
+    "tasks/listenToGetTask",
+    async (_, thunkAPI) =>
+    {
+        socket.on('getTask', (data) =>
+        {
+            //  update state
+            thunkAPI.dispatch(
+                tasksActions.addTask(data.data)
+            );
+        });
+    }
+)
+
+// update
+export const emitUpdateTask = createAsyncThunk(
+    'tasks/emitUpdateTask',
+    async (payload) =>
+    {
+        socket.emit('updateTask', payload, (res) => { });
+    }
+);
+export const listenToUpdateTask = createAsyncThunk(
+    "tasks/listenToUpdateTask",
+    async (_, thunkAPI) =>
+    {
+        socket.on('getUpdatedTask', (data) =>
+        {
+            //  update state
+            thunkAPI.dispatch(
+                tasksActions.updateTask(data.data)
+            );
+        });
+    }
+)
+
+// delete
+export const emitDeleteTask = createAsyncThunk(
+    'tasks/emitDeleteTask',
+    async (payload) =>
+    {
+        socket.emit('deleteTask', payload, () => { });
+    }
+);
+export const listenToTaskDeleted = createAsyncThunk(
+    "tasks/listenToTaskDeleted",
+    async (_, thunkAPI) =>
+    {
+        socket.on('taskDeleted', (data) =>
+        {
+            //  update state
+            thunkAPI.dispatch(
+                tasksActions.removeTask(data.data)
+            );
+        });
+    }
+)
+
+// // delete all
+// export const emitDeleteAllTasks = createAsyncThunk(
+//     'tasks/emitDeleteAllTasks',
+//     async (payload) =>
+//     {
+//         socket.emit('deleteAllTasks', payload, () => {  });
+//     }
+// );
+// export const listenToAllTasksDeleted = createAsyncThunk(
+//     "tasks/listenToAllTasksDeleted",
+//     async (_, thunkAPI) =>
+//     {
+//         socket.on('allTasksDeleted', (data) =>
+//         {
+//             //  update state
+
+//         });
+//     }
+// )
 
 
 const initialTasksState = {
@@ -28,33 +120,38 @@ const initialTasksState = {
         JSON.parse(localStorage.getItem("openedTask")) : taskInitialValues
 }
 
+const isForCalender = window.location.pathname === "/tasks/calender";
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState: initialTasksState,
     reducers: {
         addTask(state, action)
         {
-            state.tasks[action.payload.tasksType].unshift(action.payload.task)
-            state.totalLength[action.payload.tasksType] += 1;
+            state.tasks[isForCalender ? "all" : action.payload.taskStatus].unshift(action.payload)
+            state.totalLength[isForCalender ? "all" : action.payload.taskStatus] += 1;
         },
         mergeTasks(state, action)
         {
-            state.tasks[action.payload.tasksType] = mergeToUnique(state.tasks[action.payload.tasksType], action.payload.tasks);
+            state.tasks[isForCalender ? "all" : action.payload.taskStatus] = mergeToUnique(state.tasks[isForCalender ? "all" : action.payload.taskStatus], action.payload.tasks);
+        },
+        setTasks(state, action)
+        {
+            state.tasks[isForCalender ? "all" : action.payload.taskStatus] = action.payload.tasks;
         },
         removeTask(state, action)
         {
-            state.tasks[action.payload.tasksType] =
-                state.tasks[action.payload.tasksType].filter(ele => ele._id !== action.payload.taskId)
+            state.tasks[isForCalender ? "all" : action.payload.taskStatus] =
+                state.tasks[isForCalender ? "all" : action.payload.taskStatus].filter(ele => ele._id !== action.payload.taskId)
 
-            state.totalLength[action.payload.tasksType] -= 1;
+            state.totalLength[isForCalender ? "all" : action.payload.taskStatus] -= 1;
         },
         updateTask(state, action)
         {
-            state.tasks[action.payload.tasksType] = state.tasks[action.payload.tasksType].map(ele =>
+            state.tasks[isForCalender ? "all" : action.payload.taskStatus] = state.tasks[isForCalender ? "all" : action.payload.taskStatus].map(ele =>
             {
-                if (ele._id === action.payload.task._id)
+                if (ele._id === action.payload._id)
                 {
-                    return { ...ele, ...action.payload.task }
+                    return { ...ele, ...action.payload }
                 }
                 else return ele;
             })
@@ -62,11 +159,11 @@ const tasksSlice = createSlice({
         updateTotalPages(state, action)
         {
             // to update TotalPages when receive it from server
-            state.totalPages[action.payload.tasksType] = action.payload.totalPages;
+            state.totalPages[isForCalender ? "all" : action.payload.taskStatus] = action.payload.totalPages;
         },
         updateTotalLength(state, action)
         {
-            state.totalLength[[action.payload.tasksType]] = action.payload.totalLength;
+            state.totalLength[isForCalender ? "all" : action.payload.taskStatus] = action.payload.totalLength;
         },
         updateOpenedTask(state, action)
         {

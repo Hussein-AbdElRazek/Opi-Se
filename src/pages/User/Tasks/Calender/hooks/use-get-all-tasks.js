@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useScrollingPagination from '../../../../../hooks/use-scrolling-pagination';
 import { tasksActions } from '../../../../../store/tasks-slice';
 import { taskModulePath } from '../../../../../config';
+import { useSearchParams } from 'react-router-dom';
 
 const useGetAllTasks = () =>
 {
@@ -15,14 +16,18 @@ const useGetAllTasks = () =>
     } = useHttp();
     const matchId = useSelector(state => state.auth.userData.matchId);
     const dispatch = useDispatch();
-    const tasksType = "all"
+    const taskStatus = "all"
     // handle pagination 
-    const initialTotalPages = useSelector(state => state.tasks.totalPages[tasksType]);
+    const initialTotalPages = useSelector(state => state.tasks.totalPages[taskStatus]);
 
     const {
         lastElementRef,
         currentPage
     } = useScrollingPagination(isLoadingGetAllTasks, initialTotalPages);
+
+    const [searchParams] = useSearchParams();
+    const year = searchParams.get("y");
+    const month = searchParams.get("m");
 
     useEffect(() =>
     {
@@ -31,23 +36,23 @@ const useGetAllTasks = () =>
             if (message.includes("success"))
             {
                 // update store with new notes
-                dispatch(tasksActions.mergeTasks({ tasksType, tasks: data }))
+                dispatch(tasksActions.setTasks({ taskStatus, tasks: data }))
 
                 // update total pages in store
-                dispatch(tasksActions.updateTotalPages({ tasksType, totalPages }))
+                dispatch(tasksActions.updateTotalPages({ taskStatus, totalPages }))
 
                 // update total length in store
-                dispatch(tasksActions.updateTotalLength({ tasksType, totalLength: totalNumOfItems }))
+                dispatch(tasksActions.updateTotalLength({ taskStatus, totalLength: totalNumOfItems }))
             }
         };
 
-        getAllTasks(
+        if (year && month) getAllTasks(
             {
-                url: `${taskModulePath}/getAllTasks?matchId=${matchId}&page=${currentPage + 1}&limit=${20}`,
+                url: `${taskModulePath}/getAllTasks?matchId=${matchId}&page=${currentPage + 1}&limit=${20}&year=${year}&month=${Number(month) + 1}`,
             },
             getResponse
         );
-    }, [currentPage, dispatch, matchId, getAllTasks])
+    }, [currentPage, dispatch, matchId, getAllTasks, year, month])
 
     return {
         isLoadingGetAllTasks,

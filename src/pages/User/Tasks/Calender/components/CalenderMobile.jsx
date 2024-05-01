@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import classes from './styles/CalenderMobile.module.css'
 import { ReactComponent as LeftTriangleIcon } from '../../../../../assets/icons/leftTriangle.svg';
 import TasksMobileList from './TasksMobileList';
+import useDate from '../hooks/use-date';
 
 const CustomDay = ({ day, today, outsideCurrentMonth }) =>
 {
@@ -50,6 +51,8 @@ const CustomDay = ({ day, today, outsideCurrentMonth }) =>
 
 const CalenderMobile = ({ isLoadingGetAllTasks }) =>
 {
+    const { selectedDate, handleDateSelect } = useDate();
+
     return (
         <div>
             {/* calender section */}
@@ -62,8 +65,9 @@ const CalenderMobile = ({ isLoadingGetAllTasks }) =>
                 >
                     {`Today ${moment().format("DD/M/YYYY")}`}
                 </div>
-
                 <DateCalendar
+                    value={moment(selectedDate)}
+                    onMonthChange={(newValue) => handleDateSelect(newValue, "mob")}
                     className={classes.calender}
                     slots={{
                         leftArrowIcon: LeftTriangleIcon,
@@ -91,7 +95,6 @@ const CalenderMobile = ({ isLoadingGetAllTasks }) =>
                             height: "300px !important"
                         },
                     }}
-                    disabled
                 />
             </div>
 
