@@ -6,8 +6,10 @@ import TaskOptions from './TaskOptions';
 const Task = (props) =>
 {
     const { lastElementRef, ...rest } = props;
-    const {  title, content, createdAt, taskStatus } = rest;
-    const formattedDate = moment(createdAt).format('MMM DD, YYYY');
+    const { title, content, taskStatus, startDate, endDate } = rest;
+    const formattedDate = moment(startDate).format('MMM DD, YYYY');
+    const startTime = moment(startDate).format('h:mm A');
+    const endTime = moment(endDate).format('h:mm A');
 
     return (
         <div
@@ -25,18 +27,24 @@ const Task = (props) =>
                     {content}
                 </p>
             }
-
-            {/* date */}
-            <span
-                className={`
+            <div className='space-between center-y'>
+                {/* date */}
+                <span
+                    className={`
                                 ${classes.date} 
                                 ${taskStatus === "inProgress" ?
-                        classes.inProgress : taskStatus === "done" ?
-                            classes.done : ""
-                    }`}
-            >
-                {formattedDate}
-            </span>
+                            classes.inProgress : taskStatus === "done" ?
+                                classes.done : ""
+                        }`}
+                >
+                    {formattedDate}
+                </span>
+
+                {/* start time - end time */}
+                <div className={classes.time}>
+                    {`${startTime} - ${endTime}`}
+                </div>
+            </div>
 
             {/*Options btn  */}
             <TaskOptions

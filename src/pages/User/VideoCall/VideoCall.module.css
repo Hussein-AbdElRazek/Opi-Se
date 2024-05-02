@@ -125,6 +125,7 @@
 .callContainer {
     flex-grow: 1;
     height: calc(100vh - 120px);
+    height: calc(100svh - 120px);
     padding: 40px 30px 80px 30px;
     position: relative;
 }

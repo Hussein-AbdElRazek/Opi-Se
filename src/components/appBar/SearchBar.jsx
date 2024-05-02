@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { SearchBarUi } from './SearchBarUi'
 import useSearchForPartner from '../../hooks/commonApis/use-search-for-partner'
 import { uiActions } from '../../store/ui-slice';
+import useScreenWidth from '../../hooks/use-screen-width';
 
-export const SearchBar = ({ fullWidth }) =>
+export const SearchBar = () =>
 {
     const {
         handleSearchForPartner,
@@ -17,7 +18,9 @@ export const SearchBar = ({ fullWidth }) =>
     {
         dispatch(uiActions.closePopMenu(smSearchId))
     }
-    
+    const screenWidth = useScreenWidth();
+    const fullWidth = screenWidth <= 600;
+
     return (
         <SearchBarUi
             handleSearchForPartner={handleSearchForPartner}

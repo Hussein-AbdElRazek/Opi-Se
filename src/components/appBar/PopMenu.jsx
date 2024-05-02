@@ -38,7 +38,7 @@ export const PopMenu = () =>
                     <ListItemIcon className={classes.icon}>
                         <ProfileIcon id={profileMenuId} onClose={closeMenu} />
                     </ListItemIcon>
-                    {userName}
+                    <div className={classes.userName}>{userName}</div>
                 </>,
         },
         // home 

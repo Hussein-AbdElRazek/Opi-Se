@@ -19,6 +19,7 @@
     overflow: auto;
     height: 340px;
     max-height: calc(100vh - 280px);
+    max-height: calc(100svh - 280px);
     padding-top: 20px;
     position: relative;
 }
@@ -26,6 +27,7 @@
 .mediaPage {
     height: 500px;
     max-height: calc(100vh - 180px);
+    max-height: calc(100svh - 180px);
 }
 
 .inputBarContainer {
@@ -50,6 +52,11 @@
 
 @media (max-width:425px) {
     .container {
-        max-width: calc(100vw - 40px);
+        max-width: calc(100vw - 20px);
+
+    }
+    .content {
+        max-height: calc(100vh - 240px);
+        max-height: calc(100svh - 240px);
     }
 }

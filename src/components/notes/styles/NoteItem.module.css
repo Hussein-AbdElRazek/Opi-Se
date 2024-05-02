@@ -1,9 +1,35 @@
 .container {
     border-radius: var(--border-radius-form);
-    background-color: #FFF6C8;
+    background-color: var(--trash-note);
     min-height: 250px;
     padding: 20px;
 }
+
+.--note1 svg {
+    fill: var(--note1) !important;
+}
+
+.--note2 svg {
+    fill: var(--note2) !important;
+}
+
+.--note3 svg {
+    fill: var(--note3) !important;
+}
+
+.--note4 svg {
+    fill: var(--note4) !important;
+}
+
+.--note5 svg {
+    fill: var(--note5) !important;
+}
+
+/* --note1: #FFF6C8;
+--note2: #C8F2FF;
+--note3: #FFC8C8;
+--note4: #E0FFC8;
+--note5: #FFE6C8; */
 
 .positionRelative {
     position: relative;
@@ -50,7 +76,7 @@
 }
 
 .content textarea {
-    background-color: transparent ;
+    background-color: transparent;
     border: none;
     padding: 0;
 }
@@ -68,14 +94,20 @@
 }
 
 .mb {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
 }
 
 .containedIconBtn {
     background-color: var(--black-80);
     border-radius: var(--border-radius-inputs);
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
+}
+
+.containedIconBtn svg {
+    width: 60%;
+    height: 60%;
+    fill: var(--trash-note);
 }
 
 .icon {
@@ -85,4 +117,11 @@
 .optionsIcon svg {
     width: 15px;
     height: 15px;
+}
+
+@media (max-width:600px) {
+    .grid {
+        padding: 0px;
+        margin-bottom: 20px;
+    }
 }

@@ -29,8 +29,12 @@
     padding: 5px;
     border: 1px solid var(--todo);
     border-radius: var(--border-radius-5);
-    font-size: var(--font-size-35);
+    font-size: var(--font-size-40);
     background-color: var(--primary);
+}
+
+.time {
+    font-size: var(--font-size-35);
 }
 
 .inProgress {

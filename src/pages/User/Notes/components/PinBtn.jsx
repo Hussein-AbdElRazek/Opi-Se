@@ -1,6 +1,7 @@
 import { IconButton } from '@mui/material'
 
 import { ReactComponent as PinIcon } from '../../../../assets/icons/pin.svg'
+import { ReactComponent as PinnedIcon } from '../../../../assets/icons/pinned.svg'
 import classes from '../styles/PinBtn.module.css'
 
 const PinBtn = ({ _id, isPinned, pinNote }) =>
@@ -11,7 +12,7 @@ const PinBtn = ({ _id, isPinned, pinNote }) =>
             onClick={pinNote(_id, isPinned)}
             title={isPinned ? "UnPin Note" : "Pin Note"}
         >
-            <PinIcon fill={isPinned ? "var(--secondary)" : "var(--text-header)"} />
+            {isPinned ? <PinnedIcon /> : <PinIcon />}
         </IconButton>
     )
 }

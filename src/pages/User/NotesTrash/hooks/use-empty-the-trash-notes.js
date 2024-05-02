@@ -26,10 +26,7 @@ const useEmptyTheTrashNotes = () =>
                 dispatch(notesActions.resetNotes());
 
                 // close modal of confirmation
-                dispatch(uiActions.closeModal())
-
-                // close pop menu of note
-                dispatch(uiActions.closePopMenu())
+                dispatch(uiActions.closeModal("allTrashNotesModal"))
             }
         };
 

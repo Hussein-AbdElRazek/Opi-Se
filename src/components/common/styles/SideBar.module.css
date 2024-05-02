@@ -24,6 +24,7 @@
     .tabs a {
         padding-left: 0px;
         margin-left: -2px;
+        max-height: 40px;
     }
 }
 

@@ -19,6 +19,7 @@
         'Droid Sans',
         'Helvetica Neue',
         sans-serif;
+        text-overflow: ellipsis;
 }
 
 .icon {

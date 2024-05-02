@@ -6,6 +6,7 @@ import useGetSpecificTasksType from './hooks/use-get-specific-tasks-type'
 import TasksList from './components/TasksList'
 import classes from './styles/Tasks.module.css'
 import TasksTabs, { tasksTabsMap } from './components/TasksTabs'
+import useScreenWidth from '../../../../hooks/use-screen-width'
 
 const RenderTodoTasks = () =>
 {
@@ -80,12 +81,16 @@ const Tasks = () =>
 
     const RenderOpenedTypeForSmallScreens = tasksTypeMap[tasksTabsMap[window.location.pathname]]
 
+    // for render component based on size of window
+    const screenWidth = useScreenWidth();
+    const isSmall = screenWidth <= 768;
+
     return (
         <div
             className={classes.container}
         >
             {/* for bigger than 768px */}
-            <Grid2
+            {!isSmall && <Grid2
                 container
                 columnSpacing={2}
                 className={classes.bigScreens}
@@ -93,15 +98,15 @@ const Tasks = () =>
                 <RenderTodoTasks />
                 <RenderInProgressTasks />
                 <RenderDoneTasks />
-            </Grid2>
+            </Grid2>}
 
             {/* for small than 768px */}
-            <div
+            {isSmall && <div
                 className={classes.smallScreens}
             >
                 <TasksTabs />
                 {RenderOpenedTypeForSmallScreens}
-            </div>
+            </div>}
 
             <Outlet />
         </div>

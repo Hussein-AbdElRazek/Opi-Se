@@ -39,6 +39,7 @@ const Notes = () =>
 
     return (
         <>
+            <NotesMenu />
             <NotesList
                 notes={notes}
                 lastElementRef={lastElementRef}
@@ -63,7 +64,6 @@ const Notes = () =>
                 />
             )}
 
-            <NotesMenu />
             
             <Outlet />
         </>

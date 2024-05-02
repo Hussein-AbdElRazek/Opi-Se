@@ -1,16 +1,17 @@
 .container {
     position: fixed;
-    right: 40px;
+    right: 60px;
     top: 90px;
-    height: calc(100vh - 135px);
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    width: 110px;
 }
 
+.container h1 {
+    display: none;
+}
 
 .trashIcon svg {
     width: 35px;
@@ -20,12 +21,24 @@
 
 @media (max-width:900px) {
     .container {
-        right: 30px;
+        right: 20px;
     }
 }
 
 @media (max-width:600px) {
     .container {
         right: 10px;
+        left: 10px;
+        top: 65px;
+        flex-direction: row;
+        display: flex;
+        margin-bottom: 8px;
+        height: 35px;
+        position: static;
+    }
+
+    .container h1 {
+        width: auto !important;
+        display: inline;
     }
 }

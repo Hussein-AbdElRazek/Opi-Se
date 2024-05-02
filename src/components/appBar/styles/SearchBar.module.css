@@ -27,8 +27,7 @@
 }
 
 .full {
-    max-width: calc(100% - 22px) !important;
-    margin: 10px 0;
+    width: calc(100vw - 120px) !important;
 }
 
 .popperContainer {

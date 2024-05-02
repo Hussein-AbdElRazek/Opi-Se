@@ -44,18 +44,20 @@ const TasksList = (props) =>
                     <h5>
                         {getTitle()}
                     </h5>
+
                     <span
                         className={`${classes.tasksLength} center-x center-y`}
                     >
                         {totalTasksLength}
                     </span>
-                    <ButtonBase
+
+                    {type === "toDo" && <ButtonBase
                         className={classes.addIconBtn}
                         LinkComponent={NavLink}
                         to={`new?type=${type}`}
                     >
                         <AddTaskIcon />
-                    </ButtonBase>
+                    </ButtonBase>}
                 </div>
 
                 {/* Tasks list */}
@@ -78,13 +80,13 @@ const TasksList = (props) =>
                 )}
 
                 {/* Add Task btn */}
-                <Btn
+                {type === "toDo" && <Btn
                     className={classes.addBtn}
                     startIcon={<AddTaskIcon />}
                     to={`new?type=${type}`}
                 >
                     Add Task
-                </Btn>
+                </Btn>}
             </div>
         </Grid2>
     )

@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { IconButton } from '@mui/material'
 
 import { HeaderText } from '../../../../components/ui'
-import { ReactComponent as OptionsIcon } from '../../../../assets/icons/options.svg'
+import { ReactComponent as TrashIcon } from '../../../../assets/icons/trash.svg'
 import classes from '../styles/TrashBar.module.css'
-import { ConfirmDeleteModal, PopUpMenu } from '../../../../components/common/'
+import { ConfirmDeleteModal } from '../../../../components/common/'
 import useEmptyTheTrashNotes from '../hooks/use-empty-the-trash-notes'
 import { uiActions } from '../../../../store/ui-slice'
+
 const TrashBar = () =>
 {
     // handle empty the trash
@@ -14,25 +16,18 @@ const TrashBar = () =>
         handleEmptyTheTrashNotes
     } = useEmptyTheTrashNotes();
     const dispatch = useDispatch();
-    const uiId = "allTrashNotesOptions";
-    const isConfirmEmptyTheTrashOpen = useSelector(state => state.ui.isModalOpened)[uiId];
+    const trashNotesModalId = "allTrashNotesModal";
+    const isConfirmEmptyTheTrashOpen = useSelector(state => state.ui.isModalOpened)[trashNotesModalId];
 
     const handleOpenConfirmEmptyTheTrash = () =>
     {
-        dispatch(uiActions.openModal(uiId))
+        dispatch(uiActions.openModal(trashNotesModalId))
     }
 
     const handleCloseConfirmEmptyTheTrash = () =>
     {
-        dispatch(uiActions.closeModal(uiId))
+        dispatch(uiActions.closeModal(trashNotesModalId))
     }
-
-    const menuItems = [
-        {
-            onClick: handleOpenConfirmEmptyTheTrash,
-            children: "Delete all",
-        }
-    ];
 
     return (
         <div
@@ -42,16 +37,13 @@ const TrashBar = () =>
                 Trash
             </HeaderText>
 
-            {/* Options pop menu */}
-            <PopUpMenu
-                id={uiId}
-                openBtnType="base"
-                openBtnChild={
-                    <OptionsIcon fill='var(--secondary)' />
-                }
-                openBtnClassName={classes.optionBtn}
-                menuItems={menuItems}
-            />
+            <IconButton
+                onClick={handleOpenConfirmEmptyTheTrash}
+                className={classes.trashBtn}
+                title='Delete all'
+            >
+                <TrashIcon />
+            </IconButton>
 
             {/* Confirm empty trash modal  */}
             <ConfirmDeleteModal

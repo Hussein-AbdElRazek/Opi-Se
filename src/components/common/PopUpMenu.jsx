@@ -87,7 +87,7 @@ export const PopUpMenu = (props) =>
                 role={undefined}
                 placement={placement ? placement : "bottom-start"}
                 transition
-                disablePortal
+                // disablePortal
                 sx={{
                     maxWidth: children ? "fit-content" : "100%",
                 }}

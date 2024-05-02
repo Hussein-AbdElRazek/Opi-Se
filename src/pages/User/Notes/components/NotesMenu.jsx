@@ -6,6 +6,7 @@ import { uiActions } from '../../../../store/ui-slice'
 import { useDispatch } from 'react-redux'
 import trashBarClasses from '../../NotesTrash/styles/TrashBar.module.css'
 import classes from '../styles/NotesMenu.module.css'
+import { HeaderText } from '../../../../components/ui'
 const NotesMenu = () =>
 {
     const dispatch = useDispatch();
@@ -32,6 +33,10 @@ const NotesMenu = () =>
         <div
             className={classes.container}
         >
+            <HeaderText >
+                Notes
+            </HeaderText>
+            
             <PopUpMenu
                 id={uiId}
                 openBtnType="base"
@@ -40,10 +45,8 @@ const NotesMenu = () =>
                 }
                 openBtnClassName={trashBarClasses.optionBtn}
                 menuItems={menuItems}
-                placement="bottom-end"
-
             />
-        </div>
+        </div >
     )
 }
 

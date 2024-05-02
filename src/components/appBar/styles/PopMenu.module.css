@@ -18,7 +18,7 @@
 .container a,
 .container li {
     width: 100%;
-    padding: 12px 0 12px 30px;
+    padding: 12px 30px;
 }
 
 .container a,
@@ -64,6 +64,12 @@
     margin-left: -8px
 }
 
+.userName{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: calc(100% - 100px);
+}
+
 @media (min-width:901px) {
 
     .container,
@@ -76,7 +82,7 @@
 
     .container a,
     .container li {
-        padding: 12px 0 12px 10px;
+        padding: 12px 10px;
     }
 
     .icon {

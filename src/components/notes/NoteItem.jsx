@@ -15,6 +15,7 @@ import TrashOptions from '../../pages/User/NotesTrash/components/TrashOptions';
 import { NavLink } from 'react-router-dom';
 import { notesActions } from '../../store/notes-slice';
 import { useDispatch } from 'react-redux';
+
 export const NoteItem = (props) =>
 {
     const {
@@ -50,6 +51,7 @@ export const NoteItem = (props) =>
             sm={6}
             xs={12}
             ref={lastElementRef}
+            className={classes.grid}
         >
             <div
                 className={classes.container}
@@ -95,17 +97,18 @@ export const NoteItem = (props) =>
                                         type="text"
                                         name="noteTitle"
                                         placeholder="Note Title"
+                                        disabled={true}
                                     />
                                 </div>
                                 {/* Edit Btn */}
                                 {(!isTrash) && (
                                     <ButtonBase
-                                        className={classes.containedIconBtn}
+                                        className={`${classes.containedIconBtn} ${noteColor ? classes[noteColor] : ""}`}
                                         LinkComponent={NavLink}
                                         to="edit"
                                         onClick={onEdit}
                                     >
-                                        <EditIcon fill={noteColor ? `var(${noteColor})` : "var(--trash-note)"} />
+                                        <EditIcon  />
                                     </ButtonBase>
                                 )}
 
