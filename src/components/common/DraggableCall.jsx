@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 import classes from './styles/DraggableCall.module.css'
 import { HeaderText, ProfilePic } from '../ui';
 import { Video } from './Video';
+import { isMobileDevice } from '../../helpers/isMobileDevice';
 export const DraggableCall = (props) =>
 {
     const {
@@ -25,54 +26,103 @@ export const DraggableCall = (props) =>
         x: xPos,
         y: 0,
     };
+
     return (
-        <Draggable bounds={"html"} defaultPosition={defaultPosition}  >
-            <div
-                className={classes.container}
-            >
-                <div className={classes.content}>
-
-                    <div
-                        className={classes.info}
-                    >
+        <>
+            {isMobileDevice ? (
+                <div
+                    className={`${classes.container} ${classes.containerForMobile}`}
+                >
+                    <div className={classes.content}>
                         <div
-                            className={`${classes.profilePic} ${classes.marginTop}`}
+                            className={classes.info}
                         >
-                            <ProfilePic
-                                profileImage={call?.profileImage}
-                                userName={call?.userName}
-                            />
+                            <div
+                                className={`${classes.profilePic} ${classes.marginTop}`}
+                            >
+                                <ProfilePic
+                                    profileImage={call?.profileImage}
+                                    userName={call?.userName}
+                                />
+                            </div>
+                            {call?.name && (
+                                <HeaderText>
+                                    {call?.name}
+                                </HeaderText>
+                            )}
+                            {secondaryText && (
+                                <span>
+                                    {secondaryText}
+                                </span>
+                            )}
                         </div>
-                        {call?.name && (
-                            <HeaderText>
-                                {call?.name}
-                            </HeaderText>
+
+                        {type === "video" && (
+                            <div className={`${classes.marginTop} ${classes.videoContainer}`}>
+                                <Video
+                                    videoRef={video}
+                                    muted={true}
+                                    isIncoming={true}
+                                />
+                            </div>
                         )}
-                        {secondaryText && (
-                            <span>
-                                {secondaryText}
-                            </span>
-                        )}
+
+                        <div
+                            className={`${classes.action}  ${classes.marginTop} ${(type === "voice" && !isReceivingCall) ? classes.voiceAction : ""}`}
+                        >
+                            {actions}
+                        </div>
+
                     </div>
-
-                    {type === "video" && (
-                        <div className={`${classes.marginTop} ${classes.videoContainer}`}>
-                            <Video
-                                videoRef={video}
-                                muted={true}
-                                isIncoming={true}
-                            />
-                        </div>
-                    )}
-
+                </div>) :
+                (<Draggable bounds={"html"} defaultPosition={defaultPosition}  >
                     <div
-                        className={`${classes.action}  ${classes.marginTop} ${(type === "voice" && !isReceivingCall) ? classes.voiceAction : ""}`}
+                        className={classes.container}
                     >
-                        {actions}
-                    </div>
+                        <div className={classes.content}>
+                            <div
+                                className={classes.info}
+                            >
+                                <div
+                                    className={`${classes.profilePic} ${classes.marginTop}`}
+                                >
+                                    <ProfilePic
+                                        profileImage={call?.profileImage}
+                                        userName={call?.userName}
+                                    />
+                                </div>
+                                {call?.name && (
+                                    <HeaderText>
+                                        {call?.name}
+                                    </HeaderText>
+                                )}
+                                {secondaryText && (
+                                    <span>
+                                        {secondaryText}
+                                    </span>
+                                )}
+                            </div>
 
-                </div>
-            </div>
-        </Draggable>
+                            {type === "video" && (
+                                <div className={`${classes.marginTop} ${classes.videoContainer}`}>
+                                    <Video
+                                        videoRef={video}
+                                        muted={true}
+                                        isIncoming={true}
+                                    />
+                                </div>
+                            )}
+
+                            <div
+                                className={`${classes.action}  ${classes.marginTop} ${(type === "voice" && !isReceivingCall) ? classes.voiceAction : ""}`}
+                            >
+                                {actions}
+                            </div>
+
+                        </div>
+                    </div>
+                </Draggable>)
+            }
+        </>
     )
 }

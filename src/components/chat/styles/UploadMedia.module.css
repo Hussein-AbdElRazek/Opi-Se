@@ -3,11 +3,12 @@
     right: 0;
     left: 0;
     bottom: 0;
+    top: 0;
     width: calc(100% - 20px);
-    height: calc(100% - 80px);
+    height: calc(100% - 20px);
     background-color: var(--chat-receive);
     padding: 10px;
-    z-index: 9;
+    z-index: var(--layer-100);
 }
 
 .closeIcon {

@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { mergeToUnique } from '../helpers/mergeToUnique';
 import baseSocket from '../sockets/baseConnection';
-// import { scrollToBottom } from '../components/chat/helpers/scrollToBottom';
 
 // get connection 
 const socket = baseSocket;
@@ -17,11 +16,9 @@ export const sendMessage = createAsyncThunk(
                 messagesId: payload.messagesId, newMessage: payload.newMessage
             })
         );
-        console.log("payload.message", payload.message)
+
         socket.emit('sendMessage', payload.message, (res) =>
         {
-            console.log("res", res)
-
             // update id from server
             if (res?.success)
             {
@@ -29,6 +26,11 @@ export const sendMessage = createAsyncThunk(
                     {
                         _id: res?.data?._id,
                         oldId: payload.newMessage?._id,
+                        messagesId: payload.messagesId
+                    }))
+                thunkAPI.dispatch(chatActions.updateMessage(
+                    {
+                        updatedMessage: res?.data ,
                         messagesId: payload.messagesId
                     }))
             }
@@ -123,7 +125,7 @@ export const listenToStartChatSession = createAsyncThunk(
     async (_, thunkAPI) =>
     {
         socket.on('newChatSessionRequest', (data) =>
-        {
+        {console.log("data",data)
             if (data?.chatSessionRequest)
             {
                 thunkAPI.dispatch(chatActions.updateSession({
@@ -226,16 +228,19 @@ export const listenToReceiveMedia = createAsyncThunk(
     "chat/listenToReceiveMedia",
     async (payload, thunkAPI) =>
     {
-        socket.on('showMediainChat', ({ media }) =>
+        socket.on('showMediainChat', (data) =>
         {
+            console.log("media", data)
+            // TODO handle it after updated from zoz with id
+            // TODO make scroll bottom state here to can scroll from here 
             //  update state
             const imagesList = [];
-            media.forEach((img) =>
+            data.media.forEach((img) =>
             {
                 let temp = {
                     mediaUrl: img,
                     sentAt: new Date().toUTCString(),
-                    messageType: "img",
+                    messageType: "media",
                     _id: img,
                     messageSender: payload
                 };
@@ -257,21 +262,7 @@ export const selectFromPoll = createAsyncThunk(
     'chat/selectFromPoll',
     async (payload) =>
     {
-        console.log("payload", payload)
-        const matchId = JSON.parse(localStorage.getItem("userData"))?.matchId;
-        const token = (localStorage.getItem("token"));
-        // update query
-        const updatedQuery = {
-            messageId: payload.messageId,
-            optionNumber: Number(payload.optionNumber),
-            matchId: matchId,
-            token: token,
-        }
-        socket.io.opts.query = updatedQuery;
-        socket.disconnect()
-        socket.connect();
-
-        socket.emit('selectFromPoll', {}, (res) => { console.log("selectFromPoll", res) });
+        socket.emit('selectFromPoll', payload, (res) => {  });
     }
 );
 export const listenToPollOptionSelected = createAsyncThunk(
@@ -281,10 +272,14 @@ export const listenToPollOptionSelected = createAsyncThunk(
         socket.on('pollOptionSelected', (res) =>
         {
             //  update state
+            // TODO handle it 
             console.log("pollOptionSelected", res)
+            // const updatedPollAnswers = selectOption(optionSelectors, pollAnswers, optionNumber, optionVotes, myId);
             // thunkAPI.dispatch(
-            //     chatActions.updateMessages({
-
+            //     chatActions.updateMessage({
+            //         messagesId: payload.messagesId,
+            //         _id: res.messageId,
+            //         pollAnswers: res.messageId,
             //     }))
         });
     }

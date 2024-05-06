@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import useHttp from '../../../hooks/use-http';
 import MatchRequestsUi from './MatchRequestsUi'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { matchModulePath } from '../../../config';
+import { uiActions } from '../../../store/ui-slice';
 
 const MatchRequests = () =>
 {
+    const dispatch = useDispatch();
     const {
         isLoading: isLoadingGetRequests,
         sendRequest: getRequests
@@ -32,11 +34,18 @@ const MatchRequests = () =>
         );
     }, [getRequests, isRequestsOpen])
 
+    const closeRequestsMenu = () =>
+    {
+        if (isRequestsOpen)
+        { dispatch(uiActions.closePopMenu("requests")) }
+    }
+
     return (
         <MatchRequestsUi
             requests={requests}
             isLoadingGetRequests={isLoadingGetRequests}
             uiId={uiId}
+            closeRequestsMenu={closeRequestsMenu}
         />
     )
 }

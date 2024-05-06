@@ -185,3 +185,10 @@ a {
 .MuiStepLabel-label {
     margin-top: 4px !important;
 }
+
+
+@media (max-width:500px) {
+    .MuiPopper-root {
+        max-width: 100vw !important;
+    }
+}

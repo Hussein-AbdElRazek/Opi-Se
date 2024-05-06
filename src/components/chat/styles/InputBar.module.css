@@ -5,20 +5,14 @@
     display: flex;
     align-items: center;
     background-color: var(--primary);
-
-    height: calc(100% - 90px);
-    /* position: absolute; */
-    bottom: 0;
 }
 
 .textInput {
-    /* display: inline-block; */
     background-color: var(--chat-input);
     border-radius: var(--border-radius-150);
     padding: 6px 15px;
     font-size: var(--font-size-300);
     flex: 1;
-
 }
 
 .marginRight {
@@ -32,7 +26,6 @@
 .popContainer ul {
     width: 240px;
     max-width: 100%;
-    /* background-color: yellowgreen; */
 }
 
 .pollIcon svg {

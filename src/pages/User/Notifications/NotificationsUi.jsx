@@ -22,9 +22,9 @@ const NotificationsUi = ({ notifications, isLoadingGetNotifications, uiId, lastE
                 />
             }
             containerClassName={popUpCardClasses.parent}
-            placement="top"
+            placement="bottom"
             children={
-                <PopUpCard PopUpCard
+                <PopUpCard 
                     title={'Notifications'}
                 >
                     <List

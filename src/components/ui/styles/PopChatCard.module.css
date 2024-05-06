@@ -8,32 +8,38 @@
     border-radius: var(--border-radius-150);
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
     overflow: hidden;
+    max-height: calc(100vh - 100px);
+    height: fit-content;
 }
 
+
 /* for container when have input bar */
-.marginBottom {
-    margin-bottom: 77px;
+.paddingBottom {
+    padding-bottom: 77px;
 }
 
 .content {
     overflow: auto;
-    height: 340px;
-    max-height: calc(100vh - 280px);
-    max-height: calc(100svh - 280px);
+    height: 320px;
+    /* max-height: calc(100% - 280px); */
     padding-top: 20px;
     position: relative;
 }
 
+.chatContainer {
+    position: relative;
+}
+
 .mediaPage {
-    height: 500px;
-    max-height: calc(100vh - 180px);
-    max-height: calc(100svh - 180px);
+    height: 400px;
+    max-height: calc(100% - 10px);
 }
 
 .inputBarContainer {
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: 0px;
+    z-index: var(--layer-100);
 }
 
 @media (max-width:900px) {
@@ -53,8 +59,8 @@
 @media (max-width:425px) {
     .container {
         max-width: calc(100vw - 20px);
-
     }
+
     .content {
         max-height: calc(100vh - 240px);
         max-height: calc(100svh - 240px);

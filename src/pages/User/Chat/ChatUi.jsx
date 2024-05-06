@@ -28,6 +28,9 @@ const ChatUi = (props) =>
                     submitPollMessage={submitPollMessage}
                 />
             }
+            chatId={openedUserData.id}
+            handleUploadMedia={handleUploadMedia}
+            isLoadingUploadMedia={isLoadingUploadMedia}
         >
             {isLoadingGetChat && <LoadingCenter />}
             {!!messages.length && (

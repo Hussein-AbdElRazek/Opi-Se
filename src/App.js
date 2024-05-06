@@ -14,6 +14,7 @@ import useGeneralSocket from './hooks/use-general-sockets';
 import SessionConfirmation from './pages/User/SessionConfirmation/SessionConfirmation';
 import VoiceCall from './pages/User/VoiceCall/VoiceCall';
 import moment from 'moment';
+import { isMobileDevice } from './helpers/isMobileDevice';
 
 function App()
 {
@@ -43,6 +44,18 @@ function App()
   //  for date and time picker make language
   //  change for date in another pages
   moment.updateLocale('en', {});
+
+  // for handle overflow for mobile when call
+  useEffect(() =>
+  {
+    if (call && isMobileDevice)
+    {
+      document.body.style.overflow = "hidden";
+    } else
+    {
+      document.body.style.overflow = "auto";
+    }
+  }, [call])
 
   return (
     <div>

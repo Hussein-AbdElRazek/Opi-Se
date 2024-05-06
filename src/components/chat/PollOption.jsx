@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import classes from './styles/PollOption.module.css'
 import { getTypingDirection } from '../../helpers/getTypingDirection';
 import { chatActions, selectFromPoll } from '../../store/chat-slice';
+import { selectOption } from '../../helpers/selectOption';
 
 export const PollOption = (props) =>
 {
     const {
         messageId,
         pollAnswers,
-        _id,
         optionVotes,
         optionSelectors,
         optionNumber,
@@ -27,22 +27,8 @@ export const PollOption = (props) =>
 
     const updateMessageOnSelect = () =>
     {
-        const isChosen = optionSelectors?.find(selector => selector === myId);
-        const tempPollAnswers = [...pollAnswers];
-        let updatedPollAnswers = [];
-
-        tempPollAnswers.forEach((pollAnswer) =>
-        {
-            let updatedPollAnswer = { ...pollAnswer }
-            if (pollAnswer._id === _id)
-            {
-                updatedPollAnswer.optionVotes = isChosen ? optionVotes - 1 : optionVotes + 1;
-                updatedPollAnswer.optionSelectors = isChosen ?
-                    optionSelectors.filter(selector => selector !== myId) :
-                    [...optionSelectors, myId]
-            }
-            updatedPollAnswers.push(updatedPollAnswer);
-        })
+        
+        let updatedPollAnswers = selectOption(optionSelectors, pollAnswers, optionNumber, optionVotes, myId);
 
         dispatch(chatActions.updateMessage({
             messagesId: userId,

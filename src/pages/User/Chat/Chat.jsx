@@ -54,7 +54,6 @@ const Chat = () =>
     {
         if (values.message.trim() === "") return
         const sentMessage = {
-            messageSender: userId,
             messageType: "text",
             messageContent: values.message.trim(),
         }
@@ -63,6 +62,7 @@ const Chat = () =>
             isReply: false,
             sentAt: new Date().toUTCString(),
             isSeen: false,
+            messageSender: userId,
             ...sentMessage
         }
         const payload = {
@@ -144,7 +144,7 @@ const Chat = () =>
             {
                 // send images in socket
                 dispatch(uploadChatMedia({ media: data }));
-
+                console.log("data",data)
                 // update store
                 const imagesList = [];
                 data.forEach((img) =>
@@ -152,7 +152,7 @@ const Chat = () =>
                     let temp = {
                         mediaUrl: img,
                         sentAt: new Date().toUTCString(),
-                        messageType: "img",
+                        messageType: "media",
                         _id: img,
                         messageSender: userId
                     };
@@ -161,6 +161,7 @@ const Chat = () =>
                 dispatch(chatActions.updateMessages({ id: openedUserData.id, messages: imagesList }))
 
                 imgCtx.deleteAllImages();
+                setIsScrollToBottom(true);
             }
         };
 
@@ -186,6 +187,7 @@ const Chat = () =>
     {
         if (newMessageMark) scrollToBottom();
     }, [newMessageMark])
+    useEffect(() => { scrollToBottom(); },[])
     return (
         <ChatUi
             messages={messages}

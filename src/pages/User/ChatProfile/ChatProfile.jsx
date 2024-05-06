@@ -7,6 +7,7 @@ import useHttp from '../../../hooks/use-http';
 import useScrollingPagination from '../../../hooks/use-scrolling-pagination';
 import { chatActions } from '../../../store/chat-slice';
 import { chatModulePath } from '../../../config';
+import useCall from '../../../hooks/use-call';
 
 const ChatProfile = () =>
 {
@@ -53,12 +54,17 @@ const ChatProfile = () =>
         );
     }, [currentPage, dispatch, getChatMedia, matchId])
 
+    // handle call hook
+    const { handleVideoCall, handleVoiceCall } = useCall();
+
     return (
         <ChatProfileUi
             profileData={profileData}
             imageList={imageList}
             isLoadingGetChatMedia={isLoadingGetChatMedia}
             lastElementRef={lastElementRef}
+            handleVideoCall={handleVideoCall}
+            handleVoiceCall={handleVoiceCall}
         />
     )
 }

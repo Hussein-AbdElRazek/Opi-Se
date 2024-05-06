@@ -1,15 +1,15 @@
-import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { ButtonBase } from '@mui/material'
+
 import { PopChatCard } from '../../../components/ui'
 import ChatProfileHeader from './ChatProfileHeader'
-// import { ButtonBase } from '@mui/material'
-
-// import { ReactComponent as CallIcon } from '../../../assets/icons/call.svg'
-// import { ReactComponent as VideoIcon } from '../../../assets/icons/video.svg'
+import { ReactComponent as CallIcon } from '../../../assets/icons/call.svg'
+import { ReactComponent as VideoIcon } from '../../../assets/icons/video.svg'
 import { ProfilePic } from '../../../components/ui'
 import classes from './styles/ChatProfileHeader.module.css'
 import ChatProfileTabs from './ChatProfileTabs'
 import MediaList from './MediaList'
-import { NavLink } from 'react-router-dom'
+
 const ChatProfileUi = (props) =>
 {
     const {
@@ -17,6 +17,8 @@ const ChatProfileUi = (props) =>
         imageList,
         isLoadingGetChatMedia,
         lastElementRef,
+        handleVideoCall,
+        handleVoiceCall,
     } = props;
 
     return (
@@ -46,19 +48,23 @@ const ChatProfileUi = (props) =>
                 </h6>
 
                 {/* stroke to change color of border of icon */}
-                {/* <ButtonBase
+                <ButtonBase
                     className={classes.iconBtn}
+                    onClick={handleVideoCall}
                 >
                     <VideoIcon stroke='var(--primary)' />
-                </ButtonBase> */}
+                </ButtonBase>
+
                 {/* stroke to change color of border of icon */}
-                {/* <ButtonBase
+                <ButtonBase
                     className={classes.iconBtn}
+                    onClick={handleVoiceCall}
                 >
                     
                     <CallIcon stroke='var(--primary)' />
-                </ButtonBase> */}
+                </ButtonBase>
             </div>
+
             <ChatProfileTabs />
             <MediaList
                 imageList={imageList}

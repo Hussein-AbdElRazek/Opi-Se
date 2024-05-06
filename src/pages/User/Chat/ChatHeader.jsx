@@ -1,42 +1,27 @@
-import { useContext } from 'react';
 import { ButtonBase, IconButton } from '@mui/material'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import classes from './Chat.module.css'
 import Session from './Session';
-import CallContext from '../../../callStore/call-context';
 import { ProfilePic } from '../../../components/ui';
+import useCall from '../../../hooks/use-call';
 
 const ChatHeader = ({ userData }) =>
 {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const { handleVideoCall, handleVoiceCall } = useCall();
 
     const goBack = () =>
     {
         navigate("/chats")
     }
-    const { setCallerId, setCall, establishStream, stream } = useContext(CallContext);
 
     const navigateChatProfile = () =>
     {
         navigate(`/chats/chat/profile?${searchParams}`)
     }
 
-    const handleVideoCall = () =>
-    {
-        navigate("/video")
-        if (!stream) establishStream("video");
-        setCallerId(searchParams.get('id'))
-        setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
-    }
-
-    const handleVoiceCall = () =>
-    {
-        if (!stream) establishStream("voice");
-        setCallerId(searchParams.get('id'))
-        setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
-    }
     return (
         <div
             className={classes.header}
@@ -89,9 +74,6 @@ const ChatHeader = ({ userData }) =>
                 className='center-y'
             >
                 <Session />
-
-
-
                 {/* video icon */}
                 <IconButton
                     title='Video call'

@@ -1,16 +1,16 @@
-import { IconButton, InputBase, ListItemIcon } from '@mui/material'
-import classes from './styles/InputBar.module.css'
+import { IconButton, InputBase } from '@mui/material'
+import { useDispatch } from 'react-redux'
 import { Field, Form, Formik } from 'formik'
+
+import classes from './styles/InputBar.module.css'
 import { getTypingDirection } from '../../helpers/getTypingDirection'
 import UploadMedia from './UploadMedia'
 import { useSearchParams } from 'react-router-dom'
 import { PopUpMenu } from '../common'
 import { ReactComponent as AttachmentIcon } from '../../assets/icons/attachment.svg'
-import { ReactComponent as PollIcon } from '../../assets/icons/poll.svg'
-import { useDispatch } from 'react-redux'
 import { uiActions } from '../../store/ui-slice'
-import { useState } from 'react'
 import { Poll } from './Poll'
+
 export const InputBar = (props) =>
 {
     const { submitTextMessage, handleUploadMedia, isLoadingUploadMedia, submitPollMessage } = props;
@@ -21,21 +21,23 @@ export const InputBar = (props) =>
     const menuId = "chatMenu";
     const closeMenu = () => { dispatch(uiActions.closePopMenu(menuId)) };
     const menuItems = [
-        // {
-        //     component:
-        //         <UploadMedia
-        //             name={chatId}
-        //             handleUploadMedia={handleUploadMedia}
-        //             isLoadingUploadMedia={isLoadingUploadMedia}
-        //             closeMenu={closeMenu}
-        //         />
-        //     ,
-        // },
+        {
+            component:
+                <UploadMedia
+                    name={chatId}
+                    handleUploadMedia={handleUploadMedia}
+                    isLoadingUploadMedia={isLoadingUploadMedia}
+                    closeMenu={closeMenu}
+                    flag={false}
+                />
+            ,
+        },
         {
             component: <Poll closeMenu={closeMenu} submitPollMessage={submitPollMessage} />
         },
     ]
     return (
+        <>
         <Formik
             initialValues={{ message: "" }}
             onSubmit={submitTextMessage}
@@ -54,7 +56,6 @@ export const InputBar = (props) =>
                             menuItems={menuItems}
                             containerClassName={classes.popContainer}
                         />
-
                         <Field
                             name="message"
                         >
@@ -105,6 +106,6 @@ export const InputBar = (props) =>
                     </div>
                 </Form>
             )}
-        </Formik>
+        </Formik></>
     )
 }

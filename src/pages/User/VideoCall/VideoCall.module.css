@@ -11,6 +11,13 @@
     overflow: hidden;
 }
 
+.callContainer {
+    flex-grow: 1;
+    height: calc(100svh - 120px);
+    padding: 40px 30px 80px 30px;
+    position: relative;
+}
+
 .bottomBar {
     position: absolute;
     bottom: 0;
@@ -122,13 +129,6 @@
     max-width: calc(100% - 40px);
 }
 
-.callContainer {
-    flex-grow: 1;
-    height: calc(100vh - 120px);
-    height: calc(100svh - 120px);
-    padding: 40px 30px 80px 30px;
-    position: relative;
-}
 
 .title {
     width: 100%;

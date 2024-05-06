@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './styles/NotificationAndRequestItem.module.css'
 import { ProfilePic } from '../ui';
 
-export const NotificationAndRequestItem = ({ itemData, action, lastElementRef }) =>
+export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, closeRequestsMenu }) =>
 {
     const to = itemData?.partnerId ?
         `/profile?userId=${itemData?.partnerId}&from=matchRequests&requestId=${itemData._id}`
@@ -17,7 +17,9 @@ export const NotificationAndRequestItem = ({ itemData, action, lastElementRef })
             ref={lastElementRef}
         >
             {itemData.requestStatus && (
-                <ListItemAvatar>
+                <ListItemAvatar
+                    onClick={closeRequestsMenu}
+                >
                     <ProfilePic
                         src={itemData?.profileImage}
                         component={NavLink}
@@ -37,6 +39,7 @@ export const NotificationAndRequestItem = ({ itemData, action, lastElementRef })
                             {((itemData.userName || itemData.partnerUserName) && itemData.requestStatus) && (
                                 <NavLink
                                     to={to}
+                                    onClick={closeRequestsMenu}
                                 >
                                     {itemData.userName || itemData.partnerUserName}
                                 </NavLink>

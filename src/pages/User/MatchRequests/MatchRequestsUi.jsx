@@ -10,7 +10,7 @@ import { PopUpMenu as PopUpMenuComponent } from '../../../components/common'
 import { ReactComponent as RequestsIcon } from '../../../assets/icons/addFriend.svg'
 import classes from '../../../components/appBar/styles/IconBtn.module.css'
 
-const MatchRequestsUi = ({ requests, isLoadingGetRequests, uiId }) =>
+const MatchRequestsUi = ({ requests, isLoadingGetRequests, uiId, closeRequestsMenu }) =>
 {
     return (
         <PopUpMenuComponent
@@ -23,7 +23,7 @@ const MatchRequestsUi = ({ requests, isLoadingGetRequests, uiId }) =>
                 />
             }
             containerClassName={popUpCardClasses.parent}
-            placement="top"
+            placement="bottom"
             children={
                 <PopUpCard
                     title="Requests"
@@ -39,6 +39,7 @@ const MatchRequestsUi = ({ requests, isLoadingGetRequests, uiId }) =>
                                     itemData={request}
                                     action={< MatchActions requestData={request} smallBtn={true} />}
                                     key={request._id}
+                                    closeRequestsMenu={closeRequestsMenu}
                                 />
                             )
                         })}

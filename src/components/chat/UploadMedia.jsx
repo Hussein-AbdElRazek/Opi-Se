@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { ButtonBase, CircularProgress, IconButton, ListItemIcon, MenuItem } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ImageUploading from 'react-images-uploading';
@@ -6,9 +6,11 @@ import ImageUploading from 'react-images-uploading';
 import classes from './styles/UploadMedia.module.css'
 import ImagesContext from '../../imagesStore/images-context';
 import { ReactComponent as PhotoIcon } from '../../assets/icons/photo.svg'
+import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from '../../store/ui-slice';
 
 
-const UploadMedia = ({ name, handleUploadMedia, isLoadingUploadMedia, closeMenu }) =>
+const UploadMedia = ({ name, handleUploadMedia, isLoadingUploadMedia, flag }) =>
 {
     const imgCtx = useContext(ImagesContext);
 
@@ -31,11 +33,16 @@ const UploadMedia = ({ name, handleUploadMedia, isLoadingUploadMedia, closeMenu 
             }
         })
     }
-
+    const dispatch = useDispatch();
+    const menuId = "chatMenu";
+    const closeMenu = useCallback(() => { dispatch(uiActions.closePopMenu(menuId)) }, [dispatch])
+    const isMenuOpened = useSelector(state => state.ui.isPopMenuOpened)[menuId];
     const handleDeleteAllImages = () =>
     {
         imgCtx.deleteAllImages();
+        closeMenu();
     }
+
     const [openedImage, setOpenedImage] = useState(0);
 
     // update state with store images 
@@ -44,6 +51,13 @@ const UploadMedia = ({ name, handleUploadMedia, isLoadingUploadMedia, closeMenu 
         setImages(imgCtx.images[name] || []);
     }, [imgCtx.images, name])
 
+    useEffect(() =>
+    {
+        if (images.length >= 1 && isMenuOpened)
+        {
+            closeMenu();
+        }
+    }, [closeMenu, images.length, isMenuOpened])
     return (
         <ImageUploading
             multiple
@@ -64,6 +78,7 @@ const UploadMedia = ({ name, handleUploadMedia, isLoadingUploadMedia, closeMenu 
                             <MenuItem
                                 key={"uploadMedia"}
                                 onClick={() => { onImageUpload(); }}
+                                style={{ display: flag ? "none" : "flex" }}
                             // className={`${classes.item}${item.noHover ? classes.noHover : ""} ${item.haveStroke ? classes.hoverStroke : ""}`}
                             >
                                 <ListItemIcon >
@@ -75,6 +90,7 @@ const UploadMedia = ({ name, handleUploadMedia, isLoadingUploadMedia, closeMenu 
                         ) : (<div
                             {...dragProps}
                             className={classes.container}
+                            style={{ display: !flag ? "none" : "static" }}
                         >
                             <IconButton
                                 className={classes.closeIcon}
