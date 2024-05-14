@@ -19,13 +19,12 @@
     width: calc(100svw - 40px);
     max-width: calc(100svw - 40px);
 
-    height: calc(100vh - 40px) !important;
-    max-height: 100vh !important;
-
     border-radius: 0;
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
+    top: 0;
+    bottom: 0;
 
     display: flex;
     justify-content: center;

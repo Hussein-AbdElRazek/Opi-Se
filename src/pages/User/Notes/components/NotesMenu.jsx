@@ -44,6 +44,7 @@ const NotesMenu = () =>
                     <MenuIcon fill='var(--secondary)' />
                 }
                 openBtnClassName={trashBarClasses.optionBtn}
+                containerClassName={classes.menuContainer}
                 menuItems={menuItems}
             />
         </div >

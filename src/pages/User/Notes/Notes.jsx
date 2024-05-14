@@ -52,6 +52,7 @@ const Notes = () =>
             {(!notes.length && !isLoadingGetNotes) && (
                 <VectorAndText
                     isBig={true}
+                    fullScreen={true}
                     img={noNotesImg}
                     h="No Notes yet"
                     p={

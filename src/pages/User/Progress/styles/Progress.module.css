@@ -40,6 +40,8 @@
 .card h5 {
     text-align: left !important;
     margin: 0;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
 }
 
 .welcome {
@@ -49,6 +51,7 @@
     align-items: flex-start;
     position: relative;
     border: none;
+    flex-wrap: wrap;
 }
 
 .welcome,
@@ -68,6 +71,10 @@
 .welcome img {
     width: 150px;
     margin-right: -10px;
+}
+
+.welcomeInfo {
+    max-width: calc(100% - 180px);
 }
 
 .progress {
@@ -193,5 +200,12 @@
     .currentProgress img {
         width: 70px;
         height: 70px;
+    }
+
+    .welcome {
+        width: calc(100% - 60px);
+    }
+    .welcomeInfo {
+        max-width: 100%;
     }
 }

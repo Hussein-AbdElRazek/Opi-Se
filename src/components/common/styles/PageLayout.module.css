@@ -5,6 +5,13 @@
     margin-top: 60px;
 }
 
+@media (max-width:900px) {
+    .container {
+        /* Based on top navbar height */
+        margin-top: 55px;
+    }
+}
+
 @media (max-width:768px) {
     .container {
         /* Based on tabsBar width */

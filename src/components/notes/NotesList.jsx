@@ -14,21 +14,25 @@ export const NotesList = (props) =>
     } = props;
 
     return (
-        <Grid
-            container
-            spacing={3}
-            className={classes.container}
-        >
-            {notes.map((note, index) =>
-                <NoteItem
-                    key={note._id}
-                    lastElementRef={index + 1 === notes.length ? lastElementRef : null}
-                    pinNote={pinNote}
-                    isTrash={isTrash}
-                    onDelete={moveToTrash}
-                    {...note}
-                />
-            )}
-        </Grid>
+        <>
+            {
+                !!notes.length && <Grid
+                    container
+                    spacing={3}
+                    className={classes.container}
+                >
+                    {notes.map((note, index) =>
+                        <NoteItem
+                            key={note._id}
+                            lastElementRef={index + 1 === notes.length ? lastElementRef : null}
+                            pinNote={pinNote}
+                            isTrash={isTrash}
+                            onDelete={moveToTrash}
+                            {...note}
+                        />
+                    )}
+                </Grid>
+            }
+        </>
     )
 }

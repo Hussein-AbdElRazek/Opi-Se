@@ -30,7 +30,7 @@ function App()
   useEffect(() =>
   {
     const tempTitle = getWebsiteTitle(location.pathname);
-    if (!!tempTitle) document.title = `Opi Se - ${tempTitle}`;
+    if (!!tempTitle) document.title = ` ${tempTitle} - Opi Se `;
   }, [location]);
 
   const { call } = useContext(CallContext);

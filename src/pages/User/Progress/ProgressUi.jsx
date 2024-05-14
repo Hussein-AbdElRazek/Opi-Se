@@ -431,7 +431,9 @@ const ProgressUi = (props) =>
                 <Card
                     className={` ${classes.card} ${classes.welcome}`}
                 >
-                    <div>
+                    <div
+                    className={classes.welcomeInfo}
+                    >
                         <HeaderText>
                             Welcome, {userName}!
                         </HeaderText>

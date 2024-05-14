@@ -2,8 +2,7 @@ import React from 'react'
 import CalenderUi from './CalenderUi'
 import useGetAllTasks from './hooks/use-get-all-tasks'
 import { useSelector } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 const Calender = () =>
 {
@@ -20,11 +19,11 @@ const Calender = () =>
         taskStatus,
         id: _id,
     }));
-    const [searchParams] = useSearchParams();
+
     const onOpenDay = (data) =>
     {
-        const day = moment(data.start || data[0]?.start).toISOString();
-        navigate(`${day}?${searchParams}`)
+        const date = new Date(data.start || data[0]?.start).toISOString();
+        navigate(`/tasks/calender/${date}/day`)
     }
 
     return (

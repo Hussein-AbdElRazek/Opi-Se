@@ -66,8 +66,8 @@ const User = () =>
                         <Route path='edit' element={<EditTask />} />
                     </Route>
                 ))}
-                <Route path='calender' element={<Calender />} >
-                    <Route path=':day' element={<DayEventsModal />} />
+                <Route path='calender/:date' element={<Calender />} >
+                    <Route path='day' element={<DayEventsModal />} />
                 </Route>
             </Route>
 

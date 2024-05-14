@@ -52,7 +52,7 @@ const CustomDay = ({ day, today, outsideCurrentMonth }) =>
 const CalenderMobile = ({ isLoadingGetAllTasks }) =>
 {
     const { selectedDate, handleDateSelect } = useDate();
-
+    
     return (
         <div>
             {/* calender section */}
@@ -65,6 +65,7 @@ const CalenderMobile = ({ isLoadingGetAllTasks }) =>
                 >
                     {`Today ${moment().format("DD/M/YYYY")}`}
                 </div>
+                
                 <DateCalendar
                     value={moment(selectedDate)}
                     onMonthChange={(newValue) => handleDateSelect(newValue, "mob")}

@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom'
 import { Tabs } from '../../../../components/common'
 import classes from './styles/TabsBar.module.css'
 const TabsBar = () =>
@@ -11,7 +12,7 @@ const TabsBar = () =>
         {
             value: 1,
             label: "Calender",
-            to: "calender"
+            to: `calender/${new Date().toISOString()}`
         },
     ]
 
@@ -20,11 +21,15 @@ const TabsBar = () =>
         "/tasks/calender": 1,
     }
 
+    const location = useLocation();
+    const pathName = location.pathname;
+
     return (
         <Tabs
             tabs={tabs}
             tabsMap={tabsMap}
             tabsClassName={classes.tabs}
+            defaultValue={pathName.includes('calender') ? 1 : 0}
         />
     )
 }

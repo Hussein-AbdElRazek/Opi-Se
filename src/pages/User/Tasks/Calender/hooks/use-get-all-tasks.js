@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useScrollingPagination from '../../../../../hooks/use-scrolling-pagination';
 import { tasksActions } from '../../../../../store/tasks-slice';
 import { taskModulePath } from '../../../../../config';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const useGetAllTasks = () =>
 {
@@ -25,9 +25,9 @@ const useGetAllTasks = () =>
         currentPage
     } = useScrollingPagination(isLoadingGetAllTasks, initialTotalPages);
 
-    const [searchParams] = useSearchParams();
-    const year = searchParams.get("y");
-    const month = searchParams.get("m");
+    const { date } = useParams();
+    const year = String(new Date(date).getFullYear());
+    const month = String(new Date(date).getMonth())
 
     useEffect(() =>
     {

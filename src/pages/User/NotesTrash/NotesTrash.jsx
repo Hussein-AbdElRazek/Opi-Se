@@ -25,7 +25,7 @@ const NotesTrash = () =>
     // the rest of apis for that module in components
     return (
         <>
-            <TrashBar />
+            {!!notes?.length &&<TrashBar />}
             <NotesList
                 notes={notes}
                 lastElementRef={lastElementRef}
@@ -36,6 +36,7 @@ const NotesTrash = () =>
                 <div className={classes.noTrash}>
                     <VectorAndText
                         isBig={true}
+                        fullScreen={true}
                         img={noTrashImg}
                         h="No Notes in Trash yet"
                         p={

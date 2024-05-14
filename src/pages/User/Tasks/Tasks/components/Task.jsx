@@ -27,7 +27,8 @@ const Task = (props) =>
                     {content}
                 </p>
             }
-            <div className='space-between center-y'>
+            
+            <div className='space-between center-y flex-wrap'>
                 {/* date */}
                 <span
                     className={`

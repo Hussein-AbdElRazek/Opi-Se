@@ -24,5 +24,6 @@ const titleMap = {
 };
 export const getWebsiteTitle = (pathname) =>
 {
+    if (pathname.includes("calender")) return titleMap["/tasks/calender"]
     return titleMap[pathname] || null;
 }

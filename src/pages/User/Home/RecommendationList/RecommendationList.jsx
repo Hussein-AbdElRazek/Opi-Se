@@ -40,7 +40,7 @@ const RecommendationList = () =>
 
             RecommendPartner(
                 {
-                    url: `${recommendationModulePath}getPartnerRecommendation?page=${currentPage}&limit=4`,
+                    url: `${recommendationModulePath}/getPartnerRecommendation?page=${currentPage}&limit=4`,
                 },
                 getResponse
             );
