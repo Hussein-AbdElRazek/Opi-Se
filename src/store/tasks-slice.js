@@ -145,6 +145,11 @@ const tasksSlice = createSlice({
 
             state.totalLength[isForCalender ? "all" : action.payload.taskStatus] -= 1;
         },
+        removeAllTasksType(state, action)
+        {
+            state.tasks[action.payload] = []
+            state.totalLength[action.payload] = 0;
+        },
         updateTask(state, action)
         {
             state.tasks[isForCalender ? "all" : action.payload.taskStatus] = state.tasks[isForCalender ? "all" : action.payload.taskStatus].map(ele =>

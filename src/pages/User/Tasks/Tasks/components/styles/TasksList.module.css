@@ -19,7 +19,9 @@
 
 .header {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
+    justify-content: space-between;
     position: relative;
     margin-bottom: 30px;
 }
@@ -59,7 +61,7 @@
     background-color: var(--done);
 }
 
-.header h5 {
+.header div h5 {
     margin: 10px 15px;
     font-size: var(--font-size-200);
 }
@@ -74,8 +76,7 @@
 }
 
 .addIconBtn {
-    position: absolute;
-    right: 0;
+    margin: 0 2px;
     padding: 6px;
     border-radius: var(--border-radius-5);
     background-color: var(--secondary-15);
@@ -101,6 +102,17 @@
     padding: 5px;
     border-radius: 50%;
     fill: var(--text-header);
+}
+
+.deleteIconBtn {
+    width: 30px;
+    height: 30px;
+    margin-right: -8px;
+}
+
+.deleteTasksBtnDisabled {
+    cursor: not-allowed !important;
+    pointer-events: all !important;
 }
 
 @media (max-width:768px) {

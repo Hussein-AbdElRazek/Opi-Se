@@ -1,13 +1,18 @@
-import { ButtonBase } from '@mui/material';
+import { ButtonBase, IconButton } from '@mui/material';
 
 import classes from './styles/TasksList.module.css'
 import Task from './Task';
 import { ReactComponent as AddTaskIcon } from '../../../../../assets/icons/add.svg';
+import { ReactComponent as DeleteTasksIcon } from '../../../../../assets/icons/binOutlined.svg';
 import { Btn } from '../../../../../components/inputs/Btn';
 import { LoadingCenter } from '../../../../../components/ui/LoadingCenter';
+
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { NavLink } from 'react-router-dom';
 import { Droppable } from 'react-beautiful-dnd';
+import { ConfirmDeleteModal } from '../../../../../components/common';
+import useModal from '../../../../../hooks/use-modal';
+import useDeleteAllTasksType from '../hooks/use-delete-all-tasks-type';
 const TasksList = (props) =>
 {
     const { tasks, type, totalTasksLength, lastElementRef, isLoading } = props;
@@ -25,7 +30,20 @@ const TasksList = (props) =>
             return ('Done')
         }
     }
-    
+
+    // handle modal ui state 
+    const {
+        openModal,
+        closeModal,
+        isModalOpened,
+    } = useModal(type);
+
+    // delete task
+    const {
+        isLoadingDeleteAllTasksType,
+        handleDeleteAllTasksType,
+    } = useDeleteAllTasksType(tasks[0]?.taskStatus);
+
     return (
         <Droppable droppableId={type}>
             {(provided, snapshot) => (
@@ -43,24 +61,48 @@ const TasksList = (props) =>
                                     classes.inProgress : type === "done" ?
                                         classes.done : ""}
                         `}>
-                            <h5>
-                                {getTitle()}
-                            </h5>
+                            <div className='space-between center-y'>
+                                <h5>
+                                    {getTitle()}
+                                </h5>
 
-                            <span
-                                className={`${classes.tasksLength} center-x center-y`}
-                            >
-                                {/* TODO after pagination add instead of tasks.length totalTasksLength*/}
-                                {tasks.length}
-                            </span>
+                                <span
+                                    className={`${classes.tasksLength} center-x center-y`}
+                                >
+                                    {/* TODO after pagination add instead of tasks.length totalTasksLength*/}
+                                    {tasks.length}
+                                </span>
+                            </div>
 
-                            {type === "toDo" && <ButtonBase
-                                className={classes.addIconBtn}
-                                LinkComponent={NavLink}
-                                to={`new?type=${type}`}
-                            >
-                                <AddTaskIcon />
-                            </ButtonBase>}
+                            <div>
+                                {type === "toDo" && <ButtonBase
+                                    className={classes.addIconBtn}
+                                    LinkComponent={NavLink}
+                                    to={`new?type=${type}`}
+                                >
+                                    <AddTaskIcon />
+                                </ButtonBase>}
+
+                                {/* Delete All Tasks Icon Btn */}
+                                <IconButton
+                                    className={`${classes.deleteIconBtn} ${!tasks.length ? classes.deleteTasksBtnDisabled :''}`}
+                                    title={`Delete All ${getTitle()} Tasks`}
+                                    onClick={openModal}
+                                    disabled={!tasks.length || isLoadingDeleteAllTasksType}
+                                    cursor='disabled'
+                                >
+                                    <DeleteTasksIcon />
+                                </IconButton>
+
+                                {/* Confirm delete all tasks modal  */}
+                                <ConfirmDeleteModal
+                                    open={!!isModalOpened}
+                                    onClose={closeModal}
+                                    deleteMessage={`All ${getTitle()} Tasks`}
+                                    onDelete={() => handleDeleteAllTasksType(type)}
+                                    isLoading={isLoadingDeleteAllTasksType}
+                                />
+                            </div>
                         </div>
 
                         {/* Tasks list */}
