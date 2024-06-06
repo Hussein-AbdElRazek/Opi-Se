@@ -141,7 +141,7 @@ const tasksSlice = createSlice({
         removeTask(state, action)
         {
             state.tasks[isForCalender ? "all" : action.payload.taskStatus] =
-                state.tasks[isForCalender ? "all" : action.payload.taskStatus].filter(ele => ele._id !== action.payload.taskId)
+                state.tasks[isForCalender ? "all" : action.payload.taskStatus].filter(ele => ele._id !== action.payload._id)
 
             state.totalLength[isForCalender ? "all" : action.payload.taskStatus] -= 1;
         },

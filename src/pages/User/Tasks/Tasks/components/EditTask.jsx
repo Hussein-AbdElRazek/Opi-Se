@@ -14,7 +14,7 @@ const EditTask = () =>
     const {
         handleEditTask,
         isLoadingEditTask
-    } = useEditTask(taskInitialValues);
+    } = useEditTask({ isNavigate: true });
 
     return (
         <ItemCard
@@ -22,7 +22,7 @@ const EditTask = () =>
             title="Edit Task"
             initialValues={taskInitialValues}
             validationSchema={taskValidationSchema}
-            onSubmit={handleEditTask}
+            onSubmit={(values) => handleEditTask(values, taskInitialValues)}
             onClose={goBack}
             isLoading={isLoadingEditTask}
         >

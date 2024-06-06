@@ -20,8 +20,7 @@ const useDeleteTask = (taskStatus, taskId) =>
         {
             if (message.includes("success"))
             {
-                console.log("success taskId", taskId)
-                const taskData = { taskStatus: taskStatus, taskId: taskId }
+                const taskData = { taskStatus: taskStatus, _id: taskId }
                 // remove task from store
                 dispatch(tasksActions.removeTask(taskData));
 

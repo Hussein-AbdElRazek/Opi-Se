@@ -7,9 +7,14 @@
 }
 
 .content {
-    max-height: calc(100% - 127px);
-    overflow: auto;
+    height: calc(100% - 87px);
+    overflow-y: auto;
+    overflow-x: hidden;
     padding-bottom: 10px;
+}
+
+.todoContent {
+    height: calc(100% - 127px);
 }
 
 .header {

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { compareObjects } from '../../../../../helpers/compareObjects';
 import { taskModulePath } from '../../../../../config';
 
-const useEditTask = (taskInitialValues) =>
+const useEditTask = ({ isNavigate }) =>
 {
     // useEditTask hook to handle call editTask API
 
@@ -19,7 +19,7 @@ const useEditTask = (taskInitialValues) =>
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleEditTask = (values) =>
+    const handleEditTask = (values, taskInitialValues) =>
     {
         const editedData = compareObjects(taskInitialValues, values)
 
@@ -31,7 +31,7 @@ const useEditTask = (taskInitialValues) =>
 
                 // emit socket
                 dispatch(emitUpdateTask(data))
-                navigate(-1 || "/tasks")
+                if (isNavigate) navigate(-1 || "/tasks")
             }
         };
 

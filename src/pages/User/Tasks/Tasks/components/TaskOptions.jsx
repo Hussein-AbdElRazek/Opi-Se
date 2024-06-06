@@ -7,9 +7,12 @@ import { NavLink } from 'react-router-dom';
 import { uiActions } from '../../../../../store/ui-slice';
 import { useDispatch } from 'react-redux';
 import { tasksActions } from '../../../../../store/tasks-slice';
+import useMoveTask from '../hooks/use-move-task';
 
 const TaskOptions = ({ task }) =>
 {
+    const dispatch = useDispatch();
+
     // handle modal ui state 
     const {
         openModal,
@@ -22,7 +25,9 @@ const TaskOptions = ({ task }) =>
         isLoadingDeleteTask,
         handleDeleteTask,
     } = useDeleteTask(task.taskStatus, task._id);
-    const dispatch = useDispatch();
+
+    // move task
+    const handleMoveTask = useMoveTask();
 
     const closeMenu = () =>
     {
@@ -34,6 +39,27 @@ const TaskOptions = ({ task }) =>
         closeMenu();
         dispatch(tasksActions.updateOpenedTask(task));
     }
+
+    const MoveTaskToToDoOption = {
+        onClick: () => { handleMoveTask(task, "toDo", closeMenu) },
+        children: "Move To To Do",
+    }
+
+    const MoveTaskToProgressOption = {
+        onClick: () => { handleMoveTask(task, "inProgress", closeMenu) },
+        children: "Move To In Progress",
+    }
+
+    const MoveTaskToDoneOption = {
+        onClick: () =>
+        { handleMoveTask(task, 'done', closeMenu) },
+        children: "Move To Done",
+    }
+
+    const menuItemsForTodo = [MoveTaskToProgressOption, MoveTaskToDoneOption]
+    const menuItemsForProgress = [MoveTaskToToDoOption, MoveTaskToDoneOption]
+    const menuItemsForDone = [MoveTaskToToDoOption, MoveTaskToProgressOption]
+
     const menuItems = [
         {
             onClick: handleOpenEditModal,
@@ -41,12 +67,17 @@ const TaskOptions = ({ task }) =>
             to: "edit",
             children: "Edit Task",
         },
+
+        ...(task.taskStatus === "toDo" ? menuItemsForTodo : []),
+        ...(task.taskStatus === "inProgress" ? menuItemsForProgress : []),
+        ...(task.taskStatus === "done" ? menuItemsForDone : []),
+
         {
             onClick: openModal,
             children: "Delete",
         },
-
     ]
+
     return (
         <>
             <PopUpMenu

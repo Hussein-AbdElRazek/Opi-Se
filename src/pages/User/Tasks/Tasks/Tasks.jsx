@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import { Outlet } from 'react-router-dom'
+import { DragDropContext } from 'react-beautiful-dnd'
 
 import useGetSpecificTasksType from './hooks/use-get-specific-tasks-type'
 import TasksList from './components/TasksList'
 import classes from './styles/Tasks.module.css'
 import TasksTabs, { tasksTabsMap } from './components/TasksTabs'
 import useScreenWidth from '../../../../hooks/use-screen-width'
+import useDrag from './hooks/use-drag'
 
 const RenderTodoTasks = () =>
 {
@@ -85,32 +87,37 @@ const Tasks = () =>
     const screenWidth = useScreenWidth();
     const isSmall = screenWidth <= 768;
 
+    const onDragEnd = useDrag();
+
     return (
-        <div
-            className={classes.container}
-        >
-            {/* for bigger than 768px */}
-            {!isSmall && <Grid2
-                container
-                columnSpacing={2}
-                className={classes.bigScreens}
+        <DragDropContext onDragEnd={onDragEnd}>
+            <div
+                className={classes.container}
             >
-                <RenderTodoTasks />
-                <RenderInProgressTasks />
-                <RenderDoneTasks />
-            </Grid2>}
+                {/* for bigger than 768px */}
+                {!isSmall && <Grid2
+                    container
+                    columnSpacing={2}
+                    className={classes.bigScreens}
+                >
+                    <RenderTodoTasks />
+                    <RenderInProgressTasks />
+                    <RenderDoneTasks />
+                </Grid2>}
 
-            {/* for small than 768px */}
-            {isSmall && <div
-                className={classes.smallScreens}
-            >
-                <TasksTabs />
-                {RenderOpenedTypeForSmallScreens}
-            </div>}
+                {/* for smaller than 768px */}
+                {isSmall && <div
+                    className={classes.smallScreens}
+                >
+                    <TasksTabs />
+                    {RenderOpenedTypeForSmallScreens}
+                </div>}
 
-            <Outlet />
-        </div>
+                <Outlet />
+            </div>
+        </DragDropContext>
     )
 }
+
 
 export default Tasks
