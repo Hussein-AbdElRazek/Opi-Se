@@ -4,17 +4,40 @@ export const languagesInputs = [
         type: "text",
         name: "languageName",
         label: "Language Name",
-        isFirst:true,
+        validateOnInput: (value, formik, name) =>
+        {
+            const indexOfLang = name[10];
+            const isEmpty = !value?.trim();
+            const levelHaveData = !!formik.values?.languages[indexOfLang]?.level;
+            if (isEmpty && levelHaveData)
+                return "When Level have data Language Name is required"
+        },
+        isCustomValidate: true,
+        isFirst: true,
     },
     {
         control: "input",
         type: "number",
         name: "level",
         label: "Level",
-        min:1,
-        max:5,
+        validateOnInput: (value, formik, name) =>
+        {
+            const indexOfLang = name[10];
+            const isEmpty = !value?.trim();
+            const languageNameHaveData = !!formik.values?.languages[indexOfLang]?.languageName;
+            if (isEmpty && languageNameHaveData)
+                return "When Language Name have data Level is required"
+        },
+        isCustomValidate: true,
+        min: 1,
+        max: 5,
     },
 ]
+
+const languagesInitialObject = {
+    languageName: "",
+    level: ""
+}
 
 export const signUpInputs = [
     {
@@ -73,6 +96,7 @@ export const signUpInputs = [
         inputs: languagesInputs,
         name: "languages",
         label: "Languages",
+        intialObject: languagesInitialObject
     },
 ];
 
@@ -86,9 +110,6 @@ export const signUpInitialValues = {
     password: "",
     confirmPassword: "",
     languages: [
-        {
-            languageName: "",
-            level: ""
-        }
+        languagesInitialObject
     ]
 }

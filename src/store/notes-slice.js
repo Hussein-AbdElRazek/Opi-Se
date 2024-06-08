@@ -189,11 +189,11 @@ const notesSlice = createSlice({
         {
             state.notes = state.notes.sort((a, b) =>
             {
-                // Pinned notes: Sort by pinnedAt date (latest first)
+                // Pinned notes: Sort by updatedAt date (latest first)
                 if (a.isPinned && b.isPinned)
                 {
-                    let aPinnedAt = new Date(a.pinnedAt);
-                    let bPinnedAt = new Date(b.pinnedAt);
+                    let aPinnedAt = new Date(a.updatedAt);
+                    let bPinnedAt = new Date(b.updatedAt);
                     return bPinnedAt.getTime() - aPinnedAt.getTime(); // Latest pinned first
                 }
 
@@ -201,10 +201,10 @@ const notesSlice = createSlice({
                 if (a.isPinned && !b.isPinned) return -1; // a should come first
                 if (!a.isPinned && b.isPinned) return 1; // b should come first
 
-                // Non-pinned notes: Sort by createdAt date (latest first)
-                let aCreatedAt = new Date(a.createdAt);
-                let bCreatedAt = new Date(b.createdAt);
-                return bCreatedAt.getTime() - aCreatedAt.getTime(); // Latest created first
+                // Non-pinned notes: Sort by updatedAt date (latest first)
+                let aUpdatedAt = new Date(a.updatedAt);
+                let bUpdatedAt = new Date(b.updatedAt);
+                return bUpdatedAt.getTime() - aUpdatedAt.getTime(); // Latest created first
             });
         },
         resetNotes(state, action)

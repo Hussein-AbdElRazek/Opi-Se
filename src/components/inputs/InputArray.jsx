@@ -11,7 +11,7 @@ import classes from './styles/InputArray.module.css'
 
 export const InputArray = (props) =>
 {
-    const { name, inputs, intialObject, disabled } = props;
+    const { name, inputs, intialObject, disabled, formik } = props;
 
     const addOne = (push) => () =>
     {
@@ -46,6 +46,7 @@ export const InputArray = (props) =>
                                             {...input}
                                             name={`${name}.${index}.${input.name}`}
                                             disabled={disabled}
+                                            formik={formik}
                                         />
                                     </div>
                                 )

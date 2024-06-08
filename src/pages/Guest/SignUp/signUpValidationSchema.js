@@ -23,12 +23,10 @@ export const signUpValidationSchema = Yup.object({
         .required(required)
         .min(8, passwordMin)
         .oneOf([Yup.ref("password"), null], passwordMatch),
-    Languages: Yup.array().of(
+    languages: Yup.array().of(
         Yup.object().shape({
-            languageName: Yup.string()
-                .required(required),
-            level: Yup.number()
-                .required(required),
+            languageName: Yup.string(),
+            level: Yup.number(),
         })
     ),
     nationalId: Yup.string()

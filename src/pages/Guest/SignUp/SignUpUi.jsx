@@ -43,7 +43,9 @@ const SignUpUi = (props) =>
             <Form >
               <LoopOnInputs
                 inputs={signUpInputs}
-                disabled={isLoadingSignUp} />
+                formik={formik}
+                disabled={isLoadingSignUp}
+              />
               <Btn
                 type="submit"
                 variant="contained"

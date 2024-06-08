@@ -9,6 +9,7 @@ const titleMap = {
     "/recommendation": "Recommendations",
     "/profile": "Profile",
     "/mental-health": "Mental Health",
+    "/progress": "Progress",
     "/notes": "Notes",
     "/notes/trash": "Notes Trash",
     "/tasks": "Tasks",

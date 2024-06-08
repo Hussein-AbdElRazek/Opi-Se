@@ -33,7 +33,7 @@ function App()
     if (!!tempTitle) document.title = ` ${tempTitle} - Opi Se `;
   }, [location]);
 
-  const { call } = useContext(CallContext);
+  const { call, stream } = useContext(CallContext);
 
   // General sockets
   // handle join rooms + necessary listener in app root
@@ -65,7 +65,7 @@ function App()
 
           {/* for incoming calls */}
           {(call && call?.isReceivingCall && !(call?.busy) && call?.callType === "video") && <IncomingVideoCall />}
-          {(call && call?.callType === "voice") && <VoiceCall />}
+          {(call && call?.callType === "voice" && stream) && <VoiceCall />}
 
           {/* for incoming session */}
           <SessionConfirmation />

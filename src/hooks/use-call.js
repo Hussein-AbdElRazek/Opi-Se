@@ -1,4 +1,4 @@
-import  { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CallContext from '../callStore/call-context';
 
@@ -8,22 +8,34 @@ const useCall = () =>
     const [searchParams] = useSearchParams();
 
     const { setCallerId, setCall, establishStream, stream } = useContext(CallContext);
-
+    const [callType, setCallType] = useState();
     const handleVideoCall = () =>
     {
-        navigate("/video")
         if (!stream) establishStream("video");
-        setCallerId(searchParams.get('id'))
-        setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
+        setCallType("video")
     }
 
     const handleVoiceCall = () =>
     {
         if (!stream) establishStream("voice");
-        setCallerId(searchParams.get('id'))
-        setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
+        setCallType("voice")
     }
 
+    useEffect(() =>
+    {
+        console.log("usecall use effetc")
+        if (stream && callType === 'video')
+        {
+            navigate("/video")
+            setCallerId(searchParams.get('id'))
+            setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
+        } else if (stream && callType === 'voice')
+        {
+            console.log("else call voice")
+            setCallerId(searchParams.get('id'))
+            setCall(prev => ({ ...prev, name: searchParams.get('userName'), profileImage: searchParams.get('profileImage') }))
+        }
+    }, [callType, navigate, searchParams, setCall, setCallerId, stream])
     return { handleVideoCall, handleVoiceCall }
 }
 

@@ -1,5 +1,5 @@
 .container {
-    padding: 0 30px;
+    padding: 0 100px;
 }
 
 .left {
@@ -78,7 +78,7 @@
 }
 
 .progress {
-    padding: 10px 30px;
+    padding: 45px 30px;
 }
 
 .coins {
@@ -86,6 +86,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    position: absolute;
+    right: 30px;
+    top: 10px;
 }
 
 .coins span {
@@ -96,10 +99,6 @@
 
 .coins img {
     height: 40px;
-}
-
-.currentProgress {
-    margin-bottom: 20px;
 }
 
 .currentProgress img {
@@ -157,6 +156,12 @@
     color: var(--text-header);
 }
 
+@media (max-width:1200px) {
+    .container {
+        padding: 0 30px;
+    }
+}
+
 @media (max-width:1000px) {
     .container {
         flex-wrap: wrap;
@@ -205,7 +210,32 @@
     .welcome {
         width: calc(100% - 60px);
     }
+
     .welcomeInfo {
         max-width: 100%;
+    }
+}
+
+@media (max-width:375px) {
+    .progress {
+        padding: 45px 15px;
+    }
+
+    .currentProgress img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .currentProgress h3 {
+        font-size: var(--font-size-200);
+    }
+
+    .welcome {
+        padding: 30px 15px;
+        width: calc(100% - 30px);
+    }
+
+    .welcomeInfo {
+        max-width: calc(100% - 30px);
     }
 }

@@ -15,12 +15,17 @@ export const Input = (props) =>
         children,
         onChange,
         onBlur,
+        validateOnInput,
+        formik,
+        isCustomValidate,
         ...rest
     } = props;
 
     return (
         <Field
-            name={name} >
+            name={name}
+            validate={(value) => isCustomValidate && validateOnInput(value, formik, name)}
+        >
             {({ field, form, meta: { touched, error } }) =>
             {
                 const inputError = !!error && touched;

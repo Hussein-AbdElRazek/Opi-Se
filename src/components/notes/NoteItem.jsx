@@ -22,7 +22,7 @@ export const NoteItem = (props) =>
         _id,
         noteTitle,
         noteContent,
-        createdAt,
+        updatedAt,
         noteColor,
         isPinned,
         isTrash,
@@ -74,7 +74,7 @@ export const NoteItem = (props) =>
                                         ${classes.mb}
                                     `}
                             >
-                                <NoteDate date={createdAt} />
+                                <NoteDate date={updatedAt} />
 
                                 {(!isTrash) && <PinBtn pinNote={pinNote} _id={_id} isPinned={isPinned} />}
 
@@ -141,7 +141,7 @@ export const NoteItem = (props) =>
                             <div
                                 className={`${classes.group} ${classes.positionRelative}`}
                             >
-                                <NoteTimeAndDate date={createdAt} />
+                                <NoteTimeAndDate date={updatedAt} />
 
                                 {/* Move to trash */}
                                 {!isTrash && (

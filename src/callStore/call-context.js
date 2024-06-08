@@ -39,6 +39,12 @@ export const CallContextProvider = (props) =>
 
     const { enqueueSnackbar: popMessage } = useSnackbar();
 
+    const popNoPermissionMessage = useCallback((callType) =>
+    {
+        if (callType === 'video') popMessage("Allow Camera/Mic permissions to can call")
+        else popMessage("Allow Mic permission to can call")
+    }, [popMessage])
+
     const establishStream = useCallback(async (callType) =>
     {
         setCall((prev) => ({ ...prev, callType }))
@@ -52,21 +58,20 @@ export const CallContextProvider = (props) =>
                 console.log("set stream...")
                 setStream(tempStream);
             }
-
         } catch (error)
         {
             if (error.name === "NotAllowedError")
             {
-                //TODO Handle permission denial gracefully
-                //console.error("Video/audio permissions not granted.");
-                // Display a user-friendly message and offer retry options
+                popNoPermissionMessage(callType)
+                setStream(null)
             } else
             {
-                //console.error("Other error:", error);
+                popMessage(error, { variant: "error" })
+                setStream(null)
             }
         }
         return tempStream;
-    }, [stream])
+    }, [popMessage, popNoPermissionMessage, stream])
 
     // update my video when stream
     useEffect(() =>
@@ -183,6 +188,7 @@ export const CallContextProvider = (props) =>
     {
         if (stream && callerId)
         {
+            console.log("stream stream",stream)
             callUser(callerId);
             setCallerId(null)
         }
@@ -287,17 +293,19 @@ export const CallContextProvider = (props) =>
 
     const toggleMedia = (mediaType) =>
     {
-        const mediaTrack = stream.getTracks().find(track => track.kind === mediaType);
+        const mediaTrack = stream?.getTracks().find(track => track.kind === mediaType);
         console.log("toggle mediaTrack", mediaTrack)
-
-        if (mediaTrack.enabled)
+        if (mediaTrack)
         {
-            mediaTrack.enabled = false;
-            handleMyMediaToggle(mediaType, false)
-        } else
-        {
-            mediaTrack.enabled = true
-            handleMyMediaToggle(mediaType, true)
+            if (mediaTrack.enabled)
+            {
+                mediaTrack.enabled = false;
+                handleMyMediaToggle(mediaType, false)
+            } else
+            {
+                mediaTrack.enabled = true
+                handleMyMediaToggle(mediaType, true)
+            }
         }
     }
 

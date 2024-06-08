@@ -7,7 +7,7 @@ export const NoteTimeAndDate = ({ date }) =>
 {
     return (
         <div
-            className={`center-x `}
+            className='center-x center-y'
         >
             <TimeIcon className={classes.timeIcon} />
             <span

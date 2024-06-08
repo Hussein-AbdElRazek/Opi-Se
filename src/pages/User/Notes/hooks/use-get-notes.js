@@ -32,6 +32,8 @@ const useGetNotes = () =>
             {
                 // update store with new notes
                 dispatch(notesActions.mergeNotes(data))
+                // TODO Remove sort after zoz handle it
+                dispatch(notesActions.sortNotes())
 
                 // update total pages in store
                 dispatch(notesActions.updateTotalPages(totalPages))

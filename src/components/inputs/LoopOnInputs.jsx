@@ -4,7 +4,7 @@ import { FormikControl } from './';
 
 export const LoopOnInputs = (props) =>
 {
-    const { inputs, disabled, isEdit } = props;
+    const { inputs, disabled, isEdit, formik } = props;
     
     return (
         <Grid
@@ -34,6 +34,7 @@ export const LoopOnInputs = (props) =>
                         <FormikControl
                             disabled={disabled}
                             isEdit={isEdit}
+                            formik={formik}
                             {...input}
                         />
                     </Grid>

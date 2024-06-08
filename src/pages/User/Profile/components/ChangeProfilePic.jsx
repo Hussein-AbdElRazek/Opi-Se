@@ -78,7 +78,7 @@ const ChangeProfilePic = () =>
                                         [{
                                             onClick: () =>
                                             {
-                                                profileImage !== "default.png" ? onImageUpdate(0) : onImageUpload()
+                                                profileImage && profileImage !== "default.png" ? onImageUpdate(0) : onImageUpload()
                                                 closeMenu();
                                             },
                                             children:
@@ -89,13 +89,13 @@ const ChangeProfilePic = () =>
                                                     <ListItemIcon className={classes.icon}>
                                                         <AddPicIcon className={classes.listIcon} />
                                                     </ListItemIcon>
-                                                    {profileImage !== "default.png" ? "Change Photo" : "Upload Photo"}
+                                                    {profileImage && profileImage !== "default.png" ? "Change Photo" : "Upload Photo"}
                                                 </div>,
                                         },
                                         {
                                             onClick: () => { removePhoto(); closeMenu(); },
                                             children:
-                                                profileImage !== "default.png" ? (
+                                                profileImage && profileImage !== "default.png" ? (
                                                     <div
                                                         className='center-y'
                                                     >

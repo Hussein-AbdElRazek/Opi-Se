@@ -29,11 +29,13 @@ const useAddNote = (goBack) =>
             if (message.includes("success"))
             {
                 // add note
-                dispatch(notesActions.addNote(data))
+                dispatch(notesActions.addNote({ ...data, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()}))
 
                 // emit add note
                 dispatch(emitAddNote({ ...reqBody, _id: data._id, createdAt: new Date() }))
 
+                // sort all notes
+                dispatch(notesActions.sortNotes())
                 goBack();
             }
         };
