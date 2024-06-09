@@ -8,6 +8,7 @@ import ResendEmail from '../pages/Guest/ResendEmail/ResendEmail'
 import ContactUs from '../pages/Guest/ContactUs/ContactUs'
 import Features from '../pages/Guest/Feauters/Features'
 import AboutUs from '../pages/Guest/AboutUs/AboutUs'
+import Landing from '../pages/Guest/Landing/Landing'
 
 const Guest = () =>
 {
@@ -22,7 +23,8 @@ const Guest = () =>
             <Route path='/contact' element={<ContactUs />} />
             <Route path='/features' element={<Features />} />
             <Route path='/about' element={<AboutUs />} />
-            <Route path="*" element={<Navigate to="/login" replace={true} />} />
+            <Route path='/' element={<Landing />} />
+            <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
     )
 }

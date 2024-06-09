@@ -3,11 +3,11 @@ import userNavbarClasses from '../appBar/styles/Navbar.module.css'
 import { Logo } from '../ui'
 import classes from './styles/GuestFooter.module.css'
 
-export const GuestFooter = () =>
+export const GuestFooter = ({forHome}) =>
 {
     return (
         <div
-            className={`${classes.container} center-y space-between`}
+            className={`${classes.container} center-y space-between ${forHome ? classes.forHome : ""}`}
         >
             <div className='center-y space-between w-100'>
                 <div

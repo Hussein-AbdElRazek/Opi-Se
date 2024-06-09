@@ -76,10 +76,12 @@ function App()
         </>
       ) :
         <>
-          
+
           {!location.pathname.includes("/login") && !location.pathname.includes("signup") ? (
             <>
-              <GuestNav />
+              <GuestNav
+                forHome={location.pathname === "/"}
+              />
 
               <PageLayout
                 type='guest'
@@ -87,10 +89,12 @@ function App()
                 <IndexRoutes />
               </PageLayout>
 
-              <GuestFooter />
+              <GuestFooter
+                forHome={location.pathname === "/"}
+              />
             </>
-          ):(
-              <IndexRoutes />
+          ) : (
+            <IndexRoutes />
           )}
         </>
       }

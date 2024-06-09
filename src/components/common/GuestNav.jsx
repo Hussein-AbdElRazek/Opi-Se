@@ -13,7 +13,7 @@ import { PopUpMenu } from './PopUpMenu'
 import { ReactComponent as MenuIcon } from '../../assets/icons/menu.svg'
 import { ReactComponent as CloseMenuIcon } from '../../assets/icons/closeMenu.svg'
 
-export const GuestNav = () =>
+export const GuestNav = ({ forHome }) =>
 {
     const tabs = [
         {
@@ -122,7 +122,7 @@ export const GuestNav = () =>
     ]
     return (
         <div
-            className={`${classes.container} center-y space-between`}
+            className={`${classes.container} center-y space-between ${forHome ? classes.forHome : ""}`}
         >
             <div
                 className={`${userNavbarClasses.logo} center-y`}

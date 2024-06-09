@@ -86,6 +86,11 @@
     color: var(--primary) !important;
 }
 
+.forHome {
+    background-color: var(--background);
+    border-bottom: 1px solid var(--black-5);
+}
+
 @media (max-width:900px) {
     .container {
         height: 55px;

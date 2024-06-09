@@ -1,0 +1,83 @@
+.hero h2 {
+    text-align: center;
+    font-size: var(--font-size-800);
+}
+
+.heroCard h3 {
+    margin: 0 0 5px 0;
+    font-weight: 500;
+    font-size: var(--font-size-800);
+}
+
+.heroCard span {
+    font-weight: 200;
+    font-size: var(--font-size-300);
+
+}
+
+.heroCard {
+    width: 250px;
+    height: 230px;
+    margin: 10px;
+    background-color: var(--secondary);
+    padding: 20px;
+    border-radius: 20px;
+    background-position: right bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: var(--background) !important;
+}
+
+.signupSection {
+    background-color: var(--secondary);
+    background-image: url('../../../assets/images/landingBG.svg');
+    background-position: center;
+    background-size: 90% 90%;
+    background-repeat: no-repeat;
+    min-height: 70vh;
+}
+
+.content {
+    max-width: 800px;
+}
+
+.signupSection h1 {
+    font-size: var(--font-size-4000);
+    color: var(--primary);
+}
+
+.signupSection p {
+    margin: auto;
+    color: var(--primary);
+    font-weight: 200;
+    margin-bottom: 30px;
+}
+
+.action {
+    width: 100%;
+}
+
+.action a {
+    background-color: var(--background) !important;
+    color: var(--secondary);
+    width: 200px;
+    padding: 12px 40px;
+    font-weight: bold;
+}
+
+@media (max-width:900px) {
+    .signupSection {
+        padding: 0 20px;
+    }
+
+}
+
+@media (max-width:600px) {
+    .signupSection {
+        padding: 0 10px;
+    }
+
+    .signupSection h1 {
+        font-size: var(--font-size-3000);
+    }
+}
