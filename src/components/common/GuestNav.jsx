@@ -43,7 +43,6 @@ export const GuestNav = ({ forHome }) =>
         "/about": 1,
         "/features": 2,
         "/contact": 3,
-        "": 4,
     }
 
     // Pop Menu data
@@ -137,7 +136,6 @@ export const GuestNav = ({ forHome }) =>
                     tabs={tabs}
                     tabsMap={tabsMap}
                     tabsClassName={classes.tabs}
-                    defaultValue={1}
                 />
 
                 <div
