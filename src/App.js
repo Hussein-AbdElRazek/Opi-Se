@@ -25,6 +25,7 @@ function App()
   //handle background color for user 
   //and guest i had handle it in index.css file 
   if (isLoggedIn && !firstTime) document.body.style.backgroundColor = "var(--background2)";
+  else document.body.style.backgroundColor = "var(--background)";
 
   // Update title based on page
   useEffect(() =>
@@ -77,7 +78,11 @@ function App()
       ) :
         <>
 
-          {!location.pathname.includes("/login") && !location.pathname.includes("signup") ? (
+          {(location.pathname === "/" ||
+            location.pathname.includes("about" ) ||
+            location.pathname.includes("features" )||
+            location.pathname.includes("contact" )
+          ) ? (
             <>
               <GuestNav
                 forHome={location.pathname === "/"}
