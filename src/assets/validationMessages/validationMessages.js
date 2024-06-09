@@ -20,3 +20,5 @@ export const number = "Enter a number"
 
 export const aboutMax = "About cannot exceed 1000 characters"
 
+export const messageMax = "Message cannot exceed 1000 characters"
+

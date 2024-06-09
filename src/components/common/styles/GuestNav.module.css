@@ -1,0 +1,128 @@
+.container {
+    height: 60px;
+    padding: 0 30px;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    background-color: var(--primary);
+    z-index: var(--layer-nav);
+}
+
+.links {
+    display: flex;
+    /* background-color: red; */
+    /* width: 100%; */
+}
+
+.tabs,
+.tabs a {
+    height: 40px !important;
+    min-height: 40px !important;
+}
+
+.tabs {
+    height: 40px !important;
+    min-height: 40px !important;
+}
+
+.authLinks {
+    margin-left: 30px;
+    margin-right: -10px;
+}
+
+.authLinks a {
+    margin: 0 10px;
+    padding: 0px 30px;
+    height: auto;
+    height: 40px;
+    width: auto;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.loginBtn {
+    background-color: var(--primary) !important;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+
+.popMenu {
+    display: none;
+}
+
+.closeMenuIcon {
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.openBtn {
+    width: 35px;
+    height: 35px;
+}
+
+.authMenu {
+    padding: 0 30px;
+}
+
+.authMenu a {
+    border-radius: 15px;
+    font-weight: 600 !important;
+    margin: 8px 0;
+    padding: 8px !important;
+    height: 50px !important;
+}
+
+.popSignUpBtn {
+    color: var(--primary) !important;
+    background-color: var(--secondary) !important;
+}
+
+.loginBtn {
+    color: var(--secondary) !important;
+}
+
+.signUpBtn {
+    color: var(--primary) !important;
+}
+
+@media (max-width:900px) {
+    .container {
+        height: 55px;
+        padding: 0 20px;
+    }
+
+    .links {
+        display: none;
+    }
+
+    .popMenu {
+        display: block;
+    }
+}
+
+@media (max-width:768px) {
+
+    .mainIcons,
+    .profileIcon {
+        display: none;
+    }
+
+    .popMenu {
+        display: flex;
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    .logo svg {
+        margin-left: -15px;
+    }
+
+    .authMenu {
+        padding: 0 10px;
+    }
+}

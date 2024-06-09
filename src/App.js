@@ -7,7 +7,7 @@ import './App.css';
 import IndexRoutes from './routes/IndexRoutes';
 import { NavBar } from './components/appBar';
 import { getWebsiteTitle } from './helpers/getWebsiteTitle';
-import { PageLayout } from './components/common';
+import { GuestFooter, GuestNav, PageLayout } from './components/common';
 import IncomingVideoCall from './pages/User/IncomingVideoCall/IncomingVideoCall';
 import CallContext from './callStore/call-context';
 import useGeneralSocket from './hooks/use-general-sockets';
@@ -75,7 +75,24 @@ function App()
           </PageLayout>
         </>
       ) :
-        <IndexRoutes />
+        <>
+          
+          {!location.pathname.includes("/login") && !location.pathname.includes("signup") ? (
+            <>
+              <GuestNav />
+
+              <PageLayout
+                type='guest'
+              >
+                <IndexRoutes />
+              </PageLayout>
+
+              <GuestFooter />
+            </>
+          ):(
+              <IndexRoutes />
+          )}
+        </>
       }
     </div>
   );
