@@ -1,7 +1,14 @@
 import classes from './styles/GuestCard.module.css'
-export const GuestCard = ({ children }) =>
+
+export const GuestCard = ({ children, color }) =>
 {
     return (
-        <div className={classes.container}>{children}</div>
+        <div className={`
+                ${classes.container} 
+                ${color === 'secondary' ?
+                classes.secondary : ''}`}
+        >
+            {children}
+        </div>
     )
 }

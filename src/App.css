@@ -227,3 +227,16 @@ a {
         height: 10px;
     }
 }
+
+.swiper-wrapper {
+    padding-bottom: 30px;
+}
+
+.swiper-backface-hidden .swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--secondary) !important;
+}

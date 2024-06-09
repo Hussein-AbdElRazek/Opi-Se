@@ -7,6 +7,7 @@ import ResetPassword from '../pages/Guest/ResetPassword/ResetPassword'
 import ResendEmail from '../pages/Guest/ResendEmail/ResendEmail'
 import ContactUs from '../pages/Guest/ContactUs/ContactUs'
 import Features from '../pages/Guest/Feauters/Features'
+import AboutUs from '../pages/Guest/AboutUs/AboutUs'
 
 const Guest = () =>
 {
@@ -20,6 +21,7 @@ const Guest = () =>
             <Route path='/reset-password/*' element={<ResetPassword />} />
             <Route path='/contact' element={<ContactUs />} />
             <Route path='/features' element={<Features />} />
+            <Route path='/about' element={<AboutUs />} />
             <Route path="*" element={<Navigate to="/login" replace={true} />} />
         </Routes>
     )
