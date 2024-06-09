@@ -16,3 +16,4 @@ export { LoadingFullScreen } from './LoadingFullScreen';
 export { HeaderTextHero } from './HeaderTextHero';
 export { CurveContainer } from './CurveContainer';
 export { GuestCard } from './GuestCard';
+export { PicAndText } from './PicAndText';
