@@ -91,6 +91,14 @@
     border-bottom: 1px solid var(--black-5);
 }
 
+.loginHome  {
+    background-color: var(--background) !important;
+}
+
+.signupHome  {
+    color: var(--background) !important;
+} 
+
 @media (max-width:900px) {
     .container {
         height: 55px;

@@ -29,6 +29,7 @@ const Landing = () =>
                     <HeroCard
                         title='Partner'
                         img={partnerImg}
+                        to={'/signup'}
                     />
                     <HeroCard
                         title='Mentor'
@@ -38,6 +39,7 @@ const Landing = () =>
                         title='Parents'
                         subTitle='Coming Soon'
                         img={parentsImg}
+                        disabled={true}
                     />
                 </div>
                 <br />

@@ -139,17 +139,17 @@ export const GuestNav = ({ forHome }) =>
                 />
 
                 <div
-                    className={`${classes.authLinks} center-y`}
+                    className={`${classes.authLinks} center-y `}
                 >
                     <Btn
                         to="/login"
-                        className={classes.loginBtn}
+                        className={`${classes.loginBtn} ${forHome ? classes.loginHome : ""}`}
                     >
                         Login
                     </Btn>
                     <Btn
                         to="/signup"
-                        className={classes.signUpBtn}
+                        className={`${classes.signUpBtn} ${forHome ? classes.signupHome : ""}`}
                     >
                         Sign Up
                     </Btn>

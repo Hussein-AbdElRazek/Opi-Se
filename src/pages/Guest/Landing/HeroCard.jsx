@@ -1,16 +1,24 @@
+import { ButtonBase } from '@mui/material'
 import classes from './Landing.module.css'
+import { NavLink } from 'react-router-dom'
 
-const HeroCard = ({ title, subTitle, img }) =>
+const HeroCard = ({ title, subTitle, img, to, disabled }) =>
 {
     return (
-        <div className={classes.heroCard}
+        <ButtonBase
+            className={classes.heroCard}
             style={{ backgroundImage: `url(${img})` }}
+            to={to}
+            disabled={disabled}
+            LinkComponent={NavLink}
         >
-            <h3>
-                {title}
-            </h3>
-            {subTitle && <span>{subTitle}</span>}
-        </div>
+            <div>
+                <h3>
+                    {title}
+                </h3>
+                {subTitle && <span>{subTitle}</span>}
+            </div>
+        </ButtonBase>
     )
 }
 

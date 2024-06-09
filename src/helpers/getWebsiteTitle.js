@@ -22,6 +22,10 @@ const titleMap = {
     "/chats": "Chats",
     "/chats/chat": "Chat",
 
+    "/features": "Features",
+    "/contact": "Contact Us",
+
+
 };
 export const getWebsiteTitle = (pathname) =>
 {
