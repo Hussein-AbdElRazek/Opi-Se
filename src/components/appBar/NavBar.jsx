@@ -10,6 +10,7 @@ import { ReactComponent as ProgressIcon } from '../../assets/icons/progress.svg'
 import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
+import { ReactComponent as MentorIcon } from '../../assets/icons/mentor.svg'
 import { PopMenu } from './PopMenu'
 import { useSelector } from 'react-redux'
 import Notifications from '../../pages/User/Notifications/Notifications'
@@ -43,6 +44,11 @@ export const NavBar = () =>
             to: `/mental-health`,
             Icon: MentalHealthIcon,
         },
+        {
+            title: 'Mentor',
+            to: `/mentor`,
+            Icon: MentorIcon,
+        },
     ]
 
     const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
@@ -57,8 +63,8 @@ export const NavBar = () =>
             <Grid
                 item
                 xl={4}
-                lg={4}
-                md={5}
+                lg={3.5}
+                md={4}
                 sm={6}
                 xs={4}
                 className="center-y"
@@ -79,8 +85,8 @@ export const NavBar = () =>
                 item
                 xl={3}
                 lg={3}
-                md={3}
-                sm={3}
+                md={3.5}
+                sm={3.5}
                 className={classes.mainIcons}
             >
                 {mainLinks.map(({ title, to, Icon, target }) => (

@@ -9,6 +9,7 @@ import { ReactComponent as ProgressIcon } from '../../assets/icons/progress.svg'
 import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
+import { ReactComponent as MentorIcon } from '../../assets/icons/mentor.svg'
 import classes from './styles/PopMenu.module.css'
 import { uiActions } from '../../store/ui-slice'
 import { ProfileIcon } from './ProfileIcon'
@@ -105,6 +106,19 @@ export const PopMenu = () =>
                     Mental Health
                 </>,
             to: `/mental-health`,
+        },
+        // mentor
+        {
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
+            children:
+                <>
+                    <ListItemIcon className={classes.icon}>
+                        <MentorIcon fill='var(--black-40)' />
+                    </ListItemIcon>
+                    Mental Health
+                </>,
+            to: `/mentor`,
         },
     ]
 

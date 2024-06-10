@@ -25,6 +25,7 @@ import EditNote from '../pages/User/Notes/components/EditNote'
 import Calender from '../pages/User/Tasks/Calender/Calender'
 import DayEventsModal from '../pages/User/Tasks/Calender/components/DayEventsModal'
 import Progress from '../pages/User/Progress/Progress'
+import MentorHome from '../pages/User/Mentor/Home/MentorHome'
 
 const User = () =>
 {
@@ -72,6 +73,7 @@ const User = () =>
             </Route>
 
             <Route path="/progress" element={<Progress />} />
+            <Route path="/mentor" element={<MentorHome />} />
 
             <Route path="*" element={<PageNotFound />} />
         </Routes>
