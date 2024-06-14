@@ -1,0 +1,165 @@
+.container {
+    padding: 0 50px;
+}
+
+.infoContainer {
+    width: 100%;
+}
+
+.infoContainer h1 {
+    margin-bottom: 30px;
+}
+
+.infoContainer p {
+    text-align: left;
+    line-height: 25px;
+    color: var(--black-80);
+    font-size: var(--font-size-700);
+    font-weight: 400;
+}
+
+.smTextContainer {
+    width: 55%;
+}
+
+.imgContainer {
+    width: 55%;
+    text-align: right;
+}
+
+.imgContainer img {
+    width: 80%;
+    max-width: 300px;
+}
+
+.titleContainer {
+    margin: 0 0 20px 0;
+}
+
+.uploadParent {
+    background-color: var(--primary);
+    padding: 20px;
+    border-radius: var(--border-radius-inputs);
+    margin: 40px 0;
+}
+
+.uploadParent h2 {
+    font-size: var(--font-size-600);
+    font-weight: 600;
+}
+
+.uploadBtn {
+    justify-content: flex-start;
+    text-transform: none;
+    color: var(--text-header) !important;
+    position: relative;
+    margin-right: 21px;
+}
+
+.uploadBtn::after {
+    content: ' ';
+    position: absolute;
+    right: -10px;
+    width: 1px;
+    height: 100%;
+    background-color: var(--text-paragraph);
+}
+
+.uploadBtn path {
+    fill: var(--text-header) !important;
+}
+
+.uploadContainer {
+    background-color: var(--background2);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-inputs);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hiddenInputFile {
+    display: none;
+}
+
+.file {
+    font-size: var(--font-size-200);
+    margin: 8px 8px 8px 0;
+}
+
+.file svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+
+.action {
+    width: 120px;
+    padding: 8px;
+    font-size: var(--font-size-400);
+}
+
+.actionDisabled {
+    background-color: var(--disabled-bg) !important;
+    color: var(--primary) !important;
+}
+
+@media (max-width:600px) {
+
+    .infoContainer {
+        flex-wrap: wrap;
+    }
+
+    .smTextContainer,
+    .imgContainer {
+        width: 100%;
+    }
+
+    .imgContainer {
+        text-align: center;
+    }
+
+    .infoContainer p {
+        font-size: var(--font-size-400);
+    }
+    .infoContainer h1 {
+        margin-bottom: 10px;
+    }
+
+    .uploadParent h2 {
+        font-size: var(--font-size-300);
+        margin: 5px 0;
+    }
+
+    .titleContainer {
+        margin-bottom: 10px;
+    }
+
+    .container {
+        padding: 0px;
+    }
+
+    .action {
+        width: calc(100%);
+        padding: 6px;
+        font-size: var(--font-size-200);
+        border-radius: 15px;
+    }
+
+    .uploadParent {
+        padding: 10px;
+    }
+
+    .uploadContainer {
+        padding: 5px 10px;
+        border-radius: var(--border-radius-inputs);
+    }
+
+    .uploadBtn {
+        font-size: var(--font-size-100) !important;
+        margin-right: 11px;
+    }
+
+    .uploadBtn::after {
+        right: -2px;
+    }
+}

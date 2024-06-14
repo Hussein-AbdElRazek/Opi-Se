@@ -6,7 +6,7 @@ import classes from './styles/Tabs.module.css'
 
 export const Tabs = (props) =>
 {
-    const { tabs, tabsMap, tabIndicatorStyle, tabsClassName, defaultValue, selectedStyle } = props;
+    const { tabs, tabsMap, tabIndicatorStyle, tabsClassName, defaultValue, selectedStyle, componentBeforeTabs } = props;
 
     // i use pathname to detect initial value 
     // to detect when reload where is tab indicator will be
@@ -39,6 +39,7 @@ export const Tabs = (props) =>
                 },
             }}
         >
+            {componentBeforeTabs}
             {tabs.map((tab) => (
                 <Tab
                     key={tab.value}

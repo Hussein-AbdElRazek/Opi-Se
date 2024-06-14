@@ -1,6 +1,7 @@
 .mcqContainer {
     /* because of answer have margin bottom*/
     margin-bottom: -20px !important;
+    position: relative;
 }
 
 .answer {
@@ -15,6 +16,7 @@
 
 .answer span {
     font-weight: 500;
+    color: var(--header-text) !important;
 }
 
 .answer svg {
@@ -22,8 +24,9 @@
     height: 20px;
 }
 
-.answer:hover,
+.hover:hover,
 .checked {
     background-color: var(--secondary-25);
     color: var(--secondary);
+    border-color: var(--secondary);
 }

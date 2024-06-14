@@ -1,0 +1,35 @@
+.container {
+    padding: 0 100px;
+}
+
+.score h4 {
+    font-size: var(--font-size-1000);
+}
+
+.info h1 {
+    text-align: center !important;
+}
+
+.info p {
+    font-size: var(--font-size-100);
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.info button {
+    margin: 0 !important;
+    border-radius: var(--border-radius-inputs);
+    width: 100%;
+    max-width: 280px;
+    padding: 8px 20px;
+}
+
+@media (max-width:900px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .info p {
+        margin-bottom: 30px;
+    }
+}

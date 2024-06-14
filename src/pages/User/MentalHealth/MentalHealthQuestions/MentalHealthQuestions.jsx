@@ -53,7 +53,6 @@ const MentalHealthQuestions = () =>
     // store data in store on blur
     const onBlur = (e, handleBlur) =>
     {
-        console.log("dsa", isNaN(""))
         // check if not number put it as string if number put it as number
         const value = e.target.value && !isNaN(e.target.value) ? Number(e.target.value) : e.target.value;
         const name = e.target.name;

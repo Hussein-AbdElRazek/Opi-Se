@@ -1,0 +1,10 @@
+.action {
+    padding: 6px 50px;
+}
+
+@media (max-width:600px) {
+    .action {
+        padding: 4px 30px;
+        border-radius: var(--border-radius-150);
+    }
+}

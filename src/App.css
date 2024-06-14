@@ -19,6 +19,7 @@
     --secondary-40: rgb(145, 192, 192);
     --secondary-10: rgba(3, 105, 105, 0.10);
     --secondary-15: rgba(3, 105, 105, 0.15);
+    --secondary-20: rgba(3, 105, 105, 0.20);
     --secondary-0: rgba(3, 105, 105, 0.0);
     --secondary-3: rgba(3, 105, 105, 0.3);
     --secondary-25: rgba(3, 105, 105, 0.25);
@@ -63,6 +64,13 @@
     --date-cell-current-month: #222B45;
     --coin: #FFD700;
     --footer-text: #0F172A;
+    --disabled-bg: #CCCCCC;
+    --correct: rgb(0, 128, 0);
+    --correct-bg: rgba(0, 128, 0, 0.15);
+    --wrong: rgb(255, 0, 0);
+    --wrong-bg: rgba(255, 0, 0, 0.15);
+    --no-answer: rgb(255, 165, 0);
+    --no-answer-bg: rgba(255, 165, 0, 0.15);
     /* ------------------------------ */
 
     /* Font Size */
@@ -94,14 +102,15 @@
     --border-radius-inputs: 10px;
     /* ------------------------------ */
     /*Z-Index*/
-    --layer-nav: 999;
-    --layer-video-call: 1000;
+    --layer-nav: 99;
+    --layer-video-call: 1001;
     --layer-loading: 5000;
     --layer-popper: 1500;
     --layer-modal: 2000;
     --layer-incoming-call: 3000;
     --layer-100: 10;
     --layer-200: 20;
+    --layer-1000: 1000;
     /* ------------------------------ */
 }
 
@@ -240,4 +249,8 @@ a {
 
 .swiper-pagination-bullet-active {
     background-color: var(--secondary) !important;
+}
+
+.MuiInputBase-input.Mui-disabled:hover {
+    border-color: var(--primary) !important;
 }

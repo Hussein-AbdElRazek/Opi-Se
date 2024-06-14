@@ -13,7 +13,7 @@ export const ProfilePic = (props) =>
             component={component}
             to={to}
         >
-            {(userName) && `${userName.split(' ')[0][0]} ${userName.split(' ').length === 2 ? userName.split(' ')[1][0] : ""}`}
+            {(userName) && `${userName.split(' ')[0][0]}${userName.split(' ').length === 2 ? userName.split(' ')[1][0] : ""}`}
         </Avatar>
     )
 }

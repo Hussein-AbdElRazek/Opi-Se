@@ -1,16 +1,35 @@
+.container {
+    position: relative;
+}
+
 .container textarea {
     background-color: var(--primary);
     border: none;
     padding: 15px;
     border-radius: var(--border-radius-inputs);
+    border: 1px solid var(--primary);
 }
 
 .container div {
     margin-top: 0 !important;
 }
 
+.fullWidth {
+    width: calc(100% - 110px);
+}
+
+.marginBottom {
+    margin-bottom: 30px;
+}
+
 @media (max-width:900px) {
     .container label {
         font-size: var(--font-size-800);
+    }
+}
+
+@media (max-width:600px) {
+    .fullWidth {
+        width: calc(100% - 110px + 80px);
     }
 }

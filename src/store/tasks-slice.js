@@ -9,7 +9,7 @@ import baseSocket from '../sockets/baseConnection';
 const socket = baseSocket;
 
 // sockets:
-// add
+// add task
 export const emitAddTask = createAsyncThunk(
     'tasks/emitAddTask',
     async (payload) =>
@@ -17,7 +17,7 @@ export const emitAddTask = createAsyncThunk(
         socket.emit('addTask', payload, () => { });
     }
 );
-
+// listen to get task
 export const listenToGetTask = createAsyncThunk(
     "tasks/listenToGetTask",
     async (_, thunkAPI) =>

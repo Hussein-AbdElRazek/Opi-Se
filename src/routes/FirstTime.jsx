@@ -9,8 +9,8 @@ const FirstTime = () =>
 
     return (
         <Routes>
-            <Route path='/about' element={<About />} />
-            <Route path="*" element={<Navigate to="/about" replace={true} />} />
+            <Route path='/prefers' element={<About />} />
+            <Route path="*" element={<Navigate to="/prefers" replace={true} />} />
         </Routes>
     )
 }

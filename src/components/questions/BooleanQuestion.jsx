@@ -53,7 +53,7 @@ export const BooleanQuestion = (props) =>
                                             onClick={() =>
                                             {
                                                 form.setFieldValue(name, firstRadio);
-                                                onBlur({ target: { value: firstRadio, name: name } })
+                                                typeof (onBlur) === "function" && onBlur({ target: { value: firstRadio, name: name } })
                                             }}
                                             className={`
                                                     ${classes.checkBtn}
@@ -74,7 +74,7 @@ export const BooleanQuestion = (props) =>
                                             onClick={() =>
                                             {
                                                 form.setFieldValue(name, secondRadio)
-                                                onBlur({ target: { value: secondRadio, name: name } })
+                                                typeof (onBlur) === "function" && onBlur({ target: { value: secondRadio, name: name } })
                                             }}
                                             className={`
                                                     ${classes.checkBtn} 

@@ -26,6 +26,9 @@ import Calender from '../pages/User/Tasks/Calender/Calender'
 import DayEventsModal from '../pages/User/Tasks/Calender/components/DayEventsModal'
 import Progress from '../pages/User/Progress/Progress'
 import MentorHome from '../pages/User/Mentor/Home/MentorHome'
+import Mentor from '../pages/User/Mentor/Mentor/Mentor'
+import Quizzes from '../pages/User/Mentor/Mentor/Quizzes/Quizzes'
+import Quiz from '../pages/User/Mentor/Mentor/Quiz/Quiz'
 
 const User = () =>
 {
@@ -73,7 +76,12 @@ const User = () =>
             </Route>
 
             <Route path="/progress" element={<Progress />} />
+            
             <Route path="/mentor" element={<MentorHome />} />
+            <Route path="/mentor/:mentorId" element={<Mentor />} >
+                <Route path="quizzes" element={<Quizzes />} />
+            </Route>
+            <Route path="/mentor/:mentorId/quizzes/:quizId" element={<Quiz />} />
 
             <Route path="*" element={<PageNotFound />} />
         </Routes>

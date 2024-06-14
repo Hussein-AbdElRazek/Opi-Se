@@ -25,7 +25,10 @@ const Login = () =>
         {
             if (message === "success")
             {
-                dispatch(authActions.login({ token: token, userData: { ...profileDetails, ...data } }))
+                dispatch(authActions.login({
+                    token: token,
+                    userData: { ...profileDetails, ...data }
+                }))
                 navigate("/", { replace: true });
             }
         };

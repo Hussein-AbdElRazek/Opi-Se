@@ -1,0 +1,14 @@
+.name {
+    font-size: var(--font-size-300);
+    font-weight: 500;
+    margin: 0 10px 0 0;
+}
+
+@media (max-width:600px) {
+    .name {
+        font-size: var(--font-size-100);
+        max-width: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

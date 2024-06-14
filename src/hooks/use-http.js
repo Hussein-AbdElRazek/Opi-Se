@@ -8,6 +8,7 @@ const useHttp = () =>
     const [isLoading, setIsLoading] = useState(false);
     const { enqueueSnackbar: popMessage } = useSnackbar();
     const token = useSelector((state) => state.auth.token)
+
     const sendRequest = useCallback(async (requestConfig, applyData) =>
     {
         setIsLoading(true);
@@ -35,12 +36,15 @@ const useHttp = () =>
                         requestConfig.baseUrl :
                         backendUrl}${requestConfig.url}`,
                     requestData);
+
             const data = await response.json();
             applyData(data);
+
             if (!response.ok)
             {
                 throw new Error(data.message)
             }
+
             let message = data.message;
             if (message)
             {
@@ -48,7 +52,7 @@ const useHttp = () =>
                 if (!message.includes("success")
                     // for not make error when no messages in chat
                     && (!message.includes("no") && !message.includes("yet")) &&
-                    //  for not make error when notification failed
+                    //  for not make error when push notification failed
                     (!message.includes("notification"))
                     && (data.statusCode !== 500 && !data.success)
                 ) { popMessage(message || "Something went wrong", { variant: "error" }) }
@@ -57,7 +61,7 @@ const useHttp = () =>
         {
             setIsLoading(false)
 
-            //  for not make error when notification failed
+            //  for not make error when push notification failed
             if ((!error.message.includes("notification")
                 && !error.message.includes("unexpected error !"))
                 // for not make error when No tasks yet !
@@ -66,6 +70,7 @@ const useHttp = () =>
         }
         setIsLoading(false)
     }, [popMessage, token])
+    
     return {
         isLoading,
         sendRequest,

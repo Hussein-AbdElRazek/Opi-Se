@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialNotesState = {
+const initialUiState = {
     isPopMenuOpened: {},
     isModalOpened: {},
 }
 
 const uiSlice = createSlice({
     name: 'ui',
-    initialState: initialNotesState,
+    initialState: initialUiState,
     reducers: {
         openPopMenu(state, action)
         {

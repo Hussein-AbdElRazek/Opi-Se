@@ -1,0 +1,88 @@
+.quizBar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 70px;
+    background-color: var(--primary);
+    padding: 0 30px;
+    z-index: var(--layer-1000);
+}
+
+.quizBar h1 {
+    font-size: var(--font-size-900);
+    width: auto;
+    margin: 0;
+    font-weight: 500;
+}
+
+.time svg {
+    background-color: var(--secondary-10);
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+}
+
+.time {
+    color: var(--text-paragraph);
+    font-weight: 500;
+}
+
+.grade {
+    font-weight: 500;
+    font-size: var(--font-size-700);
+}
+
+.grade span {
+    color: var(--secondary);
+    margin-left: 5px;
+}
+
+.backBtn {
+    height: 100%;
+}
+
+.backBtn button {
+    text-transform: none;
+    height: 100%;
+    border-radius: 0;
+    font-weight: 500;
+    font-size: var(--font-size-700);
+    color: var(--secondary);
+}
+
+.backBtn button:hover {
+    background-color: var(--secondary-10);
+}
+
+.backBtn path {
+    fill: var(--secondary);
+}
+
+.backBtn svg {
+    margin-right: 10px;
+    width: 18px;
+}
+
+@media (max-width:600px) {
+    .quizBar {
+        padding: 0 10px;
+    }
+
+    .quizBar h1 {
+        font-size: var(--font-size-600);
+        /* max-width: 30%; */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .backBtn button {
+        font-size: var(--font-size-400);
+    }
+
+    .grade {
+        font-size: var(--font-size-400);
+    }
+}

@@ -5,7 +5,7 @@ export const LoadingCenter = () =>
 {
     return (
         <div
-            className={classes.container}
+            className={`${classes.container} center-y center-x`}
         >
             <CircularProgress />
         </div>
