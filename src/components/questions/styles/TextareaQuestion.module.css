@@ -7,7 +7,7 @@
     border: none;
     padding: 15px;
     border-radius: var(--border-radius-inputs);
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary) !important;
 }
 
 .container div {

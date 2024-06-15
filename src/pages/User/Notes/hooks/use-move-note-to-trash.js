@@ -17,6 +17,7 @@ const useMoveNoteToTrash = () =>
 
     const handleMoveNoteToTrash = (noteId) => () =>
     {
+        console.log("deleted note id: ", noteId)
         // remove note from store
         dispatch(notesActions.removeNote(noteId))
         const onSuccess = () =>

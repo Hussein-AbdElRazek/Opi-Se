@@ -66,7 +66,7 @@ function App()
 
           {/* for incoming calls */}
           {(call && call?.isReceivingCall && !(call?.busy) && call?.callType === "video") && <IncomingVideoCall />}
-          {(call && call?.callType === "voice" && stream) && <VoiceCall />}
+          {(call && call?.callType === "voice" && (stream || call?.isReceivingCall )) && <VoiceCall />}
 
           {/* for incoming session */}
           <SessionConfirmation />

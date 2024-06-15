@@ -23,6 +23,7 @@ export const NoteItem = (props) =>
         noteTitle,
         noteContent,
         updatedAt,
+        createdAt,
         noteColor,
         isPinned,
         isTrash,
@@ -55,7 +56,7 @@ export const NoteItem = (props) =>
         >
             <div
                 className={classes.container}
-                style={{ backgroundColor: noteColor ? `var(${noteColor})` : "var(--trash-note)" }}
+                style={{ backgroundColor: (noteColor !== '#ffffff' && noteColor) ? `var(${noteColor})` : "var(--trash-note)" }}
             >
                 <Formik
                     initialValues={initialValues}
@@ -74,7 +75,7 @@ export const NoteItem = (props) =>
                                         ${classes.mb}
                                     `}
                             >
-                                <NoteDate date={updatedAt} />
+                                <NoteDate date={isTrash ? createdAt : updatedAt} />
 
                                 {(!isTrash) && <PinBtn pinNote={pinNote} _id={_id} isPinned={isPinned} />}
 
@@ -108,12 +109,12 @@ export const NoteItem = (props) =>
                                         to="edit"
                                         onClick={onEdit}
                                     >
-                                        <EditIcon  />
+                                        <EditIcon />
                                     </ButtonBase>
                                 )}
 
                                 {/* Options Btn */}
-                                {isTrash && <TrashOptions note={initialValues} />}
+                                {isTrash && <TrashOptions note={{ ...initialValues, createdAt, updatedAt: createdAt }} />}
                             </div>
 
                             <Divider className={`${classes.divider} ${classes.mb}`} />
@@ -141,7 +142,7 @@ export const NoteItem = (props) =>
                             <div
                                 className={`${classes.group} ${classes.positionRelative}`}
                             >
-                                <NoteTimeAndDate date={updatedAt} />
+                                <NoteTimeAndDate date={isTrash ? createdAt : updatedAt} />
 
                                 {/* Move to trash */}
                                 {!isTrash && (

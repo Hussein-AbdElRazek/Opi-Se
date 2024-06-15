@@ -19,7 +19,7 @@ const Guest = () =>
                 <Route path='resend-email' element={<ResendEmail />} />
             </Route>
             <Route path='/forgot-password' element={<ForgetPassword />} />
-            <Route path='/reset-password/*' element={<ResetPassword />} />
+            <Route path='/user/reset-password/*' element={<ResetPassword />} />
             <Route path='/contact' element={<ContactUs />} />
             <Route path='/features' element={<Features />} />
             <Route path='/about' element={<AboutUs />} />

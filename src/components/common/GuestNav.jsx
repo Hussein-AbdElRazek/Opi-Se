@@ -113,7 +113,7 @@ export const GuestNav = ({ forHome }) =>
                         to="/login"
                         className={classes.loginBtn}
                     >
-                        Sign Up
+                        Login
                     </Btn>
                 </div>
             ,

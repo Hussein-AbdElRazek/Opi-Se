@@ -250,7 +250,3 @@ a {
 .swiper-pagination-bullet-active {
     background-color: var(--secondary) !important;
 }
-
-.MuiInputBase-input.Mui-disabled:hover {
-    border-color: var(--primary) !important;
-}

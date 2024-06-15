@@ -8,6 +8,8 @@ import useResetNotesSlice from '../../../hooks/use-reset-notes-slice';
 import VectorAndText from '../../../components/common/VectorAndText';
 import noTrashImg from '../../../assets/images/noTrash.png'
 import classes from './styles/TrashBar.module.css'
+import { useDispatch } from 'react-redux';
+import { listenToNoteRestored } from '../../../store/notes-slice';
 const NotesTrash = () =>
 {
     // reset notes slice
@@ -23,6 +25,11 @@ const NotesTrash = () =>
     const notes = useSelector(state => state.notes.notes);
 
     // the rest of apis for that module in components
+
+    // listen to restore note
+    const dispatch = useDispatch();
+    dispatch(listenToNoteRestored());
+
     return (
         <>
             {!!notes?.length &&<TrashBar />}

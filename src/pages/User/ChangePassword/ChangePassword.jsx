@@ -23,7 +23,7 @@ const ChangePassword = () =>
         };
         changePassword(
             {
-                url: `${userModulePath}changePassword`,
+                url: `${userModulePath}/changePassword`,
                 method: "POST",
                 body: values,
             },

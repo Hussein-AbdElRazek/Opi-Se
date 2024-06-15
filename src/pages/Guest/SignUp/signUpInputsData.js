@@ -7,8 +7,8 @@ export const languagesInputs = [
         validateOnInput: (value, formik, name) =>
         {
             const indexOfLang = name[10];
-            const isEmpty = !value?.trim();
-            const levelHaveData = !!formik.values?.languages[indexOfLang]?.level;
+            const isEmpty = String(value)?.trim().length === 0;
+            const levelHaveData = !!formik?.values?.languages[indexOfLang]?.level;
             if (isEmpty && levelHaveData)
                 return "When Level have data Language Name is required"
         },
@@ -23,8 +23,8 @@ export const languagesInputs = [
         validateOnInput: (value, formik, name) =>
         {
             const indexOfLang = name[10];
-            const isEmpty = !value?.trim();
-            const languageNameHaveData = !!formik.values?.languages[indexOfLang]?.languageName;
+            const isEmpty = String(value)?.trim().length === 0;
+            const languageNameHaveData = !!formik?.values?.languages[indexOfLang]?.languageName;
             if (isEmpty && languageNameHaveData)
                 return "When Language Name have data Level is required"
         },
@@ -84,13 +84,7 @@ export const signUpInputs = [
         label: "Confirm Password",
         size: 6
     },
-    {
-        control: "input",
-        type: "text",
-        label: "National Id",
-        name: "nationalId",
-        size: 12
-    },
+
     {
         control: "array",
         inputs: languagesInputs,

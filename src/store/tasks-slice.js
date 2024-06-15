@@ -46,10 +46,26 @@ export const listenToUpdateTask = createAsyncThunk(
     {
         socket.on('getUpdatedTask', (data) =>
         {
-            //  update state
-            thunkAPI.dispatch(
-                tasksActions.updateTask(data.data)
-            );
+            const updatedTask = data.data
+            // case if move task from type to type
+            if (updatedTask?.oldStatus)
+            {
+                // remove task from old type
+                thunkAPI.dispatch(tasksActions.removeTask({ ...updatedTask, taskStatus: updatedTask.oldStatus }))
+
+                //add task to new type
+                thunkAPI.dispatch(tasksActions.addTask(updatedTask))
+            }
+            // case if edit task 
+            else
+            {
+                //  update state
+                thunkAPI.dispatch(
+                    tasksActions.updateTask(data.data)
+                );
+            }
+
+            console.log("getUpdatedTask", data)
         });
     }
 )
@@ -120,7 +136,8 @@ const initialTasksState = {
         JSON.parse(localStorage.getItem("openedTask")) : taskInitialValues
 }
 
-const isForCalender = window.location.pathname === "/tasks/calender";
+const isForCalender = window.location.pathname.includes("calender");
+
 const tasksSlice = createSlice({
     name: 'tasks',
     initialState: initialTasksState,

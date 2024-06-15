@@ -92,7 +92,7 @@ export const MCQ = (props) =>
 
             <FeedbackLabel isFinished={isFinished} answerType={answerType} />
 
-            <Points points={points} />
+            {points && <Points points={points} />}
         </div>
     )
 }

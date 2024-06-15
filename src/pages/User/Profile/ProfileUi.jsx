@@ -74,7 +74,7 @@ const ProfileUi = (props) =>
                 {(from === "recommendation" && !isMyProfile) && <RecommendationActions />}
 
                 {/* For anyone not me when doesn't have partner*/}
-                {(!havePartner && !isMyProfile) && <RecommendationActions />}
+                {(!havePartner && !isMyProfile && from !== "recommendation" && from !== "matchRequests" && !!profileData?.isAvailable) && <RecommendationActions />}
             </div>
             <div
                 className={classes.content}

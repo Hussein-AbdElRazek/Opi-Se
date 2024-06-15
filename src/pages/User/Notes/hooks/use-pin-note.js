@@ -23,7 +23,7 @@ const usePinNote = () =>
         // change isPinned state in store automatic not wait to loading
         const updateNoteState = {
             _id: noteId,
-            pinnedAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
             ...reqBody
         }
         dispatch(notesActions.updateNote(updateNoteState))

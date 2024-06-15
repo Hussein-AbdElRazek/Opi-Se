@@ -89,6 +89,9 @@
     padding: 20px;
     background-color: var(--primary);
     border-radius: var(--border-radius-150);
+    overflow: hidden;
+    overflow-wrap: break-word;
+    white-space: pre-line;
 }
 
 .userData {
@@ -170,7 +173,7 @@
     }
 
     .content {
-        padding: 0  13px;
+        padding: 0 13px;
     }
 }
 

@@ -35,6 +35,7 @@ export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, c
                     primary={
                         <h6
                             className={classes.message}
+                            title={`${itemData.message}`}
                         >
                             {((itemData.userName || itemData.partnerUserName) && itemData.requestStatus) && (
                                 <NavLink

@@ -30,7 +30,7 @@ const ResendEmail = () =>
 
         resendEmail(
             {
-                url: `${userModulePath}/resendVerificationEmail?${email}`,
+                url: `${userModulePath}/resendVerificationEmail?email=${email}`,
                 method: "GET",
             },
             getResponse

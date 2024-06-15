@@ -22,6 +22,8 @@ const useEditTask = ({ isNavigate }) =>
     const handleEditTask = (values, taskInitialValues) =>
     {
         const editedData = compareObjects(taskInitialValues, values)
+        console.log("editedData handleEditTask", editedData)
+        console.log("values handleEditTask", values)
 
         const getResponse = ({ message, data }) =>
         {
@@ -30,7 +32,7 @@ const useEditTask = ({ isNavigate }) =>
                 dispatch(tasksActions.updateTask(values))
 
                 // emit socket
-                dispatch(emitUpdateTask(data))
+                dispatch(emitUpdateTask(values))
                 if (isNavigate) navigate(-1 || "/tasks")
             }
         };

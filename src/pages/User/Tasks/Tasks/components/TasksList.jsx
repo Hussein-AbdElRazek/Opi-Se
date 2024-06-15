@@ -69,8 +69,7 @@ const TasksList = (props) =>
                                 <span
                                     className={`${classes.tasksLength} center-x center-y`}
                                 >
-                                    {/* TODO after pagination add instead of tasks.length totalTasksLength*/}
-                                    {tasks.length}
+                                    {totalTasksLength}
                                 </span>
                             </div>
 

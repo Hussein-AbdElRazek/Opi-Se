@@ -16,6 +16,7 @@ import
 
 import { Form, Formik } from 'formik';
 import { Outlet } from 'react-router-dom';
+import ExtractNationalId from './ExtractNationalId';
 
 const SignUpUi = (props) =>
 {
@@ -45,6 +46,9 @@ const SignUpUi = (props) =>
                 inputs={signUpInputs}
                 formik={formik}
                 disabled={isLoadingSignUp}
+              />
+              <ExtractNationalId
+                setFieldValue={formik.setFieldValue}
               />
               <Btn
                 type="submit"

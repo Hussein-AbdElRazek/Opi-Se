@@ -30,9 +30,9 @@ const useRestoreNote = (note, uiId) =>
                     noteId: note._id,
                     noteTitle: note.noteTitle,
                     noteContent: note.noteContent,
-                    noteColor: "--note1",
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
+                    noteColor: "#ffffff",
+                    createdAt: note.createdAt,
+                    updatedAt: note.updatedAt,
                 }))
 
                 // close modal of confirmation

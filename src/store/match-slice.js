@@ -41,7 +41,6 @@ export const listenToLeaveRoom = createAsyncThunk(
             );
 
             // make notification
-            thunkAPI.dispatch(authActions.updateUserNotifications({ message: "Your partner dis match with you, it's not the end of the journey find another partner" }))
             thunkAPI.dispatch(userActions.updateNewNotificationMark(true))
 
             // if open chats navigate home

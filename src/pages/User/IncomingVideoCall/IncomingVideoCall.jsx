@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import IncomingVideoCallUi from './IncomingVideoCallUi'
 import CallContext from '../../../callStore/call-context';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from "notistack";
 
 const IncomingVideoCall = () =>
 {
@@ -9,8 +10,16 @@ const IncomingVideoCall = () =>
 
     // establish stream (take permission & get video, audio)
     const navigate = useNavigate();
+    const { enqueueSnackbar: popMessage } = useSnackbar();
+
     const handleAnswer = () =>
     {
+        // in case no stream
+        if (!stream)
+        {
+            popMessage("Allow camera/mic permissions first to can answer call")
+            return
+        }
         navigate("/video");
         setCall(prev => ({ ...prev, isReceivingCall: false }))
         setIsAnswer(true)

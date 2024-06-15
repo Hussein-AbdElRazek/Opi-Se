@@ -48,13 +48,13 @@ const Task = (props) =>
                             ${snapshot.isDropAnimating ? classes.stopDraggingInput : ""} `}
                         >
                             {title &&
-                                <h6>
+                                <h6 title={title}>
                                     {title}
                                 </h6>
                             }
 
                             {content &&
-                                <p>
+                                <p title={content}>
                                     {content}
                                 </p>
                             }

@@ -3,12 +3,16 @@ import { useSnackbar } from "notistack";
 import { trimObject } from "../helpers/trimObject";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { backendUrl } from "../config";
+import usePreventClose from "./use-prevent-close";
 const useHttp = () =>
 {
     const [isLoading, setIsLoading] = useState(false);
     const { enqueueSnackbar: popMessage } = useSnackbar();
     const token = useSelector((state) => state.auth.token)
 
+    // stop from reload or close until isLoading ended
+    usePreventClose(isLoading)
+    
     const sendRequest = useCallback(async (requestConfig, applyData) =>
     {
         setIsLoading(true);

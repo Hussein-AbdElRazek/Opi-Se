@@ -24,7 +24,7 @@ export const listenToGetNote = createAsyncThunk(
         {
             //  update state
             thunkAPI.dispatch(
-                notesActions.addNote(data.data)
+                notesActions.addNote({ ...data.data, updatedAt: data?.data?.createdAt })
             );
         });
     }
@@ -66,10 +66,14 @@ export const listenToPinNote = createAsyncThunk(
     {
         socket.on('notePinned', (data) =>
         {
+            console.log("notePinned", data)
             // update state
             thunkAPI.dispatch(
                 notesActions.updateNote(data.data)
             );
+
+            // sort notes
+            thunkAPI.dispatch(notesActions.sortNotes());
         });
     }
 )
@@ -113,20 +117,28 @@ export const listenToNoteRestored = createAsyncThunk(
         socket.on('noteRestored', (data) =>
         {
             const currentPathname = window.location.pathname;
-            console.log("noteRestored", data)
+            // console.log("noteRestored", data)
+            const restoredNote = { _id: data.data.noteId, ...data.data, }
+            // console.log("final restored ", restoredNote)
             //  update state
             // if in notes page add it
             if (currentPathname === "/notes")
             {
-                thunkAPI.dispatch(
-                    notesActions.addNote(data.data)
-                )
+                // i reolad page beacuse id i will recieve will changed from database 
+                // so i reload to get new one
+                window.location.reload();
+                // thunkAPI.dispatch(
+                //     notesActions.addNote(restoredNote)
+                // )
+                // thunkAPI.dispatch(
+                //     notesActions.sortNotes()
+                // )
             }
             // if in trash notes page remove it
             else
             {
                 thunkAPI.dispatch(
-                    notesActions.removeNote(data.data._id)
+                    notesActions.removeNote(restoredNote._id)
                 )
             }
         });

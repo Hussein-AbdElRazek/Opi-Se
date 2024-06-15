@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
 
 import baseSocket from "../sockets/baseConnection";
+import usePreventClose from "../hooks/use-prevent-close";
 
 const CallContext = React.createContext();
 
@@ -51,7 +52,7 @@ export const CallContextProvider = (props) =>
         let tempStream;
         try
         {
-            if (!stream) tempStream = await navigator.mediaDevices.getUserMedia({ video: callType === "video", audio: true });
+            if (!stream) tempStream = await navigator?.mediaDevices?.getUserMedia({ video: callType === "video", audio: true });
             console.log("current stream", stream);
             if (!stream)
             {
@@ -188,7 +189,7 @@ export const CallContextProvider = (props) =>
     {
         if (stream && callerId)
         {
-            console.log("stream stream",stream)
+            console.log("stream stream", stream)
             callUser(callerId);
             setCallerId(null)
         }
@@ -431,6 +432,9 @@ export const CallContextProvider = (props) =>
 
         }
     }, [callEnded, popMessage])
+
+    // stop from reload or close until call ended
+    usePreventClose(call)
 
     const contextValue = {
         call,

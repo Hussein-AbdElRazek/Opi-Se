@@ -68,8 +68,12 @@ export const deleteMessage = createAsyncThunk(
     'chat/deleteMessage',
     async (payload, thunkAPI) =>
     {
-        socket.emit('deleteMessage', payload.requestBody, () =>
+        console.log("payload.requestBody", payload.requestBody)
+            console.log("payload.requestBody", payload.requestBody)
+
+        socket.emit('deleteMessage', payload.requestBody, (res) =>
         {
+            console.log("res", res)
             thunkAPI.dispatch(
                 chatActions.deleteMessage({
                     messagesId: payload.messagesId, messageId: payload.requestBody.messageId
@@ -83,9 +87,10 @@ export const listenToDeleteMessage = createAsyncThunk(
     "chat/listenToDeleteMessage",
     async (messagesId, thunkAPI) =>
     {
+        console.log("messagesId", messagesId)
         socket.on('messageDeleted', (data) =>
         {
-            console.log("messageDeleted", data)
+            console.log("messageDeleted.........", data)
             //  update state
             thunkAPI.dispatch(
                 chatActions.deleteMessage({
@@ -221,14 +226,15 @@ export const uploadChatMedia = createAsyncThunk(
     async (payload, thunkAPI) =>
     {
         console.log("payload", payload)
-        socket.emit('uploadChatMedia', payload, (res) => { });
+        socket.emit('uploadChatMedia', payload, (res) => { console.log("uploadChatMedia res", res) });
     }
 );
 export const listenToReceiveMedia = createAsyncThunk(
     "chat/listenToReceiveMedia",
     async (payload, thunkAPI) =>
     {
-        socket.on('showMediainChat', (data) =>
+        console.log("listen to reciev meida functionsfdddddddddd")
+        socket.on('showMediaInChat', (data) =>
         {
             console.log("media", data)
             // TODO handle it after updated from zoz with id
@@ -262,7 +268,8 @@ export const selectFromPoll = createAsyncThunk(
     'chat/selectFromPoll',
     async (payload) =>
     {
-        socket.emit('selectFromPoll', payload, (res) => {  });
+        console.log("payload sender", payload);
+        socket.emit('selectFromPoll', payload, (res) => { console.log("selectFromPoll sender" , res) });
     }
 );
 export const listenToPollOptionSelected = createAsyncThunk(
@@ -273,7 +280,7 @@ export const listenToPollOptionSelected = createAsyncThunk(
         {
             //  update state
             // TODO handle it 
-            console.log("pollOptionSelected", res)
+            console.log("pollOptionSelected recive", res)
             // const updatedPollAnswers = selectOption(optionSelectors, pollAnswers, optionNumber, optionVotes, myId);
             // thunkAPI.dispatch(
             //     chatActions.updateMessage({

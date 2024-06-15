@@ -43,6 +43,7 @@ const EditProfileUi = (props) =>
                                 >
                                     <LoopOnInputs
                                         inputs={editProfileInputs}
+                                        formik={formik}
                                         disabled={isLoadingEditProfile}
                                     />
 

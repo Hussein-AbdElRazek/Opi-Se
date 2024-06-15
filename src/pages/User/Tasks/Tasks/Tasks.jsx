@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { DragDropContext } from 'react-beautiful-dnd'
 
 import useGetSpecificTasksType from './hooks/use-get-specific-tasks-type'
@@ -80,8 +80,8 @@ const Tasks = () =>
         1: <RenderInProgressTasks />,
         2: <RenderDoneTasks />,
     }
-
-    const RenderOpenedTypeForSmallScreens = tasksTypeMap[tasksTabsMap[window.location.pathname]]
+    const pathname = useLocation().pathname;
+    const RenderOpenedTypeForSmallScreens = tasksTypeMap[tasksTabsMap[pathname]]
 
     // for render component based on size of window
     const screenWidth = useScreenWidth();

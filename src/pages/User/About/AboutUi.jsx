@@ -13,7 +13,7 @@ import
 } from '../../../components/inputs';
 import { aboutInitialValues, aboutInputs } from './aboutInputsData';
 import { aboutValidationSchema } from './aboutValidationSchema';
-import arrowRightIcon from '../../../assets/icons/arrowRight.svg'
+import { ReactComponent as ArrowRightIcon } from '../../../assets/icons/arrowRight.svg'
 import classes from './About.module.css'
 
 const AboutUi = (props) =>
@@ -39,7 +39,11 @@ const AboutUi = (props) =>
                             action={
                                 <Btn
                                     size="small"
-                                    endIcon={<img src={arrowRightIcon} alt="arrow right" />}
+                                    endIcon={
+                                        <ArrowRightIcon
+                                            fill={isLoadingSubmitUserPrefers ?
+                                                'transparent' : 'var(--primary)'}
+                                        />}
                                     type="submit"
                                     isLoading={isLoadingSubmitUserPrefers}
                                 >
@@ -58,8 +62,10 @@ const AboutUi = (props) =>
                             >
                                 <LoopOnInputs
                                     inputs={aboutInputs}
+                                    disabled={isLoadingSubmitUserPrefers}
                                 />
-                                <Skills formik={formik} />
+                                {isLoadingSubmitUserPrefers && <br />}
+                                <Skills formik={formik} disabled={isLoadingSubmitUserPrefers} />
                             </div>
                         </FormCard >
                     </Form>

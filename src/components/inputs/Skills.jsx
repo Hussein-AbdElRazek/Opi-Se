@@ -72,7 +72,7 @@ export const Skills = (props) =>
     };
 
     return (
-        <>
+        <div className={`${skillName.trim() !== '' ? classes.parent : ''}`}>
             {/* SKILLS container, label and input hidden when disabled */}
             <div
                 className={!disabled ? classes.container : ""}
@@ -104,40 +104,39 @@ export const Skills = (props) =>
                             className={classes.input}
                         />
                     )}
-                </div>
-            </div>
-            {/* Rate hidden when disabled */}
-            {
-                skillName.trim() !== '' && (
-                    <div
-                        className={classes.rateContainer}
-                    >
-                        <p>Rate this skill out of five</p>
-                        <Slider
-                            aria-label="Skill rate"
-                            defaultValue={0}
-                            step={1}
-                            min={1}
-                            max={5}
-                            valueLabelDisplay="auto"
-                            marks={skillRateMarks}
-                            className={classes.slider}
-                            onChange={onChangeSlider}
-                            value={skillRate}
-                        />
+                </div>{/* Rate hidden when disabled */}
+                {
+                    skillName.trim() !== '' && (
                         <div
-                            className={classes.rateAction}
+                            className={classes.rateContainer}
                         >
-                            <Btn
-                                onClick={handleAddSkill}
+                            <p>Rate this skill out of five</p>
+                            <Slider
+                                aria-label="Skill rate"
+                                defaultValue={0}
+                                step={1}
+                                min={1}
+                                max={5}
+                                valueLabelDisplay="auto"
+                                marks={skillRateMarks}
+                                className={classes.slider}
+                                onChange={onChangeSlider}
+                                value={skillRate}
+                            />
+                            <div
+                                className={classes.rateAction}
                             >
-                                Done
-                            </Btn>
+                                <Btn
+                                    onClick={handleAddSkill}
+                                >
+                                    Done
+                                </Btn>
+                            </div>
                         </div>
-                    </div>
-                )
-            }
-        </>
+                    )
+                }
+            </div>
+        </div>
     );
 };
 

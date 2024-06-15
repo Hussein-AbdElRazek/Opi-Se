@@ -13,7 +13,10 @@
     width: calc(100% - 40px);
     margin: 0;
     font-size: var(--font-size-200);
+    overflow: hidden;
     overflow-wrap: break-word;
+    white-space: pre-line;
+    text-overflow: ellipsis;
 }
 
 .message a {

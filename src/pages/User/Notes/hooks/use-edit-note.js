@@ -28,12 +28,13 @@ const useEditNote = (goBack) =>
         {
             if (message.includes("success"))
             {
+                const updatedNote = { ...values, updatedAt: new Date().toISOString() }
                 //update note in store
-                dispatch(notesActions.updateNote(values))
+                dispatch(notesActions.updateNote(updatedNote))
 
                 // emit update note
                 dispatch(emitUpdateNote({
-                    ...values,
+                    ...updatedNote,
                     _id,
                 }))
 

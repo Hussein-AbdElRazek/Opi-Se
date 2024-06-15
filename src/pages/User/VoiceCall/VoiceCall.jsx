@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useSnackbar } from "notistack";
+
 import VoiceCallUi from './VoiceCallUi'
 import useTimer from '../../../hooks/use-timer'
 import CallContext from '../../../callStore/call-context';
@@ -22,10 +24,17 @@ const VoiceCall = () =>
         toggleMedia,
         isMyMicOn,
     } = useContext(CallContext);
+    const { enqueueSnackbar: popMessage } = useSnackbar();
 
     // establish stream (take permission & get video, audio)
     const handleAnswer = () =>
     {
+        // in case no stream
+        if (!stream)
+        {
+            popMessage("Allow/mic permission first to can answer call")
+            return
+        }
         setCall(prev => ({ ...prev, isReceivingCall: false }))
         setIsAnswer(true)
     }
