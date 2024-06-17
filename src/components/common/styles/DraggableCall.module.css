@@ -96,3 +96,10 @@
 .videoContainer {
     height: 120px;
 }
+
+.containerForMobile .videoContainer {
+    height: 20vh !important;
+    min-height: 120px !important;
+    max-width: 400px !important;
+    margin: 10px  auto;
+}

@@ -9,22 +9,23 @@ export const PopChatCard = ({ header, children, inputBar, type, chatId, handleUp
                 ${classes.container} 
             `}
         >
-            {header}
-            <div
-                className={`
+            <div style={{ position: "relative" }}>
+                {header}
+                <div
+                    className={`
                     ${classes.chatContainer} 
                     ${!!inputBar ? classes.paddingBottom : ""}
             `}
-            >
-                <div
-                    className={`
+                >
+                    <div
+                        className={`
                     ${classes.content} 
                     ${type === "mediaPage" ? classes.mediaPage : ""}
                 `}
-                >
-                    {children}
+                    >
+                        {children}
+                    </div>
                 </div>
-
                 {inputBar && (
                     <div
                         className={classes.inputBarContainer}
@@ -40,6 +41,7 @@ export const PopChatCard = ({ header, children, inputBar, type, chatId, handleUp
                     flag={true}
                 />)}
             </div>
+
         </div>
     )
 }

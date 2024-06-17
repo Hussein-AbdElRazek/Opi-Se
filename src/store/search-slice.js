@@ -11,7 +11,11 @@ const searchSlice = createSlice({
         setUserData(state, action)
         {
             state.userData = action.payload ;
-        }
+        },
+        updateUserData(state, action)
+        {
+            state.userData = { ...state.userData, ...action.payload };
+        },
     }
 })
 

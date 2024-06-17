@@ -31,22 +31,17 @@ const ChatItem = ({ chatItemData }) =>
                     }
                 }}
             >
-                <Badge
-                    overlap="circular"
-                    variant="dot"
-                    invisible={!isNewMessage}
-                >
-                    <ListItemAvatar>
-                        <div
-                            className={classes.profilePicContainer}
-                        >
-                            <ProfilePic
-                                profileImage={chatItemData.profileImage}
-                                userName={chatItemData.userName}
-                            />
-                        </div>
-                    </ListItemAvatar>
-                </Badge>
+
+                <ListItemAvatar>
+                    <div
+                        className={classes.profilePicContainer}
+                    >
+                        <ProfilePic
+                            profileImage={chatItemData.profileImage}
+                            userName={chatItemData.userName}
+                        />
+                    </div>
+                </ListItemAvatar>
                 <ListItemText
                     sx={{ "& span": { margin: "0 !important" } }}
                     primary={
@@ -56,6 +51,12 @@ const ChatItem = ({ chatItemData }) =>
                             {chatItemData.userName}
                         </h6>
                     }
+                />
+                <Badge
+                    overlap="circular"
+                    variant="dot"
+                    invisible={!isNewMessage}
+                    className={classes.newMessageMark}
                 />
             </ListItemButton>
         </ListItem>

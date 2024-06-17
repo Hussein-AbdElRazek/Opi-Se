@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useHttp from '../../../hooks/use-http';
 import MatchRequestsUi from './MatchRequestsUi'
 import { useDispatch, useSelector } from 'react-redux';
 import { matchModulePath } from '../../../config';
 import { uiActions } from '../../../store/ui-slice';
+import { matchActions } from '../../../store/match-slice';
 
 const MatchRequests = () =>
 {
@@ -12,7 +13,7 @@ const MatchRequests = () =>
         isLoading: isLoadingGetRequests,
         sendRequest: getRequests
     } = useHttp();
-    const [requests, setRequests] = useState([]);
+    const requests = useSelector(state => state.match.requests)
     const uiId = "requests";
     const isRequestsOpen = !!useSelector(state => state.ui.isPopMenuOpened)[uiId]
 
@@ -22,7 +23,7 @@ const MatchRequests = () =>
         {
             if (message === "success")
             {
-                setRequests(data.partnerRequests)
+                dispatch(matchActions.mergeRequests(data.partnerRequests))
             }
         };
 
@@ -32,7 +33,7 @@ const MatchRequests = () =>
             },
             getResponse
         );
-    }, [getRequests, isRequestsOpen])
+    }, [dispatch, getRequests, isRequestsOpen])
 
     const closeRequestsMenu = () =>
     {

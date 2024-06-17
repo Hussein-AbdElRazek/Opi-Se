@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import EditProfileUi from './EditProfileUi'
 import { useDispatch, useSelector } from 'react-redux'
 import useHttp from '../../../hooks/use-http';
@@ -7,6 +7,7 @@ import { compareObjects } from '../../../helpers/compareObjects';
 import { useSnackbar } from 'notistack';
 import { authActions } from '../../../store/auth-slice';
 import { recommendationModulePath, userModulePath } from '../../../config';
+import useGetMyProfile from '../../../hooks/commonApis/use-get-my-profile';
 
 const EditProfile = () =>
 {
@@ -97,13 +98,19 @@ const EditProfile = () =>
             getResponse
         );
     }
-
+    const {
+        handleGetMyProfile,
+    } = useGetMyProfile();
+    useEffect(() =>
+    {
+        handleGetMyProfile();
+    }, [handleGetMyProfile])
     return (
         <EditProfileUi
             initialUserData={initialUserData}
             handleEditProfile={handleEditProfile}
             isLoadingEditProfile={isLoadingEditProfile}
-            
+
             initialUserPrefers={initialUserPrefers}
             handleEditUserPrefers={handleEditUserPrefers}
             isLoadingEditUserPrefers={isLoadingEditUserPrefers}

@@ -1,14 +1,14 @@
 import React from 'react'
 import MatchActionsUi from './MatchActionsUi'
 import useHttp from '../../../hooks/use-http';
-import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { notifyUserRoom } from '../../../store/user-slice';
-import { acceptPartnerRequest, joinMatchRoom } from '../../../store/match-slice';
+import { acceptPartnerRequest, joinMatchRoom, matchActions } from '../../../store/match-slice';
 import { authActions } from '../../../store/auth-slice';
 import { matchModulePath } from '../../../config';
+import { uiActions } from '../../../store/ui-slice';
 
 const MatchActions = ({ requestData, smallBtn }) =>
 {
@@ -20,7 +20,6 @@ const MatchActions = ({ requestData, smallBtn }) =>
         isLoading: isLoadingDeclineMatch,
         sendRequest: declineMatch
     } = useHttp();
-    const navigate = useNavigate()
     const { enqueueSnackbar: popMessage } = useSnackbar();
     const dispatch = useDispatch();
     const myData = useSelector(state=>state.auth.userData)
@@ -30,10 +29,8 @@ const MatchActions = ({ requestData, smallBtn }) =>
         {
             if (message.includes("success") || message.includes("unexpected error !"))
             {
-                //TODO make slice for requests and remove it after it 
-                // for now i just navigate to home and pop success
                 popMessage("Match Accepted Successfully", { variant: "success" })
-                navigate("/");
+                dispatch(uiActions.closePopMenu("requests"))
 
                 // TODO ask zezo to send partnerImage in request list
                 const socketReqBody = {
@@ -49,11 +46,11 @@ const MatchActions = ({ requestData, smallBtn }) =>
                 // notify user
                 dispatch(notifyUserRoom(requestData.partnerId));
 
-                // TODO fetch user data for update user data in any place have partenr
-
                 // update match data and join match room
                 dispatch(authActions.updateUserData({
                     matchId: matchId,
+                    alreadyRequestedMe: false,
+                    alreadyRequestedHim: false,
                     partnerId: { _id: requestData.partnerId, userName: requestData.partnerUserName, profileImage: "default.png" }
                 }))
                 dispatch(joinMatchRoom());
@@ -80,13 +77,10 @@ const MatchActions = ({ requestData, smallBtn }) =>
         }
         const getResponse = ({ message }) =>
         {
-            // TODO ask zezo for notification doesn't make it send error
             if (message.includes("success") || message.includes("notification"))
             {
-                //TODO make slice for requests and remove it after it 
-                // for now i just navigate to home and pop success
+                dispatch(matchActions.removeRequest(requestData._id))
                 popMessage("Request Declined Successfully", { variant: "success" })
-                navigate("/");
             }
         };
 
@@ -98,7 +92,6 @@ const MatchActions = ({ requestData, smallBtn }) =>
             },
             getResponse
         );
-
     }
 
     return (

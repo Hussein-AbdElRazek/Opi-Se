@@ -58,12 +58,14 @@ export const DraggableCall = (props) =>
                         </div>
 
                         {type === "video" && (
-                            <div className={`${classes.marginTop} ${classes.videoContainer}`}>
-                                <Video
-                                    videoRef={video}
-                                    muted={true}
-                                    isIncoming={true}
-                                />
+                            <div className='w-100'>
+                                <div className={`${classes.marginTop} ${classes.videoContainer}`}>
+                                    <Video
+                                        videoRef={video}
+                                        muted={true}
+                                        isIncoming={true}
+                                    />
+                                </div>
                             </div>
                         )}
 

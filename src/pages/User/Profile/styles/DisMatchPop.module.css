@@ -1,6 +1,12 @@
 .container {
     outline: none;
-    text-align: center;
+    max-width: calc(100% - 20px);
+    max-height: calc(100% - 20px);
+}
+
+.card {
+    padding: 20px !important;
+    overflow: hidden;
 }
 
 .container h4 {
@@ -16,6 +22,32 @@
     font-size: var(--font-size-600);
 }
 
-.container span {
+/* .container span {
     margin: 10px 0;
+} */
+
+.rate {
+    justify-content: flex-start;
+    display: flex;
+    margin: 20px 0;
+}
+
+.rate button:nth-child(5) {
+    border-radius: 0 var(--border-radius-150) var(--border-radius-150) 0;
+}
+
+.rate button:nth-child(1) {
+    border-radius: var(--border-radius-150) 0 0 var(--border-radius-150);
+}
+
+.btnContainer {
+    width: 75px !important;
+    height: 60px !important;
+    border: 1px solid var(--border-social) !important;
+    font-size: var(--font-size-600);
+    font-weight: 600;
+}
+
+.chosen {
+    border:2px solid var(--secondary) !important;
 }

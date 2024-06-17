@@ -1,8 +1,12 @@
 import { useSnackbar } from "notistack";
 
 import useHttp from "../../../../../hooks/use-http";
-import { useNavigate } from "react-router-dom";
 import { matchModulePath } from "../../../../../config";
+import { useDispatch } from "react-redux";
+import { recommendationActions } from "../../../../../store/recommendation-slice";
+import { notifyUserRoom } from "../../../../../store/user-slice";
+import { authActions } from "../../../../../store/auth-slice";
+import { searchActions } from "../../../../../store/search-slice";
 
 const useSendPartnerRequest = () =>
 {
@@ -13,7 +17,7 @@ const useSendPartnerRequest = () =>
         isLoading: isLoadingSendPartnerRequest,
     } = useHttp();
     const { enqueueSnackbar: popMessage } = useSnackbar();
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSendPartnerRequest = (userData) =>
     {
@@ -22,7 +26,11 @@ const useSendPartnerRequest = () =>
             if (message.includes("success"))
             {
                 popMessage("Request sent successfully")
-                navigate("/");
+                dispatch(recommendationActions.addPartner(userData._id))
+                dispatch(authActions.updateUserData({ alreadyRequestedHim: true }))
+                dispatch(searchActions.updateUserData({ alreadyRequestedHim: true }))
+                // notify user
+                dispatch(notifyUserRoom(userData._id));
             }
         };
 
@@ -34,7 +42,7 @@ const useSendPartnerRequest = () =>
             getResponse
         );
     }
-    
+
     return {
         handleSendPartnerRequest,
         isLoadingSendPartnerRequest,

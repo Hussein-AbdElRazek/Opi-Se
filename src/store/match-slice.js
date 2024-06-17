@@ -4,9 +4,11 @@ import baseSocket from '../sockets/baseConnection';
 import { updateSocketQuery } from '../helpers/updateSocketsQuery';
 import { authActions } from './auth-slice';
 import { userActions } from './user-slice';
+import { mergeToUnique } from '../helpers/mergeToUnique';
 
 const initialMatchState = {
     connected: false,
+    requests:[],
 }
 
 
@@ -82,7 +84,6 @@ export const listenToMatchRequestApproved = createAsyncThunk(
     "match/listenToMatchRequestApproved",
     async (_, thunkAPI) =>
     {
-        console.log("matchRequestApproved")
 
         socket.on('matchRequestApproved', (data) =>
         {
@@ -114,6 +115,16 @@ export const listenToMatchRequestApproved = createAsyncThunk(
 const matchSlice = createSlice({
     name: 'match',
     initialState: initialMatchState,
+    reducers: {
+        mergeRequests(state, action)
+        {
+            state.requests = mergeToUnique(state.requests, action.payload);
+        },
+        removeRequest(state, action)
+        {
+            state.requests = state.requests.filter(ele => ele._id !== action.payload)
+        },
+    }
 })
 
 

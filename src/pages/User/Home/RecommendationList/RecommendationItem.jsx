@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './RecommendationListUi.module.css'
 import { ProfilePic } from '../../../../components/ui';
 import useSendPartnerRequest from './hooks/use-send-partner-request';
+import { Btn } from '../../../../components/inputs';
 const RecommendationItem = ({ userData }) =>
 {
     const {
@@ -44,16 +45,27 @@ const RecommendationItem = ({ userData }) =>
                 <div
                     className={classes.action}
                 >
-                    <LoadingButton
-                        loading={isLoadingSendPartnerRequest}
-                        onClick={() => { handleSendPartnerRequest(userData) }}
-                    >
-                        Add Partner
-                    </LoadingButton>
+                    {userData?.requestedHim ? (
+                        <Btn
+                            disabled={true}
+                            className={classes.actionLabel}
+                        >
+                            Request sent
+                        </Btn>
+                    ) : (
+                        <LoadingButton
+                            className={classes.actionButton}
+                            loading={isLoadingSendPartnerRequest}
+                            onClick={() => { handleSendPartnerRequest(userData) }}
+                        >
+                            Add Partner
+                        </LoadingButton>
+                    )}
+
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 

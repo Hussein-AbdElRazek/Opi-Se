@@ -3,6 +3,7 @@ import useHttp from "../use-http";
 import { useNavigate } from "react-router-dom";
 import { searchActions } from "../../store/search-slice";
 import { matchModulePath } from "../../config";
+import { useCallback } from "react";
 const useSearchForPartner = () =>
 {
     const {
@@ -13,7 +14,7 @@ const useSearchForPartner = () =>
     const navigate = useNavigate();
     const currentUrl = window.location.pathname;
     const dispatch = useDispatch();
-    const handleSearchForPartner = ({ userId }) =>
+    const handleSearchForPartner = useCallback(({ userId }) =>
     {
         const getResponse = ({ message, data, profileDetails }) =>
         {
@@ -34,7 +35,7 @@ const useSearchForPartner = () =>
             getResponse
         );
 
-    }
+    },[currentUrl, dispatch, navigate, searchForPartner])
     return {
         handleSearchForPartner,
         isLoadingSearchForPartner,

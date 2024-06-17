@@ -9,6 +9,8 @@ import tasksReducer from './tasks-slice';
 import uiReducer from './ui-slice';
 import searchReducer from './search-slice';
 import questionsReducer from './questions-slice';
+import matchReducer from './match-slice';
+import recommendationReducer from './recommendation-slice';
 
 const store = configureStore({
     reducer: {
@@ -20,6 +22,8 @@ const store = configureStore({
         ui: uiReducer,
         search: searchReducer,
         questions: questionsReducer,
+        match: matchReducer,
+        recommendation: recommendationReducer,
     }
 });
 

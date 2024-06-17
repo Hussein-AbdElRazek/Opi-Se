@@ -108,6 +108,7 @@
     --layer-popper: 1500;
     --layer-modal: 2000;
     --layer-incoming-call: 3000;
+    --layer-notistack: 3100;
     --layer-100: 10;
     --layer-200: 20;
     --layer-1000: 1000;
@@ -249,4 +250,16 @@ a {
 
 .swiper-pagination-bullet-active {
     background-color: var(--secondary) !important;
+}
+
+.notistack-SnackbarContainer {
+    z-index: var(--layer-notistack) !important;
+}
+
+.MuiTooltip-popper div:first-child {
+    background-color: var(--label) !important;
+    color: var(--primary) !important;
+    padding: 7px 12px;
+    font-size: var(--font-size-100);
+    font-weight: 400;
 }

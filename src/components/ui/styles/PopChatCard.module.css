@@ -8,7 +8,7 @@
     border-radius: var(--border-radius-150);
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
     overflow: hidden;
-    max-height: calc(100vh - 100px);
+    /* max-height: calc(100vh - 100px); */
     height: fit-content;
 }
 
@@ -21,13 +21,15 @@
 .content {
     overflow: auto;
     height: 320px;
-    /* max-height: calc(100% - 280px); */
+    max-height: calc(100vh - 282px);
+    max-height: calc(100svh - 282px);
     padding-top: 20px;
     position: relative;
 }
 
 .chatContainer {
     position: relative;
+    padding-top: 70px;
 }
 
 .mediaPage {
@@ -56,13 +58,13 @@
     }
 }
 
-@media (max-width:425px) {
+@media (max-width:600px) {
     .container {
         max-width: calc(100vw - 20px);
     }
 
     .content {
-        max-height: calc(100vh - 240px);
-        max-height: calc(100svh - 240px);
+        max-height: calc(100vh - 242px);
+        max-height: calc(100svh - 242px);
     }
 }

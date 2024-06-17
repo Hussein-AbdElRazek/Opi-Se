@@ -4,6 +4,9 @@ import useHttp from '../../../../hooks/use-http';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { recommendationModulePath } from '../../../../config';
+import { recommendationActions } from '../../../../store/recommendation-slice';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const RecommendationList = () =>
 {
@@ -12,11 +15,12 @@ const RecommendationList = () =>
         isLoading: isLoadingRecommendPartner,
         sendRequest: RecommendPartner
     } = useHttp();
-    const [recommendedList, setRecommendedList] = useState([]);
+    const recommendedList = useSelector(state => state.recommendation.recommendations);
     const [lastPage, setLastPage] = useState(-1);
 
     const { enqueueSnackbar: popMessage } = useSnackbar();
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     // get new data if page changed
     useEffect(() =>
     {
@@ -32,7 +36,7 @@ const RecommendationList = () =>
                 }
                 if (message === "success")
                 {
-                    setRecommendedList(data);
+                    dispatch(recommendationActions.setRecommendations(data))
                     if (totalPages !== Number(searchParams.get("l") || 1)) setSearchParams({ p: searchParams.get("p") || 1, l: totalPages })
                     setLastPage(currentPage);
                 }
@@ -48,7 +52,8 @@ const RecommendationList = () =>
 
         // to get new data only if page changed
         if (lastPage !== currentPage) handleRecommendPartner();
-    }, [RecommendPartner, lastPage, navigate, popMessage, searchParams, setSearchParams])
+        
+    }, [RecommendPartner, dispatch, lastPage, navigate, popMessage, searchParams, setSearchParams])
 
     return (
         <RecommendationListUi

@@ -1,4 +1,4 @@
-import { Modal, Rating } from '@mui/material'
+import { ButtonBase, ButtonGroup, Modal } from '@mui/material'
 import React, { useState } from 'react'
 import Card from '../../EditProfile/Card';
 import { Btn } from '../../../../components/inputs';
@@ -19,7 +19,7 @@ const DisMatchPop = (props) =>
     } = useDisMatch()
 
     // handle change rate
-    const handleChange = (event, newPartnerRateValue) =>
+    const handleChange = (newPartnerRateValue) => () =>
     {
         setPartnerRateValue(newPartnerRateValue);
     };
@@ -48,17 +48,25 @@ const DisMatchPop = (props) =>
             >
                 <Card
                     title={"Feed Back"}
+                    className={classes.card}
                 >
-                    <p>
-                        Please rate your study partner before dis match.
+                    <p >
+                        On a scale of 1-5
+                        <br />
+                        What is your rate for studying with the partner?
                     </p>
 
-                    <Rating
-                        name="rate-partner"
-                        value={partnerRateValue}
-                        onChange={handleChange}
-                        size="large"
-                    />
+                    <ButtonGroup className={classes.rate}>
+                        {[1, 2, 3, 4, 5].map(rate => (
+                            <ButtonBase
+                                key={rate}
+                                onClick={handleChange(rate)}
+                                className={`${classes.btnContainer} ${partnerRateValue === rate ? classes.chosen : ''}`}
+                            >
+                                {rate}
+                            </ButtonBase>
+                        ))}
+                    </ButtonGroup>
 
                     <Btn
                         onClick={onDisMatch}
@@ -68,7 +76,6 @@ const DisMatchPop = (props) =>
                     </Btn>
                 </Card>
             </div>
-
         </Modal>
     )
 }

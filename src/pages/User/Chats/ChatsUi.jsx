@@ -10,33 +10,35 @@ const ChatsUi = ({ partner }) =>
         <PopChatCard
             header={<ChatsHeader />}
         >
-            {partner ?
-                (
-                    <ChatList
-                        title="Your Partner"
-                        chatList={[{
-                            profileImage: partner.profileImage,
-                            userName: partner.userName,
-                            id: partner._id,
-                        }]}
-                    />
-                ) : (
-                    <div
-                        className={classes.noChatsContainer}
-                    >
-                        <VectorAndText
-                            img={noChatsImg}
-                            h="No Chats yet"
-                            p={
-                                <>
-                                    No messages in your box, yet! Start
-                                    <br />
-                                    looking for your partner.
-                                </>
-                            }
+            <div className={classes.container}>
+                {partner ?
+                    (
+                        <ChatList
+                            title="Your Partner"
+                            chatList={[{
+                                profileImage: partner.profileImage,
+                                userName: partner.userName,
+                                id: partner._id,
+                            }]}
                         />
-                    </div>
-                )}
+                    ) : (
+                        <div
+                            className={classes.noChatsContainer}
+                        >
+                            <VectorAndText
+                                img={noChatsImg}
+                                h="No Chats yet"
+                                p={
+                                    <>
+                                        No messages in your box, yet! Start
+                                        <br />
+                                        looking for your partner.
+                                    </>
+                                }
+                            />
+                        </div>
+                    )}
+            </div>
         </PopChatCard>
     )
 }

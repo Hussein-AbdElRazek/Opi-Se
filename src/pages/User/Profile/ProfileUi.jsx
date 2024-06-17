@@ -13,6 +13,7 @@ import MyPartnerActions from './components/MyPartnerActions';
 import MatchRequestActions from './components/MatchRequestActions';
 import RecommendationActions from './components/RecommendationActions';
 import { ReactComponent as ReportIcon } from '../../../assets/icons/report.svg';
+import AlreadyRequestedLabel from './components/AlreadyRequestedLabel';
 
 const ProfileUi = (props) =>
 {
@@ -68,13 +69,18 @@ const ProfileUi = (props) =>
                 {isMyPartner && <MyPartnerActions userData={profileData} />}
 
                 {/* For when come from match requests*/}
-                {(from === "matchRequests" && !isMyProfile) && <MatchRequestActions requestData={profileData} />}
-
-                {/* For when come from recommendation list*/}
-                {(from === "recommendation" && !isMyProfile) && <RecommendationActions />}
+                {(profileData?.alreadyRequestedMe && !isMyPartner) &&
+                    <MatchRequestActions requestData={profileData} />}
 
                 {/* For anyone not me when doesn't have partner*/}
-                {(!havePartner && !isMyProfile && from !== "recommendation" && from !== "matchRequests" && !!profileData?.isAvailable) && <RecommendationActions />}
+                {(!havePartner && !isMyProfile && from !== "matchRequests" && !!profileData?.isAvailable && !profileData?.alreadyRequestedHim && !profileData?.alreadyRequestedMe)
+                    && <RecommendationActions />}
+
+                {/* For already requested him */}
+                {(!isMyProfile && profileData?.alreadyRequestedHim && !isMyPartner) && (
+                    <AlreadyRequestedLabel />
+                )}
+
             </div>
             <div
                 className={classes.content}

@@ -33,7 +33,6 @@ const MatchRequestsUi = ({ requests, isLoadingGetRequests, uiId, closeRequestsMe
                     >
                         {requests.map(request =>
                         {
-                            request.message = "send you add request"
                             return (
                                 < NotificationAndRequestItem
                                     itemData={request}

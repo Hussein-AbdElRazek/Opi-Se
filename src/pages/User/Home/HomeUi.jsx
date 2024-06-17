@@ -2,7 +2,7 @@ import React from 'react'
 import { HeaderText, IllustrationSection } from '../../../components/ui'
 import classes from './Home.module.css'
 import { Btn } from '../../../components/inputs'
-import { Badge, IconButton } from '@mui/material'
+import { Badge, IconButton, Tooltip } from '@mui/material'
 import messageIcon from '../../../assets/icons/message.svg'
 import { NavLink, Outlet } from 'react-router-dom'
 import homeBackground from '../../../assets/images/homeBackground.png'
@@ -69,21 +69,22 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
             </div>
 
             {/* chat btn */}
-            <IconButton
-                LinkComponent={NavLink}
-                to="chats"
-                className={classes.messageIcon}
-                title="Chats"
-            >
-                <Badge
-                    overlap="circular"
-                    badgeContent=" "
-                    invisible={!isNewMessage}
+            <Tooltip
+                title="Chats">
+                <IconButton
+                    LinkComponent={NavLink}
+                    to="chats"
+                    className={classes.messageIcon}
                 >
-                    <img className={classes.messageIconImg} src={messageIcon} alt="messageIcon" />
-                </Badge>
-            </IconButton>
-
+                    <Badge
+                        overlap="circular"
+                        badgeContent=" "
+                        invisible={!isNewMessage}
+                    >
+                        <img className={classes.messageIconImg} src={messageIcon} alt="messageIcon" />
+                    </Badge>
+                </IconButton>
+            </Tooltip>
             {/* for make nested  pages in home */}
             <Outlet />
         </div>

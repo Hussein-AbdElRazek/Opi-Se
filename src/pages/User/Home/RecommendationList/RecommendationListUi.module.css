@@ -80,13 +80,24 @@
 }
 
 .action button {
-    background-color: var(--primary);
-    border: 2px solid var(--secondary);
     border-radius: 10px;
     text-transform: none;
-    color: var(--secondary);
     padding: 2px 10px;
     font-size: var(--font-size-50);
+}
+
+.actionButton {
+    background-color: var(--primary);
+    border: 2px solid var(--secondary);
+    text-transform: none;
+    color: var(--secondary);
+}
+
+.actionLabel{
+    background-color: var(--secondary) !important;
+    color: var(--primary) !important;
+    cursor: default;
+    margin: 0 !important;
 }
 
 .loading div {

@@ -1,10 +1,10 @@
 import classes from './styles/Card.module.css'
 
-const Card = ({ title, children }) =>
+const Card = ({ title, children, className }) =>
 {
     return (
         <div
-            className={classes.container}
+            className={`${classes.container} ${className}`}
         >
             <h4
                 className={classes.title}

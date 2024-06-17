@@ -3,12 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 import classes from './styles/NotificationAndRequestItem.module.css'
 import { ProfilePic } from '../ui';
+import moment from 'moment';
 
 export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, closeRequestsMenu }) =>
 {
     const to = itemData?.partnerId ?
         `/profile?userId=${itemData?.partnerId}&from=matchRequests&requestId=${itemData._id}`
         : null;
+
+    const formattedDate = moment(itemData.date).format('h:mm A, D MMMM YYYY');
+    const finalDate = ' at ' + formattedDate;
 
     return (
         <ListItem
@@ -35,7 +39,7 @@ export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, c
                     primary={
                         <h6
                             className={classes.message}
-                            title={`${itemData.message}`}
+                            title={!!itemData?.requestStatus ? "send you add request" : itemData.message}
                         >
                             {((itemData.userName || itemData.partnerUserName) && itemData.requestStatus) && (
                                 <NavLink
@@ -45,9 +49,10 @@ export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, c
                                     {itemData.userName || itemData.partnerUserName}
                                 </NavLink>
                             )}
-                            {itemData.message}
+                            {!!itemData?.requestStatus ? "send you add request" : itemData.message}
                         </h6>
                     }
+                    secondary={finalDate}
                 />
                 {action}
             </div>

@@ -4,7 +4,7 @@ import { Badge, Grid, IconButton } from '@mui/material'
 import classes from './styles/Navbar.module.css'
 import { SearchBar } from './SearchBar'
 import { ProfileIcon } from './ProfileIcon'
-import { Logo } from '../ui'
+import { Logo, Tooltip } from '../ui'
 import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as ProgressIcon } from '../../assets/icons/progress.svg'
 import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
@@ -90,15 +90,18 @@ export const NavBar = () =>
                 className={classes.mainIcons}
             >
                 {mainLinks.map(({ title, to, Icon, target }) => (
-                    <IconButton
-                        key={title}
+                    <Tooltip
                         title={title}
-                        to={to}
-                        component={NavLink}
-                        target={target}
+                        key={title}
                     >
-                        <Icon fill='var(--black-40)' />
-                    </IconButton>
+                        <IconButton
+                            to={to}
+                            component={NavLink}
+                            target={target}
+                        >
+                            <Icon fill='var(--black-40)' />
+                        </IconButton>
+                    </Tooltip>
                 ))}
             </Grid>
 
@@ -110,17 +113,34 @@ export const NavBar = () =>
                 sm={2.5}
                 className={`${classes.rightIcons} center-y `}
             >
-                <Badge
-                    overlap="circular"
-                    badgeContent=" "
-                    invisible={!isNewNotification}
+                <Tooltip
+                    title={'Notifications'}
                 >
-                    <Notifications />
-                </Badge>
+                    <Badge
+                        overlap="circular"
+                        badgeContent=" "
+                        invisible={!isNewNotification}
+                    >
+                        <Notifications />
+                    </Badge>
+                </Tooltip>
 
-                <MatchRequests />
+                <Tooltip
+                    title={'Match Requests'}
+                >
+                    <div>
+                        <MatchRequests />
+                    </div>
+                </Tooltip>
+
                 <div className={classes.popMenu}><PopMenu /></div>
-                <div className={classes.profileIcon}><ProfileIcon id={"profileMenu"} /></div>
+                <Tooltip
+                    title={'User Menu'}
+                >
+                    <div className={classes.profileIcon}>
+                        <ProfileIcon id={"profileMenu"} />
+                    </div>
+                </Tooltip>
             </Grid>
         </Grid>
     )
