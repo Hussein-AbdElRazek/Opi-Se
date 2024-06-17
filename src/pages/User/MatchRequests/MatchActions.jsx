@@ -81,6 +81,8 @@ const MatchActions = ({ requestData, smallBtn }) =>
             {
                 dispatch(matchActions.removeRequest(requestData._id))
                 popMessage("Request Declined Successfully", { variant: "success" })
+                // notify user
+                dispatch(notifyUserRoom(requestData.partnerId));
             }
         };
 
