@@ -89,14 +89,6 @@ export const listenToMatchRequestApproved = createAsyncThunk(
         {
             console.log("matchRequestApproved", data)
             //  update state
-
-            thunkAPI.dispatch(
-                authActions.updateUserNotifications({
-                    message: `you have a new partner with a new chance don't miss this !`,
-                    ...data
-                })
-            );
-
             // TODO ask zezo to send patner id
             // update match data and join match room
             thunkAPI.dispatch(authActions.updateUserData({

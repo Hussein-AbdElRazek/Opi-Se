@@ -42,11 +42,6 @@ const authSlice = createSlice({
             state.userData = { ...state.userData, ...action.payload };
             localStorage.setItem("userData", JSON.stringify(state.userData))
         },
-        updateUserNotifications(state, action)
-        {
-            console.log("new ", action.payload);
-            state.notifications.unshift(action.payload)
-        },
         mergeUserNotifications(state, action)
         {
             state.notifications = mergeToUnique(state.notifications, action.payload);
