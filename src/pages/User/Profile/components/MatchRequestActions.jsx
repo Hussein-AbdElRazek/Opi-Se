@@ -10,13 +10,8 @@ const MatchRequestActions = ({ requestData }) =>
             <div
                 className={classes.fromMatch}
             >
-                <MatchActions requestData={{
-                    partnerId: requestData._id,
-                    partnerUserName: requestData.partnerUserName,
-                    nationalId: requestData.nationalId,
-                }} />
+                <MatchActions requestData={requestData} />
             </div>
-
         </ActionsLayout>
     )
 }

@@ -26,6 +26,7 @@ const LoginUi = (props) =>
     const {
         handleLogin,
         isLoadingLogin,
+        userType,
     } = props;
     return (
         <div
@@ -56,7 +57,7 @@ const LoginUi = (props) =>
                         className={classes.forgetPasswordContainer}
                     >
                         <Link
-                            to="/forgot-password"
+                            to={`/${userType}/forgot-password`}
                         >
                             Forgot password?
                         </Link>

@@ -11,6 +11,7 @@ import searchReducer from './search-slice';
 import questionsReducer from './questions-slice';
 import matchReducer from './match-slice';
 import recommendationReducer from './recommendation-slice';
+import signupMentorReducer from './signup-mentor-slice';
 
 const store = configureStore({
     reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
         questions: questionsReducer,
         match: matchReducer,
         recommendation: recommendationReducer,
+        signupMentor: signupMentorReducer,
     }
 });
 

@@ -22,61 +22,65 @@ const MatchActions = ({ requestData, smallBtn }) =>
     } = useHttp();
     const { enqueueSnackbar: popMessage } = useSnackbar();
     const dispatch = useDispatch();
-    const myData = useSelector(state=>state.auth.userData)
+    const myData = useSelector(state => state.auth.userData)
     const handleAcceptMatch = () =>
     {
         const getResponse = ({ message, matchId }) =>
         {
-            if (message.includes("success") || message.includes("unexpected error !"))
+            if (message.includes("success"))
             {
                 popMessage("Match Accepted Successfully", { variant: "success" })
                 dispatch(uiActions.closePopMenu("requests"))
 
-                // TODO ask zezo to send partnerImage in request list
                 const socketReqBody = {
-                    notifiedPartner: requestData.partnerId,
+                    notifiedPartner: requestData._id,
                     matchId: matchId,
                     partnerUserName: myData.userName,
                     partnerImage: myData.profileImage,
                     partnerId: myData._id,
                 }
-                console.log("socketReqBody", socketReqBody)
                 dispatch(acceptPartnerRequest(socketReqBody))
-
+                console.log("req socketReqBody ", socketReqBody)
                 // notify user
-                dispatch(notifyUserRoom(requestData.partnerId));
+                dispatch(notifyUserRoom(requestData._id));
 
                 // update match data and join match room
                 dispatch(authActions.updateUserData({
                     matchId: matchId,
                     alreadyRequestedMe: false,
                     alreadyRequestedHim: false,
-                    partnerId: { _id: requestData.partnerId, userName: requestData.partnerUserName, profileImage: requestData.profileImage }
+                    partnerId: {
+                        _id: requestData._id,
+                        userName: requestData.userName,
+                        profileImage: requestData.profileImage
+                    }
                 }))
+
                 dispatch(joinMatchRoom());
+
+                dispatch(matchActions.removeRequest(requestData._id))
             }
         };
 
         acceptMatch(
             {
-                url: `${matchModulePath}/acceptMatchRequest?partner2Id=${requestData.partnerId}&nationalId=${requestData.nationalId}`,
+                url: `${matchModulePath}/acceptMatchRequest?partner2Id=${requestData._id}&nationalId=${"12345678912345"}`,
                 method: "POST"
             },
             getResponse
         );
-
     }
-    const userEmail = useSelector((state) => state.auth.userData.email)
 
     const handleDeclineMatch = () =>
     {
         const body = {
             rejectedUserId: requestData._id,
-            email: userEmail,
+            email: requestData.email,
         }
+
         const getResponse = ({ message }) =>
         {
-            if (message.includes("success") || message.includes("notification"))
+            if (message.includes("success"))
             {
                 dispatch(matchActions.removeRequest(requestData._id))
                 popMessage("Request Declined Successfully", { variant: "success" })

@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import LoginUi from './LoginUi'
 import useHttp from '../../../hooks/use-http';
 import { authActions } from '../../../store/auth-slice';
 import { requestNotificationPermission } from '../../../FCM/FCM';
-import { userModulePath } from '../../../config';
+
 const Login = () =>
 {
     const dispatch = useDispatch();
@@ -14,6 +14,8 @@ const Login = () =>
         isLoading: isLoadingLogin,
         sendRequest: login
     } = useHttp();
+
+    const { userType } = useParams();
 
     const handleLogin = async (values) =>
     {
@@ -35,7 +37,7 @@ const Login = () =>
 
         await login(
             {
-                url: `${userModulePath}/login`,
+                url: `${userType}/login`,
                 method: "post",
                 body: values,
             },
@@ -47,6 +49,7 @@ const Login = () =>
         <LoginUi
             handleLogin={handleLogin}
             isLoadingLogin={isLoadingLogin}
+            userType={userType}
         />
     )
 }

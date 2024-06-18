@@ -39,8 +39,16 @@ const authSlice = createSlice({
         },
         updateUserData(state, action)
         {
-            state.userData = { ...state.userData, ...action.payload };
-            localStorage.setItem("userData", JSON.stringify(state.userData))
+            let clearLanguagesArray = clearArrayOfObjects(action.payload?.languages || []);
+            let clearUserSkillsArray = clearArrayOfObjects(action.payload?.userSkills || []);
+            let tempUserData = {
+                ...state.userData,
+                ...action.payload,
+                languages: clearLanguagesArray,
+                userSkills: clearUserSkillsArray,
+            }
+            state.userData = tempUserData
+            localStorage.setItem("userData", JSON.stringify(tempUserData))
         },
         mergeUserNotifications(state, action)
         {

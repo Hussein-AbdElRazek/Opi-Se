@@ -5,10 +5,10 @@ import classes from './styles/NotificationAndRequestItem.module.css'
 import { ProfilePic } from '../ui';
 import moment from 'moment';
 
-export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, closeRequestsMenu }) =>
+export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, closeRequestsMenu, type }) =>
 {
-    const to = itemData?.partnerId ?
-        `/profile?userId=${itemData?.partnerId}&from=matchRequests&requestId=${itemData._id}`
+    const to = itemData?._id ?
+        `/profile?userId=${itemData?._id}&from=matchRequests`
         : null;
 
     const formattedDate = moment(itemData.date).format('h:mm A, D MMMM YYYY');
@@ -36,17 +36,17 @@ export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, c
                     primary={
                         <h6
                             className={classes.message}
-                            title={!!itemData?.requestStatus ? "send you add request" : itemData.message}
+                            title={type === "requests" ? "send you add request" : itemData.message}
                         >
-                            {((itemData.userName || itemData.partnerUserName) && itemData.requestStatus) && (
+                            {(itemData.userName ) && (
                                 <NavLink
                                     to={to}
                                     onClick={closeRequestsMenu}
                                 >
-                                    {itemData.userName || itemData.partnerUserName}
+                                    {itemData.userName }
                                 </NavLink>
                             )}
-                            {!!itemData?.requestStatus ? "send you add request" : itemData.message}
+                            {type ==="requests" ? "send you add request" : itemData.message}
                         </h6>
                     }
                     secondary={finalDate}

@@ -8,7 +8,7 @@ import { mergeToUnique } from '../helpers/mergeToUnique';
 
 const initialMatchState = {
     connected: false,
-    requests:[],
+    requests: [],
 }
 
 
@@ -84,16 +84,18 @@ export const listenToMatchRequestApproved = createAsyncThunk(
     "match/listenToMatchRequestApproved",
     async (_, thunkAPI) =>
     {
-
+        
         socket.on('matchRequestApproved', (data) =>
         {
             console.log("matchRequestApproved", data)
-            //  update state
-            // TODO ask zezo to send patner id
-            // update match data and join match room
+
             thunkAPI.dispatch(authActions.updateUserData({
                 matchId: data.matchId,
-                partnerId: { _id: data.partnerId || "test", userName: data.partnerUserName, profileImage: data.partnerImage }
+                partnerId: {
+                    _id: data.partnerId,
+                    userName: data.partnerUserName,
+                    profileImage: data.partnerImage
+                }
             }))
             thunkAPI.dispatch(joinMatchRoom());
 

@@ -6,6 +6,7 @@ const titleMap = {
     "/forgot-password": "Forgot Password",
     "/reset-password": "Reset Password",
     "/": "Home",
+    "/prefers": "User Prefers",
     "/recommendation": "Recommendations",
     "/profile": "Profile",
     "/mental-health": "Mental Health",

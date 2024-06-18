@@ -97,7 +97,7 @@ export const GuestNav = ({ forHome }) =>
             component:
                 <div className={classes.authMenu} onClick={closeMenu}>
                     <Btn
-                        to="/signup"
+                        to="/#signup"
                         className={classes.popSignUpBtn}
                     >
                         Sign Up
@@ -110,7 +110,7 @@ export const GuestNav = ({ forHome }) =>
             component:
                 <div className={classes.authMenu} onClick={closeMenu}>
                     <Btn
-                        to="/login"
+                        to="/user/login"
                         className={classes.loginBtn}
                     >
                         Login
@@ -142,13 +142,13 @@ export const GuestNav = ({ forHome }) =>
                     className={`${classes.authLinks} center-y `}
                 >
                     <Btn
-                        to="/login"
+                        to="/user/login"
                         className={`${classes.loginBtn} ${forHome ? classes.loginHome : ""}`}
                     >
                         Login
                     </Btn>
                     <Btn
-                        to="/signup"
+                        to="/#signup"
                         className={`${classes.signUpBtn} ${forHome ? classes.signupHome : ""}`}
                     >
                         Sign Up

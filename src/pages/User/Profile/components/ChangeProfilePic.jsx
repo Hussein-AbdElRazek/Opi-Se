@@ -55,10 +55,8 @@ const ChangeProfilePic = () =>
             {isLoadingChangeProfilePic ? (<div className={`${classes.plusIcon} ${classes.loading}`}><LoadingCenter /></div>) :
                 (
                     <ImageUploading
-                        multiple
                         value={images}
                         onChange={onChangeImage}
-                        maxNumber={1}
                         dataURLKey="data_url"
                     >
                         {({

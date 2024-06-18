@@ -39,6 +39,7 @@ const MatchRequestsUi = ({ requests, isLoadingGetRequests, uiId, closeRequestsMe
                                     action={< MatchActions requestData={request} smallBtn={true} />}
                                     key={request._id}
                                     closeRequestsMenu={closeRequestsMenu}
+                                    type={'requests'}
                                 />
                             )
                         })}

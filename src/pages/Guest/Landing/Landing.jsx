@@ -10,12 +10,28 @@ import mentalHealthSupport from '../../../assets/images/mentalHealthSupport.png'
 import appropriateMentor from '../../../assets/images/appropriateMentor.png'
 import UsersCounters from '../UsersCounters/UsersCounters'
 import { Btn } from '../../../components/inputs'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Landing = () =>
 {
+    const location = useLocation();
+    // scroll to sign up section if navigation to it
+
+    useEffect(() =>
+    {
+        if (location.hash)
+        {
+            const element = document.getElementById(location.hash.substring(1));
+            if (element)
+            {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [location]);
     return (
-        <div>
-            <div className={`${contactClasses.container} ${classes.hero}`}>
+        <div id='signup'>
+            <div className={`${contactClasses.container} ${classes.hero}`} >
                 <HeaderTextHero >
                     You deserve to study better
                 </HeaderTextHero>
@@ -29,11 +45,12 @@ const Landing = () =>
                     <HeroCard
                         title='Partner'
                         img={partnerImg}
-                        to={'/signup'}
+                        to={'/user/signup'}
                     />
                     <HeroCard
                         title='Mentor'
                         img={mentorImg}
+                        to={'/mentor/signup'}
                     />
                     <HeroCard
                         title='Parents'
@@ -103,7 +120,7 @@ const Landing = () =>
                         Lorem Ipsum has been the industry's standard dummy
                     </Paragraph>
                     <div className={`${classes.action} center-x`}>
-                        <Btn to='/signup'>Sign Up Now</Btn>
+                        <Btn to='/#signup'>Sign Up Now</Btn>
                     </div>
                 </div>
             </div>

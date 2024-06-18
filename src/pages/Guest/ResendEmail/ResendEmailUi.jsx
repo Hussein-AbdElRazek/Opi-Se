@@ -23,31 +23,34 @@ const ResendEmailUi = (props) =>
             onClose={onClose}
             className='center-x center-y'
         >
-            <FormCard
-                size={"big"}
-            >
-                <div
-                    className="center-x"
+            <>
+                <FormCard
+                    size={"big"}
                 >
                     <div
-                        className={`${classes.content} center-text`}
+                        className="center-x"
                     >
-                        <img src={resendEmailBackground} alt="Resend Email Background" />
-                        <HeaderText>Check Your Email</HeaderText>
-                        <Paragraph>
-                            We have send a verification email to your email
-                            <br />
-                            {email}
-                        </Paragraph>
-                        <Btn
-                            onClick={handleResendEmail}
-                            isLoading={isLoadingResendEmail}
+                        <div
+                            className={`${classes.content} center-text`}
                         >
-                            {sentAgain ? "Send Again" : "Resend Email"}
-                        </Btn>
+                            <img src={resendEmailBackground} alt="Resend Email Background" />
+                            <HeaderText>Check Your Email</HeaderText>
+                            <Paragraph>
+                                We have send a verification email to your email
+                                <br />
+                                {email}
+                            </Paragraph>
+                            <Btn
+                                onClick={handleResendEmail}
+                                isLoading={isLoadingResendEmail}
+                            >
+                                {sentAgain ? "Send Again" : "Resend Email"}
+                            </Btn>
+                        </div>
                     </div>
-                </div>
-            </FormCard>
+                </FormCard>
+            </>
+
         </Modal>
     )
 }
