@@ -10,13 +10,14 @@ import useGetMyProfile from '../../../hooks/commonApis/use-get-my-profile';
 const Profile = () =>
 {
     const [searchParams] = useSearchParams();
-    const myData = useSelector((state) => state.auth?.userData);
-    const myId = useSelector((state) => state.auth?.userData)?._id;
+    const myData = useSelector((state) => state?.auth?.userData);
+    const myId = useSelector((state) => state?.auth?.userData)?._id;
+    console.log("myID",myId)
     const userId = searchParams.get("userId");
-    const userData = useSelector((state) => state.search?.userData);
+    const userData = useSelector((state) => state?.search?.userData);
     const isMyProfile = myId === userId;
     const isMyPartner = userId === myData?.partnerId?._id;
-    const havePartner = !!myData?.partnerId?._id;
+    const havePartner = !!(myData?.partnerId?._id);
 
     const {
         handleSearchForPartner,

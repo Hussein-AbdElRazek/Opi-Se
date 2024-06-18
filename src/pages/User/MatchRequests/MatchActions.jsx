@@ -38,7 +38,7 @@ const MatchActions = ({ requestData, smallBtn }) =>
                     matchId: matchId,
                     partnerUserName: myData.userName,
                     partnerImage: myData.profileImage,
-                    // partnerId: myData._id,
+                    partnerId: myData._id,
                 }
                 console.log("socketReqBody", socketReqBody)
                 dispatch(acceptPartnerRequest(socketReqBody))
@@ -51,7 +51,7 @@ const MatchActions = ({ requestData, smallBtn }) =>
                     matchId: matchId,
                     alreadyRequestedMe: false,
                     alreadyRequestedHim: false,
-                    partnerId: { _id: requestData.partnerId, userName: requestData.partnerUserName, profileImage: "default.png" }
+                    partnerId: { _id: requestData.partnerId, userName: requestData.partnerUserName, profileImage: requestData.profileImage }
                 }))
                 dispatch(joinMatchRoom());
             }
@@ -71,9 +71,8 @@ const MatchActions = ({ requestData, smallBtn }) =>
     const handleDeclineMatch = () =>
     {
         const body = {
-            rejectedUserId: requestData.partnerId,
+            rejectedUserId: requestData._id,
             email: userEmail,
-            requestId: requestData._id
         }
         const getResponse = ({ message }) =>
         {
@@ -82,7 +81,7 @@ const MatchActions = ({ requestData, smallBtn }) =>
                 dispatch(matchActions.removeRequest(requestData._id))
                 popMessage("Request Declined Successfully", { variant: "success" })
                 // notify user
-                dispatch(notifyUserRoom(requestData.partnerId));
+                dispatch(notifyUserRoom(requestData._id));
             }
         };
 

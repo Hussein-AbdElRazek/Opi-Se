@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { listenToTaskDeleted, listenToGetTask, listenToUpdateTask } from '../../../../../store/tasks-slice';
+import { listenToTaskDeleted, listenToGetTask, listenToUpdateTask, listenToAllTasksDeleted } from '../../../../../store/tasks-slice';
 
 const useTaskListeners = () =>
 {
@@ -12,6 +12,7 @@ const useTaskListeners = () =>
         dispatch(listenToGetTask());
         dispatch(listenToUpdateTask());
         dispatch(listenToTaskDeleted());
+        dispatch(listenToAllTasksDeleted());
     }, [dispatch])
 }
 

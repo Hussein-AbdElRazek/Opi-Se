@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { mergeToUnique } from '../helpers/mergeToUnique';
 import baseSocket from '../sockets/baseConnection';
+import { selectOption } from '../helpers/selectOption';
 
 // get connection 
 const socket = baseSocket;
@@ -30,7 +31,7 @@ export const sendMessage = createAsyncThunk(
                     }))
                 thunkAPI.dispatch(chatActions.updateMessage(
                     {
-                        updatedMessage: res?.data ,
+                        updatedMessage: res?.data,
                         messagesId: payload.messagesId
                     }))
             }
@@ -69,7 +70,7 @@ export const deleteMessage = createAsyncThunk(
     async (payload, thunkAPI) =>
     {
         console.log("payload.requestBody", payload.requestBody)
-            console.log("payload.requestBody", payload.requestBody)
+        console.log("payload.requestBody", payload.requestBody)
 
         socket.emit('deleteMessage', payload.requestBody, (res) =>
         {
@@ -130,7 +131,8 @@ export const listenToStartChatSession = createAsyncThunk(
     async (_, thunkAPI) =>
     {
         socket.on('newChatSessionRequest', (data) =>
-        {console.log("data",data)
+        {
+            console.log("data", data)
             if (data?.chatSessionRequest)
             {
                 thunkAPI.dispatch(chatActions.updateSession({
@@ -269,7 +271,7 @@ export const selectFromPoll = createAsyncThunk(
     async (payload) =>
     {
         console.log("payload sender", payload);
-        socket.emit('selectFromPoll', payload, (res) => { console.log("selectFromPoll sender" , res) });
+        socket.emit('selectFromPoll', payload, (res) => { console.log("selectFromPoll sender", res) });
     }
 );
 export const listenToPollOptionSelected = createAsyncThunk(
@@ -278,16 +280,22 @@ export const listenToPollOptionSelected = createAsyncThunk(
     {
         socket.on('pollOptionSelected', (res) =>
         {
+            const myId = thunkAPI.getState().auth.userData._id;
+            const pollId = res.messageId;
+            const messages = [...thunkAPI.getState().chat.messages[payload.messagesId]];
+            const pollMessage = messages?.find(message => message._id === pollId);
+            const pollOption = pollMessage.pollAnswers.find(answer => answer.optionNumber === res.optionNumber)
+            const updatedPollAnswers = selectOption(pollOption.optionSelectors, pollMessage.pollAnswers, res.optionNumber, pollOption.optionVotes, myId);
+            
             //  update state
-            // TODO handle it 
-            console.log("pollOptionSelected recive", res)
-            // const updatedPollAnswers = selectOption(optionSelectors, pollAnswers, optionNumber, optionVotes, myId);
-            // thunkAPI.dispatch(
-            //     chatActions.updateMessage({
-            //         messagesId: payload.messagesId,
-            //         _id: res.messageId,
-            //         pollAnswers: res.messageId,
-            //     }))
+            thunkAPI.dispatch(
+                chatActions.updateMessage({
+                    messagesId: payload.messagesId,
+                    updatedMessage: {
+                        _id: pollId,
+                        pollAnswers: updatedPollAnswers,
+                    }
+                }))
         });
     }
 )

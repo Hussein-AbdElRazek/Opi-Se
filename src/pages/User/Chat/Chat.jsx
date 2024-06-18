@@ -104,8 +104,8 @@ const Chat = () =>
     // listen to select options
     useEffect(() =>
     {
-        dispatch(listenToPollOptionSelected())
-    }, [dispatch])
+        dispatch(listenToPollOptionSelected({ messagesId: openedUserData.id }))
+    }, [dispatch, openedUserData.id])
 
     const matchId = useSelector((state) => state.auth.userData.matchId)
 

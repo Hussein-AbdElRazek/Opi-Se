@@ -1,4 +1,4 @@
-import { ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import { ListItem, ListItemText } from '@mui/material'
 import { NavLink } from 'react-router-dom';
 
 import classes from './styles/NotificationAndRequestItem.module.css'
@@ -20,17 +20,14 @@ export const NotificationAndRequestItem = ({ itemData, action, lastElementRef, c
             className={classes.container}
             ref={lastElementRef}
         >
-            {itemData.requestStatus && (
-                <ListItemAvatar
+            {!!itemData?.profileImage && (
+                <ProfilePic
+                    profileImage={itemData?.profileImage}
+                    component={NavLink}
+                    to={to}
+                    className={classes.avatar}
                     onClick={closeRequestsMenu}
-                >
-                    <ProfilePic
-                        src={itemData?.profileImage}
-                        component={NavLink}
-                        to={to}
-                        className={classes.avatar}
-                    />
-                </ListItemAvatar>
+                />
             )}
 
             <div>

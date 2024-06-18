@@ -19,7 +19,7 @@ const useGetMyProfile = () =>
         {
             if (message === "success")
             {
-                const updatedProfileData = { ...data.profileDetails, ...data, matchId: data.matchId._id }
+                const updatedProfileData = { ...data.profileDetails, ...data, matchId: data?.matchId?._id }
                 dispatch(authActions.updateUserData(updatedProfileData))
             }
         };

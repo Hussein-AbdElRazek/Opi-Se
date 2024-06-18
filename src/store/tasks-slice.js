@@ -92,26 +92,25 @@ export const listenToTaskDeleted = createAsyncThunk(
     }
 )
 
-// // delete all
-// export const emitDeleteAllTasks = createAsyncThunk(
-//     'tasks/emitDeleteAllTasks',
-//     async (payload) =>
-//     {
-//         socket.emit('deleteAllTasks', payload, () => {  });
-//     }
-// );
-// export const listenToAllTasksDeleted = createAsyncThunk(
-//     "tasks/listenToAllTasksDeleted",
-//     async (_, thunkAPI) =>
-//     {
-//         socket.on('allTasksDeleted', (data) =>
-//         {
-//             //  update state
-
-//         });
-//     }
-// )
-
+//  delete all tasks type
+export const emitDeleteAllTasks = createAsyncThunk(
+    'tasks/emitDeleteAllTasks',
+    async (payload) =>
+    {
+        socket.emit('deleteAllTasks', payload, () => { });
+    }
+);
+export const listenToAllTasksDeleted = createAsyncThunk(
+    "tasks/listenToAllTasksDeleted",
+    async (_, thunkAPI) =>
+    {
+        socket.on('allTasksDeleted', (res) =>
+        {
+            //  update state
+            thunkAPI.dispatch(tasksActions.removeAllTasksType(res.data.type))
+        });
+    }
+)
 
 const initialTasksState = {
     tasks: {
@@ -164,8 +163,9 @@ const tasksSlice = createSlice({
         },
         removeAllTasksType(state, action)
         {
-            state.tasks[action.payload] = []
-            state.totalLength[action.payload] = 0;
+            console.log("action.payload", action.payload)
+            state.tasks[isForCalender ? "all" : action.payload] = []
+            state.totalLength[isForCalender ? "all" : action.payload] = 0;
         },
         updateTask(state, action)
         {

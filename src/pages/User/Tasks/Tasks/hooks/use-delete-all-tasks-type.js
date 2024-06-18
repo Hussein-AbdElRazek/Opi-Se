@@ -1,6 +1,6 @@
 import useHttp from '../../../../../hooks/use-http';
 import { useDispatch, useSelector } from 'react-redux';
-import {  tasksActions } from '../../../../../store/tasks-slice';
+import { emitDeleteAllTasks, tasksActions } from '../../../../../store/tasks-slice';
 import { uiActions } from '../../../../../store/ui-slice';
 import { taskModulePath } from '../../../../../config';
 
@@ -27,9 +27,8 @@ const useDeleteAllTasksType = (type) =>
                 // close modal of confirmation
                 dispatch(uiActions.closeModal(type))
 
-                // TODO handle delete tasks type socket
-                // emit socket
-                // dispatch(emitDeleteTask())
+                // emit socket deleteAllTasks type
+                dispatch(emitDeleteAllTasks({ type, deleteAllTasks: true }))
             }
         };
 
