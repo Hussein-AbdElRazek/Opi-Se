@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { signUpInitialValues } from '../pages/Guest/SignUp/signUpInputsData';
 
 const initialMentorState = {
-    userData: JSON.parse(localStorage.getItem("userData")),
-    lastSignupStep: JSON.parse(localStorage.getItem("lastSignupStep")),
+    userData: !!localStorage.getItem("mentorUserData") ? JSON.parse(localStorage.getItem("mentorUserData")) : signUpInitialValues,
+    lastSignupStep: localStorage.getItem("lastSignupStep") ?
+        Number(JSON.parse(localStorage.getItem("lastSignupStep"))) :
+        -1,
 }
 
 const signupMentorSlice = createSlice({
@@ -13,8 +16,8 @@ const signupMentorSlice = createSlice({
         {
             state.userData = action.payload.userData;
             state.lastSignupStep = action.payload.lastSignupStep;
-            
-            localStorage.setItem("userData", JSON.stringify(state.userData))
+
+            localStorage.setItem("mentorUserData", JSON.stringify(state.userData))
             localStorage.setItem("lastSignupStep", JSON.stringify(state.lastSignupStep))
         },
     }

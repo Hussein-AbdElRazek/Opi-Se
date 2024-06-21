@@ -1,0 +1,46 @@
+.container {
+    padding: 35px 50px 35px 35px;
+    margin: 10px;
+}
+
+.container h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: var(--font-size-900);
+}
+
+.container h4 {
+    margin: 5px 0;
+    color: var(--label);
+    font-weight: 500;
+}
+
+.editBtn {
+    text-align: right;
+    margin: 20px -40px -25px 0;
+}
+
+.editBtn button {
+    border: 1px solid var(--secondary);
+    padding: 4px;
+}
+
+@media (max-width:900px) {
+    .container {
+        padding: 20px 30px 20px 20px;
+    }
+
+    .container h3 {
+        font-size: var(--font-size-600);
+    }
+
+    .container h4 {
+        font-size: var(--font-size-200);
+    }
+
+    .editBtn {
+        text-align: right;
+        margin: 20px -20px -10px 0;
+    }
+
+}

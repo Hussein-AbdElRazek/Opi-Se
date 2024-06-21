@@ -5,12 +5,12 @@ import useHttp from '../../../hooks/use-http';
 
 const ExtractNationalId = (props) =>
 {
-    const { setFieldValue } = props;
+    const { setFieldValue, isHaveInitialData } = props;
     const {
         isLoading: isLoadingExtractID,
         sendRequest: extractID
     } = useHttp();
-    const [showNationalId, setShowNationalId] = useState(false);
+    const [showNationalId, setShowNationalId] = useState(!!isHaveInitialData);
 
     //extract national id from the selected file
     const handleExtractID = (values) =>

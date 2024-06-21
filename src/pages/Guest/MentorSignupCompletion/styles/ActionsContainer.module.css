@@ -1,0 +1,7 @@
+.container {
+    bottom: 0 !important;
+    top: auto;
+    flex-direction: row-reverse;
+    box-shadow: none;
+    border-top: 1px solid var(--black-10);
+}

@@ -1,0 +1,29 @@
+.container {
+    background-color: var(--primary);
+    padding: 70px 30px 90px 30px;
+    min-height: calc(100vh - 140px);
+}
+
+.container h1 {
+    font-size: var(--font-size-1000);
+    margin: 0 0 30px 0;
+    text-align: left;
+    max-width: 900px;
+}
+
+@media (max-width:900px) {
+    .container {
+        padding: 70px 20px 90px 20px;
+    }
+
+    .container h1 {
+        font-size: var(--font-size-800);
+        margin: 0 0 20px 0;
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        padding: 70px 10px 90px 10px;
+    }
+}

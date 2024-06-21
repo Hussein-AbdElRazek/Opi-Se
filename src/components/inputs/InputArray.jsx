@@ -1,7 +1,6 @@
 import { FieldArray } from 'formik'
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-
+import { ReactComponent as AddRoundedIcon } from '../../assets/icons/addRounded.svg';
 import
 {
     FormikControl,
@@ -60,6 +59,7 @@ export const InputArray = (props) =>
                             >
                                 <AddRoundedIcon />
                             </ArrayIconBtn>
+
                             {/* Remove Btn */}
                             {index !== 0 && (
                                 <ArrayIconBtn

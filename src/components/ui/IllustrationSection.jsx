@@ -5,6 +5,7 @@ import signupBackground from '../../assets/images/signupBackground.png'
 import forgotPasswordBackground from '../../assets/images/forgotPasswordBackground.png'
 import resetPasswordBackground from '../../assets/images/resetPasswordBackground.png'
 import homeBackground from '../../assets/images/homeBackground.png'
+import mentorVerificationBackground from '../../assets/images/mentorVerificationBackground.svg'
 
 export const IllustrationSection = ({ type, size }) =>
 {
@@ -26,7 +27,9 @@ export const IllustrationSection = ({ type, size }) =>
                                 `url(${resetPasswordBackground})` :
                                 type === "home" ?
                                     `url(${homeBackground})` :
-                                    null
+                                    type === "mentorVerification" ?
+                                        `url(${mentorVerificationBackground})` :
+                                        null
             }}
         >
             {type === "login" && (

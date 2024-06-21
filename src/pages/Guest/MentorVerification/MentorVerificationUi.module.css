@@ -1,0 +1,45 @@
+.OTPParent {
+    width: fit-content;
+    margin: auto;
+    margin-top:30px ;
+}
+
+.OTPContainer {
+    margin: 10px 0 0 0;
+}
+
+.OTPContainer input {
+    margin-right: 10px;
+    height: 45px;
+    outline: none;
+    font-size: var(--font-size-1000);
+    font-weight: 500;
+}
+
+.OTPContainer input:focus {
+    border: 2px solid var(--secondary) !important;
+}
+
+.resendOTP {
+    padding: 4px 0;
+}
+
+.resendOTP p {
+    font-size: var(--font-size-200);
+    text-align: left;
+}
+
+.resendOTP button {
+    text-transform: none;
+    padding: 2px;
+}
+
+.resendOTPTime,
+.resendOTP button {
+    color: var(--secondary);
+}
+
+.resendOTPTime {
+    min-width: 55px !important;
+    display: inline-flex;
+}

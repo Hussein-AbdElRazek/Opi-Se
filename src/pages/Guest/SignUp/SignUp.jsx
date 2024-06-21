@@ -5,24 +5,31 @@ import SignUpUi from './SignUpUi';
 import { clearArrayOfObjects } from '../../../helpers/clearArrayOfObjects';
 import { userModulePath } from '../../../config';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { signupMentorActions } from '../../../store/signup-mentor-slice';
+import { signUpInitialValues } from './signUpInputsData';
 
 const SignUp = () =>
 {
     const navigate = useNavigate();
     const { userType } = useParams();
     const dispatch = useDispatch();
-    const lastSignupStep = useSelector(state => state.signupMentor.lastSignupStep)
+    const mentorIntialData = useSelector(state => state?.signupMentor?.userData);
     const {
         isLoading: isLoadingSignUp,
         sendRequest: signUp
     } = useHttp();
 
-    const handleSignUpForUser = (values, { resetForm }) =>
+    const cleanData = (values) =>
     {
         let submitData = { ...values };
-        submitData.languages = clearArrayOfObjects(submitData.languages)
+        submitData.languages = clearArrayOfObjects(submitData.languages);
+        return submitData
+    }
+
+    const handleSignUpForUser = (values, { resetForm }) =>
+    {
+        const submitData = cleanData(values)
         const getResponse = ({ message }) =>
         {
             if (message.includes("success"))
@@ -40,18 +47,18 @@ const SignUp = () =>
             getResponse
         );
     }
-    
+
     const handleSignUpForMentor = (values) =>
     {
-
+        const submitData = cleanData(values);
+        dispatch(signupMentorActions.updateData({ userData: submitData, lastSignupStep: 0 }))
+        navigate('1')
     }
 
-    // useEffect(()=>{
-
-    // },[])
-    // console.log("userType", userType)
     return (
         <SignUpUi
+            userType={userType}
+            signupInitialValues={userType === "user" ? signUpInitialValues : mentorIntialData}
             isLoadingSignUp={isLoadingSignUp}
             handleSignUp={userType === "user" ? handleSignUpForUser : handleSignUpForMentor}
         />

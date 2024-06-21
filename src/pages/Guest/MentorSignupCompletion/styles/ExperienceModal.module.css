@@ -1,0 +1,21 @@
+.deleteBtnContainer {
+    flex: 1;
+    justify-content: flex-start;
+    display: flex;
+    min-width: 215px;
+}
+
+.deleteBtn {
+    text-transform: none;
+    color: var(--secondary);
+    width: fit-content !important;
+    padding: 5px 0px;
+    border-radius: var(--border-radius-5) !important;
+}
+
+@media (max-width:600px) {
+    .deleteBtnContainer {
+        min-width: 100%;
+        margin-bottom: 20px;
+    }
+}

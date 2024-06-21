@@ -12,6 +12,8 @@ export const ItemCard = (props) =>
         onSubmit,
         onClose,
         isLoading,
+        addBtnTitle,
+        AdditionalAction
     } = props;
 
     return (
@@ -22,11 +24,14 @@ export const ItemCard = (props) =>
             <div
                 className={`${classes.content} ${type === "edit" ? classes.edit : ""}`}
             >
-                {title && <HeaderText
-                    size='medium'
-                >
-                    {title}
-                </HeaderText>}
+                {title &&
+                    <HeaderText
+                        size='medium'
+                    >
+                        {title}
+                    </HeaderText>
+                }
+
                 <FormikContainer
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -40,18 +45,21 @@ export const ItemCard = (props) =>
                         <div
                             className={classes.actions}
                         >
+                            {AdditionalAction}
+
+                            <Btn
+                                onClick={onClose}
+                                className={`cancel-btn ${classes.marginRight}`}
+                            >
+                                Cancel
+                            </Btn>
+
                             <Btn
                                 isLoading={isLoading}
                                 type="submit"
                             >
-                                {type === "add" ? "Add" : "Save"}
-                            </Btn>
-
-                            <Btn
-                                onClick={onClose}
-                                className='cancel-btn'
-                            >
-                                Cancel
+                                {addBtnTitle ? addBtnTitle
+                                    : type === "add" ? "Add" : "Save"}
                             </Btn>
                         </div>
                     )}

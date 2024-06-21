@@ -1,17 +1,17 @@
-import { signUpInitialValues, signUpInputs } from './signUpInputsData';
+import { signUpInputs } from './signUpInputsData';
 import { signUpValidationSchema } from './signUpValidationSchema';
 import { TextAndLink } from '../../../components/common';
 import
 {
-  IllustrationSection,
-  HeaderText,
-  Paragraph,
-  FormCard
+    IllustrationSection,
+    HeaderText,
+    Paragraph,
+    FormCard
 } from '../../../components/ui';
 import
 {
-  Btn,
-  LoopOnInputs,
+    Btn,
+    LoopOnInputs,
 } from '../../../components/inputs';
 
 import { Form, Formik } from 'formik';
@@ -20,58 +20,58 @@ import ExtractNationalId from './ExtractNationalId';
 
 const SignUpUi = (props) =>
 {
-  const { handleSignUp, isLoadingSignUp } = props;
-  return (
-    <div
-      className='center-x'
-    >
-      <FormCard
-        size="big"
-        isSignUp={true}
-      >
-        <HeaderText>
-          Sign Up
-        </HeaderText>
-        <Paragraph>
-          Connect with a study buddy today
-        </Paragraph>
-        <Formik
-          initialValues={signUpInitialValues}
-          validationSchema={signUpValidationSchema}
-          onSubmit={handleSignUp}
+    const { userType, handleSignUp, isLoadingSignUp, signupInitialValues } = props;
+    return (
+        <div
+            className='center-x'
         >
-          {(formik) =>
-            <Form >
-              <LoopOnInputs
-                inputs={signUpInputs}
-                formik={formik}
-                disabled={isLoadingSignUp}
-              />
-              <ExtractNationalId
-                setFieldValue={formik.setFieldValue}
-              />
-              <Btn
-                type="submit"
-                variant="contained"
-                isLoading={isLoadingSignUp}
-                fullWidth
-              >
-                Sign Up
-              </Btn>
-            </Form>
-          }
-        </Formik>
-        <TextAndLink
-          type="signup"
-        />
-      </FormCard >
-      <IllustrationSection
-        type="signup"
-        size="small"
-      />
-      <Outlet />
-    </div>
-  )
+            <FormCard
+                size="big"
+                isSignUp={true}
+            >
+                <HeaderText>
+                    Sign Up
+                </HeaderText>
+                <Paragraph>
+                    Connect with a study buddy today
+                </Paragraph>
+                <Formik
+                    initialValues={signupInitialValues}
+                    validationSchema={signUpValidationSchema}
+                    onSubmit={handleSignUp}
+                >
+                    {(formik) =>
+                        <Form >
+                            <LoopOnInputs
+                                inputs={signUpInputs}
+                                formik={formik}
+                                disabled={isLoadingSignUp}
+                            />
+                            <ExtractNationalId
+                                setFieldValue={formik.setFieldValue}
+                                isHaveInitialData={!!signupInitialValues.nationalId}
+                            />
+                            <Btn
+                                type="submit"
+                                variant="contained"
+                                isLoading={isLoadingSignUp}
+                                fullWidth
+                            >
+                                {userType === "user" ? 'Sign Up' : 'Continue'}
+                            </Btn>
+                        </Form>}
+                </Formik>
+                <TextAndLink
+                    type="signup"
+                />
+            </FormCard >
+            <IllustrationSection
+                type="signup"
+                size="small"
+            />
+            <Outlet />
+        </div>
+    )
 }
 
 export default SignUpUi

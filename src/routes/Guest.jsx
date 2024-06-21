@@ -9,22 +9,32 @@ import ContactUs from '../pages/Guest/ContactUs/ContactUs'
 import Features from '../pages/Guest/Feauters/Features'
 import AboutUs from '../pages/Guest/AboutUs/AboutUs'
 import Landing from '../pages/Guest/Landing/Landing'
+import { useSelector } from 'react-redux'
+import MentorSignupCompletion from '../pages/Guest/MentorSignupCompletion/MentorSignupCompletion'
+import MentorSignupCompletion2 from '../pages/Guest/MentorSignupCompletion/MentorSignupCompletion2'
+import MentorVerification from '../pages/Guest/MentorVerification/MentorVerification'
 
 const Guest = () =>
 {
     const location = useLocation();
+    const lastSignupStep = Number(useSelector(state => state.signupMentor?.lastSignupStep))
     const isUser = location.pathname.includes("user")
-    console.log("isUser", isUser)
+    const isMentor = location.pathname.includes("mentor")
 
     return (
         <Routes>
-
 
             <Route path='/:userType/signup' element={<SignUp />} >
                 {/* For user only*/}
                 {isUser && <Route path='resend-email' element={<ResendEmail />} />}
                 {/*  */}
             </Route>
+
+            {/* For mentor only*/}
+            {(isMentor && lastSignupStep >= 0) && <Route path='/:userType/signup/1' element={<MentorSignupCompletion />} />}
+            {(isMentor && lastSignupStep >= 1) && <Route path='/:userType/signup/2' element={<MentorSignupCompletion2 />} />}
+            {(isMentor && lastSignupStep >= 2) && <Route path='/mentor/verification/*' element={<MentorVerification />} />}
+            {/*  */}
 
             <Route path='/:userType/login' element={<Login />} />
             <Route path='/:userType/reset-password/*' element={<ResetPassword />} />

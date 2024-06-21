@@ -2,6 +2,7 @@ import { LoadingButton } from '@mui/lab';
 
 import classes from './styles/OutlinedBtn.module.css'
 import btnClasses from './styles/Btn.module.css'
+import { NavLink } from 'react-router-dom';
 
 export const OutlinedBtn = (props) =>
 {
@@ -14,7 +15,8 @@ export const OutlinedBtn = (props) =>
         endIcon,
         startIcon,
         className,
-        disabled
+        disabled,
+        ...rest
     } = props;
     return (
         <LoadingButton
@@ -31,6 +33,8 @@ export const OutlinedBtn = (props) =>
             endIcon={endIcon}
             startIcon={startIcon}
             disabled={disabled}
+            LinkComponent={NavLink}
+            {...rest}
         >
             {children}
         </LoadingButton>

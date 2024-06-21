@@ -1,0 +1,18 @@
+.container {
+    margin: 30px 0;
+}
+
+.container span {
+    margin-right: 20px;
+}
+
+@media (max-width:900px) {
+    .container {
+        margin: 20px 0;
+    }
+
+    .container span {
+        font-size: var(--font-size-100);
+    margin-right: 10px;
+    }
+}

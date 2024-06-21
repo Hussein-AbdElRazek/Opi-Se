@@ -33,7 +33,8 @@ export const Skills = (props) =>
     const {
         disabled,
         formik,
-        skillsInitial
+        skillsInitial,
+        name
     } = props;
     const [skillName, setSkillName] = useState('');
     const [skillRate, setSkillRate] = useState(1);
@@ -58,7 +59,7 @@ export const Skills = (props) =>
             ])
         if (!!formik)
         {
-            formik.setFieldValue("userSkills", [...formik.values.userSkills, newSkill])
+            formik.setFieldValue(name||"userSkills", [...formik.values.userSkills, newSkill])
         }
         setSkillName("")
         setSkillRate(1)
