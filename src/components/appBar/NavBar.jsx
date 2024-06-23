@@ -11,6 +11,8 @@ import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import { ReactComponent as MentorIcon } from '../../assets/icons/mentor.svg'
+import { ReactComponent as LibraryIcon } from '../../assets/icons/library.svg'
+import { ReactComponent as MentorReportIcon } from '../../assets/icons/mentorReport.svg'
 import { PopMenu } from './PopMenu'
 import { useSelector } from 'react-redux'
 import Notifications from '../../pages/User/Notifications/Notifications'
@@ -18,12 +20,16 @@ import MatchRequests from '../../pages/User/MatchRequests/MatchRequests'
 
 export const NavBar = () =>
 {
-    const mainLinks = [
-        {
-            title: 'Home',
-            to: "/",
-            Icon: HomeIcon,
-        },
+    const mainLink =
+    {
+        title: 'Home',
+        to: "/",
+        Icon: HomeIcon,
+    }
+
+
+    const userLinks = [
+        mainLink,
         {
             title: 'Progress',
             to: '/progress',
@@ -51,7 +57,22 @@ export const NavBar = () =>
         },
     ]
 
+    const mentorLinks = [
+        mainLink,
+        {
+            title: 'Library',
+            to: '/library',
+            Icon: LibraryIcon,
+        },
+        {
+            title: 'Report',
+            to: "/report",
+            Icon: MentorReportIcon,
+        }
+    ]
+
     const isNewNotification = useSelector(state => state?.user?.newNotificationMark);
+    const role = useSelector(state => state?.auth?.userData.role);
 
     return (
         <Grid
@@ -83,13 +104,13 @@ export const NavBar = () =>
             {/* main links */}
             <Grid
                 item
-                xl={3}
-                lg={3}
-                md={3.5}
-                sm={3.5}
+                xl={role === 'user' ? 3 : 2}
+                lg={role === 'user' ? 3 : 2}
+                md={role === 'user' ? 3 : 2}
+                sm={role === 'user' ? 3 : 2}
                 className={classes.mainIcons}
             >
-                {mainLinks.map(({ title, to, Icon, target }) => (
+                {(role === 'user' ? userLinks : mentorLinks).map(({ title, to, Icon, target }) => (
                     <Tooltip
                         title={title}
                         key={title}

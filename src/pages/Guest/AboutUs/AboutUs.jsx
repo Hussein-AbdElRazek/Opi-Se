@@ -1,14 +1,15 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 import contactClasses from '../ContactUs/ContactUs.module.css'
 import classes from './AboutUs.module.css'
 import { CurveContainer, GuestCard, HeaderTextHero, Paragraph } from '../../../components/ui'
 import UsersCounters from '../UsersCounters/UsersCounters'
 import Member from './Member'
-import husseinImg from '../../../assets/images/hussein.jpg'
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { membersData } from './memebrsData'
 
 const AboutUs = () =>
 {
@@ -50,37 +51,11 @@ const AboutUs = () =>
                     <br />
 
                     <div className={`${classes.bigTeam} center-x center-y flex-wrap`}>
-                        <Member
-                            img={husseinImg}
-                            name="HUSSEIN ABD EL RAZEK"
-                            position='Front-End'
-                        />
-                        <Member
-                            img={husseinImg}
-                            name="HUSSEIN ABD EL RAZEK"
-                            position='Front-End'
-                        />
-                        <Member
-                            img={husseinImg}
-                            name="HUSSEIN ABD EL RAZEK"
-                            position='Front-End'
-                        />
-                        <Member
-                            img={husseinImg}
-                            name="HUSSEIN ABD EL RAZEK"
-                            position='Front-End'
-                        />
-                        <Member
-                            img={husseinImg}
-                            name="HUSSEIN ABD EL RAZEK"
-                            position='Front-End'
-                        />
-                        <Member
-                            img={husseinImg}
-                            name="HUSSEIN ABD EL RAZEK"
-                            position='Front-End'
-                        />
+                        {membersData.map(member => <Member
+                            {...member}
+                        />)}
                     </div>
+
                     <div className={classes.smTeam}
                     >
                         <Swiper
@@ -91,48 +66,13 @@ const AboutUs = () =>
                             modules={[Pagination]}
                             loop={true}
                         >
-                            <SwiperSlide>
+                            {membersData.map(member =>
+                            (<SwiperSlide>
                                 <Member
-                                    img={husseinImg}
-                                    name="HUSSEIN ABD EL RAZEK"
-                                    position='Front-End'
+                                    {...member}
                                 />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Member
-                                    img={husseinImg}
-                                    name="HUSSEIN ABD EL RAZEK"
-                                    position='Front-End'
-                                />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Member
-                                    img={husseinImg}
-                                    name="HUSSEIN ABD EL RAZEK"
-                                    position='Front-End'
-                                />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Member
-                                    img={husseinImg}
-                                    name="HUSSEIN ABD EL RAZEK"
-                                    position='Front-End'
-                                />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Member
-                                    img={husseinImg}
-                                    name="HUSSEIN ABD EL RAZEK"
-                                    position='Front-End'
-                                />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Member
-                                    img={husseinImg}
-                                    name="HUSSEIN ABD EL RAZEK"
-                                    position='Front-End'
-                                />
-                            </SwiperSlide>
+                            </SwiperSlide>)
+                            )}
                         </Swiper>
                     </div>
 

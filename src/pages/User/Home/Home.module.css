@@ -31,10 +31,17 @@
     width: 70%;
 }
 
-.action button {
+.action button,
+.action a {
     padding: 15px 40px;
     font-size: var(--font-size-400);
     max-width: 450px;
+}
+
+.action svg {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
 }
 
 .right {

@@ -5,7 +5,7 @@ import { userActions } from '../../../store/user-slice';
 import useScrollingPagination from '../../../hooks/use-scrolling-pagination';
 import useHttp from '../../../hooks/use-http';
 import { authActions } from '../../../store/auth-slice';
-import { userModulePath } from '../../../config';
+import { mentorModulePath, userModulePath } from '../../../config';
 
 const Notifications = ({ type }) =>
 {
@@ -13,6 +13,7 @@ const Notifications = ({ type }) =>
     const dispatch = useDispatch();
     const uiId = "notifications";
     const isNotificationsOpened = !!useSelector(state => state.ui.isPopMenuOpened)[uiId];
+    const role = useSelector((state) => state.auth.userData.role)
 
     useEffect(() =>
     {
@@ -48,11 +49,12 @@ const Notifications = ({ type }) =>
 
         if (isNotificationsOpen) getNotifications(
             {
-                url: `${userModulePath}/getNotifications?page=${currentPage + 1}&limit=${20}`,
+                url: `${role === 'user' ? userModulePath : mentorModulePath}/getNotifications?page=${currentPage + 1}&limit=${20}`,
             },
             getResponse
         );
-    }, [currentPage, dispatch, getNotifications, isNotificationsOpen])
+    }, [currentPage, dispatch, getNotifications, isNotificationsOpen, role])
+
     return (
         <NotificationsUi
             notifications={notifications}

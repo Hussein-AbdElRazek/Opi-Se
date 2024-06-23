@@ -25,7 +25,7 @@ const MatchActions = ({ requestData, smallBtn }) =>
     const myData = useSelector(state => state.auth.userData)
     const handleAcceptMatch = () =>
     {
-        const getResponse = ({ message, matchId }) =>
+        const getResponse = async ({ message, matchId }) =>
         {
             if (message.includes("success"))
             {
@@ -39,24 +39,24 @@ const MatchActions = ({ requestData, smallBtn }) =>
                     partnerImage: myData.profileImage,
                     partnerId: myData._id,
                 }
-                dispatch(acceptPartnerRequest(socketReqBody))
+                dispatch(acceptPartnerRequest({ socketReqBody, requestData }))
                 console.log("req socketReqBody ", socketReqBody)
                 // notify user
                 dispatch(notifyUserRoom(requestData._id));
 
-                // update match data and join match room
-                dispatch(authActions.updateUserData({
-                    matchId: matchId,
-                    alreadyRequestedMe: false,
-                    alreadyRequestedHim: false,
-                    partnerId: {
-                        _id: requestData._id,
-                        userName: requestData.userName,
-                        profileImage: requestData.profileImage
-                    }
-                }))
+                // // update match data and join match room
+                // dispatch(authActions.updateUserData({
+                //     matchId: matchId,
+                //     alreadyRequestedMe: false,
+                //     alreadyRequestedHim: false,
+                //     partnerId: {
+                //         _id: requestData._id,
+                //         userName: requestData.userName,
+                //         profileImage: requestData.profileImage
+                //     }
+                // }))
 
-                dispatch(joinMatchRoom());
+                // dispatch(joinMatchRoom());
 
                 dispatch(matchActions.removeRequest(requestData._id))
             }

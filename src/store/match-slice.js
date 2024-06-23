@@ -5,9 +5,11 @@ import { updateSocketQuery } from '../helpers/updateSocketsQuery';
 import { authActions } from './auth-slice';
 import { userActions } from './user-slice';
 import { mergeToUnique } from '../helpers/mergeToUnique';
+import { chatActions } from './chat-slice';
 
 const initialMatchState = {
     connected: false,
+    joinedMatchRoom: 0,
     requests: [],
 }
 
@@ -41,6 +43,9 @@ export const listenToLeaveRoom = createAsyncThunk(
                     matchId: null
                 })
             );
+            thunkAPI.dispatch(
+                chatActions.clearMessages()
+            );
 
             // make notification
             thunkAPI.dispatch(userActions.updateNewNotificationMark(true))
@@ -52,30 +57,44 @@ export const listenToLeaveRoom = createAsyncThunk(
 )
 
 export const acceptPartnerRequest = createAsyncThunk('match/acceptPartnerRequest',
-    async (body) =>
+    async (body, thunkAPI) =>
     {
         console.log("call acceptPartnerRequest", body)
-        socket.io.opts.query = {
 
-        };
-        socket.disconnect()
-        socket.connect();
-        socket.emit('acceptPartnerRequest', body, (res) =>
+        // update match data and join match room
+        thunkAPI.dispatch(authActions.updateUserData({
+            matchId: body.socketReqBody.matchId,
+            alreadyRequestedMe: false,
+            alreadyRequestedHim: false,
+            partnerId: {
+                _id: body.requestData._id,
+                userName: body.requestData.userName,
+                profileImage: body.requestData.profileImage
+            }
+        }))
+
+        thunkAPI.dispatch(joinMatchRoom());
+
+        socket.emit('acceptPartnerRequest', body.socketReqBody, (res) =>
         {
             console.log('acceptPartnerRequest res', res)
+            window.location.reload();
+
         });
     }
 );
 
 export const joinMatchRoom = createAsyncThunk('match/joinMatchRoom',
-    async () =>
+    async (_, thunkAPI) =>
     {
         // update query and restart socket connection
-        updateSocketQuery();
+        const authState = thunkAPI.getState(state => state).auth;
+        updateSocketQuery(authState);
 
         socket.emit('joinMatchRoom', {}, (res) =>
         {
             console.log('joinMatchRoom', res)
+            thunkAPI.dispatch(matchActions.markJoinedMatchRoom())
         });
     }
 );
@@ -84,7 +103,6 @@ export const listenToMatchRequestApproved = createAsyncThunk(
     "match/listenToMatchRequestApproved",
     async (_, thunkAPI) =>
     {
-        
         socket.on('matchRequestApproved', (data) =>
         {
             console.log("matchRequestApproved", data)
@@ -95,13 +113,17 @@ export const listenToMatchRequestApproved = createAsyncThunk(
                     _id: data.partnerId,
                     userName: data.partnerUserName,
                     profileImage: data.partnerImage
-                }
+                },
+                alreadyRequestedMe: false,
+                alreadyRequestedHim: false,
+                isAvailable: false,
             }))
             thunkAPI.dispatch(joinMatchRoom());
 
             thunkAPI.dispatch(
                 userActions.updateNewNotificationMark(true)
             );
+            window.location.reload();
         });
     }
 )
@@ -118,6 +140,10 @@ const matchSlice = createSlice({
         {
             state.requests = state.requests.filter(ele => ele._id !== action.payload)
         },
+        markJoinedMatchRoom(state)
+        {
+            state.joinedMatchRoom += 1;
+        }
     }
 })
 

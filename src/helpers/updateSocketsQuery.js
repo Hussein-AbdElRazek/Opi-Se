@@ -2,18 +2,21 @@ import baseSocket from "../sockets/baseConnection";
 
 const socket = baseSocket;
 
-export const updateSocketQuery = () =>
+export const updateSocketQuery = (authState) =>
 {
-    const matchId = JSON.parse(localStorage.getItem("userData"))?.matchId;
-    const token = (localStorage.getItem("token"));
-    const userId = JSON.parse(localStorage.getItem("userData"))?._id;
-
-    socket.io.opts.query = {
+    // prepare newSocketQuery from state
+    const userId = authState?.userData?._id
+    const token = authState?.token
+    const matchId = authState?.userData?.matchId
+    const newSocketQuery = {
         matchId: matchId,
         roomId: matchId,
         userId: userId,
         token: token,
-    };
-    
-    socket.disconnect().connect();
+    }
+    console.log("newSocketQuery", newSocketQuery)
+    socket.io.opts.query = newSocketQuery;
+
+    socket.disconnect();
+    socket.connect();
 }

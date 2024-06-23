@@ -4,7 +4,7 @@ import contactUsBG from '../../../assets/images/contactUsBG.svg'
 import { Btn, FormikContainer, LoopOnInputs } from '../../../components/inputs'
 import { contactUsInitialValues, contactUsInputData } from './contactusInputsData'
 import { contactUsValidationSchema } from './contactUsValidationSchema'
-const ContactUsUi = () =>
+const ContactUsUi = ({ onSendMessage }) =>
 {
     return (
         <div >
@@ -34,7 +34,7 @@ const ContactUsUi = () =>
                             <FormikContainer
                                 initialValues={contactUsInitialValues}
                                 validationSchema={contactUsValidationSchema}
-                                onSubmit={() => { }}
+                                onSubmit={onSendMessage}
                             >
                                 <LoopOnInputs
                                     inputs={contactUsInputData}

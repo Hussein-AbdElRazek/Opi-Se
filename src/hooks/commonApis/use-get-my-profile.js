@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 
 import useHttp from "../use-http";
-import { userModulePath } from "../../config";
+import { mentorModulePath, userModulePath } from "../../config";
 import { authActions } from "../../store/auth-slice";
 import { useCallback } from "react";
+import { useSelector } from "react-redux";
 
 const useGetMyProfile = () =>
 {
@@ -13,6 +14,8 @@ const useGetMyProfile = () =>
     } = useHttp();
 
     const dispatch = useDispatch();
+    const role = useSelector(state => state.auth.userData.role);
+
     const handleGetMyProfile = useCallback((onSuccess) =>
     {
         const getResponse = ({ message, data }) =>
@@ -26,11 +29,11 @@ const useGetMyProfile = () =>
 
         getMyProfile(
             {
-                url: `${userModulePath}/getUserProfile`,
+                url: role === 'user' ? `${userModulePath}/getUserProfile` : `${mentorModulePath}/getMentorProfile`,
             },
             getResponse
         );
-    }, [dispatch, getMyProfile])
+    }, [dispatch, getMyProfile, role])
 
     return {
         handleGetMyProfile,

@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
+
 import useHttp from "../../../hooks/use-http";
 import ForgetPasswordUi from "./ForgetPasswordUi"
-import {  useSnackbar } from "notistack";
-import { userModulePath } from "../../../config";
+import { mentorModulePath, userModulePath } from "../../../config";
 
 const ForgetPassword = (props) =>
 {
@@ -11,22 +12,24 @@ const ForgetPassword = (props) =>
         sendRequest: forgetPassword
     } = useHttp();
     const navigate = useNavigate();
-    const {enqueueSnackbar:popMessage} = useSnackbar();
+    const { enqueueSnackbar: popMessage } = useSnackbar();
+    const { userType } = useParams();
+
     const handleForgetPassword = (values) =>
     {
         const getResponse = ({ message }) =>
         {
             if (message.includes("success"))
             {
-                popMessage("Please check your email", {variant:"success"})
-                navigate("/login")
+                popMessage("Please check your email", { variant: "success" })
+                navigate(`${userType}/login`)
             }
         };
 
         forgetPassword(
             {
-                url: `${userModulePath}/forgetPassword`,
-                method: "post",
+                url: `${userType === 'user' ? userModulePath : mentorModulePath}/forgetPassword`,
+                method: "POST",
                 body: values,
             },
             getResponse

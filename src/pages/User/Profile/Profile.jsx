@@ -6,29 +6,37 @@ import ProfileUi from './ProfileUi'
 import useSearchForPartner from '../../../hooks/commonApis/use-search-for-partner';
 import { LoadingFullScreen } from '../../../components/ui';
 import useGetMyProfile from '../../../hooks/commonApis/use-get-my-profile';
+import { useSnackbar } from 'notistack';
 
 const Profile = () =>
 {
     const [searchParams] = useSearchParams();
     const myData = useSelector((state) => state?.auth?.userData);
     const myId = useSelector((state) => state?.auth?.userData)?._id;
-    console.log("myID",myId)
+    console.log("myID", myId)
     const userId = searchParams.get("userId");
     const userData = useSelector((state) => state?.search?.userData);
     const isMyProfile = myId === userId;
     const isMyPartner = userId === myData?.partnerId?._id;
     const havePartner = !!(myData?.partnerId?._id);
-
+    const navigate = useNavigate();
+    const { enqueueSnackbar: popMessage } = useSnackbar();
+    const currentUrl = window.location.href;
+    // to handle where i come from like come from partners requests
+    const from = searchParams.get("from");
     const {
         handleSearchForPartner,
         isLoadingSearchForPartner,
     } = useSearchForPartner();
-    const navigate = useNavigate();
-
     const {
         handleGetMyProfile,
         isLoadingGetMyProfile,
     } = useGetMyProfile();
+
+    const onCopy = () =>
+    {
+        popMessage("Copied successfully")
+    }
 
     useEffect(() =>
     {
@@ -46,8 +54,6 @@ const Profile = () =>
         }
     }, [handleGetMyProfile, handleSearchForPartner, isMyProfile, navigate, userId])
 
-    // to handle where i come from like come from partners requests
-    const from = searchParams.get("from");
     return (
         <>
             {(isLoadingSearchForPartner || isLoadingGetMyProfile || (!myData && !userData)) ?
@@ -58,6 +64,8 @@ const Profile = () =>
                         isMyPartner={isMyPartner}
                         from={from}
                         havePartner={havePartner}
+                        currentUrl={currentUrl}
+                        onCopy={onCopy}
                     />
                 )}
         </>

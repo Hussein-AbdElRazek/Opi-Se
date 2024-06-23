@@ -8,6 +8,7 @@ import { aboutInputs } from '../About/aboutInputsData'
 
 import { Formik, Form } from 'formik'
 import { aboutValidationSchema } from '../About/aboutValidationSchema'
+import { ProfileList } from '../../../components/common'
 
 const EditProfileUi = (props) =>
 {
@@ -19,7 +20,7 @@ const EditProfileUi = (props) =>
         isLoadingEditUserPrefers,
         handleEditUserPrefers,
     } = props;
-    
+
     return (
         <div
             className={classes.container}
@@ -106,7 +107,9 @@ const EditProfileUi = (props) =>
 
                                     {isLoadingEditUserPrefers && <br />}
                                     <Skills
-                                        skillsInitial={initialUserPrefers.userSkills}
+                                        name={initialUserData.role === 'user' ? 'userSkills' : 'skills'}
+                                        skillsInitial={initialUserData.role === 'user'
+                                            ? initialUserPrefers.userSkills : initialUserPrefers.skills}
                                         formik={formik}
                                         disabled={isLoadingEditUserPrefers}
                                     />
@@ -126,6 +129,19 @@ const EditProfileUi = (props) =>
                         }}
                     </Formik>
                 </Card>
+
+                {/* <Card
+                    title="Experience"
+                >
+                    <ProfileList list={[
+                        {title:"UI/UX Designer",
+                        text:"SYNC - Full-time", 
+                        secText:"Aug 2022 - Present"},
+                        {title:"UI/UX Designer",
+                        text:"SYNC - Full-time", 
+                        secText:"Aug 2022 - Present"},
+                        ]}/>
+                </Card> */}
             </div>
         </div >
     )

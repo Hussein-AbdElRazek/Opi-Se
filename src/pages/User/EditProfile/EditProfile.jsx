@@ -6,7 +6,7 @@ import { clearArrayOfObjects } from '../../../helpers/clearArrayOfObjects';
 import { compareObjects } from '../../../helpers/compareObjects';
 import { useSnackbar } from 'notistack';
 import { authActions } from '../../../store/auth-slice';
-import { recommendationModulePath, userModulePath } from '../../../config';
+import { mentorModulePath, recommendationModulePath, userModulePath } from '../../../config';
 import useGetMyProfile from '../../../hooks/commonApis/use-get-my-profile';
 
 const EditProfile = () =>
@@ -27,6 +27,12 @@ const EditProfile = () =>
         specialization: userData.specialization,
     }
 
+    const initialMentorInterests = {
+        skills: userData.skills,
+        fieldOfStudy: userData.fieldOfStudy,
+        specialization: userData.specialization,
+    }
+
     const {
         sendRequest: editProfile,
         isLoading: isLoadingEditProfile
@@ -39,6 +45,7 @@ const EditProfile = () =>
 
     const { enqueueSnackbar: popMessage } = useSnackbar();
     const dispatch = useDispatch();
+    const role = useSelector(state => state.auth.userData.role);
 
     const handleEditProfile = (values) =>   
     {
@@ -62,7 +69,7 @@ const EditProfile = () =>
 
         editProfile(
             {
-                url: `${userModulePath}/editProfile`,
+                url: `${role === 'user' ? userModulePath : mentorModulePath}/editProfile`,
                 method: "PATCH",
                 body: submitData,
             },
@@ -72,7 +79,9 @@ const EditProfile = () =>
 
     const handleEditUserPrefers = (values) =>   
     {
-        const submitData = compareObjects(initialUserPrefers, values)
+        const submitData = initialUserData.role === 'user' ?
+            compareObjects(initialUserPrefers, values) :
+            compareObjects(initialMentorInterests, values)
 
         if (!Object.keys(submitData).length)
         {

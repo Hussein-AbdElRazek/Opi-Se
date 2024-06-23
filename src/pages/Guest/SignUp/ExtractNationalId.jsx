@@ -29,7 +29,7 @@ const ExtractNationalId = (props) =>
                 method: "POST",
                 contentType: "form-data",
                 body: values,
-                baseUrl: "https://ocr-api-ysqv.onrender.com/"
+                baseUrl: "https://ocr-model-a.onrender.com/"
             },
             getResponse
         );

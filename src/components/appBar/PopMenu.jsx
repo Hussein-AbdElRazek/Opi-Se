@@ -1,4 +1,4 @@
-import {ListItemIcon } from '@mui/material'
+import { ListItemIcon } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -10,6 +10,8 @@ import { ReactComponent as TasksIcon } from '../../assets/icons/tasks.svg'
 import { ReactComponent as NotesIcon } from '../../assets/icons/notes.svg'
 import { ReactComponent as MentalHealthIcon } from '../../assets/icons/mentalHealth.svg'
 import { ReactComponent as MentorIcon } from '../../assets/icons/mentor.svg'
+import { ReactComponent as LibraryIcon } from '../../assets/icons/library.svg'
+import { ReactComponent as MentorReportIcon } from '../../assets/icons/mentorReport.svg'
 import classes from './styles/PopMenu.module.css'
 import { uiActions } from '../../store/ui-slice'
 import { ProfileIcon } from './ProfileIcon'
@@ -29,7 +31,7 @@ export const PopMenu = () =>
         else dispatch(uiActions.openPopMenu(profileMenuId))
     }
 
-    const menuItems = [
+    const mainMenuItems = [
         // profile menu
         {
             noHover: true,
@@ -55,6 +57,11 @@ export const PopMenu = () =>
                 </>,
             to: "/",
         },
+    ]
+
+    const userMenuItems = [
+        ...mainMenuItems,
+
         // progress
         {
             onClick: closeMenu,
@@ -122,15 +129,48 @@ export const PopMenu = () =>
         },
     ]
 
+    const mentorMenuItems = [
+        ...mainMenuItems,
+
+        // library
+        {
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
+            children:
+                <>
+                    <ListItemIcon className={classes.icon}>
+                        <LibraryIcon fill='var(--black-40)' />
+                    </ListItemIcon>
+                    Library
+                </>,
+            to: "/library",
+        },
+        // report
+        {
+            onClick: closeMenu,
+            menuItemComponent: NavLink,
+            children:
+                <>
+                    <ListItemIcon className={classes.icon}>
+                        <MentorReportIcon fill='var(--black-40)' />
+                    </ListItemIcon>
+                    Report
+                </>,
+            to: "/report",
+        },
+    ]
+
+    const role = useSelector(state => state?.auth?.userData.role);
+
     return (
         <PopUpMenuComponent
             id={menuId}
             openBtnType="base"
             openBtnChild={
-                <MenuIcon fill='var(--text-header)'/>
+                <MenuIcon fill='var(--text-header)' />
             }
             openBtnClassName={classes.openBtn}
-            menuItems={menuItems}
+            menuItems={role === 'user' ? userMenuItems : mentorMenuItems}
             containerClassName={classes.container}
             fullWidth={true}
         />

@@ -20,12 +20,31 @@ const authSlice = createSlice({
             state.token = action.payload.token;
             let clearLanguagesArray = clearArrayOfObjects(action.payload?.userData?.languages || []);
             let clearUserSkillsArray = clearArrayOfObjects(action.payload?.userData?.userSkills || []);
-            let tempUserData = {
+
+            // start: for mentor clear data
+            let clearSkillsArray = clearArrayOfObjects(action.payload?.userData?.skills || []);
+            let clearCertificatesArray = clearArrayOfObjects(action.payload?.userData?.certificates || []);
+            let clearExperienceArray = clearArrayOfObjects(action.payload?.userData?.experience || []);
+            // end: for mentor clear data
+
+            const tempMainData = {
                 ...action.payload.userData,
                 languages: clearLanguagesArray,
+            }
+
+            let tempUserData = {
+                ...tempMainData,
                 userSkills: clearUserSkillsArray,
             }
-            state.userData = tempUserData;
+
+            let tempMentorData = {
+                ...tempMainData,
+                skills: clearSkillsArray,
+                certificates: clearCertificatesArray,
+                experience: clearExperienceArray,
+            }
+
+            state.userData = tempMainData.role === "user" ? tempUserData : tempMentorData;
             state.isLoggedIn = true;
             localStorage.setItem("token", action.payload.token)
             localStorage.setItem("userData", JSON.stringify(tempUserData))

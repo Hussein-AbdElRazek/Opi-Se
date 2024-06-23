@@ -1,7 +1,8 @@
 import ChangePasswordUi from './ChangePasswordUi'
 import useHttp from '../../../hooks/use-http';
 import { useSnackbar } from 'notistack';
-import { userModulePath } from '../../../config';
+import { mentorModulePath, userModulePath } from '../../../config';
+import { useSelector } from 'react-redux';
 
 const ChangePassword = () =>
 {
@@ -10,6 +11,7 @@ const ChangePassword = () =>
         sendRequest: changePassword
     } = useHttp();
     const { enqueueSnackbar: popMessage } = useSnackbar();
+    const role = useSelector(state => state.auth.userData.role);
 
     const handleChangePassword = (values, {resetForm}) =>
     {
@@ -23,7 +25,7 @@ const ChangePassword = () =>
         };
         changePassword(
             {
-                url: `${userModulePath}/changePassword`,
+                url: `${role === 'user' ? userModulePath : mentorModulePath}/changePassword`,
                 method: "POST",
                 body: values,
             },

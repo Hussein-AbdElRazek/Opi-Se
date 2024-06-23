@@ -16,7 +16,7 @@ const RecommendationActions = () =>
     return (
         <ActionsLayout>
             <Btn
-                startIcon={<AddIcon fill='var(--primary)' />}
+                startIcon={<AddIcon fill='var(--primary)' className={classes.addBtnIcon} />}
                 className={classes.addBtn}
                 isLoading={isLoadingSendPartnerRequest}
                 onClick={() => { handleSendPartnerRequest(userData) }}

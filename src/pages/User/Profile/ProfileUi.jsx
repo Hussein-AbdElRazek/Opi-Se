@@ -1,5 +1,4 @@
 import { IconButton } from '@mui/material'
-import { useSnackbar } from 'notistack';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
@@ -14,6 +13,7 @@ import MatchRequestActions from './components/MatchRequestActions';
 import RecommendationActions from './components/RecommendationActions';
 import { ReactComponent as ReportIcon } from '../../../assets/icons/report.svg';
 import AlreadyRequestedLabel from './components/AlreadyRequestedLabel';
+import NoData from './components/NoData';
 
 const ProfileUi = (props) =>
 {
@@ -23,17 +23,9 @@ const ProfileUi = (props) =>
         isMyPartner,
         from,
         havePartner,
+        currentUrl,
+        onCopy,
     } = props;
-
-    const { enqueueSnackbar: popMessage } = useSnackbar();
-
-    const currentUrl = window.location.href;
-    const haveBio = profileData.bio && profileData.bio !== "blank"
-
-    const onCopy = () =>
-    {
-        popMessage("Copied successfully")
-    }
 
     return (
         <>
@@ -51,8 +43,8 @@ const ProfileUi = (props) =>
                     {isMyProfile && <ChangeProfilePic />}
                 </div>
 
-                {/* My Report Btn*/}
-                {isMyProfile && (
+                {/* My Report Btn for user*/}
+                {(profileData?.role === 'user' && isMyProfile) && (
                     <ActionsLayout>
                         <Btn
                             to={`https://userdashboard-cv8d.onrender.com/${profileData?.nationalId}`}
@@ -109,30 +101,95 @@ const ProfileUi = (props) =>
                 <Grid2
                     container
                     rowSpacing={2}
-                    columnSpacing={{ lg: haveBio ? 4 : 0, md: haveBio ? 4 : 0, sm: 0, xs: 0 }}
+                    columnSpacing={{ lg: 4, md: 4, sm: 0, xs: 0 }}
                     alignContent={"flex-start"}
                     alignItems={"flex-start"}
                 >
-                    {/* About */}
-                    {haveBio && <Grid2
+                    {/* About (Bio)*/}
+                    <Grid2
+                        lg={6}
                         md={6}
                         sm={12}
                         xs={12}
-                        className={classes.about}
                     >
                         <div className={classes.card} >
                             <h6>
                                 About me
                             </h6>
-                            <p>
-                                {profileData.bio}
-                            </p>
+                            {profileData?.bio ?
+                                (
+                                    <p>
+                                        {profileData.bio}
+                                    </p>
+                                ) :
+                                (
+                                    <NoData >
+                                        No About, yet
+                                    </NoData>
+                                )
+                            }
                         </div>
-                    </Grid2>}
+                    </Grid2>
+
+                    {/* MENTOR Experience */}
+                    {profileData?.role === 'mentor' && (
+                        <Grid2
+                            lg={6}
+                            md={6}
+                            sm={12}
+                            xs={12}
+                        >
+                            <div className={classes.card} >
+                                <h6>
+                                    Experience
+                                </h6>
+                                {profileData?.experience?.length ?
+                                    (
+                                        <p>
+                                            have experience
+                                        </p>
+                                    ) :
+                                    (
+                                        <NoData >
+                                            No Experience, yet
+                                        </NoData>
+                                    )
+                                }
+                            </div>
+                        </Grid2>
+                    )}
+
+                    {/* MENTOR Certifications */}
+                    {profileData?.role === 'mentor' && (
+                        <Grid2
+                            lg={6}
+                            md={6}
+                            sm={12}
+                            xs={12}
+                        >
+                            <div className={classes.card} >
+                                <h6>
+                                    Certifications
+                                </h6>
+                                {profileData?.certificates?.length ?
+                                    (
+                                        <p>
+                                            have certificates
+                                        </p>
+                                    ) :
+                                    (
+                                        <NoData >
+                                            No Certifications, yet
+                                        </NoData>
+                                    )
+                                }
+                            </div>
+                        </Grid2>
+                    )}
 
                     {/* Skills */}
                     <Grid2
-                        md={haveBio ? 6 : 12}
+                        md={6}
                         sm={12}
                         xs={12}
                         container
@@ -140,7 +197,7 @@ const ProfileUi = (props) =>
                         columnSpacing={{ lg: 4, md: 4, sm: 0, xs: 0 }}
                     >
                         <Grid2
-                            md={haveBio ? 12 : 6}
+                            md={12}
                             sm={12}
                             xs={12}
                             className={classes.skills}
@@ -149,13 +206,14 @@ const ProfileUi = (props) =>
                                 <h6>
                                     Skills
                                 </h6>
+                                {(!profileData?.userSkills?.length) && <NoData >No Skills, yet</NoData>}
                                 <Skills disabled={true} skillsInitial={profileData?.userSkills} />
                             </div>
                         </Grid2>
 
                         {/* Copy id section */}
                         <Grid2
-                            md={haveBio ? 12 : 6}
+                            md={12}
                             sm={12}
                             xs={12}
                         >
@@ -178,7 +236,7 @@ const ProfileUi = (props) =>
                         </Grid2>
                     </Grid2>
                 </Grid2>
-            </div>
+            </div >
         </>
     )
 }

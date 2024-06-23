@@ -2,7 +2,8 @@ import { createSearchParams, useNavigate, useSearchParams } from "react-router-d
 import useHttp from "../../../hooks/use-http";
 import ResetPasswordUi from "./ResetPasswordUi"
 import { useSnackbar } from "notistack";
-import { userModulePath } from "../../../config";
+import { mentorModulePath, userModulePath } from "../../../config";
+import { useSelector } from "react-redux";
 
 const ResetPassword = (props) =>
 {
@@ -13,6 +14,7 @@ const ResetPassword = (props) =>
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const { enqueueSnackbar: popMessage } = useSnackbar();
+    const role = useSelector(state => state.auth.userData.role);
 
     const handleResetPassword = (values) =>
     {
@@ -28,8 +30,8 @@ const ResetPassword = (props) =>
 
         resetPassword(
             {
-                url: `${userModulePath}/submitNewPassword?token=${token}`,
-                method: "post",
+                url: `${role === 'user' ? userModulePath : mentorModulePath}/submitNewPassword?token=${token}`,
+                method: "POST",
                 body: values,
             },
             getResponse

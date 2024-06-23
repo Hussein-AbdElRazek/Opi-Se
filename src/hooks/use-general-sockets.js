@@ -11,53 +11,59 @@ const useGeneralSocket = () =>
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const isHavePartner = !!useSelector((state) => state.auth?.userData?.partnerId?._id);
     const partnerId = useSelector((state) => state.auth?.userData?.partnerId?._id);
-
+    const joinedMatchRoom = !!useSelector((state) => state.match?.joinedMatchRoom);
     // handle all general sockets (app root sockets)
     useEffect(() =>
     {
-        //if logged in sockets
-        if (isLoggedIn)
+        const logic = async () =>
         {
-            //-- user module
-            dispatch(joinUserRoom());
+            //if logged in sockets
+            if (isLoggedIn)
+            {
+                //-- user module
+                dispatch(joinUserRoom());
 
-            dispatch(listenToShowNotificationMark());
-            // ______________________________
+                dispatch(listenToShowNotificationMark());
+                // ______________________________
 
-            // -- Match module
+                // -- Match module
 
-            //listen to MatchRequestApproved
-            dispatch(listenToMatchRequestApproved());
+                //listen to MatchRequestApproved
+                dispatch(listenToMatchRequestApproved());
+            }
+
+            //if have partner sockets
+            if (isHavePartner)
+            {// join match room
+                dispatch(joinMatchRoom());
+            }
+            if (isHavePartner && joinedMatchRoom)
+            {
+                console.log("have partner sokcets")
+                //-- Match module
+
+                //listen to if the other partner un match me 
+                dispatch(listenToLeaveRoom());
+                // ______________________________
+
+                //-- chat module
+
+                //Messages listener
+                dispatch(listenToReceiveMessage());
+
+                //Media listener
+                dispatch(listenToReceiveMedia(partnerId));
+
+                //Session listener
+                dispatch(listenToStartChatSession());
+                dispatch(listenToReplyToSessionRequest());
+                dispatch(listenToEndToSessionRequest());
+                // ______________________________
+
+            }
+
         }
-
-        //if have partner sockets
-        if (isHavePartner)
-        {
-            //-- Match module
-
-            // join match room
-            dispatch(joinMatchRoom());
-
-            //listen to if the other partner un match me 
-            dispatch(listenToLeaveRoom());
-            // ______________________________
-
-            //-- chat module
-
-            //Messages listener
-            dispatch(listenToReceiveMessage());
-
-            //Media listener
-            dispatch(listenToReceiveMedia(partnerId));
-
-            //Session listener
-            dispatch(listenToStartChatSession());
-            dispatch(listenToReplyToSessionRequest());
-            dispatch(listenToEndToSessionRequest());
-            // ______________________________
-
-        }
-
-    }, [dispatch, isHavePartner, isLoggedIn, partnerId])
+        logic()
+    }, [dispatch, isHavePartner, isLoggedIn, joinedMatchRoom, partnerId])
 }
 export default useGeneralSocket

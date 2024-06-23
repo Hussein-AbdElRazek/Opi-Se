@@ -1,11 +1,12 @@
-import React from 'react'
-import { HeaderText, IllustrationSection } from '../../../components/ui'
-import classes from './Home.module.css'
-import { Btn } from '../../../components/inputs'
-import { Badge, IconButton, Tooltip } from '@mui/material'
-import messageIcon from '../../../assets/icons/message.svg'
 import { NavLink, Outlet } from 'react-router-dom'
+import { Badge, IconButton, Tooltip } from '@mui/material'
+
+import { HeaderText, IllustrationSection } from '../../../components/ui'
+import classes from '../../User/Home/Home.module.css'
+import { Btn } from '../../../components/inputs'
+import messageIcon from '../../../assets/icons/message.svg'
 import homeBackground from '../../../assets/images/homeBackground.png'
+import { ReactComponent as AddIcon } from '../../../assets/icons/add.svg'
 
 const HomeUi = ({ isHavePartner, isNewMessage }) =>
 {
@@ -21,11 +22,11 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
                     <span className={classes.logo}>
                         Opi Se
                     </span>
-                    You
+                    You Can
                     <br />
-                    Can Find The
+                    Create Quizzes and
                     <br />
-                    Perfect Study Partner
+                    Tasks for your students
                 </HeaderText>
 
                 <p>
@@ -35,19 +36,12 @@ const HomeUi = ({ isHavePartner, isNewMessage }) =>
                 <div
                     className={classes.action}
                 >
-                    {isHavePartner ?
-                        (<Btn
-                            disabled={isHavePartner}
-                        >
-                            Get a New Brain Buddy
-                        </Btn>) :
-                        (
-                            <Btn
-                                to="recommendation?p=1&l=1"
-                            >
-                                Get a New Brain Buddy
-                            </Btn>
-                        )}
+                    <Btn
+                        to={'create'}
+                        startIcon={<AddIcon fill='var(--primary)'/>}
+                    >
+                        Start Create
+                    </Btn>
                 </div>
 
                 {/* illustration  section sm screens*/}

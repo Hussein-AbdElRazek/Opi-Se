@@ -42,6 +42,7 @@ export const listenToReceiveMessage = createAsyncThunk(
     "chat/listenToReceiveMessage",
     async (_, thunkAPI) =>
     {
+        console.log("------socket listenToReceiveMessage", socket)
         socket.on('receiveMessage', (data) =>
         {
             //  update state
@@ -286,7 +287,7 @@ export const listenToPollOptionSelected = createAsyncThunk(
             const pollMessage = messages?.find(message => message._id === pollId);
             const pollOption = pollMessage.pollAnswers.find(answer => answer.optionNumber === res.optionNumber)
             const updatedPollAnswers = selectOption(pollOption.optionSelectors, pollMessage.pollAnswers, res.optionNumber, pollOption.optionVotes, myId);
-            
+
             //  update state
             thunkAPI.dispatch(
                 chatActions.updateMessage({
@@ -391,6 +392,19 @@ const chatSlice = createSlice({
                 else return ele;
             })
         },
+        clearMessages(state)
+        {
+            state.messages = {}
+            state.session = {
+                status: "",
+                startDate: "",
+                isLoading: false,
+            }
+            state.totalPages = 1;
+            state.newMessageMark = false;
+
+            localStorage.setItem("newMessageMark", JSON.stringify(false))
+        }
     },
 })
 

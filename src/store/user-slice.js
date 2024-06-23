@@ -11,10 +11,11 @@ const initialUserState = {
 const socket = baseSocket;
 
 export const joinUserRoom = createAsyncThunk('user/joinUserRoom',
-    async () =>
+    async (_, thunkAPI) =>
     {
         // update query and restart socket connection
-        updateSocketQuery();
+        const authState = thunkAPI.getState(state => state).auth;
+        updateSocketQuery(authState);
 
         socket.emit('joinUserRoom', {}, (res) =>
         {

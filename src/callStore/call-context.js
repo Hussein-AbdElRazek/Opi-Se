@@ -258,13 +258,13 @@ export const CallContextProvider = (props) =>
     // emit toggleCamera
     const toggleCamera = (isCameraOn) =>
     {
-        socket.emit("toggleCamera", { camera: isCameraOn }, () => { })
+        socket.emit("toggleCamera", { camera: isCameraOn }, (res) => { console.log("toggleCamera",res)})
     }
 
     // emit toggleMicrophone
     const toggleMicrophone = (isMicOn) =>
     {
-        socket.emit("toggleMicrophone", { microphone: isMicOn }, () => { })
+        socket.emit("toggleMicrophone", { microphone: isMicOn }, (res) => { console.log("toggleMicrophone", res) })
     }
 
     // set my media and call sockets
@@ -405,13 +405,13 @@ export const CallContextProvider = (props) =>
     // listen to cameraToggeled, microphoneToggeled
     useEffect(() =>
     {
-        socket.on("cameraToggeled", (res) =>
+        socket.on("cameraToggled", (res) =>
         {
-            console.log("cameraToggeled", res)
+            console.log("cameraToggled", res)
             setAnotherMediaState("video", res?.camera)
         })
 
-        socket.on("microphoneToggeled", (res) =>
+        socket.on("microphoneToggled", (res) =>
         {
             console.log("microphoneToggeled", res)
             setAnotherMediaState("audio", res?.microphone)
