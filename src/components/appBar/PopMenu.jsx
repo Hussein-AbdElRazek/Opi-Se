@@ -123,7 +123,7 @@ export const PopMenu = () =>
                     <ListItemIcon className={classes.icon}>
                         <MentorIcon fill='var(--black-40)' />
                     </ListItemIcon>
-                    Mental Health
+                    Mentor
                 </>,
             to: `/mentor`,
         },
