@@ -281,12 +281,12 @@ export const listenToPollOptionSelected = createAsyncThunk(
     {
         socket.on('pollOptionSelected', (res) =>
         {
-            const myId = thunkAPI.getState().auth.userData._id;
+            const partnerId = thunkAPI.getState().auth.userData.partnerId._id;
             const pollId = res.messageId;
             const messages = [...thunkAPI.getState().chat.messages[payload.messagesId]];
             const pollMessage = messages?.find(message => message._id === pollId);
             const pollOption = pollMessage.pollAnswers.find(answer => answer.optionNumber === res.optionNumber)
-            const updatedPollAnswers = selectOption(pollOption.optionSelectors, pollMessage.pollAnswers, res.optionNumber, pollOption.optionVotes, myId);
+            const updatedPollAnswers = selectOption(pollOption.optionSelectors, pollMessage.pollAnswers, res.optionNumber, pollOption.optionVotes, partnerId);
 
             //  update state
             thunkAPI.dispatch(

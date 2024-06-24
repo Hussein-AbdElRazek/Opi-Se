@@ -11,7 +11,7 @@ export const selectOption = ( optionSelectors, pollAnswers, optionNumber, option
         let updatedPollAnswer = { ...pollAnswer }
         if (pollAnswer.optionNumber === optionNumber)
         {
-            updatedPollAnswer.optionVotes = isChosen ? optionVotes - 1 : optionVotes || 0 + 1;
+            updatedPollAnswer.optionVotes = isChosen ? optionVotes - 1 : (optionVotes || 0 )+ 1;
 
             updatedPollAnswer.optionSelectors = isChosen ?
                 optionSelectors.filter(selector => selector !== myId) :
