@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/material'
+import { CircularProgress, IconButton } from '@mui/material'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
@@ -25,6 +25,8 @@ const ProfileUi = (props) =>
         havePartner,
         currentUrl,
         onCopy,
+        handleChangeProfilePic,
+        isLoadingChangeProfilePic
     } = props;
 
     return (
@@ -36,11 +38,16 @@ const ProfileUi = (props) =>
                 <div
                     className={classes.pic}
                 >
+                    {isLoadingChangeProfilePic && <div className={classes.loading}><CircularProgress thickness={2} /></div>}
                     <ProfilePic
                         userName={profileData?.userName}
                         profileImage={profileData?.profileImage}
                     />
-                    {isMyProfile && <ChangeProfilePic />}
+                    {isMyProfile &&
+                        <ChangeProfilePic
+                            handleChangeProfilePic={handleChangeProfilePic}
+                            isLoadingChangeProfilePic={isLoadingChangeProfilePic}
+                        />}
                 </div>
 
                 {/* My Report Btn for user*/}

@@ -33,6 +33,8 @@ const ExtractNationalId = (props) =>
             },
             getResponse
         );
+        // TODO Remove it after atef solve bug on it
+        setShowNationalId(true)
     }
 
     const [images] = useState([]);

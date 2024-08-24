@@ -24,7 +24,7 @@ export const listenToGetTask = createAsyncThunk(
     {
         socket.on('getTask', (data) =>
         {
-            //  update state
+            //  update tasks state
             thunkAPI.dispatch(
                 tasksActions.addTask(data.data)
             );
@@ -135,7 +135,7 @@ const initialTasksState = {
         JSON.parse(localStorage.getItem("openedTask")) : taskInitialValues
 }
 
-const isForCalender = window.location.pathname.includes("calender");
+const getIsForCalender = () => window.location.pathname.includes("calender");
 
 const tasksSlice = createSlice({
     name: 'tasks',
@@ -143,33 +143,40 @@ const tasksSlice = createSlice({
     reducers: {
         addTask(state, action)
         {
-            state.tasks[isForCalender ? "all" : action.payload.taskStatus].unshift(action.payload)
-            state.totalLength[isForCalender ? "all" : action.payload.taskStatus] += 1;
+            const taskTypeTotalLength = state.totalLength[action.payload.taskStatus];
+            const taskTypeCurrentLength = state.tasks[action.payload.taskStatus].length;
+            // Add only task if on calender or all tasks pages before it already get 
+            if (taskTypeCurrentLength === taskTypeTotalLength || getIsForCalender())
+            {
+                //  update tasks state
+                state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus].push(action.payload)
+            }
+            state.totalLength[getIsForCalender() ? "all" : action.payload.taskStatus] += 1;
         },
         mergeTasks(state, action)
         {
-            state.tasks[isForCalender ? "all" : action.payload.taskStatus] = mergeToUnique(state.tasks[isForCalender ? "all" : action.payload.taskStatus], action.payload.tasks);
+            state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus] = mergeToUnique(state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus], action.payload.tasks);
         },
         setTasks(state, action)
         {
-            state.tasks[isForCalender ? "all" : action.payload.taskStatus] = action.payload.tasks;
+            state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus] = action.payload.tasks;
         },
         removeTask(state, action)
         {
-            state.tasks[isForCalender ? "all" : action.payload.taskStatus] =
-                state.tasks[isForCalender ? "all" : action.payload.taskStatus].filter(ele => ele._id !== action.payload._id)
+            state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus] =
+                state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus].filter(ele => ele._id !== action.payload._id)
 
-            state.totalLength[isForCalender ? "all" : action.payload.taskStatus] -= 1;
+            state.totalLength[getIsForCalender() ? "all" : action.payload.taskStatus] -= 1;
         },
         removeAllTasksType(state, action)
         {
             console.log("action.payload", action.payload)
-            state.tasks[isForCalender ? "all" : action.payload] = []
-            state.totalLength[isForCalender ? "all" : action.payload] = 0;
+            state.tasks[getIsForCalender() ? "all" : action.payload] = []
+            state.totalLength[getIsForCalender() ? "all" : action.payload] = 0;
         },
         updateTask(state, action)
         {
-            state.tasks[isForCalender ? "all" : action.payload.taskStatus] = state.tasks[isForCalender ? "all" : action.payload.taskStatus].map(ele =>
+            state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus] = state.tasks[getIsForCalender() ? "all" : action.payload.taskStatus].map(ele =>
             {
                 if (ele._id === action.payload._id)
                 {
@@ -181,11 +188,11 @@ const tasksSlice = createSlice({
         updateTotalPages(state, action)
         {
             // to update TotalPages when receive it from server
-            state.totalPages[isForCalender ? "all" : action.payload.taskStatus] = action.payload.totalPages;
+            state.totalPages[getIsForCalender() ? "all" : action.payload.taskStatus] = action.payload.totalPages;
         },
         updateTotalLength(state, action)
         {
-            state.totalLength[isForCalender ? "all" : action.payload.taskStatus] = action.payload.totalLength;
+            state.totalLength[getIsForCalender() ? "all" : action.payload.taskStatus] = action.payload.totalLength;
         },
         updateOpenedTask(state, action)
         {

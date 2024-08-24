@@ -15,7 +15,6 @@ const useMoveTask = () =>
         const updatedTask = { ...intialTask };
         dispatch(tasksActions.removeTask(intialTask))
         updatedTask.taskStatus = newTaskStatus
-        updatedTask.oldStatus = intialTask.taskStatus;
         dispatch(tasksActions.addTask(updatedTask))
         handleEditTask(updatedTask, intialTask)
         if (typeof onFinish === 'function') onFinish()

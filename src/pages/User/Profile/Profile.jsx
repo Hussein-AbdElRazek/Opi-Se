@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 import ProfileUi from './ProfileUi'
 import useSearchForPartner from '../../../hooks/commonApis/use-search-for-partner';
 import { LoadingFullScreen } from '../../../components/ui';
 import useGetMyProfile from '../../../hooks/commonApis/use-get-my-profile';
-import { useSnackbar } from 'notistack';
+import useChangeProfilePic from './hooks/use-change-profile-pic';
 
 const Profile = () =>
 {
@@ -32,6 +33,11 @@ const Profile = () =>
         handleGetMyProfile,
         isLoadingGetMyProfile,
     } = useGetMyProfile();
+
+    const {
+        handleChangeProfilePic,
+        isLoadingChangeProfilePic
+    } = useChangeProfilePic();
 
     const onCopy = () =>
     {
@@ -66,6 +72,8 @@ const Profile = () =>
                         havePartner={havePartner}
                         currentUrl={currentUrl}
                         onCopy={onCopy}
+                        handleChangeProfilePic={handleChangeProfilePic}
+                        isLoadingChangeProfilePic={isLoadingChangeProfilePic}
                     />
                 )}
         </>

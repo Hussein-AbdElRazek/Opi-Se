@@ -40,7 +40,7 @@ const CustomDay = ({ day, today, outsideCurrentMonth }) =>
                                 classes.inProgress : taskStatus === "done" ?
                                     classes.done : ""}`} />}
                         {index === 3 && (
-                            <p>{`+${tasks.length - 3}`}</p>
+                            <div className={classes.overLength}>{`+${tasks.length - 3}`}</div>
                         )}
                     </div>
                 ))}

@@ -9,9 +9,8 @@ import { ReactComponent as BinIcon } from '../../../../assets/icons/bin.svg'
 import classes from '../Profile.module.css'
 import plusIcon from '../../../../assets/icons/plusPic.svg'
 import { uiActions } from '../../../../store/ui-slice';
-import useChangeProfilePic from '../hooks/use-change-profile-pic';
-import { LoadingCenter } from '../../../../components/ui';
-const ChangeProfilePic = () =>
+
+const ChangeProfilePic = ({ handleChangeProfilePic, isLoadingChangeProfilePic }) =>
 {
     const profileUploadId = "profileUploadId";
 
@@ -25,10 +24,6 @@ const ChangeProfilePic = () =>
 
     const [images, setImages] = useState([]);
 
-    const {
-        handleChangeProfilePic,
-        isLoadingChangeProfilePic
-    } = useChangeProfilePic();
 
     //  pass selected image to handleChangeProfilePic
     const onChangeImage = (imageList) =>
@@ -52,7 +47,7 @@ const ChangeProfilePic = () =>
 
     return (
         <>
-            {isLoadingChangeProfilePic ? (<div className={`${classes.plusIcon} ${classes.loading}`}><LoadingCenter /></div>) :
+            {isLoadingChangeProfilePic ? (null) :
                 (
                     <ImageUploading
                         value={images}

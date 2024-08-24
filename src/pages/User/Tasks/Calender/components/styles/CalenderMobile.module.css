@@ -53,7 +53,7 @@
 .containerCell {
     margin: 0 6px 0px 6px;
     width: 28px !important;
-    height: 42px !important;
+    min-height: 42px !important;
 }
 
 .dateCell {
@@ -81,13 +81,18 @@
 .tasks {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     width: 28px;
     flex-wrap: wrap;
+    margin: 5px 0;
 }
 
-.tasks p {
+.overLength {
     font-size: var(--font-size-30);
-    margin: 2px 0 0 0;
+    margin: 2px 0;
+    width: 28px;
+    text-align: center;
+
 }
 
 .taskContainer {

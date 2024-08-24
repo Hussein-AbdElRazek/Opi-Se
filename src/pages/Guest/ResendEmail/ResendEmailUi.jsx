@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
 import { Modal } from '@mui/material'
+
 import { FormCard, HeaderText, Paragraph } from '../../../components/ui';
 import { Btn } from '../../../components/inputs';
 import resendEmailBackground from '../../../assets/images/resendEmailBackground.png'
 import classes from './ResendEmailUi.module.css'
+
 const ResendEmailUi = (props) =>
 {
     const {
@@ -11,16 +12,14 @@ const ResendEmailUi = (props) =>
         handleResendEmail,
         isLoadingResendEmail,
         sentAgain,
+        isModalOpen,
+        onCloseModal
     } = props;
-    const [open, setOpen] = useState(true);
-    const onClose = () =>
-    {
-        setOpen(false)
-    }
+    
     return (
         <Modal
-            open={open}
-            onClose={onClose}
+            open={isModalOpen}
+            onClose={onCloseModal}
             className='center-x center-y'
         >
             <>

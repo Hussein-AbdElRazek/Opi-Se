@@ -26,6 +26,11 @@ const TaskOptions = ({ task }) =>
         handleDeleteTask,
     } = useDeleteTask(task.taskStatus, task._id);
 
+    const handleOpenDeleteModal = () =>
+    {
+        closeMenu();
+        openModal()
+    }
     // move task
     const handleMoveTask = useMoveTask();
 
@@ -73,7 +78,7 @@ const TaskOptions = ({ task }) =>
         ...(task.taskStatus === "done" ? menuItemsForDone : []),
 
         {
-            onClick: openModal,
+            onClick: handleOpenDeleteModal,
             children: "Delete",
         },
     ]
@@ -87,6 +92,7 @@ const TaskOptions = ({ task }) =>
                     <OptionsIcon />
                 }
                 openBtnClassName={classes.optionsBtn}
+                popperClassName={classes.popper}
                 menuItems={menuItems}
             />
 

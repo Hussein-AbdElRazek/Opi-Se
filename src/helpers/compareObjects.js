@@ -1,6 +1,8 @@
 export const compareObjects = (obj1, obj2) =>
 {
+    // for return difference on two objects used in PATCH APIs
     const diffs = {};
+
     for (const key in obj2)
     {
         if (obj1.hasOwnProperty(key))
@@ -27,8 +29,15 @@ export const compareObjects = (obj1, obj2) =>
                         }
                     })
                 })
+            } else if (obj2[key] instanceof Date)
+            {
+                // in case if type is date return it bcs it's edited
+                // and if it's not edited ele will be ISO date string not instanceof Date
+                // so will be pass and not returned if not edited
+                diffs[key] = obj2[key];
             }
         }
     }
+    
     return diffs;
 };
