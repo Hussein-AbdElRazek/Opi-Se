@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# Opi Se - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Opi Se is a web application designed to connect learners and mentors, built with a focus on delivering an engaging and interactive user experience. This repository contains the frontend codebase of the application, implemented using modern technologies like React.js, Redux Toolkit, and Material-UI.
 
-## Available Scripts
+For full documentation, please refer to the [Opi Se Documentation](./Opi%20Se%20Documentation.pdf).
 
-In the project directory, you can run:
+## Table of Contents
+- [Introduction](#introduction)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Design Patterns](#design-patterns)
+- [State Management](#state-management)
+- [Routing](#routing)
+- [Styling](#styling)
+- [API Integration](#api-integration)
+- [Performance Optimization](#performance-optimization)
+- [Deployment](#deployment)
+- [Challenges During Development](#challenges-during-development)
 
-### `npm start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The frontend of **Opi Se** is developed using React.js, leveraging a component-based architecture to create a dynamic and interactive user interface. The application is designed to be scalable and maintainable, utilizing several modern development tools, libraries, and design patterns.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technology Stack
 
-### `npm test`
+The frontend of the Opi Se project utilizes the following technologies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React.js**: For building the user interface using reusable components.
+- **Redux Toolkit**: For efficient state management across the application.
+- **React Router Dom**: For navigation and routing in a Single Page Application (SPA) environment.
+- **Material-UI**: For a consistent and responsive user interface design.
+- **CSS Modules**: For locally scoped and maintainable CSS styling.
+- **React Big Calendar**: For calendar management and event scheduling.
+- **Socket.io Client**: For real-time communication such as chat and notifications.
+- **Simple Peer**: For voice and video calls using WebRTC-based peer-to-peer connections.
+- **Firebase**: For handling push notifications with Firebase Cloud Messaging (FCM).
+- **Vercel**: For seamless deployment and continuous integration with GitHub.
 
-### `npm run build`
+For a more detailed breakdown of the libraries used, please refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The project follows a modular directory structure to maintain clarity and scalability:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **src/**: Root directory for source files.
+  - **assets/**: Static assets like images and icons.
+  - **callStore/**: State management related to voice/video call functionality.
+  - **components/**: Reusable UI components following the barrel design pattern.
+  - **FCM/**: Integration with Firebase Cloud Messaging.
+  - **hooks/**: Custom hooks for various functionalities.
+  - **pages/**: Main views and pages of the application.
+  - **routes/**: Route management for the application.
+  - **store/**: Global state management with Redux.
 
-### `npm run eject`
+For a more detailed explanation of the project structure, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Design Patterns
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application leverages several design patterns to ensure modularity and maintainability:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Presentational and Container Pattern**: Separates UI components (presentational) from business logic (container), improving reusability and testability.
+- **Facade Pattern**: Simplifies complex subsystems by providing a unified interface, used in components like Notes.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+For examples and more details on the design patterns used, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
 
-## Learn More
+## State Management
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+State management is handled using **Redux Toolkit**, with each major module having its own slice for managing state and reducers. For real-time communication, `createAsyncThunk` is used to handle asynchronous actions related to socket events.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Example slices include:
+- **Authentication Slice**: Manages user login data and tokens.
+- **Notes Slice**: Manages notes data and related socket events.
+- **Tasks Slice**: Manages tasks and related socket events.
 
-### Code Splitting
+For more information on state management, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Routing
 
-### Analyzing the Bundle Size
+Routing is managed using **React Router Dom**. The routing structure is modular, with separate route files for different user roles and states, such as Guest, User, Mentor, and Admin.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+For more details on routing setup, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
+ 
+## Styling
 
-### Making a Progressive Web App
+Styling is primarily done using **CSS Modules** to ensure locally scoped and maintainable styles. Global styles and theme settings are managed in `App.css`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+For more details on the styling approach, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
 
-### Advanced Configuration
+## API Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+API calls are handled through a custom hook, `useHttp`, which abstracts the fetch logic and error handling. This hook manages the loading state, token authentication, and error notifications.
 
-### Deployment
+For code examples and more information, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Performance Optimization
 
-### `npm run build` fails to minify
+Several techniques are employed to optimize performance, including:
+- **Code Splitting**: Using `React.lazy` to load components only when needed.
+- **Callback Optimization**: Using `useCallback` to avoid unnecessary function re-creation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For more details on performance optimizations, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
+
+## Deployment
+
+The frontend application is deployed on **Vercel**, which provides continuous integration with GitHub. The deployment process includes building the application and configuring necessary environment variables.
+
+For more details on deployment, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
+
+## Challenges During Development
+
+During development, several challenges were faced, including:
+- Integrating real-time functionalities with sockets.
+- Managing reliable video and voice calls with Simple Peer and Socket.io.
+- Structuring the codebase with a Page-Based Structure and employing design patterns for scalability.
+
+For more details on the challenges faced and how they were addressed, refer to the full documentation [here](./Opi%20Se%20Documentation.pdf).
+
