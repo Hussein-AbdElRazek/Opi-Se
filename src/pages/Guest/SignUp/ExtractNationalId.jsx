@@ -13,7 +13,7 @@ const ExtractNationalId = (props) =>
     const [showNationalId, setShowNationalId] = useState(!!isHaveInitialData);
 
     //extract national id from the selected file
-    const handleExtractID = (values) =>
+    const handleExtractID = async(values) =>
     {
         const getResponse = ({ status, nationalId, message }) =>
         {
@@ -21,19 +21,19 @@ const ExtractNationalId = (props) =>
             {
                 setFieldValue("nationalId", nationalId)
             }
-            setShowNationalId(true)
         };
-        extractID(
+
+        await extractID(
             {
                 url: "extract_nationalId",
                 method: "POST",
                 contentType: "form-data",
                 body: values,
-                baseUrl: "https://ocr-model-a.onrender.com/"
+                baseUrl: "https://ocr-api-ysqv.onrender.com/"
             },
             getResponse
         );
-        // TODO Remove it after atef solve bug on it
+
         setShowNationalId(true)
     }
 
