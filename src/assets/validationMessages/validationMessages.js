@@ -22,3 +22,7 @@ export const aboutMax = "About cannot exceed 1000 characters"
 
 export const messageMax = "Message cannot exceed 1000 characters"
 
+export const languageLevelMin = "Minimum is 1"
+
+export const languageLevelMax = "Maximum is 5"
+

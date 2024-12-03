@@ -12,8 +12,9 @@ import { Btn } from '../inputs'
 import { PopUpMenu } from './PopUpMenu'
 import { ReactComponent as MenuIcon } from '../../assets/icons/menu.svg'
 import { ReactComponent as CloseMenuIcon } from '../../assets/icons/closeMenu.svg'
+import { useEffect } from 'react'
 
-export const GuestNav = ({ forHome }) =>
+export const GuestNav = ({ forHome, pathname }) =>
 {
     const tabs = [
         {
@@ -119,6 +120,13 @@ export const GuestNav = ({ forHome }) =>
             ,
         },
     ]
+
+    // Scroll to top when pathname changed
+    useEffect(() =>
+    {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [pathname])
+
     return (
         <div
             className={`${classes.container} center-y space-between ${forHome ? classes.forHome : ""}`}

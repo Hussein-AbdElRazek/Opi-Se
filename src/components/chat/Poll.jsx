@@ -52,12 +52,11 @@ export const Poll = ({  submitPollMessage }) =>
                 placement="top-start"
                 transition
             >
-                {({ TransitionProps, placement }) => (
+                {({ TransitionProps }) => (
                     <Grow
                         {...TransitionProps}
                         style={{
-                            transformOrigin:
-                                placement === 'bottom-start' ? 'left top' : 'left bottom',
+                            transformOrigin: 'left bottom',
                         }}
                     >
                         <div>

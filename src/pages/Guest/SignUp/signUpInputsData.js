@@ -1,3 +1,5 @@
+import { required as requiredValidationMessage } from "../../../assets/validationMessages/validationMessages";
+
 export const languagesInputs = [
     {
         control: "input",
@@ -6,11 +8,12 @@ export const languagesInputs = [
         label: "Language Name",
         validateOnInput: (value, formik, name) =>
         {
+            // name for example = languages.0.languageName
             const indexOfLang = name[10];
             const isEmpty = String(value)?.trim().length === 0;
             const levelHaveData = !!formik?.values?.languages[indexOfLang]?.level;
-            if (isEmpty && levelHaveData)
-                return "When Level have data Language Name is required"
+            if (isEmpty && levelHaveData )
+                return requiredValidationMessage
         },
         isCustomValidate: true,
         isFirst: true,
@@ -22,15 +25,14 @@ export const languagesInputs = [
         label: "Level",
         validateOnInput: (value, formik, name) =>
         {
+            // name for example = languages.0.level
             const indexOfLang = name[10];
             const isEmpty = String(value)?.trim().length === 0;
             const languageNameHaveData = !!formik?.values?.languages[indexOfLang]?.languageName;
-            if (isEmpty && languageNameHaveData)
-                return "When Language Name have data Level is required"
+            if (isEmpty && languageNameHaveData && formik?.touched?.languages )
+                return requiredValidationMessage
         },
         isCustomValidate: true,
-        min: 1,
-        max: 5,
     },
 ]
 

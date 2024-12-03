@@ -66,7 +66,7 @@ function App()
 
           {/* for incoming calls */}
           {(call && call?.isReceivingCall && !(call?.busy) && call?.callType === "video") && <IncomingVideoCall />}
-          {(call && call?.callType === "voice" && (stream || call?.isReceivingCall )) && <VoiceCall />}
+          {(call && call?.callType === "voice" && (stream || call?.isReceivingCall)) && <VoiceCall />}
 
           {/* for incoming session */}
           <SessionConfirmation />
@@ -79,13 +79,14 @@ function App()
         <>
 
           {(location.pathname === "/" ||
-            location.pathname.includes("about" ) ||
-            location.pathname.includes("features" )||
-            location.pathname.includes("contact" )
+            location.pathname.includes("about") ||
+            location.pathname.includes("features") ||
+            location.pathname.includes("contact")
           ) ? (
             <>
               <GuestNav
                 forHome={location.pathname === "/"}
+                pathname={location.pathname}
               />
 
               <PageLayout
@@ -95,7 +96,7 @@ function App()
               </PageLayout>
 
               <GuestFooter
-                forHome={location.pathname === "/"}
+                pathname={location.pathname}
               />
             </>
           ) : (

@@ -49,8 +49,10 @@ const Landing = () =>
                     />
                     <HeroCard
                         title='Mentor'
+                        subTitle='Coming Soon'
                         img={mentorImg}
-                        to={'/mentor/signup'}
+                        // to={'/mentor/signup'}
+                        disabled={true}
                     />
                     <HeroCard
                         title='Parents'
@@ -116,8 +118,7 @@ const Landing = () =>
                         Ready to get your perfect study partner ?
                     </HeaderTextHero>
                     <Paragraph>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy
+                        Are you ready to boost your productivity and enhance your learning experience? Join us today and discover the perfect study partner designed to meet your needs. Whether you're preparing for exams, tackling new subjects, or improving your skills, our platform offers the tools and resources to help you succeed. Don't wait—start learning smarter and more efficiently now!
                     </Paragraph>
                     <div className={`${classes.action} center-x`}>
                         <Btn to='/#signup'>Sign Up Now</Btn>

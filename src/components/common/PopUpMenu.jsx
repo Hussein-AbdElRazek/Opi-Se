@@ -15,7 +15,8 @@ export const PopUpMenu = (props) =>
         fullWidth,
         children,
         placement,
-        popperClassName
+        popperClassName,
+        transformOrigin,
     } = props;
 
     // handle open menu btn
@@ -93,12 +94,11 @@ export const PopUpMenu = (props) =>
                 }}
                 className={popperClassName}
             >
-                {({ TransitionProps, placement }) => (
+                {({ TransitionProps }) => (
                     <Grow
                         {...TransitionProps}
                         style={{
-                            transformOrigin:
-                                placement === 'bottom-start' ? 'left bottom' : 'left top',
+                            transformOrigin: transformOrigin ? transformOrigin:'right top',
                         }}
                     >
                         <div

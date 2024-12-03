@@ -48,6 +48,7 @@ const SignUpUi = (props) =>
                                 disabled={isLoadingSignUp}
                             />
                             <ExtractNationalId
+                                error={formik.errors?.nationalId && formik.touched?.nationalId}
                                 setFieldValue={formik.setFieldValue}
                                 isHaveInitialData={!!signupInitialValues.nationalId}
                             />

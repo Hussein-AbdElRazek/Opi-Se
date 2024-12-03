@@ -56,6 +56,7 @@ export const SearchBarUi = (props) =>
                 popperClassName={classes.popperContainer}
                 containerClassName={classes.smContainerP}
                 fullWidth={true}
+                transformOrigin={'top'}
             />
         </div>
 

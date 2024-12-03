@@ -12,7 +12,7 @@ import { ReactComponent as ChangePasswordIcon } from '../../assets/icons/shield.
 import { ReactComponent as ExitIcon } from '../../assets/icons/exit.svg'
 import { authActions } from "../../store/auth-slice"
 
-export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnType, containerClassName }) =>
+export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnType, containerClassName, placement, transformOrigin }) =>
 {
     // user data
     const userId = useSelector((state) => state.auth.userData?._id);
@@ -104,6 +104,8 @@ export const UserMenu = ({ id, onClose, openBtnChild, openBtnClassName, openBtnT
             openBtnClassName={openBtnClassName}
             containerClassName={`${classes.container} ${containerClassName ? containerClassName : ""}`}
             menuItems={menuItems}
+            placement={placement}
+            transformOrigin={transformOrigin}
         />
     )
 }

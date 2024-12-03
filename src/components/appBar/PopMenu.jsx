@@ -39,7 +39,7 @@ export const PopMenu = () =>
             children:
                 <>
                     <ListItemIcon className={classes.icon}>
-                        <ProfileIcon id={profileMenuId} onClose={closeMenu} />
+                        <ProfileIcon placement="top-start" transformOrigin='top left' id={profileMenuId} onClose={closeMenu} />
                     </ListItemIcon>
                     <div className={classes.userName}>{userName}</div>
                 </>,

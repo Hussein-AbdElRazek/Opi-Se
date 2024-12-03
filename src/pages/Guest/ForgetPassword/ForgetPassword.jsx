@@ -22,7 +22,7 @@ const ForgetPassword = (props) =>
             if (message.includes("success"))
             {
                 popMessage("Please check your email", { variant: "success" })
-                navigate(`${userType}/login`)
+                navigate(`/${userType}/login`)
             }
         };
 

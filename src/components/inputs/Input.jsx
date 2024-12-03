@@ -61,8 +61,6 @@ export const Input = (props) =>
                             {...rest}
                             variant="outlined"
                             className={!!children ? classes.password : ""}
-                            // TODO handle it from validation for langauge level
-                            inputProps={{ min: rest.min, max: rest.max }}
                             onBlur={(e) =>
                             {
                                 if (onBlur) onBlur(e, handleBlur);

@@ -6,7 +6,7 @@ import { UserMenu } from '../common'
 import { ReactComponent as ArrowTopIcon } from '../../assets/icons/arrowTop.svg'
 
 
-export const ProfileIcon = ({ id, onClose }) =>
+export const ProfileIcon = ({ id, onClose, placement, transformOrigin }) =>
 {
     // user data
     const userName = useSelector((state) => state.auth.userData?.userName);
@@ -31,6 +31,8 @@ export const ProfileIcon = ({ id, onClose }) =>
             openBtnClassName={classes.profileIcon}
             containerClassName={id === "profileMenu" ? classes.bigScreens : classes.smallScreens}
             onClose={onClose}
+            placement={placement}
+            transformOrigin={transformOrigin}
         />
     )
 }

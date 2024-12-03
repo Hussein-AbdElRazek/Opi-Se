@@ -10,9 +10,11 @@ import UsersCounters from '../UsersCounters/UsersCounters'
 import Member from './Member'
 
 import { membersData } from './memebrsData'
+import useScreenWidth from '../../../hooks/use-screen-width';
 
 const AboutUs = () =>
 {
+    const isSmallScreen = useScreenWidth() <= 900;
     return (
         <div>
             <div className={contactClasses.container}>
@@ -51,30 +53,39 @@ const AboutUs = () =>
                     <br />
 
                     <div className={`${classes.bigTeam} center-x center-y flex-wrap`}>
-                        {membersData.map(member => <Member
-                            {...member}
-                        />)}
+                        {membersData.map(member =>
+                            <Member
+                                key={member.name}
+                                {...member}
+                            />)}
                     </div>
 
-                    <div className={classes.smTeam}
+                    {/* Team component for small screens*/}
+                    {/* 
+                        i use that detection because of warning on swiper library
+                        detect for big screens as no data so i make it only render for small screens
+                    */}
+                    {isSmallScreen && <div
+                        className={classes.smTeam}
                     >
-                        <Swiper
+                        {membersData && <Swiper
                             spaceBetween={30}
                             pagination={{
                                 clickable: true,
                             }}
                             modules={[Pagination]}
                             loop={true}
+                            slidesPerView={1}
                         >
                             {membersData.map(member =>
-                            (<SwiperSlide>
+                            (<SwiperSlide key={member.name}>
                                 <Member
                                     {...member}
                                 />
                             </SwiperSlide>)
                             )}
-                        </Swiper>
-                    </div>
+                        </Swiper>}
+                    </div>}
 
                 </div>
                 <br />

@@ -1,5 +1,4 @@
 import { Tab, Tabs as TabsMUI } from '@mui/material';
-import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom';
 
 import classes from './styles/Tabs.module.css'
@@ -12,17 +11,10 @@ export const Tabs = (props) =>
     // to detect when reload where is tab indicator will be
     const location = useLocation();
     const pathName = location.pathname;
-    const [value, setValue] = useState((tabsMap && tabsMap[pathName]) || defaultValue || 0);
-
-    const handleChange = (event, newValue) =>
-    {
-        setValue(newValue);
-    };
 
     return (
         <TabsMUI
-            value={value}
-            onChange={handleChange}
+            value={(tabsMap && tabsMap[pathName]) || defaultValue || 0}
             className={`${classes.tabs} ${tabsClassName || ""}`}
             TabIndicatorProps={{
                 style: {

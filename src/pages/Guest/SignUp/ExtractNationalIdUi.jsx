@@ -1,10 +1,14 @@
 import { LoadingButton } from '@mui/lab'
 import ImageUploading from 'react-images-uploading';
+import { ErrorMessage, } from "formik";
 
-import uploadIcon from '../../../assets/icons/upload.svg'
+import { Input, InputError } from '../../../components/inputs'
+import { ReactComponent as UploadIcon } from '../../../assets/icons/upload.svg'
 import inputClasses from '../../../components/inputs/styles/Input.module.css'
 import classes from './ExtractNationalId.module.css'
-import { Input } from '../../../components/inputs'
+import errorClasses from '../../../components/inputs/styles/InputError.module.css'
+
+
 const ExtractNationalIdUi = (props) =>
 {
     const {
@@ -12,61 +16,68 @@ const ExtractNationalIdUi = (props) =>
         showNationalId,
         onChangeImage,
         images,
+        error,
     } = props;
 
     return (
         <>
             {!showNationalId ? (
-                <div
-                    className={`
+                <div>
+                    <div
+                        className={`
                     ${classes.outlined} 
                     ${classes.container}
                     ${isLoadingExtractID ? classes.cursorDefault : ""}
+                    ${!isLoadingExtractID && error ? errorClasses.borderError : ''}
+                    ${!isLoadingExtractID && error ? errorClasses.formError : ''}
                 `}
-                    title={isLoadingExtractID ? "" : "Upload your national id image"}
-                >
-                    <label
-                        className={inputClasses.label}
+                        title={isLoadingExtractID ? "" : "Upload your national id image"}
                     >
-                        National ID
-                    </label>
+                        <label
+                            className={`${inputClasses.label} `}
+                        >
+                            National ID
+                        </label>
 
-                    {/* Upload Button */}
-                    <ImageUploading
-                        multiple
-                        value={images}
-                        onChange={onChangeImage}
-                        maxNumber={1}
-                        dataURLKey="data_url"
-                    >
-                        {({
-                            onImageUpload,
-                            dragProps,
-                        }) =>
-                        {
-                            return (
-                                <LoadingButton
-                                    startIcon={
-                                        <img
-                                            src={uploadIcon}
-                                            alt="upload icon"
-                                            hidden={isLoadingExtractID}
-                                        />
-                                    }
-                                    className={classes.btn}
-                                    component="label"
-                                    fullWidth
-                                    loading={isLoadingExtractID}
-                                    onClick={onImageUpload}
-                                    {...dragProps}
-                                >
-                                    Add File
-                                </LoadingButton>
-                            )
-                        }
-                        }
-                    </ImageUploading >
-                </div>
+                        {/* Upload Button */}
+                        <ImageUploading
+                            multiple
+                            value={images}
+                            onChange={onChangeImage}
+                            maxNumber={1}
+                            dataURLKey="data_url"
+                        >
+                            {({
+                                onImageUpload,
+                                dragProps,
+                            }) =>
+                            {
+                                return (
+                                    <LoadingButton
+                                        startIcon={!isLoadingExtractID &&
+                                            <UploadIcon />}
+                                        className={classes.btn}
+                                        component="label"
+                                        fullWidth
+                                        loading={isLoadingExtractID}
+                                        onClick={onImageUpload}
+                                        {...dragProps}
+                                    >
+                                        Add File
+                                    </LoadingButton>
+                                )
+                            }
+                            }
+
+                        </ImageUploading >
+                    </div>
+                    <div >
+                        {!isLoadingExtractID && <ErrorMessage
+                            name={"nationalId"}
+                            component={InputError}
+                        />}
+                    </div>
+                </div >
             ) : (
                 <Input
                     label="National Id"

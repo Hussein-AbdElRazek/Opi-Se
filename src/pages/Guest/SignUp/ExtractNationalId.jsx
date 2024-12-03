@@ -5,7 +5,7 @@ import useHttp from '../../../hooks/use-http';
 
 const ExtractNationalId = (props) =>
 {
-    const { setFieldValue, isHaveInitialData } = props;
+    const { setFieldValue, isHaveInitialData, error } = props;
     const {
         isLoading: isLoadingExtractID,
         sendRequest: extractID
@@ -54,6 +54,7 @@ const ExtractNationalId = (props) =>
             showNationalId={showNationalId}
             images={images}
             onChangeImage={onChangeImage}
+            error={error}
         />
     )
 }

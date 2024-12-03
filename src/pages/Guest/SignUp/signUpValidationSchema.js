@@ -1,5 +1,5 @@
 import *  as Yup from 'yup';
-import { ageMax, ageMin, emailNotValid, genderNotValid, passwordMatch, passwordMin, required, nationalIdNotValid } from '../../../assets/validationMessages/validationMessages';
+import { ageMax, ageMin, emailNotValid, genderNotValid, passwordMatch, passwordMin, required, nationalIdNotValid, languageLevelMin, languageLevelMax } from '../../../assets/validationMessages/validationMessages';
 
 export const signUpValidationSchema = Yup.object({
     userName: Yup.string()
@@ -26,7 +26,9 @@ export const signUpValidationSchema = Yup.object({
     languages: Yup.array().of(
         Yup.object().shape({
             languageName: Yup.string(),
-            level: Yup.number(),
+            level: Yup.number()
+                .min(1, languageLevelMin)
+                .max(5, languageLevelMax),
         })
     ),
     nationalId: Yup.string()
